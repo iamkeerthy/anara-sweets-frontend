@@ -7,6 +7,7 @@ import AboutUs from './pages/AboutUs';
 
 import Contact from './pages/Contact';
 
+import AllSweets from "./pages/AllSweets";
 
 import './styles/index.css';
 
@@ -20,7 +21,7 @@ function App() {
 
           <Route path="/about" element={<AboutUs />} />
 
-
+          <Route path="/sweets" element={<AllSweets />} />
           {/* Contact Page Route */}
           <Route path="/Contact" element={<Contact />} />
 

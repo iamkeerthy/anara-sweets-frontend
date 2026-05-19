@@ -165,7 +165,7 @@ const Navbar = () => {
               {isDropdownOpen && (
                 <div className="dropdown-menu">
                   <a href="#all-items" className="dropdown-item">All Items</a>
-                  <a href="#all-sweets" className="dropdown-item">All Sweets</a>
+                  <Link to="/sweets" className="dropdown-item">All Sweets</Link>
                   <a href="#all-traditional" className="dropdown-item">All Traditional</a>
                   <a href="#all-health-mix" className="dropdown-item">All Health Mix</a>
                 </div>
