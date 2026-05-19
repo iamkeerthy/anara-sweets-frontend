@@ -1,17 +1,38 @@
-/* About page styles */
+/* ==========================================================================
+   Global Layout Utilities (Expanded Max-Widths to decrease side margins)
+   ========================================================================== */
+.container {
+  max-width: 1350px;       /* Increased from 1100px to allow content to sit much wider */
+  margin: 0 auto;
+  padding: 0 40px;         /* Uniform side boundaries */
+}
+
+.center { 
+  text-align: center; 
+}
+
+.muted { 
+  color: #6b6b6b; 
+  max-width: 850px; 
+  margin: 0 auto; 
+}
+
+/* ==========================================================================
+   About Hero Section
+   ========================================================================== */
 .about-hero {
   background: #efe7e1;
   padding: 60px 0;
 }
 
 .about-hero-inner {
-  max-width: 1200px;
+  max-width: 1350px;       /* Matched to container size to align with the rest of the page */
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 460px;
+  grid-template-columns: 1.15fr 0.85fr; 
   gap: 40px;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 40px;
 }
 
 .about-hero-image img {
@@ -52,6 +73,9 @@
   font-weight: 700;
 }
 
+/* ==========================================================================
+   About Details / Legacy Intro
+   ========================================================================== */
 .about-details {
   padding: 60px 0 100px;
   background: white;
@@ -78,9 +102,114 @@
   list-style: disc inside;
 }
 
+/* ==========================================================================
+   Excellence Banner Section
+   ========================================================================== */
+.excellence-section h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  margin-top: 100px;
+  color: #173049;
+}
+
+.excellence-section .banner-image img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  margin-top: 30px;
+}
+
+/* ==========================================================================
+   Dynamic Two-Column Layout Blocks (Quality, Grid, Philosophy)
+   ========================================================================== */
+/* Section spacing layout rules - balanced rhythm setup */
+.quality-section,
+.about-grid, 
+.philosophy-section {
+  margin-top: 100px; /* Uniform structural spacing between content sections */
+}
+
+.quality-section .two-col,
+.about-grid .two-col,
+.philosophy-section .two-col {
+  padding-top: 0;
+}
+
+/* Two Column Layout Grid: Image wide, text and image pulled slightly closer */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* balanced two-column layout */
+  gap: 28px;                          /* Slightly tighter gap */
+  align-items: center;
+  padding: 32px 0;
+}
+
+/* Large imagery specifications matching screenshot references */
+.two-col .image img { 
+  width: 100%; 
+  height: 420px;                     /* reduced height to better match the design */
+  object-fit: cover; 
+  border-radius: 6px; 
+}
+
+/* Content Element Specifications */
+.two-col .text h3 { 
+  font-size: 32px;
+  line-height: 1.2;
+  margin-bottom: 16px; 
+  color: #173049; 
+}
+
+.two-col .text p { 
+  color: #444; 
+  line-height: 1.8; 
+  font-size: 15px;
+}
+
+/* Section overrides & layout helpers */
+.about-grid .text h3 { 
+  font-size: 28px; 
+  margin-top: 0; 
+}
+
+.philosophy-section .alt { 
+  padding-top: 10px; 
+}
+
+.reverse-on-mobile { 
+  grid-auto-flow: dense; 
+}
+
+/* ==========================================================================
+   Certifications Section
+   ========================================================================== */
+.certifications-section { 
+  padding: 40px 0 100px; 
+}
+
+.cert-icons { 
+  display: flex; 
+  gap: 40px; 
+  justify-content: center; 
+  align-items: center; 
+  margin-top: 30px; 
+}
+
+.cert-icons img { 
+  width: 80px; 
+  height: 80px; 
+  object-fit: contain; 
+  opacity: 0.9; 
+}
+
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
 @media (max-width: 980px) {
   .about-hero-inner {
     grid-template-columns: 1fr;
+    padding: 0 20px;
   }
 
   .about-hero-image img {
@@ -96,57 +225,46 @@
   }
 }
 
-/* New sections styles */
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.center { text-align: center; }
-.muted { color: #6b6b6b; max-width: 850px; margin: 0 auto; }
-
-.excellence-section .banner-image img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  display: block;
-  margin-top: 30px;
-}
-
-.excellence-section h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
-  color: #173049;
-}
-
-.two-col {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
-  align-items: center;
-  padding: 40px 0;
-}
-
-.two-col .image img { width: 100%; height: 320px; object-fit: cover; border-radius: 6px; }
-
-.two-col .text h3 { font-size: 22px; margin-bottom: 12px; color: #173049; }
-.two-col .text p { color: #444; line-height: 1.8; }
-
-.about-grid .text h3 { font-size: 28px; margin-top: 0; }
-
-.reverse-on-mobile { grid-auto-flow: dense; }
-
-.philosophy-section .alt { padding-top: 10px; }
-
-.certifications-section { padding: 40px 0 100px; }
-.cert-icons { display: flex; gap: 40px; justify-content: center; align-items: center; margin-top: 30px; }
-.cert-icons img { width: 80px; height: 80px; object-fit: contain; opacity: 0.9; }
-
 @media (max-width: 880px) {
-  .two-col { grid-template-columns: 1fr; }
-  .two-col .image img { height: 240px; }
-  .about-hero-image img { height: 320px; }
-  .cert-icons { gap: 20px; }
+  .container {
+    padding: 0 20px; /* Safely contracts side spacing on smaller viewports */
+  }
+
+  .two-col { 
+    grid-template-columns: 1fr; 
+    gap: 24px;
+  }
+  
+  .two-col .image img { 
+    height: 320px; 
+  }
+  
+  .cert-icons { 
+    gap: 20px; 
+  }
 }
 
+/* ==========================================================================
+   Two-column equal (square) images
+   Use by wrapping images in a container with class `two-col-images`
+   ========================================================================== */
+.two-col-images {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  align-items: stretch;
+}
+
+.two-col-images img {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* square: height matches width */
+  object-fit: cover;  /* fill the square without distortion */
+  display: block;
+  border-radius: 6px;
+}
+
+@media (max-width: 600px) {
+  .two-col-images {
+    grid-template-columns: 1fr;
+  }
+}
