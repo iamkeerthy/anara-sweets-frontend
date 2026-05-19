@@ -698,7 +698,7 @@ const AboutUsSection = () => {
             Old Traditional Recipes.<br /><br />
             Every bite is a Celebration of Our Ethnic Indian flavours and Rich Heritage.
           </h5>
-          <button className="about-btn">KNOW MORE</button>
+          <Link to="/about" className="about-btn">KNOW MORE</Link>
         </div>
 
       </div>
