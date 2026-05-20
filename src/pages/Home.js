@@ -78,26 +78,7 @@ import thattuVadai1 from "../assets/images/THATTU VADAI.jpg";
 import thattuVadai2 from "../assets/images/THATTU VADAI.jpg";
 import thattuVadai3 from "../assets/images/THATTU VADAI.jpg";
 
-// Best Sellers product images (3 images each for gallery)
-import thattai1 from "../assets/images/img1.jpg";
-import thattai2 from "../assets/images/img1.jpg";
-import thattai3 from "../assets/images/img1.jpg";
 
-import kaiMurukku1 from "../assets/images/img1.jpg";
-import kaiMurukku2 from "../assets/images/img1.jpg";
-import kaiMurukku3 from "../assets/images/img1.jpg";
-
-import achuMurukku1 from "../assets/images/img1.jpg";
-import achuMurukku2 from "../assets/images/img1.jpg";
-import achuMurukku3 from "../assets/images/img1.jpg";
-
-import aswinsMixture1 from "../assets/images/img1.jpg";
-import aswinsMixture2 from "../assets/images/img1.jpg";
-import aswinsMixture3 from "../assets/images/img1.jpg";
-
-import ribbonBakoda1 from "../assets/images/img1.jpg";
-import ribbonBakoda2 from "../assets/images/img1.jpg";
-import ribbonBakoda3 from "../assets/images/img1.jpg";
 
 // Video imports for the new reels section
 import reel1 from "../assets/images/anara.mp4";
@@ -176,43 +157,43 @@ const reels = [
 const bestSellers = [
   {
     id: 1,
-    name: "Thattai",
+    name: "Turkish Delight",
     rating: 5,
     reviews: 130,
     price: 71.00,
-    images: [thattai1, thattai2, thattai3],
+    images: [turkishDelight1, turkishDelight2, turkishDelight3],
   },
   {
     id: 2,
-    name: "Kai murukku",
+    name: "Coconut Burfi",
     rating: 5,
     reviews: 483,
     price: 96.00,
-    images: [kaiMurukku1, kaiMurukku2, kaiMurukku3],
+    images: [coconutBurfi1, coconutBurfi2, coconutBurfi3],
   },
   {
     id: 3,
-    name: "Achu muruku - Kaaram",
+    name: "Chocolate Brownies",
     rating: 5,
     reviews: 111,
     price: 67.00,
-    images: [achuMurukku1, achuMurukku2, achuMurukku3],
+    images: [chocolateBrownies1, chocolateBrownies2, chocolateBrownies3],
   },
   {
     id: 4,
-    name: "Anara Mixture",
+    name: "Rava Kesari",
     rating: 5,
     reviews: 196,
     price: 105.00,
-    images: [aswinsMixture1, aswinsMixture2, aswinsMixture3],
+    images: [ravaKesari1, ravaKesari2, ravaKesari3],
   },
   {
     id: 5,
-    name: "Ribbon Bakoda",
+    name: "Boondi Laddu",
     rating: 5,
     reviews: 72,
     price: 86.00,
-    images: [ribbonBakoda1, ribbonBakoda2, ribbonBakoda3],
+    images: [boondiLaddu1, boondiLaddu2, boondiLaddu3],
   },
 ];
 
@@ -369,44 +350,47 @@ const ImageGallery = ({ images, productName }) => {
 const combos = [
   {
     id: 1,
-    name: "Thattai",
+    name: "Rava Kesari",
     price: 71,
-    images: [thattai1, thattai2, thattai3],
+    images: [ravaKesari1, ravaKesari2, ravaKesari3],
     reviews: 130,
     isBestSeller: true
   },
   {
     id: 2,
-    name: "Kai murukku",
+    name: "Chocolate Brownies",
     price: 96,
-    images: [kaiMurukku1, kaiMurukku2, kaiMurukku3],
+    images: [chocolateBrownies1, chocolateBrownies2, chocolateBrownies3],
     reviews: 483,
     isBestSeller: true
   },
   {
     id: 3,
-    name: "Achu muruku - Kaaram",
+    name: "Coconut Burfi",
     price: 67,
-    images: [achuMurukku1, achuMurukku2, achuMurukku3],
+    images: [coconutBurfi1, coconutBurfi2, coconutBurfi3],
     reviews: 111,
     isBestSeller: true
   },
   {
     id: 4,
-    name: "Anara Mixture",
+    name: "Boondi Laddu",
     price: 105,
-    images: [aswinsMixture1, aswinsMixture2, aswinsMixture3],
+    images: [boondiLaddu1, boondiLaddu2, boondiLaddu3],
     reviews: 196,
     isBestSeller: true
   },
   {
     id: 5,
-    name: "Ribbon Bakoda",
+    name: "Turkish Delight",
     price: 86,
-    images: [ribbonBakoda1, ribbonBakoda2, ribbonBakoda3],
+    images: [turkishDelight1, turkishDelight2, turkishDelight3],
     reviews: 72,
     isBestSeller: true
   },
+
+
+
   {
     id: 6,
     name: "Mysore Pak",
@@ -1018,7 +1002,7 @@ const Home = () => {
       <FlavourfulDelightsSection />
 
       {/* About Us Section */}
-       {/* About Us Section */}
+      {/* About Us Section */}
       <AboutUsSection />
 
       {/* What Makes Anara Special */}
@@ -1028,7 +1012,7 @@ const Home = () => {
       <TrustedReviewsSection />
 
 
-      
+
 
       <Footer />
       <WhatsAppButton />

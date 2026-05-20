@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import '../styles/product.css';
 import { useNavigate } from 'react-router-dom'; // Added navigation hook import
+import WhatsAppButton from '../components/WhatsAppButton';
 
 const images = require.context(
   '../assets/images',
