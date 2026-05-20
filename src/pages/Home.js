@@ -230,38 +230,73 @@ const flavourfulDelights = [
 const reviewsData = [
   {
     id: 1,
-    name: "Sudharsan Rama...",
+    name: "Sudharsan R.",
     rating: 5,
-    text: "Very good",
+    text: "Very fresh and tasty sweets. Loved the Mysore Pak!",
     product: "Special Mysore Pak",
   },
   {
     id: 2,
-    name: "Nallathambi R",
+    name: "Nallathambi R.",
     rating: 5,
-    text: "Excellent substitute for Ni... Light crisp bite and amazing flavour. Not too...",
+    text: "Excellent taste and perfect sweetness. Feels homemade and authentic.",
     product: "Special Mysore Pak",
   },
   {
     id: 3,
-    name: "J E",
+    name: "J. Eshan",
     rating: 5,
-    text: "",
-    product: "Special Mysore Pak",
+    text: "Amazing quality snacks. Crispy and fresh delivery.",
+    product: "Sweet Achu Murukku",
   },
   {
     id: 4,
-    name: "Subramanian A k",
+    name: "Subramanian A.",
     rating: 5,
-    text: "So tasty I ordered this for friends and family travelling overseas. The crunchness a...",
+    text: "Bought for overseas travel. Everyone loved the crunch and taste.",
     product: "Sweet Achu Murukku",
   },
   {
     id: 5,
-    name: "Vijayakumar Chel...",
+    name: "Vijayakumar C.",
     rating: 5,
-    text: "",
-    product: "Sweet Achu Murukku",
+    text: "Best sweets shop I’ve tried so far. Highly recommended!",
+    product: "Boondi Laddu",
+  },
+  {
+    id: 6,
+    name: "Priya S.",
+    rating: 5,
+    text: "Fresh, hygienic and very tasty traditional sweets.",
+    product: "Coconut Burfi",
+  },
+  {
+    id: 7,
+    name: "Karthik M.",
+    rating: 4,
+    text: "Good taste and value for money. Delivery was on time.",
+    product: "Mixture",
+  },
+  {
+    id: 8,
+    name: "Anjali P.",
+    rating: 5,
+    text: "Loved the texture and freshness. Will order again for festivals.",
+    product: "Rava Laddu",
+  },
+  {
+    id: 9,
+    name: "Ramesh K.",
+    rating: 5,
+    text: "Authentic taste like homemade sweets. Very satisfied.",
+    product: "Health Mix",
+  },
+  {
+    id: 10,
+    name: "Nirosha M.",
+    rating: 5,
+    text: "Packaging was clean and premium. Taste is excellent.",
+    product: "Turkish Delight",
   },
 ];
 
@@ -813,82 +848,68 @@ const SpecialSection = () => {
 };
 
 // ==================== TASTED & TRUSTED SECTION ====================
-
 const TrustedReviewsSection = () => {
   const scrollRef = useRef(null);
-  const [showLeftArrow, setShowLeftArrow] = useState(false);
-  const [showRightArrow, setShowRightArrow] = useState(true);
-
-  const checkScrollPosition = () => {
-    if (scrollRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-      setShowLeftArrow(scrollLeft > 10);
-      setShowRightArrow(scrollLeft + clientWidth < scrollWidth - 10);
-    }
-  };
 
   const scroll = (direction) => {
-    if (scrollRef.current) {
-      const scrollAmount = 320;
-      scrollRef.current.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth"
-      });
-    }
-  };
+    const container = scrollRef.current;
+    if (!container) return;
 
-  useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (scrollContainer) {
-      scrollContainer.addEventListener('scroll', checkScrollPosition);
-      checkScrollPosition();
-      return () => scrollContainer.removeEventListener('scroll', checkScrollPosition);
-    }
-  }, []);
+    container.scrollBy({
+      left: direction === "left" ? -260 : 260,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <section className="trusted-section">
-      <div className="trusted-header">
-        <h2 className="trusted-title">Tasted & Trusted by Millions</h2>
-        <div className="trusted-stars">
-          ⭐⭐⭐⭐⭐ <span className="trusted-reviews-count">from 3833 reviews</span>
-        </div>
-      </div>
 
-      <div className="trusted-slider-wrapper">
-        {showLeftArrow && (
-          <button className="trusted-arrow trusted-left-arrow" onClick={() => scroll("left")}>
-            &#8249;
-          </button>
-        )}
+      <h2 className="trusted-title">
+        Tasted & Trusted by Millions
+      </h2>
 
-        <div className="trusted-scroll-container" ref={scrollRef}>
+      <div className="trusted-wrapper">
+
+        {/* LEFT ARROW */}
+        <button className="review-arrow left" onClick={() => scroll("left")}>
+          ‹
+        </button>
+
+        {/* SCROLL AREA */}
+        <div className="trusted-scroll" ref={scrollRef}>
           {reviewsData.map((review) => (
-            <div key={review.id} className="trusted-card">
-              <div className="trusted-card-header">
-                <div className="trusted-product-tag">{review.product}</div>
-                <div className="trusted-rating">★★★★★</div>
+            <div className="review-card" key={review.id}>
+              <div className="review-top">
+                <span className="review-product">{review.product}</span>
+                <span className="review-stars">★★★★★</span>
               </div>
-              <p className="trusted-review-text">
-                {review.text || (review.name === "J E" ? "" : "")}
+
+              <p className="review-text">
+                “{review.text || "Amazing taste and quality!"}”
               </p>
-              <div className="trusted-reviewer">
-                <span className="trusted-reviewer-name">{review.name}</span>
+
+              <div className="review-user">
+                <div className="avatar">
+                  {review.name.charAt(0)}
+                </div>
+                <div>
+                  <p className="name">{review.name}</p>
+                  <p className="verified">Verified Buyer</p>
+                </div>
               </div>
             </div>
           ))}
         </div>
 
-        {showRightArrow && (
-          <button className="trusted-arrow trusted-right-arrow" onClick={() => scroll("right")}>
-            &#8250;
-          </button>
-        )}
+        {/* RIGHT ARROW */}
+        <button className="review-arrow right" onClick={() => scroll("right")}>
+          ›
+        </button>
+
       </div>
     </section>
   );
 };
-
 const Home = () => {
   const scrollRef = useRef(null);
   const [cartItems, setCartItems] = useState([]);
