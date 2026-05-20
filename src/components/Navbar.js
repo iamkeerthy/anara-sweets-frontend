@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../styles/navbar.css';
 import logo from '../assets/images/logo.png';
+import Product from '../pages/product';
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
@@ -54,7 +55,7 @@ const toggleTheme = () => {
 
   const submenuItems = {
     'All': [
-      { name: 'All Items', path: '/all-items' },
+      { name: 'All Items', path: '/Product' },
       { name: 'All Sweets', path: '/all-sweets' },
       { name: 'All Traditional', path: '/all-traditional' },
       { name: 'All Health Mix', path: '/all-health-mix' }
@@ -182,7 +183,7 @@ const toggleTheme = () => {
                 <div className="dropdown-menu">
 
 
-                  <Link to="/all-items" className="dropdown-item">All Items</Link>
+                  <Link to="/product" className="dropdown-item">All Items</Link>
                   <Link to="/sweets" className="dropdown-item">All Sweets</Link>
                   <Link to="/all-traditional" className="dropdown-item">All Traditional</Link>
                   <Link to="/all-health-mix" className="dropdown-item">All Health Mix</Link>

@@ -24,6 +24,7 @@
   align-items: center;
   justify-content: center;
   transition: transform 0.3s ease;
+  transform: translateY(-8px);
 }
 
 .social-icon:hover {
