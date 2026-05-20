@@ -1,0 +1,489 @@
+import React, { useState } from 'react';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import '../styles/product.css';
+import { useNavigate } from 'react-router-dom'; // Added navigation hook import
+
+const images = require.context(
+  '../assets/images',
+  false,
+  /\.(png|jpe?g|svg)$/
+);
+
+const initialProducts = [
+  {
+    id: 1,
+    name: "Aswin's Flavor Fusion",
+    desc: 'Murukku, Bakoda, Aswin Mixer, Mini Thattai, Badusha',
+    price: 528,
+    rating: 5,
+    reviews: 951,
+    badge: 'Best Seller',
+    image: images('./PAYATHAM URUNDAI.jpg'),
+  },
+  {
+    id: 2,
+    name: "Aswin's Delight",
+    desc: 'Murukku, Bakoda, Bombay Mixer, Thattai, Jangiri',
+    price: 494,
+    rating: 4,
+    reviews: 429,
+    badge: 'Best Seller',
+    image: images('./PAYATHAM URUNDAI.jpg'),
+  },
+  {
+    id: 3,
+    name: 'Achu Murukku + Thattai',
+    desc: 'Traditional sweet crunchy combinations',
+    price: 138,
+    rating: 4,
+    reviews: 147,
+    badge: null,
+    image: images('./PAYATHAM URUNDAI.jpg'),
+  },
+  {
+    id: 4,
+    name: 'Premium Royal Sweet Box',
+    desc: 'Milk Peda, Laddu, Kaju Katli, Gulab Jamun',
+    price: 1250,
+    rating: 5,
+    reviews: 310,
+    badge: 'Best Seller',
+    image: images('./PAYATHAM URUNDAI.jpg'),
+  },
+  {
+    id: 5,
+    name: 'Jaffna Spicy Special',
+    desc: 'Fiery Mixture, Chickpeas, Cassava Chips',
+    price: 680,
+    rating: 5,
+    reviews: 184,
+    badge: null,
+    image: images('./PAYATHAM URUNDAI.jpg'),
+  },
+  {
+    id: 6,
+    name: 'Traditional Village Treat',
+    desc: 'Kavum, Kokis, Aluwa, Athirasa combo',
+    price: 850,
+    rating: 4,
+    reviews: 95,
+    badge: null,
+    image: images('./PAYATHAM URUNDAI.jpg'),
+  },
+  {
+    id: 7,
+    name: 'Snack Attack Crunch',
+    desc: 'Spicy Murukku, Ribbon Pakoda, Garlic Sev',
+    price: 340,
+    rating: 4,
+    reviews: 212,
+    badge: null,
+    image: images('./PAYATHAM URUNDAI.jpg'),
+  },
+  {
+    id: 8,
+    name: 'Anara Signature Pack',
+    desc: 'Halwa, Muscat, Coconut Rock',
+    price: 920,
+    rating: 5,
+    reviews: 440,
+    badge: 'Best Seller',
+    image: images('./PAYATHAM URUNDAI.jpg'),
+  },
+  {
+    id: 9,
+    name: 'Anara Signature Pack',
+    desc: 'Halwa, Muscat, Coconut Rock',
+    price: 920,
+    rating: 5,
+    reviews: 440,
+    badge: 'Best Seller',
+    image: images('./PAYATHAM URUNDAI.jpg'),
+  },
+  {
+    id: 10,
+    name: 'Anara Signature Pack',
+    desc: 'Halwa, Muscat, Coconut Rock',
+    price: 920,
+    rating: 5,
+    reviews: 440,
+    badge: 'Best Seller',
+    image: images('./PAYATHAM URUNDAI.jpg'),
+  },
+  {
+    id: 11,
+    name: 'Anara Signature Pack',
+    desc: 'Halwa, Muscat, Coconut Rock',
+    price: 920,
+    rating: 5,
+    reviews: 440,
+    badge: 'Best Seller',
+    image: images('./PAYATHAM URUNDAI.jpg'),
+  },
+];
+
+const Product = () => {
+  const navigate = useNavigate(); // Initialized the routing navigator
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(1800);
+  const [showOutOfStock, setShowOutOfStock] = useState(true);
+  const [sortOption, setSortOption] = useState('Featured');
+  const [isSortOpen, setIsSortOpen] = useState(false);
+
+  // FILTER PRODUCTS
+  const filteredProducts = initialProducts.filter(
+    (product) =>
+      product.price >= minPrice && product.price <= maxPrice
+  );
+
+  // SORT PRODUCTS
+  const sortedProducts = [...filteredProducts].sort((a, b) => {
+    if (sortOption === 'Price, low to high') {
+      return a.price - b.price;
+    }
+
+    if (sortOption === 'Price, high to low') {
+      return b.price - a.price;
+    }
+
+    if (sortOption === 'Alphabetically, A-Z') {
+      return a.name.localeCompare(b.name);
+    }
+
+    if (sortOption === 'Alphabetically, Z-A') {
+      return b.name.localeCompare(a.name);
+    }
+
+    return 0;
+  });
+
+  const handleMinSliderChange = (e) => {
+    const value = Number(e.target.value);
+
+    if (value <= maxPrice) {
+      setMinPrice(value);
+    }
+  };
+
+  const handleMaxSliderChange = (e) => {
+    const value = Number(e.target.value);
+
+    if (value >= minPrice) {
+      setMaxPrice(value);
+    }
+  };
+
+  const handleMinInputChange = (e) => {
+    const value = Number(e.target.value);
+
+    if (value >= 0 && value <= maxPrice) {
+      setMinPrice(value);
+    }
+  };
+
+  const handleMaxInputChange = (e) => {
+    const value = Number(e.target.value);
+
+    if (value >= minPrice && value <= 1800) {
+      setMaxPrice(value);
+    }
+  };
+
+  const clearAllFilters = () => {
+    setMinPrice(0);
+    setMaxPrice(1800);
+    setShowOutOfStock(true);
+  };
+
+  const removePriceFilter = () => {
+    setMinPrice(0);
+    setMaxPrice(1800);
+  };
+
+  const sortingOptions = [
+    'Alphabetically, A-Z',
+    'Alphabetically, Z-A',
+    'Price, low to high',
+    'Price, high to low',
+  ];
+
+  return (
+    <div className="traditional-page-wrapper">
+      <Navbar />
+
+      <div className="product-container">
+        {/* SIDEBAR */}
+        <aside className="filter-sidebar">
+          <div className="filter-header">
+            <div className="filter-title-section">
+              <svg
+                className="filter-icon-svg"
+                viewBox="0 0 32 32"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="4" y1="11" x2="28" y2="11" />
+                <circle cx="10" cy="11" r="2.5" fill="black" />
+                <line x1="4" y1="21" x2="28" y2="21" />
+                <circle cx="22" cy="21" r="2.5" fill="black" />
+              </svg>
+
+              <span className="filter-title">Filter</span>
+            </div>
+          </div>
+
+          {/* APPLIED FILTERS */}
+          <div className="applied-filters">
+            <div className="applied-title">
+              Applied filters
+            </div>
+
+            <div className="price-tag">
+              Rs. {minPrice}.00 - Rs. {maxPrice}.00
+
+              <button
+                className="remove-filter"
+                onClick={removePriceFilter}
+              >
+                ✕
+              </button>
+            </div>
+
+            <button
+              className="clear-all"
+              onClick={clearAllFilters}
+            >
+              Clear all
+            </button>
+          </div>
+
+          {/* OUT OF STOCK */}
+          <div className="filter-section">
+            <div className="section-header">
+              <h4>Out of stock</h4>
+
+              <div className="toggle-buttons">
+                <button
+                  className={showOutOfStock ? 'active' : ''}
+                  onClick={() => setShowOutOfStock(true)}
+                >
+                  Show
+                </button>
+
+                <button
+                  className={!showOutOfStock ? 'active' : ''}
+                  onClick={() => setShowOutOfStock(false)}
+                >
+                  Hide
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* PRICE FILTER */}
+          <div className="filter-section price-section-wrapper">
+            <div className="section-header price-header-toggle">
+              <h4 className="price-heading">Price</h4>
+
+              <span className="accordion-indicator">
+                <svg
+                  viewBox="0 0 24 24"
+                  width="18"
+                  height="18"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                >
+                  <path
+                    d="M18 15l-6-6-6 6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+            </div>
+
+            <div className="price-inputs-container">
+              <div className="input-box-field">
+                <span className="currency-symbol">
+                  ₹
+                </span>
+
+                <input
+                  type="number"
+                  value={minPrice}
+                  onChange={handleMinInputChange}
+                />
+              </div>
+
+              <div className="input-box-field">
+                <span className="currency-symbol">
+                  ₹
+                </span>
+
+                <input
+                  type="number"
+                  value={maxPrice}
+                  onChange={handleMaxInputChange}
+                />
+              </div>
+            </div>
+
+            {/* RANGE SLIDER */}
+            <div className="double-slider-container">
+              <div className="double-slider-widget">
+                <div className="base-track"></div>
+
+                <div
+                  className="active-range-progress"
+                  style={{
+                    left: `${(minPrice / 1800) * 100}%`,
+                    right: `${
+                      100 - (maxPrice / 1800) * 100
+                    }%`,
+                  }}
+                ></div>
+
+                <input
+                  type="range"
+                  min="0"
+                  max="1800"
+                  value={minPrice}
+                  onChange={handleMinSliderChange}
+                  className="native-slider"
+                />
+
+                <input
+                  type="range"
+                  min="0"
+                  max="1800"
+                  value={maxPrice}
+                  onChange={handleMaxSliderChange}
+                  className="native-slider"
+                />
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        {/* PRODUCTS */}
+        <main className="product-content">
+          <div className="product-top-bar">
+            <span className="product-count">
+              {sortedProducts.length} products
+            </span>
+
+            <div className="sort-dropdown-container">
+              <button
+                className="sort-dropdown-btn"
+                onClick={() =>
+                  setIsSortOpen(!isSortOpen)
+                }
+              >
+                <span>{sortOption}</span>
+
+                <span
+                  className={`arrow-icon ${
+                    isSortOpen ? 'up' : 'down'
+                  }`}
+                >
+                  ▼
+                </span>
+              </button>
+
+              {isSortOpen && (
+                <ul className="sort-dropdown-menu">
+                  {sortingOptions.map((option) => (
+                    <li
+                      key={option}
+                      className={
+                        sortOption === option
+                          ? 'selected'
+                          : ''
+                      }
+                      onClick={() => {
+                        setSortOption(option);
+                        setIsSortOpen(false);
+                      }}
+                    >
+                      {option}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
+
+          {/* PRODUCT GRID */}
+          <div className="product-grid">
+            {sortedProducts.map((product) => (
+              <div
+                className="product-card"
+                key={product.id}
+                onClick={() => navigate(`/product/${product.id}`)}
+                style={{ cursor: 'pointer' }}
+              >
+                <div className="image-container">
+                  {product.badge ===
+                    'Best Seller' && (
+                    <div className="badge best-seller-badge">
+                      Best Seller
+                    </div>
+                  )}
+
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="product-img"
+                  />
+                </div>
+
+                <div className="product-info">
+                  <h3 className="product-name">
+                    {product.name}
+                  </h3>
+
+                  <p className="product-desc">
+                    {product.desc}
+                  </p>
+
+                  <div className="rating-section">
+                    <div className="stars">
+                      {'★'.repeat(product.rating)}
+                      {'☆'.repeat(
+                        5 - product.rating
+                      )}
+                    </div>
+
+                    <span className="review-count">
+                      ({product.reviews} reviews)
+                    </span>
+                  </div>
+
+                  <div className="product-price">
+                    Rs. {product.price}.00
+                  </div>
+
+                  <button 
+                    className="add-to-cart-btn"
+                    onClick={(e) => e.stopPropagation()} // Keeps cart click from firing page navigation
+                  >
+                    ADD TO CART
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </main>
+      </div>
+
+      <Footer />
+    </div>
+  );
+};
+
+export default Product;
