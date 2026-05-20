@@ -5,7 +5,7 @@ import FilterSidebar from "../components/PriceFilter";
 import "../styles/AllSweets.css";
 import sweetsImages from "../assets/images/sweets";
 import Hero from "../components/Hero";
-import "../styles/filter.css";
+
 
 const initialSweets = [
   {
@@ -211,6 +211,7 @@ export default function AllSweets() {
       </div>
 
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 }

@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar';
 
 import Footer from '../components/Footer';
 import '../styles/aboutus.css';
+import WhatsAppButton from '../components/WhatsAppButton';
 
 import heroImg from '../assets/images/img2.jpg';
 import gridImg from '../assets/images/img4.jpg';
@@ -165,6 +166,7 @@ const AboutUs = () => {
             </motion.section>
 
             <Footer />
+            <WhatsAppButton />
         </>
     );
 };

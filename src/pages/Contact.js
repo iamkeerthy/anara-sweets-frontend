@@ -3,6 +3,8 @@ import "../styles/contact.css";
 
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import WhatsAppButton from "../components/WhatsAppButton";
+
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -92,6 +94,7 @@ const ContactPage = () => {
 
       {/* FOOTER */}
       <Footer />
+      <WhatsAppButton />
     </>
   );
 };

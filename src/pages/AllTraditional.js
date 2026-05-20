@@ -6,6 +6,7 @@ import '../styles/allTraditional.css';
 import '../styles/filter.css';
 
 import heroImg from '../assets/images/img2.jpg';
+import WhatsAppButton from '../components/WhatsAppButton';
 
 const placeholderImage =
   'https://via.placeholder.com/400x400?text=Traditional+Sweet';
@@ -203,14 +204,10 @@ const AllTraditional = () => {
         </main>
       </div>
 
-      {/* WHATSAPP BUTTON */}
-      <a href="https://wa.me/#" className="whatsapp-floating-btn" target="_blank" rel="noreferrer">
-        <svg viewBox="0 0 32 32" className="whatsapp-icon">
-          <path d="M16 2a13 13 0 0 0-11.27 19.51L3 29l7.73-2A13 13 0 1 0 16 2z" fill="#fff" />
-        </svg>
-      </a>
+     
 
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 };

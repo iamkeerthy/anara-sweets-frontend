@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import '../styles/product.css';
-import '../styles/filter.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; // Added navigation hook import
 
 const images = require.context(
   '../assets/images',
@@ -415,6 +414,7 @@ const Product = () => {
       </div>
 
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 };

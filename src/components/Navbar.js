@@ -9,6 +9,12 @@ const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [activeSubMenu, setActiveSubMenu] = useState(null);
+  const [darkMode, setDarkMode] = useState(false);
+
+const toggleTheme = () => {
+  setDarkMode(!darkMode);
+  document.body.className = !darkMode ? "dark-mode" : "light-mode";
+};
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -131,14 +137,24 @@ const Navbar = () => {
             <img src={logo} alt="Anara Sweets" className="middle-logo" />
           </div>
 
-          <div className="account-cart-wrapper">
-            <button className="account-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="2">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-              </svg>
-              <span>Account</span>
-            </button>
+          
+         <div className="account-cart-wrapper">
+  <button className="account-icon" onClick={toggleTheme}>
+    {darkMode ? (
+      // 🌙 Dark mode icon (Moon)
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+      </svg>
+    ) : (
+      // ☀️ Light mode icon (Sun)
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <circle cx="12" cy="12" r="5"></circle>
+        <path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"></path>
+      </svg>
+    )}
+    <span>{darkMode ? "Dark Mode" : "Light Mode"}</span>
+  </button>
+</div>
             <button className="cart-icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="2">
                 <circle cx="9" cy="21" r="1"></circle>
@@ -149,7 +165,7 @@ const Navbar = () => {
             </button>
           </div>
         </div>
-      </div>
+    
 
       <div className="nav-bar">
         <div className="nav-bar-container">

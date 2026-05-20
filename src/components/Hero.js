@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import "../styles/hero.css";
 
 import hero1 from "../assets/images/img1.jpg";
@@ -53,7 +54,7 @@ const Hero = () => {
             <span className="highlight">40+ Outlets</span>
           </p>
           <p className="hero-tagline">HANDCRAFTED SWEETS & SAVOURIES</p>
-          <button className="hero-btn">Shop now</button>
+          <Link to="/all-collections" className="hero-btn">Shop now</Link>
         </div>
       </div>
     </section>

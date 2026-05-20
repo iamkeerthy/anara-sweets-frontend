@@ -3,9 +3,13 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import FilterSidebar from '../components/PriceFilter';
 import '../styles/allhealthmix.css';
+<<<<<<< HEAD
 import '../styles/filter.css';
 import { useNavigate } from 'react-router-dom';
 
+=======
+import WhatsAppButton from '../components/WhatsAppButton';
+>>>>>>> 27a34dfcf69e5726753eb0380da434abc7e98af6
 import heroImg from '../assets/images/img2.jpg';
 
 const placeholderImage = 'https://via.placeholder.com/400x400?text=Product+Image';
@@ -196,6 +200,7 @@ const AllHealthMix = () => {
       </a>
 
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 };
