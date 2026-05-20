@@ -5,10 +5,6 @@ import Footer from '../components/Footer';
 import WhatsAppButton from "../components/WhatsAppButton";
 import sweetsImages from "../assets/images/sweets";
 import '../styles/product.css';
-<<<<<<< HEAD
-=======
-
->>>>>>> 51818a1bd1fca93ab678285aab77498ac2c2f7fc
 
 // Webpack Context for asset bundling fallbacks
 const images = require.context(
