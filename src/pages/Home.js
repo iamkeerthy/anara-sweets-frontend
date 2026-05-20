@@ -658,7 +658,9 @@ const BestSellersSection = () => {
 
         <div className="title-box">
           <h2>Best Sellers</h2>
-          <a href="/best-sellers" className="view-all-link">VIEW ALL</a>
+          <a href="/product" className="view-all-link">
+            VIEW ALL
+          </a>
         </div>
 
         {/* No right arrow in header - consistent with request */}
@@ -968,7 +970,9 @@ const Home = () => {
 
           <div className="title-box">
             <h2>Combos</h2>
-            <a href="/combos" className="view-all-link">VIEW ALL</a>
+            <a href="/product" className="view-all-link">
+              VIEW ALL
+            </a>
           </div>
 
           <button
