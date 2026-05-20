@@ -78,26 +78,7 @@ import thattuVadai1 from "../assets/images/THATTU VADAI.jpg";
 import thattuVadai2 from "../assets/images/THATTU VADAI.jpg";
 import thattuVadai3 from "../assets/images/THATTU VADAI.jpg";
 
-// Best Sellers product images (3 images each for gallery)
-import thattai1 from "../assets/images/img1.jpg";
-import thattai2 from "../assets/images/img1.jpg";
-import thattai3 from "../assets/images/img1.jpg";
 
-import kaiMurukku1 from "../assets/images/img1.jpg";
-import kaiMurukku2 from "../assets/images/img1.jpg";
-import kaiMurukku3 from "../assets/images/img1.jpg";
-
-import achuMurukku1 from "../assets/images/img1.jpg";
-import achuMurukku2 from "../assets/images/img1.jpg";
-import achuMurukku3 from "../assets/images/img1.jpg";
-
-import aswinsMixture1 from "../assets/images/img1.jpg";
-import aswinsMixture2 from "../assets/images/img1.jpg";
-import aswinsMixture3 from "../assets/images/img1.jpg";
-
-import ribbonBakoda1 from "../assets/images/img1.jpg";
-import ribbonBakoda2 from "../assets/images/img1.jpg";
-import ribbonBakoda3 from "../assets/images/img1.jpg";
 
 // Video imports for the new reels section
 import reel1 from "../assets/images/anara.mp4";
@@ -176,43 +157,43 @@ const reels = [
 const bestSellers = [
   {
     id: 1,
-    name: "Thattai",
+    name: "Turkish Delight",
     rating: 5,
     reviews: 130,
     price: 71.00,
-    images: [thattai1, thattai2, thattai3],
+    images: [turkishDelight1, turkishDelight2, turkishDelight3],
   },
   {
     id: 2,
-    name: "Kai murukku",
+    name: "Coconut Burfi",
     rating: 5,
     reviews: 483,
     price: 96.00,
-    images: [kaiMurukku1, kaiMurukku2, kaiMurukku3],
+    images: [coconutBurfi1, coconutBurfi2, coconutBurfi3],
   },
   {
     id: 3,
-    name: "Achu muruku - Kaaram",
+    name: "Chocolate Brownies",
     rating: 5,
     reviews: 111,
     price: 67.00,
-    images: [achuMurukku1, achuMurukku2, achuMurukku3],
+    images: [chocolateBrownies1, chocolateBrownies2, chocolateBrownies3],
   },
   {
     id: 4,
-    name: "Anara Mixture",
+    name: "Rava Kesari",
     rating: 5,
     reviews: 196,
     price: 105.00,
-    images: [aswinsMixture1, aswinsMixture2, aswinsMixture3],
+    images: [ravaKesari1, ravaKesari2, ravaKesari3],
   },
   {
     id: 5,
-    name: "Ribbon Bakoda",
+    name: "Boondi Laddu",
     rating: 5,
     reviews: 72,
     price: 86.00,
-    images: [ribbonBakoda1, ribbonBakoda2, ribbonBakoda3],
+    images: [boondiLaddu1, boondiLaddu2, boondiLaddu3],
   },
 ];
 
@@ -249,38 +230,73 @@ const flavourfulDelights = [
 const reviewsData = [
   {
     id: 1,
-    name: "Sudharsan Rama...",
+    name: "Sudharsan R.",
     rating: 5,
-    text: "Very good",
+    text: "Very fresh and tasty sweets. Loved the Mysore Pak!",
     product: "Special Mysore Pak",
   },
   {
     id: 2,
-    name: "Nallathambi R",
+    name: "Nallathambi R.",
     rating: 5,
-    text: "Excellent substitute for Ni... Light crisp bite and amazing flavour. Not too...",
+    text: "Excellent taste and perfect sweetness. Feels homemade and authentic.",
     product: "Special Mysore Pak",
   },
   {
     id: 3,
-    name: "J E",
+    name: "J. Eshan",
     rating: 5,
-    text: "",
-    product: "Special Mysore Pak",
+    text: "Amazing quality snacks. Crispy and fresh delivery.",
+    product: "Sweet Achu Murukku",
   },
   {
     id: 4,
-    name: "Subramanian A k",
+    name: "Subramanian A.",
     rating: 5,
-    text: "So tasty I ordered this for friends and family travelling overseas. The crunchness a...",
+    text: "Bought for overseas travel. Everyone loved the crunch and taste.",
     product: "Sweet Achu Murukku",
   },
   {
     id: 5,
-    name: "Vijayakumar Chel...",
+    name: "Vijayakumar C.",
     rating: 5,
-    text: "",
-    product: "Sweet Achu Murukku",
+    text: "Best sweets shop I’ve tried so far. Highly recommended!",
+    product: "Boondi Laddu",
+  },
+  {
+    id: 6,
+    name: "Priya S.",
+    rating: 5,
+    text: "Fresh, hygienic and very tasty traditional sweets.",
+    product: "Coconut Burfi",
+  },
+  {
+    id: 7,
+    name: "Karthik M.",
+    rating: 4,
+    text: "Good taste and value for money. Delivery was on time.",
+    product: "Mixture",
+  },
+  {
+    id: 8,
+    name: "Anjali P.",
+    rating: 5,
+    text: "Loved the texture and freshness. Will order again for festivals.",
+    product: "Rava Laddu",
+  },
+  {
+    id: 9,
+    name: "Ramesh K.",
+    rating: 5,
+    text: "Authentic taste like homemade sweets. Very satisfied.",
+    product: "Health Mix",
+  },
+  {
+    id: 10,
+    name: "Nirosha M.",
+    rating: 5,
+    text: "Packaging was clean and premium. Taste is excellent.",
+    product: "Turkish Delight",
   },
 ];
 
@@ -369,44 +385,47 @@ const ImageGallery = ({ images, productName }) => {
 const combos = [
   {
     id: 1,
-    name: "Thattai",
+    name: "Rava Kesari",
     price: 71,
-    images: [thattai1, thattai2, thattai3],
+    images: [ravaKesari1, ravaKesari2, ravaKesari3],
     reviews: 130,
     isBestSeller: true
   },
   {
     id: 2,
-    name: "Kai murukku",
+    name: "Chocolate Brownies",
     price: 96,
-    images: [kaiMurukku1, kaiMurukku2, kaiMurukku3],
+    images: [chocolateBrownies1, chocolateBrownies2, chocolateBrownies3],
     reviews: 483,
     isBestSeller: true
   },
   {
     id: 3,
-    name: "Achu muruku - Kaaram",
+    name: "Coconut Burfi",
     price: 67,
-    images: [achuMurukku1, achuMurukku2, achuMurukku3],
+    images: [coconutBurfi1, coconutBurfi2, coconutBurfi3],
     reviews: 111,
     isBestSeller: true
   },
   {
     id: 4,
-    name: "Anara Mixture",
+    name: "Boondi Laddu",
     price: 105,
-    images: [aswinsMixture1, aswinsMixture2, aswinsMixture3],
+    images: [boondiLaddu1, boondiLaddu2, boondiLaddu3],
     reviews: 196,
     isBestSeller: true
   },
   {
     id: 5,
-    name: "Ribbon Bakoda",
+    name: "Turkish Delight",
     price: 86,
-    images: [ribbonBakoda1, ribbonBakoda2, ribbonBakoda3],
+    images: [turkishDelight1, turkishDelight2, turkishDelight3],
     reviews: 72,
     isBestSeller: true
   },
+
+
+
   {
     id: 6,
     name: "Mysore Pak",
@@ -829,82 +848,68 @@ const SpecialSection = () => {
 };
 
 // ==================== TASTED & TRUSTED SECTION ====================
-
 const TrustedReviewsSection = () => {
   const scrollRef = useRef(null);
-  const [showLeftArrow, setShowLeftArrow] = useState(false);
-  const [showRightArrow, setShowRightArrow] = useState(true);
-
-  const checkScrollPosition = () => {
-    if (scrollRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-      setShowLeftArrow(scrollLeft > 10);
-      setShowRightArrow(scrollLeft + clientWidth < scrollWidth - 10);
-    }
-  };
 
   const scroll = (direction) => {
-    if (scrollRef.current) {
-      const scrollAmount = 320;
-      scrollRef.current.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth"
-      });
-    }
-  };
+    const container = scrollRef.current;
+    if (!container) return;
 
-  useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (scrollContainer) {
-      scrollContainer.addEventListener('scroll', checkScrollPosition);
-      checkScrollPosition();
-      return () => scrollContainer.removeEventListener('scroll', checkScrollPosition);
-    }
-  }, []);
+    container.scrollBy({
+      left: direction === "left" ? -260 : 260,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <section className="trusted-section">
-      <div className="trusted-header">
-        <h2 className="trusted-title">Tasted & Trusted by Millions</h2>
-        <div className="trusted-stars">
-          ⭐⭐⭐⭐⭐ <span className="trusted-reviews-count">from 3833 reviews</span>
-        </div>
-      </div>
 
-      <div className="trusted-slider-wrapper">
-        {showLeftArrow && (
-          <button className="trusted-arrow trusted-left-arrow" onClick={() => scroll("left")}>
-            &#8249;
-          </button>
-        )}
+      <h2 className="trusted-title">
+        Tasted & Trusted by Millions
+      </h2>
 
-        <div className="trusted-scroll-container" ref={scrollRef}>
+      <div className="trusted-wrapper">
+
+        {/* LEFT ARROW */}
+        <button className="review-arrow left" onClick={() => scroll("left")}>
+          ‹
+        </button>
+
+        {/* SCROLL AREA */}
+        <div className="trusted-scroll" ref={scrollRef}>
           {reviewsData.map((review) => (
-            <div key={review.id} className="trusted-card">
-              <div className="trusted-card-header">
-                <div className="trusted-product-tag">{review.product}</div>
-                <div className="trusted-rating">★★★★★</div>
+            <div className="review-card" key={review.id}>
+              <div className="review-top">
+                <span className="review-product">{review.product}</span>
+                <span className="review-stars">★★★★★</span>
               </div>
-              <p className="trusted-review-text">
-                {review.text || (review.name === "J E" ? "" : "")}
+
+              <p className="review-text">
+                “{review.text || "Amazing taste and quality!"}”
               </p>
-              <div className="trusted-reviewer">
-                <span className="trusted-reviewer-name">{review.name}</span>
+
+              <div className="review-user">
+                <div className="avatar">
+                  {review.name.charAt(0)}
+                </div>
+                <div>
+                  <p className="name">{review.name}</p>
+                  <p className="verified">Verified Buyer</p>
+                </div>
               </div>
             </div>
           ))}
         </div>
 
-        {showRightArrow && (
-          <button className="trusted-arrow trusted-right-arrow" onClick={() => scroll("right")}>
-            &#8250;
-          </button>
-        )}
+        {/* RIGHT ARROW */}
+        <button className="review-arrow right" onClick={() => scroll("right")}>
+          ›
+        </button>
+
       </div>
     </section>
   );
 };
-
 const Home = () => {
   const scrollRef = useRef(null);
   const [cartItems, setCartItems] = useState([]);
@@ -1018,7 +1023,7 @@ const Home = () => {
       <FlavourfulDelightsSection />
 
       {/* About Us Section */}
-      
+       {/* About Us Section */}
       <AboutUsSection />
 
       {/* What Makes Anara Special */}
@@ -1028,7 +1033,7 @@ const Home = () => {
       <TrustedReviewsSection />
 
 
-      
+
 
       <Footer />
       <WhatsAppButton />

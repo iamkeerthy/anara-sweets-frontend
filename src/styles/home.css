@@ -176,18 +176,123 @@
 }
 
 /* REVIEWS */
-.reviews {
-  font-size: 13px;
-  color: #f5a623;
-  margin: 0;
+.trusted-section {
+  padding: 40px 10px;;
+  background: #fff7f0;
+  text-align: center;
+}
+
+/* TITLE */
+.trusted-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* 🔥 CENTER CONTAINER (IMPORTANT) */
+.trusted-wrapper {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;   /* THIS CENTERS THE WHOLE BLOCK */
   display: flex;
   align-items: center;
 }
 
-.reviews span {
-  color: #444;
-  margin-left: 6px;
-  font-size: 15px;
+/* SCROLL AREA */
+.trusted-scroll {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px;
+  flex: 1;
+}
+
+.trusted-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* SMALL CARD */
+.review-card {
+  min-width: 200px;
+  max-width: 200px;
+  background: white;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  flex-shrink: 0;
+  text-align: left;
+}
+
+/* TOP */
+.review-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.review-product {
+  background: #ffe6cc;
+  padding: 3px 8px;
+  border-radius: 20px;
+}
+
+/* TEXT */
+.review-text {
+  font-size: 11px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* USER */
+.review-user {
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.avatar {
+  width: 25px;
+  height: 25px;
+  border-radius: 30%;
+  background: orange;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.review-stars {
+  color: #f5c518;   /* Amazon-style yellow */
+  font-size: 14px;
+}
+
+/* ARROWS (NOW INSIDE CENTER) */
+.review-arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgb(255, 210, 210);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+  font-size: 22px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* LEFT + RIGHT POSITION */
+.review-arrow.left {
+  margin-right: 10px;
+}
+
+.review-arrow.right {
+  margin-left: 10px;
 }
 
 /* PRICE */

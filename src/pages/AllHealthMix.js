@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import FilterSidebar from '../components/PriceFilter';
+import WhatsAppButton from '../components/WhatsAppButton';
+
 import '../styles/allhealthmix.css';
 import '../styles/filter.css';
-import { useNavigate } from 'react-router-dom';
-import WhatsAppButton from '../components/WhatsAppButton';
-import heroImg from '../assets/images/img2.jpg';
 
+import { useNavigate } from 'react-router-dom';
+import heroImg from '../assets/images/img2.jpg';
 const placeholderImage = 'https://via.placeholder.com/400x400?text=Product+Image';
 
 const initialProducts = [
