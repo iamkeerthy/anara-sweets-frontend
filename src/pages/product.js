@@ -6,7 +6,6 @@ import WhatsAppButton from "../components/WhatsAppButton";
 import sweetsImages from "../assets/images/sweets";
 import '../styles/product.css';
 
-
 // Webpack Context for asset bundling fallbacks
 const images = require.context(
   '../assets/images',

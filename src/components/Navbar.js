@@ -8,31 +8,26 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [activeSubMenu, setActiveSubMenu] = useState(null);
   const [darkMode, setDarkMode] = useState(false);
   
-  const topBarMessages = ['SriLankan Sweets', 'Made fresh daily |One time use Pure Groundnut Oil'];
+  const topBarMessages = ['SriLankan Sweets', 'Made fresh daily | One time use Pure Groundnut Oil'];
   const [topBarIndex, setTopBarIndex] = useState(0);
 
   useEffect(() => {
-  const interval = setInterval(() => {
-    setTopBarIndex((prev) => (prev + 1) % topBarMessages.length);
-  }, 3000);
+    const interval = setInterval(() => {
+      setTopBarIndex((prev) => (prev + 1) % topBarMessages.length);
+    }, 3000);
 
-  return () => clearInterval(interval);
-}, [topBarMessages.length]);
+    return () => clearInterval(interval);
+  }, [topBarMessages.length]);
 
-const toggleTheme = () => {
-  setDarkMode(!darkMode);
-  document.body.className = !darkMode ? "dark-mode" : "light-mode";
-};
+  const toggleTheme = () => {
+    setDarkMode(!darkMode);
+    document.body.className = !darkMode ? "dark-mode" : "light-mode";
+  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-    if (!isMenuOpen) {
-      setActiveSubMenu(null);
-    }
   };
 
   const toggleSearch = () => {
@@ -52,25 +47,9 @@ const toggleTheme = () => {
     window.location.href = '/';
   };
 
-  // Function to handle menu link clicks - closes both menu and submenu
+  // Function to handle menu link clicks - closes the mobile menu
   const handleMenuLinkClick = () => {
     setIsMenuOpen(false);
-    setActiveSubMenu(null);
-  };
-
-  // Function to handle submenu item click
-  const handleSubmenuItemClick = () => {
-    setIsMenuOpen(false);
-    setActiveSubMenu(null);
-  };
-
-  const submenuItems = {
-    'All': [
-      { name: 'All Items', path: '/Product' },
-      { name: 'All Sweets', path: '/all-sweets' },
-      { name: 'All Traditional', path: '/all-traditional' },
-      { name: 'All Health Mix', path: '/all-health-mix' }
-    ]
   };
 
   return (
@@ -157,24 +136,20 @@ const toggleTheme = () => {
             <img src={logo} alt="Anara Sweets" className="middle-logo" />
           </div>
 
-          
-         <div className="account-cart-wrapper">
-  <button className="account-icon" onClick={toggleTheme}>
-    {darkMode ? (
-      // 🌙 Dark mode icon (Moon)
-      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
-      </svg>
-    ) : (
-      // ☀️ Light mode icon (Sun)
-      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <circle cx="12" cy="12" r="5"></circle>
-        <path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"></path>
-      </svg>
-    )}
-    <span>{darkMode ? "Dark Mode" : "Light Mode"}</span>
-  </button>
-</div>
+          <div className="account-cart-wrapper">
+            <button className="account-icon" onClick={toggleTheme}>
+              {darkMode ? (
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+                </svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="12" cy="12" r="5"></circle>
+                  <path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"></path>
+                </svg>
+              )}
+              <span>{darkMode ? "Dark Mode" : "Light Mode"}</span>
+            </button>
             <button className="cart-icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="2">
                 <circle cx="9" cy="21" r="1"></circle>
@@ -185,30 +160,12 @@ const toggleTheme = () => {
             </button>
           </div>
         </div>
-    
+      </div>
 
       <div className="nav-bar">
         <div className="nav-bar-container">
           <div className="nav-links">
-            <div
-              className="nav-dropdown"
-              onMouseEnter={() => setIsDropdownOpen(true)}
-              onMouseLeave={() => setIsDropdownOpen(false)}
-            >
-              <span className="nav-link dropdown-trigger">
-                All <span className="dropdown-arrow">▼</span>
-              </span>
-              {isDropdownOpen && (
-                <div className="dropdown-menu">
-
-
-                  <Link to="/product" className="dropdown-item">All Items</Link>
-                  <Link to="/sweets" className="dropdown-item">All Sweets</Link>
-                  <Link to="/all-traditional" className="dropdown-item">All Traditional</Link>
-                  <Link to="/all-health-mix" className="dropdown-item">All Health Mix</Link>
-                </div>
-              )}
-            </div>
+            <Link to="/" className="nav-link">Home</Link>
             <Link to="/product" className="nav-link">Product</Link>
             <Link to="/about" className="nav-link">About Us</Link>
             <Link to="/contact" className="nav-link">Contact Us</Link>
@@ -227,44 +184,10 @@ const toggleTheme = () => {
           <button className="mobile-menu-close" onClick={handleMenuLinkClick}>✕</button>
         </div>
 
-        <div className="mobile-dropdown">
-          <div
-            className="mobile-dropdown-title"
-            onClick={() => setActiveSubMenu('All')}
-          >
-            All
-            <span className="arrow">›</span>
-          </div>
-        </div>
-
-        <a href="#product" onClick={handleMenuLinkClick}>Product</a>
-        <a href="#about" onClick={handleMenuLinkClick}>About Us</a>
+        <Link to="/" onClick={handleMenuLinkClick}>Home</Link>
+        <Link to="/product" onClick={handleMenuLinkClick}>Product</Link>
+        <Link to="/about" onClick={handleMenuLinkClick}>About Us</Link>
         <Link to="/contact" onClick={handleMenuLinkClick}>Contact Us</Link>
-      </div>
-
-      <div className={`mobile-submenu-panel ${activeSubMenu ? 'active' : ''}`}>
-        {activeSubMenu && (
-          <>
-            <div className="submenu-header">
-              <button className="submenu-back-btn" onClick={() => setActiveSubMenu(null)}>
-                ←
-              </button>
-              <span className="submenu-title">{activeSubMenu}</span>
-            </div>
-            <div className="submenu-items">
-              {submenuItems[activeSubMenu]?.map((item, index) => (
-                <a
-                  key={index}
-                  href={item.path}
-                  className="submenu-item"
-                  onClick={handleSubmenuItemClick}
-                >
-                  {item.name}
-                </a>
-              ))}
-            </div>
-          </>
-        )}
       </div>
     </>
   );
