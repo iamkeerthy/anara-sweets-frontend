@@ -1015,6 +1015,7 @@ const Home = () => {
       <FlavourfulDelightsSection />
 
       {/* About Us Section */}
+       {/* About Us Section */}
       <AboutUsSection />
 
       {/* What Makes Anara Special */}
