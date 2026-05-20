@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import '../styles/allhealthmix.css';
-
+import WhatsAppButton from '../components/WhatsAppButton';
 import heroImg from '../assets/images/img2.jpg';
 
 // Placeholder image in case images don't load
@@ -339,6 +339,7 @@ const AllHealthMix = () => {
       </a>
 
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 };

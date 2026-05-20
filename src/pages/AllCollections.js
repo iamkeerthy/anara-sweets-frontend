@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import '../styles/AllCollections.css';
+import WhatsAppButton from '../components/WhatsAppButton';
 
 // Importing dummy collection imagery - replace these paths with your real assets
 import allProductsImg from '../assets/images/img1.jpg'; 
@@ -49,6 +50,7 @@ const AllCollections = () => {
             </main>
 
             <Footer />
+            <WhatsAppButton />
         </>
     );
 };

@@ -726,3 +726,22 @@
     font-size: 0.9rem;
   }
 }
+
+body.light-mode {
+  background-color: #ffffff;
+  color: #222;
+}
+
+body.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+/* Navbar support */
+.dark-mode .navbar {
+  background-color: #1e1e1e;
+}
+
+.light-mode .navbar {
+  background-color: #ffffff;
+}

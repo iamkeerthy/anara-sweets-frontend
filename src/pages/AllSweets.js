@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import "../styles/AllSweets.css";
 import sweetsImages from "../assets/images/sweets";
 import Hero from "../components/Hero";
-
+import WhatsAppButton from "../components/WhatsAppButton";
 
 const initialSweets = [
   {
@@ -194,6 +194,7 @@ export default function AllSweets() {
       </div>
 
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 }

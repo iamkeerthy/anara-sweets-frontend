@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import '../styles/productDetails.css';
+import WhatsAppButton from '../components/WhatsAppButton';
 
 const images = require.context('../assets/images', false, /\.(png|jpe?g|svg)$/);
 
@@ -247,6 +248,7 @@ function ProductDetails() {
       </div>
 
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 }
