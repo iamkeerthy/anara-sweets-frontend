@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import FilterSidebar from "../components/PriceFilter";
 import "../styles/AllSweets.css";
 import sweetsImages from "../assets/images/sweets";
 import Hero from "../components/Hero";
-import WhatsAppButton from "../components/WhatsAppButton";
+
 
 const initialSweets = [
   {
@@ -90,20 +91,40 @@ const initialSweets = [
 ];
 
 export default function AllSweets() {
-  const [priceRange, setPriceRange] = useState(400);
+  const MAX = 3000;
+
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(MAX);
+  const [showOutOfStock, setShowOutOfStock] = useState(true);
   const [sortBy, setSortBy] = useState("featured");
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSortOpen, setIsSortOpen] = useState(false);
 
-  const getProcessed = () => {
-    let data = initialSweets.filter((p) => p.price <= priceRange);
-
-    if (sortBy === "low-high") data.sort((a, b) => a.price - b.price);
-    if (sortBy === "high-low") data.sort((a, b) => b.price - a.price);
-
-    return data;
+  const clearAllFilters = () => {
+    setMinPrice(0);
+    setMaxPrice(MAX);
+    setShowOutOfStock(true);
   };
 
-  const sweets = getProcessed();
+  const sortingOptions = [
+    "Alphabetically, A-Z",
+    "Alphabetically, Z-A",
+    "Price, low to high",
+    "Price, high to low",
+  ];
+
+  // FILTER
+  const filteredSweets = initialSweets.filter(
+    (p) => p.price >= minPrice && p.price <= maxPrice
+  );
+
+  // SORT
+  const sortedSweets = [...filteredSweets].sort((a, b) => {
+    if (sortBy === "Price, low to high") return a.price - b.price;
+    if (sortBy === "Price, high to low") return b.price - a.price;
+    if (sortBy === "Alphabetically, A-Z") return a.name.localeCompare(b.name);
+    if (sortBy === "Alphabetically, Z-A") return b.name.localeCompare(a.name);
+    return 0;
+  });
 
   return (
     <div className="product-page-wrapper">
@@ -112,80 +133,76 @@ export default function AllSweets() {
 
       <div className="product-container">
 
-        {/* SIDEBAR */}
-        {isSidebarOpen && (
-          <aside className="filter-sidebar">
-            <div className="filter-section">
-              <h4>Price</h4>
-              <div className="price-inputs">
-                <div className="price-box">Rs. 0</div>
-                <div className="price-box">Rs. {priceRange}</div>
-              </div>
-
-              <input
-                type="range"
-                min="0"
-                max="400"
-                value={priceRange}
-                onChange={(e) => setPriceRange(e.target.value)}
-                className="price-slider"
-              />
-            </div>
-          </aside>
-        )}
+        {/* FILTER SIDEBAR COMPONENT */}
+        <FilterSidebar
+          minPrice={minPrice}
+          maxPrice={maxPrice}
+          onMinChange={setMinPrice}
+          onMaxChange={setMaxPrice}
+          showOutOfStock={showOutOfStock}
+          onOutOfStockChange={setShowOutOfStock}
+          onClearAll={clearAllFilters}
+          max={MAX}
+          step={100}
+        />
 
         {/* MAIN */}
         <main className="product-content">
 
-          <div className="content-header">
-            <button
-              className="icon-filter-btn"
-              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            >
-              Filter
-            </button>
-
-            <h3 className="category-title">All Sweets</h3>
+          <div className="product-top-bar">
+            <span className="product-count">{sortedSweets.length} products</span>
 
             <div className="sort-dropdown-container">
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="sort-select-dropdown"
+              <button
+                className="sort-dropdown-btn"
+                onClick={() => setIsSortOpen(!isSortOpen)}
               >
-                <option value="featured">Featured</option>
-                <option value="low-high">Low to High</option>
-                <option value="high-low">High to Low</option>
-              </select>
+                <span>{sortBy === "featured" ? "Featured" : sortBy}</span>
+                <span className={`arrow-icon ${isSortOpen ? "up" : "down"}`}>▼</span>
+              </button>
+
+              {isSortOpen && (
+                <ul className="sort-dropdown-menu">
+                  {sortingOptions.map((option) => (
+                    <li
+                      key={option}
+                      className={sortBy === option ? "selected" : ""}
+                      onClick={() => {
+                        setSortBy(option);
+                        setIsSortOpen(false);
+                      }}
+                    >
+                      {option}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           </div>
 
           {/* GRID */}
-          <div className={`product-grid ${!isSidebarOpen ? "sidebar-hidden" : ""}`}>
-            {sweets.map((item) => (
+          <div className="product-grid">
+            {sortedSweets.map((item) => (
               <div className="product-card" key={item.id}>
-                
                 <div className="image-container">
                   {item.isBestSeller && (
-                    <span className="bestseller-badge">★ Best Seller</span>
+                    <span className="badge best-seller-badge">★ Best Seller</span>
                   )}
                   <img src={item.image} alt={item.name} className="product-img" />
                 </div>
 
                 <div className="product-info">
-                  <h4 className="product-title">{item.name}</h4>
+                  <h4 className="product-name">{item.name}</h4>
                   <p className="product-desc">{item.desc}</p>
 
-                  <div className="rating-row">
+                  <div className="rating-section">
                     <span className="stars">{"★".repeat(item.rating)}</span>
-                    <span className="reviews-count">
-                      ({item.reviews} reviews)
-                    </span>
+                    <span className="review-count">({item.reviews} reviews)</span>
                   </div>
 
                   <div className="product-price">Rs. {item.price}.00</div>
+                  <button className="add-to-cart-btn">ADD TO CART</button>
                 </div>
-
               </div>
             ))}
           </div>

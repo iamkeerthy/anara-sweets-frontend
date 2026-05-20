@@ -1,0 +1,229 @@
+/* SIDEBAR */
+.filter-sidebar {
+  width: 280px;
+  position: sticky;
+  top: 20px;
+  height: fit-content;
+}
+
+.filter-header {
+  margin-bottom: 28px;
+}
+
+.filter-title-section {
+  display: flex;
+  align-items: center;
+}
+
+.filter-icon-svg {
+  width: 22px;
+  height: 22px;
+  margin-right: 12px;
+}
+
+.filter-title {
+  font-size: 19px;
+  font-weight: 500;
+}
+
+.applied-title {
+  font-size: 15px;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.price-tag {
+  background: #f4f5f7;
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.remove-filter {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.clear-all {
+  border: none;
+  background: none;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.filter-section {
+  margin-top: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toggle-buttons {
+  display: flex;
+  background: #f4f5f7;
+  border-radius: 4px;
+}
+
+.toggle-buttons button {
+  padding: 6px 14px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.toggle-buttons button.active {
+  background: #5d5c5c;
+  color: white;
+  border-radius: 4px;
+}
+
+/* ================================ */
+/*       PRICE FILTER SECTION       */
+/* ================================ */
+
+.price-section-wrapper {
+  border-bottom: none;
+}
+
+.price-header-toggle {
+  cursor: pointer;
+  user-select: none;
+}
+
+.price-heading {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.accordion-indicator {
+  display: flex;
+  align-items: center;
+  color: #888;
+  transition: transform 0.2s ease;
+}
+
+/* DUAL RANGE TRACK */
+.range-track-wrapper {
+  position: relative;
+  height: 4px;
+  margin: 20px 4px 28px;
+}
+
+.range-track-bg {
+  position: absolute;
+  inset: 0;
+  background: #e0e0e0;
+  border-radius: 2px;
+}
+
+.range-track-fill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: #1a1a1a;
+  border-radius: 2px;
+}
+
+/* DUAL RANGE INPUTS */
+.dual-range {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  margin: 0;
+  pointer-events: none;
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  height: 40px;
+}
+
+.dual-range::-webkit-slider-thumb {
+  pointer-events: all;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1.5px solid #1a1a1a;
+  cursor: pointer;
+  transition: box-shadow 0.15s ease;
+}
+
+.dual-range::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 0 6px rgba(0, 0, 0, 0.07);
+}
+
+.dual-range::-moz-range-thumb {
+  pointer-events: all;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1.5px solid #1a1a1a;
+  cursor: pointer;
+}
+
+/* PRICE INPUT BOXES */
+.price-inputs-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.input-box-field {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #f7f7f7;
+  border: 1px solid #e0e0e0;
+  padding: 8px 10px;
+  border-radius: 6px;
+  transition: border-color 0.15s ease;
+}
+
+.input-box-field:focus-within {
+  border-color: #1a1a1a;
+  background: #ffffff;
+}
+
+.currency-symbol {
+  font-size: 13px;
+  color: #666;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.input-box-field input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a1a1a;
+  min-width: 0;
+}
+
+/* hide number input arrows */
+.input-box-field input::-webkit-outer-spin-button,
+.input-box-field input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.input-box-field input[type=number] {
+  -moz-appearance: textfield;
+}

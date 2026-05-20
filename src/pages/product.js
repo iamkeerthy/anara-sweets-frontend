@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import '../styles/product.css';
 import { useNavigate } from 'react-router-dom'; // Added navigation hook import
-import WhatsAppButton from '../components/WhatsAppButton';
+
 const images = require.context(
   '../assets/images',
   false,
@@ -124,82 +124,63 @@ const initialProducts = [
 ];
 
 const Product = () => {
-  const navigate = useNavigate(); // Initialized the routing navigator
+  const navigate = useNavigate();
+  const MAX = 3000;
+
   const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(1800);
+  const [maxPrice, setMaxPrice] = useState(MAX);
   const [showOutOfStock, setShowOutOfStock] = useState(true);
   const [sortOption, setSortOption] = useState('Featured');
   const [isSortOpen, setIsSortOpen] = useState(false);
+  const [priceOpen, setPriceOpen] = useState(true);
 
   // FILTER PRODUCTS
   const filteredProducts = initialProducts.filter(
-    (product) =>
-      product.price >= minPrice && product.price <= maxPrice
+    (product) => product.price >= minPrice && product.price <= maxPrice
   );
 
   // SORT PRODUCTS
   const sortedProducts = [...filteredProducts].sort((a, b) => {
-    if (sortOption === 'Price, low to high') {
-      return a.price - b.price;
-    }
-
-    if (sortOption === 'Price, high to low') {
-      return b.price - a.price;
-    }
-
-    if (sortOption === 'Alphabetically, A-Z') {
-      return a.name.localeCompare(b.name);
-    }
-
-    if (sortOption === 'Alphabetically, Z-A') {
-      return b.name.localeCompare(a.name);
-    }
-
+    if (sortOption === 'Price, low to high') return a.price - b.price;
+    if (sortOption === 'Price, high to low') return b.price - a.price;
+    if (sortOption === 'Alphabetically, A-Z') return a.name.localeCompare(b.name);
+    if (sortOption === 'Alphabetically, Z-A') return b.name.localeCompare(a.name);
     return 0;
   });
 
-  const handleMinSliderChange = (e) => {
-    const value = Number(e.target.value);
-
-    if (value <= maxPrice) {
-      setMinPrice(value);
-    }
+  const handleMinSlider = (e) => {
+    const val = Math.min(Number(e.target.value), maxPrice - 100);
+    setMinPrice(val);
   };
 
-  const handleMaxSliderChange = (e) => {
-    const value = Number(e.target.value);
-
-    if (value >= minPrice) {
-      setMaxPrice(value);
-    }
+  const handleMaxSlider = (e) => {
+    const val = Math.max(Number(e.target.value), minPrice + 100);
+    setMaxPrice(val);
   };
 
-  const handleMinInputChange = (e) => {
-    const value = Number(e.target.value);
-
-    if (value >= 0 && value <= maxPrice) {
-      setMinPrice(value);
-    }
+  const handleMinInput = (e) => {
+    const val = Math.max(0, Math.min(Number(e.target.value), maxPrice - 100));
+    setMinPrice(val);
   };
 
-  const handleMaxInputChange = (e) => {
-    const value = Number(e.target.value);
-
-    if (value >= minPrice && value <= 1800) {
-      setMaxPrice(value);
-    }
+  const handleMaxInput = (e) => {
+    const val = Math.min(MAX, Math.max(Number(e.target.value), minPrice + 100));
+    setMaxPrice(val);
   };
 
   const clearAllFilters = () => {
     setMinPrice(0);
-    setMaxPrice(1800);
+    setMaxPrice(MAX);
     setShowOutOfStock(true);
   };
 
   const removePriceFilter = () => {
     setMinPrice(0);
-    setMaxPrice(1800);
+    setMaxPrice(MAX);
   };
+
+  const fillLeft = `${(minPrice / MAX) * 100}%`;
+  const fillRight = `${100 - (maxPrice / MAX) * 100}%`;
 
   const sortingOptions = [
     'Alphabetically, A-Z',
@@ -231,41 +212,24 @@ const Product = () => {
                 <line x1="4" y1="21" x2="28" y2="21" />
                 <circle cx="22" cy="21" r="2.5" fill="black" />
               </svg>
-
               <span className="filter-title">Filter</span>
             </div>
           </div>
 
           {/* APPLIED FILTERS */}
           <div className="applied-filters">
-            <div className="applied-title">
-              Applied filters
-            </div>
-
+            <div className="applied-title">Applied filters</div>
             <div className="price-tag">
               Rs. {minPrice}.00 - Rs. {maxPrice}.00
-
-              <button
-                className="remove-filter"
-                onClick={removePriceFilter}
-              >
-                ✕
-              </button>
+              <button className="remove-filter" onClick={removePriceFilter}>✕</button>
             </div>
-
-            <button
-              className="clear-all"
-              onClick={clearAllFilters}
-            >
-              Clear all
-            </button>
+            <button className="clear-all" onClick={clearAllFilters}>Clear all</button>
           </div>
 
           {/* OUT OF STOCK */}
           <div className="filter-section">
             <div className="section-header">
               <h4>Out of stock</h4>
-
               <div className="toggle-buttons">
                 <button
                   className={showOutOfStock ? 'active' : ''}
@@ -273,12 +237,11 @@ const Product = () => {
                 >
                   Show
                 </button>
-
                 <button
                   className={!showOutOfStock ? 'active' : ''}
                   onClick={() => setShowOutOfStock(false)}
                 >
-                  Hide
+                  View Details
                 </button>
               </div>
             </div>
@@ -286,10 +249,18 @@ const Product = () => {
 
           {/* PRICE FILTER */}
           <div className="filter-section price-section-wrapper">
-            <div className="section-header price-header-toggle">
-              <h4 className="price-heading">Price</h4>
-
-              <span className="accordion-indicator">
+            <div
+              className="section-header price-header-toggle"
+              onClick={() => setPriceOpen(!priceOpen)}
+            >
+              <h4 className="price-heading">Price Range</h4>
+              <span
+                className="accordion-indicator"
+                style={{
+                  transform: priceOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                  transition: '0.2s',
+                }}
+              >
                 <svg
                   viewBox="0 0 24 24"
                   width="18"
@@ -298,101 +269,82 @@ const Product = () => {
                   stroke="currentColor"
                   strokeWidth="2.5"
                 >
-                  <path
-                    d="M18 15l-6-6-6 6"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
+                  <path d="M18 15l-6-6-6 6" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </span>
             </div>
 
-            <div className="price-inputs-container">
-              <div className="input-box-field">
-                <span className="currency-symbol">
-                  ₹
-                </span>
+            {priceOpen && (
+              <>
+                {/* Dual Range Slider */}
+                <div className="range-track-wrapper">
+                  <div className="range-track-bg" />
+                  <div
+                    className="range-track-fill"
+                    style={{ left: fillLeft, right: fillRight }}
+                  />
+                  <input
+                    type="range"
+                    className="dual-range"
+                    min={0}
+                    max={MAX}
+                    step={100}
+                    value={minPrice}
+                    onChange={handleMinSlider}
+                  />
+                  <input
+                    type="range"
+                    className="dual-range"
+                    min={0}
+                    max={MAX}
+                    step={100}
+                    value={maxPrice}
+                    onChange={handleMaxSlider}
+                  />
+                </div>
 
-                <input
-                  type="number"
-                  value={minPrice}
-                  onChange={handleMinInputChange}
-                />
-              </div>
-
-              <div className="input-box-field">
-                <span className="currency-symbol">
-                  ₹
-                </span>
-
-                <input
-                  type="number"
-                  value={maxPrice}
-                  onChange={handleMaxInputChange}
-                />
-              </div>
-            </div>
-
-            {/* RANGE SLIDER */}
-            <div className="double-slider-container">
-              <div className="double-slider-widget">
-                <div className="base-track"></div>
-
-                <div
-                  className="active-range-progress"
-                  style={{
-                    left: `${(minPrice / 1800) * 100}%`,
-                    right: `${
-                      100 - (maxPrice / 1800) * 100
-                    }%`,
-                  }}
-                ></div>
-
-                <input
-                  type="range"
-                  min="0"
-                  max="1800"
-                  value={minPrice}
-                  onChange={handleMinSliderChange}
-                  className="native-slider"
-                />
-
-                <input
-                  type="range"
-                  min="0"
-                  max="1800"
-                  value={maxPrice}
-                  onChange={handleMaxSliderChange}
-                  className="native-slider"
-                />
-              </div>
-            </div>
+                {/* Price Inputs */}
+                <div className="price-inputs-container">
+                  <div className="input-box-field">
+                    <span className="currency-symbol">Rs.</span>
+                    <input
+                      type="number"
+                      value={minPrice}
+                      onChange={handleMinInput}
+                      min={0}
+                      max={MAX}
+                      step={100}
+                    />
+                  </div>
+                  <div className="input-box-field">
+                    <span className="currency-symbol">Rs.</span>
+                    <input
+                      type="number"
+                      value={maxPrice}
+                      onChange={handleMaxInput}
+                      min={0}
+                      max={MAX}
+                      step={100}
+                    />
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </aside>
 
         {/* PRODUCTS */}
         <main className="product-content">
           <div className="product-top-bar">
-            <span className="product-count">
-              {sortedProducts.length} products
-            </span>
+            <span className="product-count">{sortedProducts.length} products</span>
 
             <div className="sort-dropdown-container">
               <button
                 className="sort-dropdown-btn"
-                onClick={() =>
-                  setIsSortOpen(!isSortOpen)
-                }
+                onClick={() => setIsSortOpen(!isSortOpen)}
               >
                 <span>{sortOption}</span>
-
-                <span
-                  className={`arrow-icon ${
-                    isSortOpen ? 'up' : 'down'
-                  }`}
-                >
-                  ▼
-                </span>
+                <span className={`arrow-icon ${isSortOpen ? 'up' : 'down'}`}>▼</span>
               </button>
 
               {isSortOpen && (
@@ -400,11 +352,7 @@ const Product = () => {
                   {sortingOptions.map((option) => (
                     <li
                       key={option}
-                      className={
-                        sortOption === option
-                          ? 'selected'
-                          : ''
-                      }
+                      className={sortOption === option ? 'selected' : ''}
                       onClick={() => {
                         setSortOption(option);
                         setIsSortOpen(false);
@@ -419,65 +367,49 @@ const Product = () => {
           </div>
 
           {/* PRODUCT GRID */}
-          <div className="product-grid">
-            {sortedProducts.map((product) => (
-              <div
-                className="product-card"
-                key={product.id}
-                onClick={() => navigate(`/product/${product.id}`)}
-                style={{ cursor: 'pointer' }}
-              >
-                <div className="image-container">
-                  {product.badge ===
-                    'Best Seller' && (
-                    <div className="badge best-seller-badge">
-                      Best Seller
-                    </div>
-                  )}
+          {/* PRODUCT GRID */}
+<div className="product-grid">
+  {sortedProducts.map((product) => (
+    <div
+      className="product-card"
+      key={product.id}
+      onClick={() => navigate(`/product/${product.id}`)} // This captures the click!
+      style={{ cursor: 'pointer' }}
+    >
+      <div className="image-container">
+        {product.badge === 'Best Seller' && (
+          <div className="badge best-seller-badge">Best Seller</div>
+        )}
+        <img
+          src={product.image}
+          alt={product.name}
+          className="product-img"
+        />
+      </div>
 
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="product-img"
-                  />
-                </div>
+      <div className="product-info">
+        <h3 className="product-name">{product.name}</h3>
+        <p className="product-desc">{product.desc}</p>
 
-                <div className="product-info">
-                  <h3 className="product-name">
-                    {product.name}
-                  </h3>
-
-                  <p className="product-desc">
-                    {product.desc}
-                  </p>
-
-                  <div className="rating-section">
-                    <div className="stars">
-                      {'★'.repeat(product.rating)}
-                      {'☆'.repeat(
-                        5 - product.rating
-                      )}
-                    </div>
-
-                    <span className="review-count">
-                      ({product.reviews} reviews)
-                    </span>
-                  </div>
-
-                  <div className="product-price">
-                    Rs. {product.price}.00
-                  </div>
-
-                  <button 
-                    className="add-to-cart-btn"
-                    onClick={(e) => e.stopPropagation()} // Keeps cart click from firing page navigation
-                  >
-                    ADD TO CART
-                  </button>
-                </div>
-              </div>
-            ))}
+        <div className="rating-section">
+          <div className="stars">
+            {'★'.repeat(product.rating)}
+            {'☆'.repeat(5 - product.rating)}
           </div>
+          <span className="review-count">({product.reviews} reviews)</span>
+        </div>
+
+        <div className="product-price">Rs. {product.price}.00</div>
+
+        {/* CHOOSE THIS MODIFIED BUTTON BELOW */}
+        <button className="add-to-cart-btn">
+          View Details
+        </button>
+      </div>
+    </div>
+  ))}
+</div>
+          
         </main>
       </div>
 

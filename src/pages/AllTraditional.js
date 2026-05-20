@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import FilterSidebar from '../components/PriceFilter';
 import '../styles/allTraditional.css';
+import '../styles/filter.css';
 
 import heroImg from '../assets/images/img2.jpg';
 import WhatsAppButton from '../components/WhatsAppButton';
 
-// Placeholder image
 const placeholderImage =
   'https://via.placeholder.com/400x400?text=Traditional+Sweet';
 
@@ -68,8 +69,10 @@ const initialProducts = [
 ];
 
 const AllTraditional = () => {
+  const MAX = 3000;
+
   const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(1510);
+  const [maxPrice, setMaxPrice] = useState(MAX);
   const [showOutOfStock, setShowOutOfStock] = useState(true);
   const [sortOption, setSortOption] = useState('Featured');
   const [isSortOpen, setIsSortOpen] = useState(false);
@@ -88,43 +91,10 @@ const AllTraditional = () => {
     return 0;
   });
 
-  const handleMinSliderChange = (e) => {
-    const value = Number(e.target.value);
-    if (value <= maxPrice) {
-      setMinPrice(value);
-    }
-  };
-
-  const handleMaxSliderChange = (e) => {
-    const value = Number(e.target.value);
-    if (value >= minPrice) {
-      setMaxPrice(value);
-    }
-  };
-
-  const handleMinInputChange = (e) => {
-    const value = Number(e.target.value);
-    if (value >= 0 && value <= maxPrice) {
-      setMinPrice(value);
-    }
-  };
-
-  const handleMaxInputChange = (e) => {
-    const value = Number(e.target.value);
-    if (value >= minPrice && value <= 1510) {
-      setMaxPrice(value);
-    }
-  };
-
   const clearAllFilters = () => {
     setMinPrice(0);
-    setMaxPrice(1510);
+    setMaxPrice(MAX);
     setShowOutOfStock(true);
-  };
-
-  const removePriceFilter = () => {
-    setMinPrice(0);
-    setMaxPrice(1510);
   };
 
   const sortingOptions = [
@@ -151,125 +121,29 @@ const AllTraditional = () => {
 
       {/* MAIN CONTAINER */}
       <div className="product-container">
-        {/* SIDEBAR */}
-        <aside className="filter-sidebar">
-          <div className="filter-header">
-            <div className="filter-title-section">
-              <svg
-                className="filter-icon-svg"
-                viewBox="0 0 32 32"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <line x1="4" y1="11" x2="28" y2="11" />
-                <circle cx="10" cy="11" r="2.5" fill="black" />
-                <line x1="4" y1="21" x2="28" y2="21" />
-                <circle cx="22" cy="21" r="2.5" fill="black" />
-              </svg>
-              <span className="filter-title">Filter</span>
-              <span className="filter-arrow">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <path d="M15 19l-7-7 7-7" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </span>
-            </div>
-          </div>
 
-          {/* APPLIED FILTERS */}
-          <div className="applied-filters">
-            <div className="applied-title">Applied filters</div>
-            <div className="price-tag">
-              Rs. {minPrice}.00 - Rs. {maxPrice}.00
-              <button className="remove-filter" onClick={removePriceFilter}>✕</button>
-            </div>
-            <button className="clear-all" onClick={clearAllFilters}>Clear all</button>
-          </div>
-
-          {/* OUT OF STOCK */}
-          <div className="filter-section">
-            <div className="section-header">
-              <h4>Out of stock</h4>
-              <div className="toggle-buttons">
-                <button
-                  className={showOutOfStock ? 'active' : ''}
-                  onClick={() => setShowOutOfStock(true)}
-                >
-                  Show
-                </button>
-                <button
-                  className={!showOutOfStock ? 'active' : ''}
-                  onClick={() => setShowOutOfStock(false)}
-                >
-                  Hide
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* PRICE FILTER */}
-          <div className="filter-section price-section-wrapper">
-            <div className="section-header price-header-toggle">
-              <h4 className="price-heading">Price</h4>
-              <span className="accordion-indicator">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <path d="M18 15l-6-6-6 6" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </span>
-            </div>
-
-            <div className="price-inputs-container">
-              <div className="input-box-field">
-                <span className="currency-symbol">₹</span>
-                <input type="number" value={minPrice} onChange={handleMinInputChange} />
-              </div>
-              <div className="input-box-field">
-                <span className="currency-symbol">₹</span>
-                <input type="number" value={maxPrice} onChange={handleMaxInputChange} />
-              </div>
-            </div>
-
-            {/* RANGE SLIDER */}
-            <div className="double-slider-container">
-              <div className="double-slider-widget">
-                <div className="base-track"></div>
-                <div
-                  className="active-range-progress"
-                  style={{
-                    left: `${(minPrice / 1510) * 100}%`,
-                    right: `${100 - (maxPrice / 1510) * 100}%`,
-                  }}
-                ></div>
-
-                <input
-                  type="range"
-                  min="0"
-                  max="1510"
-                  value={minPrice}
-                  onChange={handleMinSliderChange}
-                  className="native-slider"
-                />
-                <input
-                  type="range"
-                  min="0"
-                  max="1510"
-                  value={maxPrice}
-                  onChange={handleMaxSliderChange}
-                  className="native-slider"
-                />
-              </div>
-            </div>
-          </div>
-        </aside>
+        {/* FILTER SIDEBAR COMPONENT */}
+        <FilterSidebar
+          minPrice={minPrice}
+          maxPrice={maxPrice}
+          onMinChange={setMinPrice}
+          onMaxChange={setMaxPrice}
+          showOutOfStock={showOutOfStock}
+          onOutOfStockChange={setShowOutOfStock}
+          onClearAll={clearAllFilters}
+          max={MAX}
+          step={100}
+        />
 
         {/* PRODUCTS */}
         <main className="product-content">
           <div className="product-top-bar">
             <span className="product-count">{sortedProducts.length} products</span>
             <div className="sort-dropdown-container">
-              <button className="sort-dropdown-btn" onClick={() => setIsSortOpen(!isSortOpen)}>
+              <button
+                className="sort-dropdown-btn"
+                onClick={() => setIsSortOpen(!isSortOpen)}
+              >
                 <span>{sortOption}</span>
                 <span className={`arrow-icon ${isSortOpen ? 'up' : 'down'}`}>▼</span>
               </button>
@@ -298,8 +172,12 @@ const AllTraditional = () => {
             {sortedProducts.map((product) => (
               <div className="product-card" key={product.id}>
                 <div className="image-container">
-                  {product.badge === 'New Launch' && <div className="badge new-launch-badge">New Launch</div>}
-                  {product.badge === 'Best Seller' && <div className="badge best-seller-badge">Best Seller</div>}
+                  {product.badge === 'New Launch' && (
+                    <div className="badge new-launch-badge">New Launch</div>
+                  )}
+                  {product.badge === 'Best Seller' && (
+                    <div className="badge best-seller-badge">Best Seller</div>
+                  )}
                   <img
                     src={product.image}
                     alt={product.name}
@@ -318,7 +196,7 @@ const AllTraditional = () => {
                     <span className="review-count">({product.reviews} reviews)</span>
                   </div>
                   <div className="product-price">Rs. {product.price}.00</div>
-                  <button className="add-to-cart-btn">ADD TO CART</button>
+                  <button className="add-to-cart-btn">View Details</button>
                 </div>
               </div>
             ))}
