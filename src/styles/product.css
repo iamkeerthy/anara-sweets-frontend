@@ -46,10 +46,8 @@ body {
   padding: 40px 24px;
 }
 
-
-
 /* ================================ */
-/*         PRODUCTS SECTION         */
+/* PRODUCTS SECTION          */
 /* ================================ */
 
 .product-content {
@@ -122,36 +120,15 @@ body {
   cursor: pointer;
 }
 
+/* ⚠️ FIXED: Added overflow: hidden so extra slider images don't leak out */
 .image-container {
   position: relative;
   height: 400px;
   background: #fafafa;
+  overflow: hidden; 
 }
 
-.product-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  padding: 6px 12px;
-  color: white;
-  font-size: 11px;
-  font-weight: 600;
-}
-
-.new-launch-badge {
-  background: #ef4444;
-}
-
-.best-seller-badge {
-  background: #d97706;
-}
-
+/* ⚠️ MOVED: Removed old full-height rule here because .slider-image-track handles image dimensions now */
 .product-info {
   padding-top: 16px;
 }
@@ -224,6 +201,95 @@ body {
 .whatsapp-icon {
   width: 28px;
   height: 28px;
+}
+
+/* ==========================================================================
+   ADDED: DETAILED IN-CARD SMOOTH IMAGE SLIDER (MATCHES SCREENSHOT)
+   ========================================================================== */
+.card-slider-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.slider-content-window {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.slider-image-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.slider-image-track .product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* Flushed vertically in the center, exact shape match from screenshot */
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.55); /* Clean translucent overlay matching sample */
+  color: #111111;
+  border: none;
+  font-size: 24px;
+  width: 18px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.slider-arrow:hover {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.slider-arrow:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.left-arrow {
+  left: 0px;
+  border-radius: 0 4px 4px 0; /* Flat edge left side, rounded inner */
+}
+
+.right-arrow {
+  right: 0px;
+  border-radius: 4px 0 0 4px; /* Flat edge right side, rounded inner */
+}
+
+/* Slider Pagination Dots Overlay */
+.slider-dots {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 9;
+}
+
+.slider-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transition: background 0.2s ease;
+}
+
+.slider-dot.active {
+  background: #ffffff;
 }
 
 /* RESPONSIVE */

@@ -84,7 +84,7 @@
   object-fit: cover;
 }
 
-/* Premium Best Seller Ribbon Design badge matching screenshot */
+/* Premium Best Seller Ribbon Design badge */
 .details-ribbon-tag {
   position: absolute;
   top: 0;
@@ -127,16 +127,13 @@
   border: 1px solid #e0e0e0;
   cursor: pointer;
   background-color: #f7f7f7;
+  transition: all 0.2s ease;
 }
 
 .thumb-box-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.thumb-box-item:hover, .thumb-box-item.active-border {
-  border-color: #1a1a1a;
 }
 
 /* Right Grid: Content Panel components stacks */
@@ -173,8 +170,8 @@
 }
 
 .product-price-display {
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 22px;
+  font-weight: 600;
   color: #1a1a1a;
   margin-bottom: 24px;
 }
@@ -195,86 +192,51 @@
   font-size: 16px;
 }
 
-/* Pincode Inline Check Input Container row styling elements */
-.pincode-checker-widget {
-  margin-bottom: 28px;
-}
-
-.pincode-checker-widget .widget-label {
-  font-size: 13px;
-  font-weight: 600;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-}
-
-.pincode-checker-widget .pin-marker {
-  margin-right: 6px;
-  color: #cc0c23;
-}
-
-.input-action-field {
-  display: flex;
-  max-width: 360px;
-  height: 44px;
-}
-
-.input-action-field input {
-  flex: 1;
-  border: 1px solid #cccccc;
-  border-right: none;
-  padding: 0 14px;
-  font-size: 13px;
-  outline: none;
-  color: #1a1a1a;
-}
-
-.input-action-field input::placeholder {
-  color: #999999;
-}
-
-.pincode-submit-btn {
-  background-color: #000000;
-  color: #ffffff;
-  border: none;
-  padding: 0 24px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.pincode-submit-btn:hover {
-  background-color: #222222;
-}
-
-.pincode-helper-text {
-  font-size: 12px;
-  color: #555555;
-  margin: 8px 0 0 0;
-}
-
-/* Variants Labels and Attribute Selector Pill Blocks */
+/* Weights Selector Configurations */
 .variant-options-group {
   margin-bottom: 24px;
 }
 
 .variant-field-label {
   display: block;
-  font-size: 12px;
+  font-size: 13px;
+  font-weight: 600;
   color: #1a1a1a;
   margin-bottom: 10px;
 }
 
-.variant-badge-selection {
-  display: inline-block;
-  border: 1px solid #1a1a1a;
-  padding: 10px 24px;
+/* Enforce dark text color over any buttons or fields inside the selector container */
+.weight-selection-container button {
+  color: #1a1a1a !important;
   font-size: 13px;
-  font-weight: 400;
-  background-color: #ffffff;
-  cursor: default;
+  font-weight: 600;
+  transition: all 0.15s ease-in-out;
+}
+
+.weight-selection-container button:hover {
+  border-color: #ff9900 !important;
+  background-color: #fffdf0 !important;
+}
+
+.weight-selection-container input[type=number] {
+  color: #1a1a1a !important;
+  font-weight: 600;
+  font-size: 14px;
+  -moz-appearance: textfield;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.weight-selection-container span {
+  color: #1a1a1a !important;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.weight-selection-container input::-webkit-outer-spin-button,
+.weight-selection-container input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 /* Quantity Adjustments Counter styling layout configuration */
@@ -285,7 +247,7 @@
 .counter-control-wrapper {
   display: flex;
   align-items: center;
-  border: 1px solid #cccccc;
+  border: 1px solid #999999;
   width: fit-content;
   height: 44px;
   background-color: #ffffff;
@@ -296,7 +258,9 @@
   border: none;
   width: 44px;
   height: 100%;
-  font-size: 13px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a !important;
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -305,15 +269,15 @@
 }
 
 .counter-btn:hover {
-  background-color: #f5f5f5;
+  background-color: #f0f0f0;
 }
 
 .counter-number-box {
   min-width: 40px;
   text-align: center;
-  font-size: 14px;
-  font-weight: 400;
-  color: #1a1a1a;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a1a !important;
   user-select: none;
 }
 
@@ -340,8 +304,6 @@
 }
 
 .secondary-buy-action-btn {
-  background-color: #1a2530;
-  color: #ffffff;
   border: none;
   width: 100%;
   height: 48px;
@@ -349,11 +311,21 @@
   font-weight: 600;
   letter-spacing: 1px;
   cursor: pointer;
-  transition: opacity 0.2s ease;
+  transition: transform 0.1s ease, background-color 0.2s ease;
 }
 
 .primary-cart-action-btn:hover, .secondary-buy-action-btn:hover {
   opacity: 0.93;
+}
+
+.secondary-buy-action-btn:active {
+  transform: scale(0.995);
+}
+
+.secondary-buy-action-btn:disabled {
+  background-color: #cccccc !important;
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 /* Bottom Bullet Description Section Spec List */
@@ -374,6 +346,67 @@
   margin-bottom: 8px;
 }
 
+/* Interactive WhatsApp Order Confirmation Screen Overlay */
+.order-modal-backdrop {
+  animation: fadeInBackground 0.25s ease-out forwards;
+}
+
+.order-modal-content {
+  color: #1a1a1a !important;
+  animation: slideInWindow 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.order-modal-content p, 
+.order-modal-content h3, 
+.order-modal-content strong {
+  color: #1a1a1a !important;
+}
+
+/* 
+  FIX: Targets the Cancel button inside the WhatsApp details layout modal.
+  Forces a white background with a vibrant red text color.
+*/
+.order-modal-content .modal-cancel-btn,
+button.modal-cancel-btn {
+  background-color: #ffffff !important;
+  color: #cc0c23 !important;
+  border: 1px solid #cc0c23 !important;
+  text-transform: none !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  border-radius: 4px !important;
+  padding: 10px 20px !important;
+  cursor: pointer !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: inline-block !important;
+  transition: all 0.15s ease-in-out !important;
+}
+
+/* Hover state: slight gray tinted background while maintaining red text */
+.order-modal-content .modal-cancel-btn:hover,
+button.modal-cancel-btn:hover {
+  background-color: #fff5f5 !important;
+  border-color: #b00a1e !important;
+  color: #b00a1e !important;
+}
+
+@keyframes fadeInBackground {
+  from { background-color: rgba(0, 0, 0, 0); }
+  to { background-color: rgba(0, 0, 0, 0.5); }
+}
+
+@keyframes slideInWindow {
+  from {
+    transform: translateY(15px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 /* Core Responsiveness Viewport Media Rules */
 @media (max-width: 890px) {
   .details-main-layout {
@@ -382,7 +415,7 @@
     margin-top: 20px;
   }
   
-  .input-action-field, .checkout-funnel-actions {
+  .checkout-funnel-actions {
     max-width: 100%;
   }
 }

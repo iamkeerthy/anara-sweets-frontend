@@ -1,11 +1,30 @@
+/* ==========================================================================
+   1. MAIN PAGE LAYOUT & SIDEBAR
+   ========================================================================== */
 .products {
   padding: 60px 20px;
   background-color: #fff;
 }
 
-.products-container {
+.product-container {
+  display: flex;
+  align-items: flex-start; /* Stops the sidebar from stretching */
+  gap: 32px;               /* Breathing room between filters and cards */
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 20px;
+}
+
+.filter-sidebar {
+  width: 280px;
+  position: sticky;
+  top: 20px;
+  height: fit-content;
+}
+
+.product-content {
+  flex: 1; /* Occupies all remaining horizontal space */
 }
 
 .products-title {
@@ -19,7 +38,10 @@
   color: #c0392b;
 }
 
-.products-grid {
+/* ==========================================================================
+   2. PRODUCT GRID & CARD LAYOUT
+   ========================================================================== */
+.product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 30px;
@@ -29,19 +51,21 @@
   background: white;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .product-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
 }
 
-.product-image {
+/* This fixes the image container area so the arrows center exactly on it */
+.image-container {
+  position: relative; 
   width: 100%;
-  height: 250px;
-  object-fit: cover;
+  height: 250px; /* Fixed height matching your original design intent */
+  overflow: hidden;
 }
 
 .product-info {
@@ -55,9 +79,9 @@
   color: #333;
 }
 
-.product-category {
-  color: #e67e22;
+.product-desc {
   font-size: 0.9rem;
+  color: #666;
   margin-bottom: 10px;
 }
 
@@ -68,7 +92,7 @@
   margin-bottom: 15px;
 }
 
-.product-btn {
+.add-to-cart-btn {
   background-color: #c0392b;
   color: white;
   border: none;
@@ -78,16 +102,133 @@
   transition: background-color 0.3s;
 }
 
-.product-btn:hover {
+.add-to-cart-btn:hover {
   background-color: #a93226;
 }
 
+/* ==========================================================================
+   3. IN-CARD SMOOTH IMAGE SLIDER (EXACTLY MATCHING UPLOADED IMAGE)
+   ========================================================================== */
+.card-slider-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.slider-content-window {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.slider-image-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.slider-image-track .product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* Arrow buttons centered vertically exactly in the middle of the photo container */
+.slider-arrow {
+  position: absolute;
+  top: 50%;                    /* Move baseline to middle */
+  transform: translateY(-50%); /* Pull up by half arrow height for true absolute centering */
+  background: rgba(255, 255, 255, 0.6); /* Translucent background like your design screenshot */
+  color: #111;
+  border: none;
+  font-size: 24px;             /* Clear, large < and > characters */
+  width: 36px;                 /* Clean rectangular format block shape */
+  height: 55px;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.slider-arrow:hover {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.slider-arrow:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.left-arrow {
+  left: 0px;
+  border-radius: 0 4px 4px 0;  /* Flushed left with square edge, rounded inside corner */
+}
+
+.right-arrow {
+  right: 0px;
+  border-radius: 4px 0 0 4px;  /* Flushed right with square edge, rounded inside corner */
+}
+
+/* Dot Indicators */
+.slider-dots {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 9;
+}
+
+.slider-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transition: background 0.2s ease;
+}
+
+.slider-dot.active {
+  background: #ffffff;
+}
+
+/* ==========================================================================
+   4. RESPONSIVE MEDIA QUERIES
+   ========================================================================== */
 @media (max-width: 768px) {
   .products-title {
     font-size: 2rem;
   }
   
-  .products-grid {
+  .product-grid {
     gap: 20px;
   }
+}
+
+.slider-arrow {
+  position: absolute !important;
+  top: 50% !important;                     /* Moves baseline to vertical center */
+  transform: translateY(-50%) !important;  /* Centers perfectly based on arrow height */
+  background: rgba(255, 255, 255, 0.6) !important; 
+  color: #111 !important;
+  border: none !important;
+  font-size: 24px !important;             
+  width: 36px !important;                 
+  height: 55px !important;
+  cursor: pointer !important;
+  z-index: 999 !important;                 /* Pushes them above everything else */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.left-arrow {
+  left: 0px !important;
+}
+
+.right-arrow {
+  right: 0px !important;
 }

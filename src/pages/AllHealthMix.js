@@ -198,7 +198,6 @@ const AllHealthMix = () => {
       </a>
 
       <Footer />
-      <WhatsAppButton />
     </div>
   );
 };

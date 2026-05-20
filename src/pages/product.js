@@ -3,7 +3,6 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import '../styles/product.css';
 import { useNavigate } from 'react-router-dom'; // Added navigation hook import
-import WhatsAppButton from '../components/WhatsAppButton';
 
 const images = require.context(
   '../assets/images',
@@ -11,6 +10,8 @@ const images = require.context(
   /\.(png|jpe?g|svg)$/
 );
 
+// We assume you have images like: ./PAYATHAM URUNDAI.jpg, ./PAYATHAM_2.jpg, etc.
+// Replace the placeholder strings below with your actual image filenames.
 const initialProducts = [
   {
     id: 1,
@@ -20,7 +21,13 @@ const initialProducts = [
     rating: 5,
     reviews: 951,
     badge: 'Best Seller',
-    image: images('./PAYATHAM URUNDAI.jpg'),
+    // Array of 4 images total (1 main + 3 extra)
+    imagesList: [
+      images('./PAYATHAM URUNDAI.jpg'),
+      images('./PAYATHAM URUNDAI.jpg'), // Replace with extra photo 1
+      images('./PAYATHAM URUNDAI.jpg'), // Replace with extra photo 2
+      images('./PAYATHAM URUNDAI.jpg'), // Replace with extra photo 3
+    ],
   },
   {
     id: 2,
@@ -30,7 +37,12 @@ const initialProducts = [
     rating: 4,
     reviews: 429,
     badge: 'Best Seller',
-    image: images('./PAYATHAM URUNDAI.jpg'),
+    imagesList: [
+      images('./PAYATHAM URUNDAI.jpg'),
+      images('./PAYATHAM URUNDAI.jpg'),
+      images('./PAYATHAM URUNDAI.jpg'),
+      images('./PAYATHAM URUNDAI.jpg'),
+    ],
   },
   {
     id: 3,
@@ -40,7 +52,12 @@ const initialProducts = [
     rating: 4,
     reviews: 147,
     badge: null,
-    image: images('./PAYATHAM URUNDAI.jpg'),
+    imagesList: [
+      images('./PAYATHAM URUNDAI.jpg'),
+      images('./PAYATHAM URUNDAI.jpg'),
+      images('./PAYATHAM URUNDAI.jpg'),
+      images('./PAYATHAM URUNDAI.jpg'),
+    ],
   },
   {
     id: 4,
@@ -50,7 +67,12 @@ const initialProducts = [
     rating: 5,
     reviews: 310,
     badge: 'Best Seller',
-    image: images('./PAYATHAM URUNDAI.jpg'),
+    imagesList: [
+      images('./PAYATHAM URUNDAI.jpg'),
+      images('./PAYATHAM URUNDAI.jpg'),
+      images('./PAYATHAM URUNDAI.jpg'),
+      images('./PAYATHAM URUNDAI.jpg'),
+    ],
   },
   {
     id: 5,
@@ -60,7 +82,7 @@ const initialProducts = [
     rating: 5,
     reviews: 184,
     badge: null,
-    image: images('./PAYATHAM URUNDAI.jpg'),
+    imagesList: [images('./PAYATHAM URUNDAI.jpg'), images('./PAYATHAM URUNDAI.jpg'), images('./PAYATHAM URUNDAI.jpg'), images('./PAYATHAM URUNDAI.jpg')],
   },
   {
     id: 6,
@@ -70,7 +92,7 @@ const initialProducts = [
     rating: 4,
     reviews: 95,
     badge: null,
-    image: images('./PAYATHAM URUNDAI.jpg'),
+    imagesList: [images('./PAYATHAM URUNDAI.jpg'), images('./PAYATHAM URUNDAI.jpg'), images('./PAYATHAM URUNDAI.jpg'), images('./PAYATHAM URUNDAI.jpg')],
   },
   {
     id: 7,
@@ -80,7 +102,7 @@ const initialProducts = [
     rating: 4,
     reviews: 212,
     badge: null,
-    image: images('./PAYATHAM URUNDAI.jpg'),
+    imagesList: [images('./PAYATHAM URUNDAI.jpg'), images('./PAYATHAM URUNDAI.jpg'), images('./PAYATHAM URUNDAI.jpg'), images('./PAYATHAM URUNDAI.jpg')],
   },
   {
     id: 8,
@@ -90,7 +112,7 @@ const initialProducts = [
     rating: 5,
     reviews: 440,
     badge: 'Best Seller',
-    image: images('./PAYATHAM URUNDAI.jpg'),
+    imagesList: [images('./PAYATHAM URUNDAI.jpg'), images('./PAYATHAM URUNDAI.jpg'), images('./PAYATHAM URUNDAI.jpg'), images('./PAYATHAM URUNDAI.jpg')],
   },
   {
     id: 9,
@@ -100,7 +122,7 @@ const initialProducts = [
     rating: 5,
     reviews: 440,
     badge: 'Best Seller',
-    image: images('./PAYATHAM URUNDAI.jpg'),
+    imagesList: [images('./PAYATHAM URUNDAI.jpg'), images('./PAYATHAM URUNDAI.jpg'), images('./PAYATHAM URUNDAI.jpg'), images('./PAYATHAM URUNDAI.jpg')],
   },
   {
     id: 10,
@@ -110,7 +132,7 @@ const initialProducts = [
     rating: 5,
     reviews: 440,
     badge: 'Best Seller',
-    image: images('./PAYATHAM URUNDAI.jpg'),
+    imagesList: [images('./PAYATHAM URUNDAI.jpg'), images('./PAYATHAM URUNDAI.jpg'), images('./PAYATHAM URUNDAI.jpg'), images('./PAYATHAM URUNDAI.jpg')],
   },
   {
     id: 11,
@@ -120,9 +142,69 @@ const initialProducts = [
     rating: 5,
     reviews: 440,
     badge: 'Best Seller',
-    image: images('./PAYATHAM URUNDAI.jpg'),
+    imagesList: [images('./PAYATHAM URUNDAI.jpg'), images('./PAYATHAM URUNDAI.jpg'), images('./PAYATHAM URUNDAI.jpg'), images('./PAYATHAM URUNDAI.jpg')],
   },
 ];
+
+// REUSABLE SUB-COMPONENT FOR SMOOTH IN-CARD SLIDER
+const ProductCardImageSlider = ({ imagesList, productName }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handlePrev = (e) => {
+    e.stopPropagation(); // Stops routing to product details page
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? imagesList.length - 1 : prevIndex - 1
+    );
+  };
+
+  const handleNext = (e) => {
+    e.stopPropagation(); // Stops routing to product details page
+    setCurrentIndex((prevIndex) =>
+      prevIndex === imagesList.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  return (
+    <div className="card-slider-wrapper">
+      {/* Left Arrow Button */}
+      <button className="slider-arrow left-arrow" onClick={handlePrev}>
+        &#10094;
+      </button>
+
+      {/* Slide Container for smooth transition */}
+      <div className="slider-content-window">
+        <div 
+          className="slider-image-track" 
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        >
+          {imagesList.map((imgSrc, idx) => (
+            <img
+              key={idx}
+              src={imgSrc}
+              alt={`${productName} view ${idx + 1}`}
+              className="product-img"
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Right Arrow Button */}
+      <button className="slider-arrow right-arrow" onClick={handleNext}>
+        &#10095;
+      </button>
+
+      {/* Visual dots indicators */}
+      <div className="slider-dots">
+        {imagesList.map((_, idx) => (
+          <span 
+            key={idx} 
+            className={`slider-dot ${idx === currentIndex ? 'active' : ''}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
 
 const Product = () => {
   const navigate = useNavigate();
@@ -242,7 +324,7 @@ const Product = () => {
                   className={!showOutOfStock ? 'active' : ''}
                   onClick={() => setShowOutOfStock(false)}
                 >
-                  View Details
+                  Hide
                 </button>
               </div>
             </div>
@@ -277,7 +359,6 @@ const Product = () => {
 
             {priceOpen && (
               <>
-                {/* Dual Range Slider */}
                 <div className="range-track-wrapper">
                   <div className="range-track-bg" />
                   <div
@@ -304,7 +385,6 @@ const Product = () => {
                   />
                 </div>
 
-                {/* Price Inputs */}
                 <div className="price-inputs-container">
                   <div className="input-box-field">
                     <span className="currency-symbol">Rs.</span>
@@ -368,49 +448,46 @@ const Product = () => {
           </div>
 
           {/* PRODUCT GRID */}
-          {/* PRODUCT GRID */}
-<div className="product-grid">
-  {sortedProducts.map((product) => (
-    <div
-      className="product-card"
-      key={product.id}
-      onClick={() => navigate(`/product/${product.id}`)} // This captures the click!
-      style={{ cursor: 'pointer' }}
-    >
-      <div className="image-container">
-        {product.badge === 'Best Seller' && (
-          <div className="badge best-seller-badge">Best Seller</div>
-        )}
-        <img
-          src={product.image}
-          alt={product.name}
-          className="product-img"
-        />
-      </div>
+          <div className="product-grid">
+            {sortedProducts.map((product) => (
+              <div
+                className="product-card"
+                key={product.id}
+                onClick={() => navigate(`/product/${product.id}`)}
+                style={{ cursor: 'pointer' }}
+              >
+                <div className="image-container">
+                  {product.badge === 'Best Seller' && (
+                    <div className="badge best-seller-badge">Best Seller</div>
+                  )}
+                  {/* REPLACED THE OLD <img /> CONTEXT WITH OUR SLIDER COMPONENT */}
+                  <ProductCardImageSlider 
+                    imagesList={product.imagesList} 
+                    productName={product.name} 
+                  />
+                </div>
 
-      <div className="product-info">
-        <h3 className="product-name">{product.name}</h3>
-        <p className="product-desc">{product.desc}</p>
+                <div className="product-info">
+                  <h3 className="product-name">{product.name}</h3>
+                  <p className="product-desc">{product.desc}</p>
 
-        <div className="rating-section">
-          <div className="stars">
-            {'★'.repeat(product.rating)}
-            {'☆'.repeat(5 - product.rating)}
+                  <div className="rating-section">
+                    <div className="stars">
+                      {'★'.repeat(product.rating)}
+                      {'☆'.repeat(5 - product.rating)}
+                    </div>
+                    <span className="review-count">({product.reviews} reviews)</span>
+                  </div>
+
+                  <div className="product-price">Rs. {product.price}.00</div>
+
+                  <button className="add-to-cart-btn">
+                    View Details
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
-          <span className="review-count">({product.reviews} reviews)</span>
-        </div>
-
-        <div className="product-price">Rs. {product.price}.00</div>
-
-        {/* CHOOSE THIS MODIFIED BUTTON BELOW */}
-        <button className="add-to-cart-btn">
-          View Details
-        </button>
-      </div>
-    </div>
-  ))}
-</div>
-          
         </main>
       </div>
 

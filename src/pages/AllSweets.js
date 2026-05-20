@@ -5,7 +5,7 @@ import FilterSidebar from "../components/PriceFilter";
 import "../styles/AllSweets.css";
 import sweetsImages from "../assets/images/sweets";
 import Hero from "../components/Hero";
-import WhatsAppButton from '../components/WhatsAppButton';
+
 
 const initialSweets = [
   {
@@ -16,7 +16,12 @@ const initialSweets = [
     rating: 5,
     reviews: 120,
     isBestSeller: true,
-    image: sweetsImages.mysorePak,
+    imagesList: [
+      sweetsImages.mysorePak,
+      sweetsImages.mysorePak, // Add unique image paths here as needed
+      sweetsImages.mysorePak,
+      sweetsImages.mysorePak,
+    ],
   },
   {
     id: 2,
@@ -26,7 +31,12 @@ const initialSweets = [
     rating: 4,
     reviews: 98,
     isBestSeller: false,
-    image: sweetsImages.ravaladdu,
+    imagesList: [
+      sweetsImages.ravaladdu,
+      sweetsImages.ravaladdu,
+      sweetsImages.ravaladdu,
+      sweetsImages.ravaladdu,
+    ],
   },
   {
     id: 3,
@@ -36,7 +46,12 @@ const initialSweets = [
     rating: 4,
     reviews: 80,
     isBestSeller: false,
-    image: sweetsImages.ravakesari,
+    imagesList: [
+      sweetsImages.ravakesari,
+      sweetsImages.ravakesari,
+      sweetsImages.ravakesari,
+      sweetsImages.ravakesari,
+    ],
   },
   {
     id: 4,
@@ -46,7 +61,12 @@ const initialSweets = [
     rating: 5,
     reviews: 150,
     isBestSeller: true,
-    image: sweetsImages.payiththamurundai,
+    imagesList: [
+      sweetsImages.payiththamurundai,
+      sweetsImages.payiththamurundai,
+      sweetsImages.payiththamurundai,
+      sweetsImages.payiththamurundai,
+    ],
   },
   {
     id: 5,
@@ -56,7 +76,12 @@ const initialSweets = [
     rating: 5,
     reviews: 200,
     isBestSeller: true,
-    image: sweetsImages.richladdu,
+    imagesList: [
+      sweetsImages.richladdu,
+      sweetsImages.richladdu,
+      sweetsImages.richladdu,
+      sweetsImages.richladdu,
+    ],
   },
   {
     id: 6,
@@ -66,7 +91,12 @@ const initialSweets = [
     rating: 5,
     reviews: 300,
     isBestSeller: true,
-    image: sweetsImages.TURKISHDELIGHT,
+    imagesList: [
+      sweetsImages.TURKISHDELIGHT,
+      sweetsImages.TURKISHDELIGHT,
+      sweetsImages.TURKISHDELIGHT,
+      sweetsImages.TURKISHDELIGHT,
+    ],
   },
   {
     id: 7,
@@ -76,7 +106,12 @@ const initialSweets = [
     rating: 4,
     reviews: 140,
     isBestSeller: false,
-    image: sweetsImages.BOONDILADDU,
+    imagesList: [
+      sweetsImages.BOONDILADDU,
+      sweetsImages.BOONDILADDU,
+      sweetsImages.BOONDILADDU,
+      sweetsImages.BOONDILADDU,
+    ],
   },
   {
     id: 8,
@@ -86,9 +121,74 @@ const initialSweets = [
     rating: 4,
     reviews: 110,
     isBestSeller: false,
-    image: sweetsImages.COCONUTBURFI,
+    imagesList: [
+      sweetsImages.COCONUTBURFI,
+      sweetsImages.COCONUTBURFI,
+      sweetsImages.COCONUTBURFI,
+      sweetsImages.COCONUTBURFI,
+    ],
   },
 ];
+
+// IN-CARD IMAGE SLIDER COMPONENT
+const ProductCardImageSlider = ({ imagesList, productName }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handlePrev = (e) => {
+    e.stopPropagation(); // Prevents accidental click routing triggers
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? imagesList.length - 1 : prevIndex - 1
+    );
+  };
+
+  const handleNext = (e) => {
+    e.stopPropagation(); // Prevents accidental click routing triggers
+    setCurrentIndex((prevIndex) =>
+      prevIndex === imagesList.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  return (
+    <div className="card-slider-wrapper">
+      {/* Left Navigation Arrow */}
+      <button className="slider-arrow left-arrow" onClick={handlePrev}>
+        &lt;
+      </button>
+
+      {/* Frame view window */}
+      <div className="slider-content-window">
+        <div 
+          className="slider-image-track" 
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        >
+          {imagesList.map((imgSrc, idx) => (
+            <img
+              key={idx}
+              src={imgSrc}
+              alt={`${productName} view ${idx + 1}`}
+              className="product-img"
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Right Navigation Arrow */}
+      <button className="slider-arrow right-arrow" onClick={handleNext}>
+        &gt;
+      </button>
+
+      {/* Slide Indicators */}
+      <div className="slider-dots">
+        {imagesList.map((_, idx) => (
+          <span 
+            key={idx} 
+            className={`slider-dot ${idx === currentIndex ? 'active' : ''}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
 
 export default function AllSweets() {
   const MAX = 3000;
@@ -132,7 +232,6 @@ export default function AllSweets() {
       <Hero />
 
       <div className="product-container">
-
         {/* FILTER SIDEBAR COMPONENT */}
         <FilterSidebar
           minPrice={minPrice}
@@ -146,9 +245,8 @@ export default function AllSweets() {
           step={100}
         />
 
-        {/* MAIN */}
+        {/* MAIN content wrapper */}
         <main className="product-content">
-
           <div className="product-top-bar">
             <span className="product-count">{sortedSweets.length} products</span>
 
@@ -180,15 +278,19 @@ export default function AllSweets() {
             </div>
           </div>
 
-          {/* GRID */}
+          {/* GRID ROW */}
           <div className="product-grid">
             {sortedSweets.map((item) => (
               <div className="product-card" key={item.id}>
+                {/* ⚠️ Image Container integration with Slider Sub-Component */}
                 <div className="image-container">
                   {item.isBestSeller && (
                     <span className="badge best-seller-badge">★ Best Seller</span>
                   )}
-                  <img src={item.image} alt={item.name} className="product-img" />
+                  <ProductCardImageSlider 
+                    imagesList={item.imagesList} 
+                    productName={item.name} 
+                  />
                 </div>
 
                 <div className="product-info">
@@ -206,7 +308,6 @@ export default function AllSweets() {
               </div>
             ))}
           </div>
-
         </main>
       </div>
 
