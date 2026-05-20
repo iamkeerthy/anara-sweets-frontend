@@ -1,0 +1,406 @@
+.details-page-wrapper {
+  background-color: #ffffff;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #1a1a1a;
+}
+
+/* Breadcrumb Navigation Subheader */
+.breadcrumb-nav-container {
+  border-bottom: 1px solid #e5e5e5;
+  background-color: #ffffff;
+  padding: 12px 0;
+}
+
+.breadcrumb-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+
+.breadcrumb-path {
+  color: #707070;
+}
+
+.breadcrumb-path a {
+  color: #1a1a1a;
+  text-decoration: none;
+}
+
+.breadcrumb-path a:hover {
+  text-decoration: underline;
+}
+
+.current-node {
+  color: #707070;
+  font-weight: 400;
+  margin-left: 4px;
+}
+
+.next-nav-pointer a {
+  color: #1a1a1a;
+  text-decoration: none;
+}
+
+.next-nav-pointer a:hover {
+  text-decoration: underline;
+}
+
+/* Main Split Content Core Grid */
+.details-main-layout {
+  max-width: 1140px;
+  margin: 40px auto 80px auto;
+  padding: 0 24px;
+  display: flex;
+  gap: 60px;
+}
+
+/* Left Grid: Media Elements Layout block */
+.details-media-gallery {
+  flex: 1.1;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-preview-frame {
+  position: relative;
+  width: 100%;
+  background-color: #f7f7f7;
+  border: 1px solid #e8e8e8;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.active-display-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Premium Best Seller Ribbon Design badge matching screenshot */
+.details-ribbon-tag {
+  position: absolute;
+  top: 0;
+  left: 20px;
+  background-color: #cc0c23;
+  color: #ffffff;
+  padding: 8px 12px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  z-index: 5;
+}
+
+.details-ribbon-tag .stars-line {
+  font-size: 8px;
+  letter-spacing: 1px;
+  margin-bottom: 2px;
+}
+
+.details-ribbon-tag .tag-text {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+/* Bottom Strip Thumbnail row container grid styling */
+.thumbnail-strip-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.thumb-box-item {
+  width: 72px;
+  height: 72px;
+  border: 1px solid #e0e0e0;
+  cursor: pointer;
+  background-color: #f7f7f7;
+}
+
+.thumb-box-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thumb-box-item:hover, .thumb-box-item.active-border {
+  border-color: #1a1a1a;
+}
+
+/* Right Grid: Content Panel components stacks */
+.details-info-panel {
+  flex: 0.9;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-main-heading {
+  font-size: 32px;
+  font-weight: 500;
+  margin: 0 0 12px 0;
+  letter-spacing: -0.5px;
+  color: #1a1a1a;
+}
+
+.product-rating-summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.star-rating-row {
+  color: #fabc05;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.review-numerical-count {
+  font-size: 12px;
+  color: #555555;
+}
+
+.product-price-display {
+  font-size: 18px;
+  font-weight: 500;
+  color: #1a1a1a;
+  margin-bottom: 24px;
+}
+
+.facility-shipping-banner {
+  font-size: 13px;
+  color: #1a1a1a;
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 14px 0;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.facility-shipping-banner .truck-icon {
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+/* Pincode Inline Check Input Container row styling elements */
+.pincode-checker-widget {
+  margin-bottom: 28px;
+}
+
+.pincode-checker-widget .widget-label {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.pincode-checker-widget .pin-marker {
+  margin-right: 6px;
+  color: #cc0c23;
+}
+
+.input-action-field {
+  display: flex;
+  max-width: 360px;
+  height: 44px;
+}
+
+.input-action-field input {
+  flex: 1;
+  border: 1px solid #cccccc;
+  border-right: none;
+  padding: 0 14px;
+  font-size: 13px;
+  outline: none;
+  color: #1a1a1a;
+}
+
+.input-action-field input::placeholder {
+  color: #999999;
+}
+
+.pincode-submit-btn {
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  padding: 0 24px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.pincode-submit-btn:hover {
+  background-color: #222222;
+}
+
+.pincode-helper-text {
+  font-size: 12px;
+  color: #555555;
+  margin: 8px 0 0 0;
+}
+
+/* Variants Labels and Attribute Selector Pill Blocks */
+.variant-options-group {
+  margin-bottom: 24px;
+}
+
+.variant-field-label {
+  display: block;
+  font-size: 12px;
+  color: #1a1a1a;
+  margin-bottom: 10px;
+}
+
+.variant-badge-selection {
+  display: inline-block;
+  border: 1px solid #1a1a1a;
+  padding: 10px 24px;
+  font-size: 13px;
+  font-weight: 400;
+  background-color: #ffffff;
+  cursor: default;
+}
+
+/* Quantity Adjustments Counter styling layout configuration */
+.quantity-counter-group {
+  margin-bottom: 32px;
+}
+
+.counter-control-wrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid #cccccc;
+  width: fit-content;
+  height: 44px;
+  background-color: #ffffff;
+}
+
+.counter-btn {
+  background: transparent;
+  border: none;
+  width: 44px;
+  height: 100%;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.15s ease;
+}
+
+.counter-btn:hover {
+  background-color: #f5f5f5;
+}
+
+.counter-number-box {
+  min-width: 40px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  color: #1a1a1a;
+  user-select: none;
+}
+
+/* Primary Action Buttons Container Funnel Stack */
+.checkout-funnel-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 440px;
+  margin-bottom: 36px;
+}
+
+.primary-cart-action-btn {
+  background-color: #d11b5d;
+  color: #ffffff;
+  border: none;
+  width: 100%;
+  height: 48px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.secondary-buy-action-btn {
+  background-color: #1a2530;
+  color: #ffffff;
+  border: none;
+  width: 100%;
+  height: 48px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.primary-cart-action-btn:hover, .secondary-buy-action-btn:hover {
+  opacity: 0.93;
+}
+
+/* Bottom Bullet Description Section Spec List */
+.product-features-bullet-list {
+  border-top: 1px solid #e5e5e5;
+  padding-top: 28px;
+}
+
+.product-features-bullet-list ul {
+  margin: 0;
+  padding-left: 18px;
+  color: #222222;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.product-features-bullet-list li {
+  margin-bottom: 8px;
+}
+
+/* Core Responsiveness Viewport Media Rules */
+@media (max-width: 890px) {
+  .details-main-layout {
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 20px;
+  }
+  
+  .input-action-field, .checkout-funnel-actions {
+    max-width: 100%;
+  }
+}
+
+/* Not Found Screen Fallback Helpers */
+.error-message-container {
+  max-width: 600px;
+  margin: 120px auto;
+  text-align: center;
+}
+
+.error-message-container h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.error-message-container a {
+  color: #d11b5d;
+  text-decoration: none;
+  font-weight: 500;
+}
