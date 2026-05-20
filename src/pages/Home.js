@@ -3,8 +3,11 @@ import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import Footer from "../components/Footer";
 import "../styles/home.css";
-import WhatsAppButton from "../components/WhatsAppButton";
 
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
+
+import WhatsAppButton from "../components/WhatsAppButton";
 
 // Import all images (multiple angles/variants per product)
 import mysorePak1 from "../assets/images/MYSORE PAK.jpg";
@@ -284,22 +287,44 @@ const reviewsData = [
 // Component for image gallery inside each combo card
 const ImageGallery = ({ images, productName }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [previewIndex, setPreviewIndex] = useState(null);
 
   const nextImage = (e) => {
-    e.stopPropagation();
+    if (e) e.stopPropagation();
     setCurrentIndex((prev) => (prev + 1) % images.length);
+    setPreviewIndex(null);
   };
 
   const prevImage = (e) => {
-    e.stopPropagation();
+    if (e) e.stopPropagation();
     setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+    setPreviewIndex(null);
   };
 
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const half = rect.width / 2;
+    if (x < half) {
+      setPreviewIndex((currentIndex - 1 + images.length) % images.length);
+    } else {
+      setPreviewIndex((currentIndex + 1) % images.length);
+    }
+  };
+
+  const handleMouseLeave = () => setPreviewIndex(null);
+
+  const displayedIndex = previewIndex !== null ? previewIndex : currentIndex;
+
   return (
-    <div className="image-gallery">
+    <div
+      className="image-gallery"
+      onMouseMove={images.length > 1 ? handleMouseMove : undefined}
+      onMouseLeave={images.length > 1 ? handleMouseLeave : undefined}
+    >
       <img
-        src={images[currentIndex]}
-        alt={`${productName} - view ${currentIndex + 1}`}
+        src={images[displayedIndex]}
+        alt={`${productName} - view ${displayedIndex + 1}`}
         onError={(e) => {
           e.target.src = "https://via.placeholder.com/300x300?text=Image+Not+Found";
         }}
@@ -307,12 +332,22 @@ const ImageGallery = ({ images, productName }) => {
 
       {images.length > 1 && (
         <>
-          <button className="gallery-arrow left-arrow" onClick={prevImage}>
-            &#8249;
+          <button
+            className={`gallery-arrow left-arrow ${previewIndex === ((currentIndex - 1 + images.length) % images.length) ? 'preview' : ''}`}
+            onClick={prevImage}
+            aria-label="Previous image"
+          >
+            <FaChevronLeft />
           </button>
-          <button className="gallery-arrow right-arrow" onClick={nextImage}>
-            &#8250;
+
+          <button
+            className={`gallery-arrow right-arrow ${previewIndex === ((currentIndex + 1) % images.length) ? 'preview' : ''}`}
+            onClick={nextImage}
+            aria-label="Next image"
+          >
+            <FaChevronRight />
           </button>
+
           <div className="image-dots">
             {images.map((_, idx) => (
               <span
@@ -334,51 +369,51 @@ const ImageGallery = ({ images, productName }) => {
 const combos = [
   {
     id: 1,
+    name: "Thattai",
+    price: 71,
+    images: [thattai1, thattai2, thattai3],
+    reviews: 130,
+    isBestSeller: true
+  },
+  {
+    id: 2,
+    name: "Kai murukku",
+    price: 96,
+    images: [kaiMurukku1, kaiMurukku2, kaiMurukku3],
+    reviews: 483,
+    isBestSeller: true
+  },
+  {
+    id: 3,
+    name: "Achu muruku - Kaaram",
+    price: 67,
+    images: [achuMurukku1, achuMurukku2, achuMurukku3],
+    reviews: 111,
+    isBestSeller: true
+  },
+  {
+    id: 4,
+    name: "Anara Mixture",
+    price: 105,
+    images: [aswinsMixture1, aswinsMixture2, aswinsMixture3],
+    reviews: 196,
+    isBestSeller: true
+  },
+  {
+    id: 5,
+    name: "Ribbon Bakoda",
+    price: 86,
+    images: [ribbonBakoda1, ribbonBakoda2, ribbonBakoda3],
+    reviews: 72,
+    isBestSeller: true
+  },
+  {
+    id: 6,
     name: "Mysore Pak",
     price: 197,
     images: [mysorePak1, mysorePak2, mysorePak3],
     reviews: 207,
     isBestSeller: true
-  },
-  {
-    id: 2,
-    name: "Rava Kesari",
-    price: 167,
-    images: [ravaKesari1, ravaKesari2, ravaKesari3],
-    reviews: 4,
-    isBestSeller: false
-  },
-  {
-    id: 3,
-    name: "Chocolate Brownies",
-    price: 163,
-    images: [chocolateBrownies1, chocolateBrownies2, chocolateBrownies3],
-    reviews: 223,
-    isBestSeller: true
-  },
-  {
-    id: 4,
-    name: "Coconut Burfi",
-    price: 201,
-    images: [coconutBurfi1, coconutBurfi2, coconutBurfi3],
-    reviews: 3,
-    isBestSeller: false
-  },
-  {
-    id: 5,
-    name: "Boondi Laddu",
-    price: 163,
-    images: [boondiLaddu1, boondiLaddu2, boondiLaddu3],
-    reviews: 8,
-    isBestSeller: true
-  },
-  {
-    id: 6,
-    name: "Turkish Delight",
-    price: 189,
-    images: [turkishDelight1, turkishDelight2, turkishDelight3],
-    reviews: 45,
-    isBestSeller: false
   },
   {
     id: 7,
@@ -664,7 +699,7 @@ const FlavourfulDelightsSection = () => {
           <img src={flavourfulFullWidthImg} alt="Traditional Savouries" />
           <div className="fullwidth-overlay">
             <p className="fullwidth-text">Traditional Savouries, <br />made the native way</p>
-            <button className="fullwidth-shop-btn">Shop now</button>
+            <Link to="/all-collections" className="fullwidth-shop-btn">Shop now</Link>
           </div>
         </div>
       </div>
@@ -698,7 +733,7 @@ const AboutUsSection = () => {
             Old Traditional Recipes.<br /><br />
             Every bite is a Celebration of Our Ethnic Indian flavours and Rich Heritage.
           </h5>
-          <button className="about-btn">KNOW MORE</button>
+          <Link to="/about" className="about-btn">KNOW MORE</Link>
         </div>
 
       </div>
@@ -917,8 +952,13 @@ const Home = () => {
       {/* Combos Section */}
       <section className="combos-section">
         <div className="combos-header">
-          <button className="nav-arrow" onClick={() => scroll("left")} style={{ visibility: showLeftArrow ? 'visible' : 'hidden' }}>
-            &#8249;
+          <button
+            className="nav-arrow"
+            onClick={() => scroll("left")}
+            style={{ visibility: showLeftArrow ? 'visible' : 'hidden' }}
+            aria-label="Scroll combos left"
+          >
+            <FaChevronLeft />
           </button>
 
           <div className="title-box">
@@ -926,8 +966,13 @@ const Home = () => {
             <a href="/combos" className="view-all-link">VIEW ALL</a>
           </div>
 
-          <button className="nav-arrow" onClick={() => scroll("right")} style={{ visibility: showRightArrow ? 'visible' : 'hidden' }}>
-            &#8250;
+          <button
+            className="nav-arrow"
+            onClick={() => scroll("right")}
+            style={{ visibility: showRightArrow ? 'visible' : 'hidden' }}
+            aria-label="Scroll combos right"
+          >
+            <FaChevronRight />
           </button>
         </div>
 
@@ -973,6 +1018,7 @@ const Home = () => {
       <FlavourfulDelightsSection />
 
       {/* About Us Section */}
+       {/* About Us Section */}
       <AboutUsSection />
 
       {/* What Makes Anara Special */}
