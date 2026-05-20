@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/navbar.css';
 import logo from '../assets/images/logo.png';
 
@@ -11,6 +11,17 @@ const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [activeSubMenu, setActiveSubMenu] = useState(null);
   const [darkMode, setDarkMode] = useState(false);
+  
+  const topBarMessages = ['SriLankan Sweets', 'Made fresh daily |One time use Pure Groundnut Oil'];
+  const [topBarIndex, setTopBarIndex] = useState(0);
+
+  useEffect(() => {
+  const interval = setInterval(() => {
+    setTopBarIndex((prev) => (prev + 1) % topBarMessages.length);
+  }, 3000);
+
+  return () => clearInterval(interval);
+}, [topBarMessages.length]);
 
 const toggleTheme = () => {
   setDarkMode(!darkMode);
@@ -100,7 +111,15 @@ const toggleTheme = () => {
             </a>
           </div>
           <div className="top-bar-center">
-            <span className="center-text">SriLankan Sweets</span>
+            <div className='c'>
+              <span
+                key={topBarIndex}
+                className={`top-bar-message ${topBarIndex === 1 ? 'from-bottom' : 'fade'}`}
+                aria-live="polite"
+              >
+                {topBarMessages[topBarIndex]}
+              </span>
+            </div>
           </div>
           <div className="top-bar-right"></div>
         </div>
@@ -187,7 +206,6 @@ const toggleTheme = () => {
                   <Link to="/sweets" className="dropdown-item">All Sweets</Link>
                   <Link to="/all-traditional" className="dropdown-item">All Traditional</Link>
                   <Link to="/all-health-mix" className="dropdown-item">All Health Mix</Link>
-
                 </div>
               )}
             </div>
