@@ -1,331 +1,311 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import '../styles/product.css';
 import { useNavigate } from 'react-router-dom';
 import WhatsAppButton from "../components/WhatsAppButton";
 import sweetsImages from "../assets/images/sweets";
 
-// Layout styling imports
-import '../styles/product.css';
-import '../styles/filter.css';
+const images = require.context(
+  '../assets/images',
+  false,
+  /\.(png|jpe?g|svg)$/
+);
 
-import { useNavigate } from 'react-router-dom';
-
-import heroImg from '../assets/images/img2.jpg';
-const placeholderImage = 'https://via.placeholder.com/400x400?text=Product+Image';
-
-// EVERY SINGLE SPECIFIC PRODUCT COMBINED BY CATEGORY
+// 1. UPDATED DATA STRUCTURE WITH 'category' PROPERTIES
 const initialProducts = [
   // --- SWEETS (8 EXACT ITEMS) ---
   {
-    id: 'sweet-1',
-    name: "Mysore Pak (Ghee)",
+    id: 1,
+    name: "Mysore Pak",
     desc: "Traditional South Indian sweet made with ghee",
     price: 150,
     rating: 5,
     reviews: 120,
-    badge: 'Best Seller',
+    isBestSeller: true,
     category: 'sweets',
     imagesList: [
       sweetsImages.mysorePak,
       sweetsImages.mysorePak,
       sweetsImages.mysorePak,
-      sweetsImages.mysorePak
-    ]
+      sweetsImages.mysorePak,
+    ],
   },
   {
-    id: 'sweet-2',
+    id: 2,
     name: "Rava Laddu",
     desc: "Soft and sweet coconut rava laddu",
     price: 140,
     rating: 4,
     reviews: 98,
-    badge: null,
+    isBestSeller: false,
     category: 'sweets',
     imagesList: [
       sweetsImages.ravaladdu,
       sweetsImages.ravaladdu,
       sweetsImages.ravaladdu,
-      sweetsImages.ravaladdu
-    ]
+      sweetsImages.ravaladdu,
+    ],
   },
   {
-    id: 'sweet-3',
+    id: 3,
     name: "Rava Kesari",
     desc: "Kesari made with semolina and saffron",
     price: 120,
     rating: 4,
     reviews: 80,
-    badge: null,
+    isBestSeller: false,
     category: 'sweets',
     imagesList: [
       sweetsImages.ravakesari,
       sweetsImages.ravakesari,
       sweetsImages.ravakesari,
-      sweetsImages.ravakesari
-    ]
+      sweetsImages.ravakesari,
+    ],
   },
   {
-    id: 'sweet-4',
+    id: 4,
     name: "Payatham Urundai",
     desc: "Protein rich traditional sweet balls",
     price: 180,
     rating: 5,
     reviews: 150,
-    badge: 'Best Seller',
+    isBestSeller: true,
     category: 'sweets',
     imagesList: [
       sweetsImages.payiththamurundai,
       sweetsImages.payiththamurundai,
       sweetsImages.payiththamurundai,
-      sweetsImages.payiththamurundai
-    ]
+      sweetsImages.payiththamurundai,
+    ],
   },
   {
-    id: 'sweet-5',
+    id: 5,
     name: "Rich Laddu",
     desc: "Premium dry fruit laddu",
     price: 220,
     rating: 5,
     reviews: 200,
-    badge: 'Best Seller',
+    isBestSeller: true,
     category: 'sweets',
     imagesList: [
       sweetsImages.richladdu,
       sweetsImages.richladdu,
       sweetsImages.richladdu,
-      sweetsImages.richladdu
-    ]
+      sweetsImages.richladdu,
+    ],
   },
   {
-    id: 'sweet-6',
+    id: 6,
     name: "Turkish Delight",
     desc: "Soft chewy middle eastern sweet",
     price: 350,
     rating: 5,
     reviews: 300,
-    badge: 'Best Seller',
+    isBestSeller: true,
     category: 'sweets',
     imagesList: [
       sweetsImages.TURKISHDELIGHT,
       sweetsImages.TURKISHDELIGHT,
       sweetsImages.TURKISHDELIGHT,
-      sweetsImages.TURKISHDELIGHT
-    ]
+      sweetsImages.TURKISHDELIGHT,
+    ],
   },
   {
-    id: 'sweet-7',
+    id: 7,
     name: "Boondi Laddu",
     desc: "Classic crunchy boondi laddu",
     price: 160,
     rating: 4,
     reviews: 140,
-    badge: null,
+    isBestSeller: false,
     category: 'sweets',
     imagesList: [
       sweetsImages.BOONDILADDU,
       sweetsImages.BOONDILADDU,
       sweetsImages.BOONDILADDU,
-      sweetsImages.BOONDILADDU
-    ]
+      sweetsImages.BOONDILADDU,
+    ],
   },
   {
-    id: 'sweet-8',
-    name: "Coconut Burfi (Milk)",
+    id: 8,
+    name: "Coconut Burfi",
     desc: "Soft coconut milk sweet squares",
     price: 180,
     rating: 4,
     reviews: 110,
-    badge: null,
+    isBestSeller: false,
     category: 'sweets',
     imagesList: [
       sweetsImages.COCONUTBURFI,
       sweetsImages.COCONUTBURFI,
       sweetsImages.COCONUTBURFI,
-      sweetsImages.COCONUTBURFI
-    ]
+      sweetsImages.COCONUTBURFI,
+    ],
   },
 
   // --- TRADITIONAL ---
   {
-    id: 'trad-1',
-    name: 'Mysore Pak',
-    desc: 'Authentic homemade traditional sweet',
-    price: 350,
-    rating: 5,
-    reviews: 62,
-    badge: 'Best Seller',
-    category: 'traditional',
-    imagesList: [
-      require('../assets/images/PAYATHAM URUNDAI.jpg'),
-      require('../assets/images/PAYATHAM URUNDAI.jpg')
-    ]
-  },
-  {
-    id: 'trad-2',
-    name: 'Laddu',
-    desc: 'Classic sweet festive treat',
-    price: 250,
-    rating: 5,
-    reviews: 48,
-    badge: 'New Launch',
-    category: 'traditional',
-    imagesList: [
-      require('../assets/images/PAYATHAM URUNDAI.jpg')
-    ]
-  },
-  {
-    id: 'trad-3',
-    name: 'Jangiri',
-    desc: 'Traditional juicy syrup treat',
-    price: 180,
+    id: 9,
+    name: 'Achu Murukku + Thattai',
+    desc: 'Traditional sweet crunchy combinations',
+    price: 138,
     rating: 4,
-    reviews: 39,
-    badge: null,
+    reviews: 147,
+    isBestSeller: false,
     category: 'traditional',
     imagesList: [
-      require('../assets/images/PAYATHAM URUNDAI.jpg')
-    ]
+      images('./PAYATHAM URUNDAI.jpg'),
+      images('./PAYATHAM URUNDAI.jpg'),
+      images('./PAYATHAM URUNDAI.jpg'),
+      images('./PAYATHAM URUNDAI.jpg'),
+    ],
   },
   {
-    id: 'trad-4',
-    name: 'Kaju Katli',
-    desc: 'Rich premium cashew squares',
-    price: 420,
+    id: 10,
+    name: 'Jaffna Spicy Special',
+    desc: 'Fiery Mixture, Chickpeas, Cassava Chips',
+    price: 680,
     rating: 5,
-    reviews: 55,
-    badge: null,
+    reviews: 184,
+    isBestSeller: false,
     category: 'traditional',
     imagesList: [
-      require('../assets/images/PAYATHAM URUNDAI.jpg')
-    ]
+      images('./PAYATHAM URUNDAI.jpg'), 
+      images('./PAYATHAM URUNDAI.jpg'), 
+      images('./PAYATHAM URUNDAI.jpg'), 
+      images('./PAYATHAM URUNDAI.jpg')
+    ],
   },
   {
-    id: 'trad-5',
-    name: 'Milk Halwa',
-    desc: 'Slow-cooked reduction milk sweet',
-    price: 300,
-    rating: 5,
-    reviews: 44,
-    badge: 'Best Seller',
-    category: 'traditional',
-    imagesList: [
-      require('../assets/images/PAYATHAM URUNDAI.jpg')
-    ]
-  },
-  {
-    id: 'trad-6',
-    name: 'Coconut Burfi',
-    desc: 'Traditional shredded coconut delight',
-    price: 220,
+    id: 11,
+    name: 'Traditional Village Treat',
+    desc: 'Kavum, Kokis, Aluwa, Athirasa combo',
+    price: 850,
     rating: 4,
-    reviews: 30,
-    badge: null,
+    reviews: 95,
+    isBestSeller: false,
     category: 'traditional',
     imagesList: [
-      require('../assets/images/PAYATHAM URUNDAI.jpg')
-    ]
+      images('./PAYATHAM URUNDAI.jpg'), 
+      images('./PAYATHAM URUNDAI.jpg'), 
+      images('./PAYATHAM URUNDAI.jpg'), 
+      images('./PAYATHAM URUNDAI.jpg')
+    ],
+  },
+  {
+    id: 12,
+    name: 'Snack Attack Crunch',
+    desc: 'Spicy Murukku, Ribbon Pakoda, Garlic Sev',
+    price: 340,
+    rating: 4,
+    reviews: 212,
+    isBestSeller: false,
+    category: 'traditional',
+    imagesList: [
+      images('./PAYATHAM URUNDAI.jpg'), 
+      images('./PAYATHAM URUNDAI.jpg'), 
+      images('./PAYATHAM URUNDAI.jpg'), 
+      images('./PAYATHAM URUNDAI.jpg')
+    ],
   },
 
   // --- HEALTH MIX ---
   {
-    id: 'health-1',
-    name: 'Kaju Bulbul',
-    desc: 'Nutritious ingredient variant treat blend',
-    price: 255,
+    id: 13,
+    name: 'Nutritious Ragi Health Mix',
+    desc: 'Finger millet, almonds, walnuts, and cardamom formula',
+    price: 450,
     rating: 5,
-    reviews: 49,
-    badge: 'New Launch',
+    reviews: 120,
+    isBestSeller: false,
     category: 'healthmix',
     imagesList: [
-      require('../assets/images/PAYATHAM URUNDAI.jpg')
-    ]
+      images('./PAYATHAM URUNDAI.jpg'), 
+      images('./PAYATHAM URUNDAI.jpg'), 
+      images('./PAYATHAM URUNDAI.jpg'), 
+      images('./PAYATHAM URUNDAI.jpg')
+    ],
   },
   {
-    id: 'health-2',
-    name: 'Mini jamun jars',
-    desc: 'Nutritious rich healthy portion presentation',
-    price: 135,
+    id: 14,
+    name: 'Millet & Nuts Power Mix',
+    desc: 'Multi-grain roasted health mix breakfast drink',
+    price: 580,
     rating: 5,
-    reviews: 49,
-    badge: 'Best Seller',
+    reviews: 88,
+    isBestSeller: true,
     category: 'healthmix',
     imagesList: [
-      require('../assets/images/PAYATHAM URUNDAI.jpg')
-    ]
+      images('./PAYATHAM URUNDAI.jpg'), 
+      images('./PAYATHAM URUNDAI.jpg'), 
+      images('./PAYATHAM URUNDAI.jpg'), 
+      images('./PAYATHAM URUNDAI.jpg')
+    ],
   },
   {
-    id: 'health-3',
-    name: 'Holes Mysore Pak',
-    desc: 'Traditional porous sweet structural mix texture',
-    price: 100,
-    rating: 5,
-    reviews: 58,
-    badge: null,
+    id: 15,
+    name: 'Herbal Immunity Porridge',
+    desc: 'Traditional health mix mix with authentic greens',
+    price: 390,
+    rating: 4,
+    reviews: 64,
+    isBestSeller: false,
     category: 'healthmix',
     imagesList: [
-      require('../assets/images/PAYATHAM URUNDAI.jpg')
-    ]
-  }
+      images('./PAYATHAM URUNDAI.jpg'), 
+      images('./PAYATHAM URUNDAI.jpg'), 
+      images('./PAYATHAM URUNDAI.jpg'), 
+      images('./PAYATHAM URUNDAI.jpg')
+    ],
+  },
 ];
 
-// REUSABLE CARD SLIDER SUB-COMPONENT
+// IN-CARD SLIDER COMPONENT (Kept original unchanged)
 const ProductCardImageSlider = ({ imagesList, productName }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  const cleanImages = (imagesList && imagesList.length > 0) ? imagesList : [placeholderImage];
 
   const handlePrev = (e) => {
     e.stopPropagation();
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? cleanImages.length - 1 : prevIndex - 1
+      prevIndex === 0 ? imagesList.length - 1 : prevIndex - 1
     );
   };
 
   const handleNext = (e) => {
     e.stopPropagation();
     setCurrentIndex((prevIndex) =>
-      prevIndex === cleanImages.length - 1 ? 0 : prevIndex + 1
+      prevIndex === imagesList.length - 1 ? 0 : prevIndex + 1
     );
   };
 
   return (
     <div className="card-slider-wrapper">
-      {cleanImages.length > 1 && (
-        <button className="slider-arrow left-arrow" onClick={handlePrev}>&lt;</button>
-      )}
-
+      <button className="slider-arrow left-arrow" onClick={handlePrev}>&#10094;</button>
       <div className="slider-content-window">
         <div 
           className="slider-image-track" 
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
-          {cleanImages.map((imgSrc, idx) => (
+          {imagesList.map((imgSrc, idx) => (
             <img
               key={idx}
               src={imgSrc}
               alt={`${productName} view ${idx + 1}`}
               className="product-img"
-              onError={(e) => { e.target.src = placeholderImage; }}
             />
           ))}
         </div>
       </div>
-
-      {cleanImages.length > 1 && (
-        <button className="slider-arrow right-arrow" onClick={handleNext}>&gt;</button>
-      )}
-
-      {cleanImages.length > 1 && (
-        <div className="slider-dots">
-          {cleanImages.map((_, idx) => (
-            <span 
-              key={idx} 
-              className={`slider-dot ${idx === currentIndex ? 'active' : ''}`}
-            />
-          ))}
-        </div>
-      )}
+      <button className="slider-arrow right-arrow" onClick={handleNext}>&#10095;</button>
+      <div className="slider-dots">
+        {imagesList.map((_, idx) => (
+          <span 
+            key={idx} 
+            className={`slider-dot ${idx === currentIndex ? 'active' : ''}`}
+          />
+        ))}
+      </div>
     </div>
   );
 };
@@ -336,20 +316,22 @@ const Product = () => {
 
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(MAX);
-  const [, setShowOutOfStock] = useState(true); // Left for filter-section reference toggle fallback
+  const [showOutOfStock, setShowOutOfStock] = useState(true);
+  const [sortOption, setSortOption] = useState('Featured');
+  const [isSortOpen, setIsSortOpen] = useState(false);
   const [priceOpen, setPriceOpen] = useState(true);
+  
+  // 2. NEW CATEGORY STATE ('all', 'sweets', 'traditional', 'healthmix')
   const [selectedCategory, setSelectedCategory] = useState('all');
 
-  const sortOption = 'Featured';
-
-  // FILTER LOGIC
+  // 3. UPDATED FILTER PRODUCTS LOGIC (Checks price AND category)
   const filteredProducts = initialProducts.filter((product) => {
     const matchesPrice = product.price >= minPrice && product.price <= maxPrice;
     const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
     return matchesPrice && matchesCategory;
   });
 
-  // SORT LOGIC
+  // SORT PRODUCTS (Kept original logic)
   const sortedProducts = [...filteredProducts].sort((a, b) => {
     if (sortOption === 'Price, low to high') return a.price - b.price;
     if (sortOption === 'Price, high to low') return b.price - a.price;
@@ -382,18 +364,30 @@ const Product = () => {
     setMinPrice(0);
     setMaxPrice(MAX);
     setShowOutOfStock(true);
-    setSelectedCategory('all');
+    setSelectedCategory('all'); // Resets category too
+  };
+
+  const removePriceFilter = () => {
+    setMinPrice(0);
+    setMaxPrice(MAX);
   };
 
   const fillLeft = `${(minPrice / MAX) * 100}%`;
   const fillRight = `${100 - (maxPrice / MAX) * 100}%`;
+
+  const sortingOptions = [
+    'Alphabetically, A-Z',
+    'Alphabetically, Z-A',
+    'Price, low to high',
+    'Price, high to low',
+  ];
 
   return (
     <div className="traditional-page-wrapper">
       <Navbar />
 
       <div className="product-container">
-        {/* SIDEBAR FILTER */}
+        {/* SIDEBAR */}
         <aside className="filter-sidebar">
           <div className="filter-header">
             <div className="filter-title-section">
@@ -407,31 +401,34 @@ const Product = () => {
             </div>
           </div>
 
+          {/* APPLIED FILTERS */}
           <div className="applied-filters">
             <div className="applied-title">Applied filters</div>
             <div className="price-tag">
               Rs. {minPrice}.00 - Rs. {maxPrice}.00
-              <button className="remove-filter" onClick={() => { setMinPrice(0); setMaxPrice(MAX); }}>✕</button>
+              <button className="remove-filter" onClick={removePriceFilter}>✕</button>
             </div>
             {selectedCategory !== 'all' && (
               <div className="price-tag" style={{ textTransform: 'capitalize' }}>
-                Category: {selectedCategory === 'healthmix' ? 'Health Mix' : selectedCategory}
+                Category: {selectedCategory}
                 <button className="remove-filter" onClick={() => setSelectedCategory('all')}>✕</button>
               </div>
             )}
             <button className="clear-all" onClick={clearAllFilters}>Clear all</button>
           </div>
 
+          {/* OUT OF STOCK */}
           <div className="filter-section">
             <div className="section-header">
               <h4>Out of stock</h4>
               <div className="toggle-buttons">
-                <button className="active">Show</button>
-                <button className="">Hide</button>
+                <button className={showOutOfStock ? 'active' : ''} onClick={() => setShowOutOfStock(true)}>Show</button>
+                <button className={!showOutOfStock ? 'active' : ''} onClick={() => setShowOutOfStock(false)}>Hide</button>
               </div>
             </div>
           </div>
 
+          {/* PRICE FILTER */}
           <div className="filter-section price-section-wrapper">
             <div className="section-header price-header-toggle" onClick={() => setPriceOpen(!priceOpen)}>
               <h4 className="price-heading">Price Range</h4>
@@ -466,9 +463,69 @@ const Product = () => {
           </div>
         </aside>
 
-        {/* PRODUCTS AREA */}
+        {/* PRODUCTS CONTENT SECTION */}
         <main className="product-content">
-          {/* GRID RENDERER */}
+          
+          {/* 4. NEW INTERACTIVE CATEGORY TABS BANNER */}
+          <div className="category-tabs-container">
+            <button 
+              className={`category-tab-btn ${selectedCategory === 'all' ? 'active-tab' : ''}`}
+              onClick={() => setSelectedCategory('all')}
+            >
+              All Products
+            </button>
+            <button 
+              className={`category-tab-btn ${selectedCategory === 'sweets' ? 'active-tab' : ''}`}
+              onClick={() => setSelectedCategory('sweets')}
+            >
+              Sweets
+            </button>
+            <button 
+              className={`category-tab-btn ${selectedCategory === 'traditional' ? 'active-tab' : ''}`}
+              onClick={() => setSelectedCategory('traditional')}
+            >
+              Traditional Treats
+            </button>
+            <button 
+              className={`category-tab-btn ${selectedCategory === 'healthmix' ? 'active-tab' : ''}`}
+              onClick={() => setSelectedCategory('healthmix')}
+            >
+              Health Mix
+            </button>
+          </div>
+
+          <div className="product-top-bar">
+            {/* Contextually changing dynamic header phrase */}
+            <span className="product-count">
+              Showing {sortedProducts.length} {selectedCategory !== 'all' ? selectedCategory : ''} products
+            </span>
+
+            <div className="sort-dropdown-container">
+              <button className="sort-dropdown-btn" onClick={() => setIsSortOpen(!isSortOpen)}>
+                <span>{sortOption}</span>
+                <span className={`arrow-icon ${isSortOpen ? 'up' : 'down'}`}>▼</span>
+              </button>
+
+              {isSortOpen && (
+                <ul className="sort-dropdown-menu">
+                  {sortingOptions.map((option) => (
+                    <li
+                      key={option}
+                      className={sortOption === option ? 'selected' : ''}
+                      onClick={() => {
+                        setSortOption(option);
+                        setIsSortOpen(false);
+                      }}
+                    >
+                      {option}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
+
+          {/* PRODUCT GRID */}
           <div className="product-grid">
             {sortedProducts.map((product) => (
               <div
@@ -478,8 +535,8 @@ const Product = () => {
                 style={{ cursor: 'pointer' }}
               >
                 <div className="image-container">
-                  {product.badge && (
-                    <div className="badge universal-badge">{product.badge}</div>
+                  {product.badge === 'Best Seller' && (
+                    <div className="badge best-seller-badge">Best Seller</div>
                   )}
                   <ProductCardImageSlider imagesList={product.imagesList} productName={product.name} />
                 </div>
@@ -496,31 +553,21 @@ const Product = () => {
                     <span className="review-count">({product.reviews} reviews)</span>
                   </div>
 
-                  <div className="product-price">
-                    Rs. {product.price}.00
-                  </div>
+                  <div className="product-price">Rs. {product.price}.00</div>
 
                   <button className="add-to-cart-btn">View Details</button>
                 </div>
               </div>
             ))}
           </div>
-
+          
           {sortedProducts.length === 0 && (
-            <div className="empty-results-fallback">
-              <p>No products found matching this category and price selection range.</p>
-              <button onClick={clearAllFilters} className="clear-all">Reset Filters</button>
+            <div className="no-products-fallback">
+              <p>No products found matching your current price or category combination.</p>
             </div>
           )}
         </main>
       </div>
-
-      {/* WhatsApp Button */}
-      <a href="https://wa.me/#" className="whatsapp-floating-btn" target="_blank" rel="noreferrer">
-        <svg viewBox="0 0 32 32" className="whatsapp-icon">
-          <path d="M16 2a13 13 0 0 0-11.27 19.51L3 29l7.73-2A13 13 0 1 0 16 2zm6.75 18.39c-.3.84-1.48 1.54-2.42 1.63-.64.06-1.47.09-3.79-.88a10.93 10.93 0 0 1-4.82-4.25 5.09 5.09 0 0 1-1.07-2.71 3.2 3.2 0 0 1 1-2.4c.18-.18.4-.26.6-.26h.43c.13 0 .3.05.44.38l.94 2.27c.09.21.14.45.01.71l-.42.53c-.13.16-.27.35-.12.61a7.8 7.8 0 0 0 2.45 3.06 6.47 6.47 0 0 0 3.26 1.48c.31.05.49 0 .68-.21l.62-.83c.18-.24.37-.2.61-.11l2.31 1.09c.24.12.37.18.43.29.07.13.07.72-.23 1.56z" fill="#fff"/>
-        </svg>
-      </a>
 
       <Footer />
       <WhatsAppButton />
