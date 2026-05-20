@@ -1,57 +1,274 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: #ffffff;
-}
-
-/* HERO SECTION */
-.traditional-hero {
-  position: relative;
-  width: 100%;
-  height: 380px;
-  overflow: hidden;
-}
-
-.traditional-hero img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(50%);
-}
-
-.hero-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  text-align: center;
-}
-
-.hero-text h1 {
-  font-size: 48px;
-  margin-bottom: 12px;
+/* ==========================================================================
+   1. GLOBAL LAYOUT WRAPPER & RESET
+   ========================================================================== */
+.traditional-page-wrapper {
+  background-color: #fcfcfc;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  color: #222222;
 }
 
 .product-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 40px 20px;
   display: flex;
-  gap: 32px;
-  max-width: 1440px;
-  margin: auto;
-  padding: 40px 24px;
+  gap: 30px;
 }
 
-/* ================================ */
-/* PRODUCTS SECTION          */
-/* ================================ */
+/* ==========================================================================
+   2. FILTER SIDEBAR STYLING
+   ========================================================================== */
+.filter-sidebar {
+  width: 280px;
+  flex-shrink: 0;
+  background-color: #ffffff;
+  border: 1px solid #eef0f2;
+  border-radius: 8px;
+  padding: 24px;
+  height: fit-content;
+}
+
+.filter-title-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filter-icon-svg {
+  width: 20px;
+  height: 20px;
+  color: #111111;
+}
+
+.filter-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  color: #111111;
+}
+
+/* Applied Filter Badges */
+.applied-filters {
+  margin-bottom: 24px;
+}
+
+.applied-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #111111 !important;
+  margin-bottom: 10px;
+}
+
+.price-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f1eff7; /* Light purple-tinted gray background */
+  color: #5c3e91; /* Dark purple text */
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+.category-tag-text {
+  text-transform: capitalize;
+}
+
+.remove-filter {
+  background: none;
+  border: none;
+  color: #a496c0;
+  cursor: pointer;
+  padding: 0 0 0 6px;
+}
+
+.remove-filter:hover {
+  color: #7952b3; /* Rich purple */
+}
+
+.clear-all {
+  background: none;
+  border: none;
+  color: #7952b3;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 4px 0;
+  text-decoration: underline;
+}
+
+/* Sidebar Accordion Sections & Headers */
+.filter-section {
+  border-top: 1px solid #f0f2f5;
+  padding: 16px 0;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-section h4,
+.section-header h4,
+.price-heading {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111111 !important;
+}
+
+.toggle-buttons button {
+  background-color: #f0f2f5;
+  border: none;
+  color: #222222;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.toggle-buttons button.active {
+  background-color: #7952b3; /* Active filter button goes light purple */
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   3. DUAL RANGE SLIDERS & INPUTS
+   ========================================================================== */
+.price-header-toggle {
+  cursor: pointer;
+}
+
+.accordion-indicator {
+  color: #111111;
+}
+
+.range-track-wrapper {
+  position: relative;
+  width: 100%;
+  height: 6px;
+  margin: 25px 0 15px 0;
+}
+
+.range-track-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #e9ecef;
+  border-radius: 3px;
+}
+
+.range-track-fill {
+  position: absolute;
+  height: 100%;
+  background-color: #9b72cf; /* Slider accent bar color to light violet-purple */
+  border-radius: 3px;
+}
+
+.dual-range {
+  position: absolute;
+  width: 100%;
+  background: none;
+  pointer-events: none;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 100%;
+  top: 0;
+  left: 0;
+  margin: 0;
+}
+
+.dual-range::-webkit-slider-thumb {
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid #9b72cf; /* Slider thumb matches light purple accent */
+  cursor: pointer;
+  pointer-events: auto;
+  -webkit-appearance: none;
+}
+
+.price-inputs-container {
+  display: flex;
+  gap: 10px;
+}
+
+.input-box-field {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  padding: 6px 8px;
+  width: 50%;
+  background-color: #ffffff;
+}
+
+.currency-symbol {
+  font-size: 12px;
+  color: #6c757d;
+  margin-right: 4px;
+}
+
+.input-box-field input {
+  border: none;
+  width: 100%;
+  outline: none;
+  font-size: 13px;
+  color: #222222;
+  background-color: transparent;
+}
+
+/* ==========================================================================
+   4. CATEGORY TABS BANNER & TOP CONTROLS (HOVER EFFECT REWORKED)
+   ========================================================================== */
+.category-tabs-container {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #eef0f2;
+  padding-bottom: 12px;
+}
+
+.category-tab-btn {
+  background: none;
+  border: none;
+  font-size: 15px;
+  font-weight: 500;
+  color: #444444;
+  padding: 8px 16px;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+/* Fixed: Category tab text now smoothly shifts to light gray on hover */
+.category-tab-btn:hover {
+  color: #888888; 
+}
+
+.category-tab-btn.active-tab {
+  color: #7952b3; /* Active brand tab retains distinctive light purple */
+  font-weight: 600;
+}
+
+.category-tab-btn.active-tab::after {
+  content: '';
+  position: absolute;
+  bottom: -13px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #7952b3;
+}
 
 .product-content {
-  flex: 1;
+  flex-grow: 1;
 }
 
 .product-top-bar {
@@ -63,148 +280,114 @@ body {
 
 .product-count {
   font-size: 14px;
-  color: #555;
+  color: #111111 !important;
+  font-weight: 500;
 }
 
+/* Dropdown Menu Filters */
 .sort-dropdown-container {
   position: relative;
-  width: 220px;
 }
 
 .sort-dropdown-btn {
-  width: 100%;
-  padding: 10px 14px;
-  border: 1px solid #ccc;
-  background: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
+  background-color: #ffffff;
+  border: 1px solid #ced4da;
+  color: #222222;
+  padding: 8px 16px;
+  border-radius: 4px;
   font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.arrow-icon {
+  font-size: 10px;
 }
 
 .sort-dropdown-menu {
   position: absolute;
   top: 105%;
-  width: 100%;
-  background: white;
-  border: 1px solid #ddd;
+  right: 0;
+  background-color: #ffffff;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
   list-style: none;
+  padding: 6px 0;
+  margin: 0;
+  width: 200px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   z-index: 10;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 .sort-dropdown-menu li {
-  padding: 10px 14px;
-  cursor: pointer;
+  padding: 10px 16px;
   font-size: 13px;
+  color: #333333;
+  cursor: pointer;
 }
 
-.sort-dropdown-menu li:hover {
-  background: #f4f4f4;
-}
-
+.sort-dropdown-menu li:hover, 
 .sort-dropdown-menu li.selected {
-  font-weight: 500;
-  background: #f9f9f9;
-}
-
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px 24px;
-}
-
-.product-card {
-  background: white;
-  cursor: pointer;
-}
-
-/* ⚠️ FIXED: Added overflow: hidden so extra slider images don't leak out */
-.image-container {
-  position: relative;
-  height: 400px;
-  background: #fafafa;
-  overflow: hidden; 
-}
-
-/* ⚠️ MOVED: Removed old full-height rule here because .slider-image-track handles image dimensions now */
-.product-info {
-  padding-top: 16px;
-}
-
-.product-name {
-  font-size: 16px;
-  margin-bottom: 8px;
-}
-
-.product-desc {
-  font-size: 13px;
-  color: #777;
-  margin-bottom: 8px;
-}
-
-.rating-section {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
-}
-
-.stars {
-  color: #f59e0b;
-}
-
-.review-count {
-  font-size: 13px;
-  color: #777;
-}
-
-.product-price {
-  margin-bottom: 14px;
-  font-weight: 500;
-}
-
-.add-to-cart-btn {
-  width: 100%;
-  padding: 14px;
-  background: #de1b6f;
-  color: white;
-  border: 1px solid #de1b6f;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 13px;
-  letter-spacing: 0.5px;
-  transition: background 0.2s ease, color 0.2s ease;
-}
-
-.add-to-cart-btn:hover {
-  background: white;
-  color: black;
-  border-color: black;
-}
-
-/* WHATSAPP */
-.whatsapp-floating-btn {
-  position: fixed;
-  right: 24px;
-  bottom: 24px;
-  width: 55px;
-  height: 55px;
-  background: #25d366;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.whatsapp-icon {
-  width: 28px;
-  height: 28px;
+  background-color: #f6f3fa; /* Light purple selection highlight background */
+  color: #7952b3; /* Purple text action color */
 }
 
 /* ==========================================================================
-   ADDED: DETAILED IN-CARD SMOOTH IMAGE SLIDER (MATCHES SCREENSHOT)
+   5. RESPONSIVE PRODUCT CARD GRID
+   ========================================================================== */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.product-card {
+  background-color: #ffffff;
+  border: 1px solid #eef0f2;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.25s ease, 
+              background-color 0.25s ease;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  background-color: #f3f4f6; /* Soft light gray tint */
+  border-color: #dcdfe3;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07); 
+}
+
+.image-container {
+  position: relative;
+  aspect-ratio: 4/3;
+  background-color: #f8f9fa;
+}
+
+.badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: bold;
+  z-index: 2;
+  text-transform: uppercase;
+}
+
+.best-seller-badge {
+  background-color: #8c63d4; /* Beautiful bright light purple badge */
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   6. IN-CARD IMAGE SLIDER MICRO-INTERFACE
    ========================================================================== */
 .card-slider-wrapper {
   position: relative;
@@ -222,104 +405,164 @@ body {
   display: flex;
   width: 100%;
   height: 100%;
-  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.slider-image-track .product-img {
+.product-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   flex-shrink: 0;
 }
 
-/* Flushed vertically in the center, exact shape match from screenshot */
 .slider-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.55); /* Clean translucent overlay matching sample */
-  color: #111111;
+  background: rgba(255, 255, 255, 0.9);
   border: none;
-  font-size: 24px;
-  width: 18px;
-  height: 40px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
   cursor: pointer;
-  z-index: 10;
+  z-index: 3;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.2s ease, transform 0.1s ease;
+  font-size: 12px;
+  color: #222222;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  transition: opacity 0.2s ease, background-color 0.2s ease;
 }
 
 .slider-arrow:hover {
-  background: rgba(255, 255, 255, 0.85);
+  background-color: #ffffff;
 }
 
-.slider-arrow:active {
-  transform: translateY(-50%) scale(0.95);
+.card-slider-wrapper:hover .slider-arrow {
+  opacity: 1;
 }
 
-.left-arrow {
-  left: 0px;
-  border-radius: 0 4px 4px 0; /* Flat edge left side, rounded inner */
-}
+.left-arrow { left: 8px; }
+.right-arrow { right: 8px; }
 
-.right-arrow {
-  right: 0px;
-  border-radius: 4px 0 0 4px; /* Flat edge right side, rounded inner */
-}
-
-/* Slider Pagination Dots Overlay */
 .slider-dots {
   position: absolute;
-  bottom: 12px;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 8px;
+  width: 100%;
   display: flex;
-  gap: 6px;
-  z-index: 9;
+  justify-content: center;
+  gap: 4px;
+  z-index: 3;
 }
 
 .slider-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.4);
-  transition: background 0.2s ease;
+  background-color: rgba(255, 255, 255, 0.4);
+  transition: width 0.2s, background-color 0.2s;
 }
 
 .slider-dot.active {
-  background: #ffffff;
+  background-color: #ffffff;
+  width: 12px;
+  border-radius: 3px;
 }
 
-/* RESPONSIVE */
+/* ==========================================================================
+   7. CARD CONTENT META DETAILS & BUTTONS
+   ========================================================================== */
+.product-info {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.product-name {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 6px 0;
+  color: #111111;
+}
+
+.product-desc {
+  font-size: 13px;
+  color: #555555;
+  margin: 0 0 12px 0;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.rating-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.stars {
+  color: #fabc05;
+  font-size: 13px;
+}
+
+.review-count {
+  font-size: 12px;
+  color: #777777;
+}
+
+.product-price {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111111;
+  margin-top: auto;
+  margin-bottom: 14px;
+}
+
+.add-to-cart-btn {
+  background-color: transparent;
+  border: 1px solid #7952b3; /* Light purple layout outline */
+  color: #7952b3; /* Light purple text */
+  padding: 10px 0;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Primary Brand light purple action fill on card hover */
+.product-card:hover .add-to-cart-btn {
+  background-color: #7952b3;
+  color: #ffffff;
+  border-color: #7952b3;
+}
+
+.no-products-fallback {
+  text-align: center;
+  padding: 60px 0;
+  color: #666666;
+}
+
+/* ==========================================================================
+   8. MEDIA VIEWPORT BREAKPOINTS
+   ========================================================================== */
 @media (max-width: 1024px) {
-  .product-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  .product-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-@media (max-width: 840px) {
-  .product-container {
-    flex-direction: column;
-  }
-
-  .filter-sidebar {
-    width: 100%;
-    position: static;
-  }
+@media (max-width: 768px) {
+  .product-container { flex-direction: column; }
+  .filter-sidebar { width: 100%; }
+  .product-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-@media (max-width: 580px) {
-  .product-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .image-container {
-    height: 320px;
-  }
-
-  .hero-text h1 {
-    font-size: 32px;
-  }
+@media (max-width: 480px) {
+  .product-grid { grid-template-columns: 1fr; }
 }

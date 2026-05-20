@@ -12,6 +12,7 @@ import AllHealthMix from './pages/AllHealthMix';
 import AllCollections from './pages/AllCollections';
 
 import ProductDetails from './pages/ProductDetails';
+import AllItems from './pages/AllItems';
 
 import './styles/index.css';
 
@@ -33,6 +34,8 @@ function App() {
           <Route path="/sweets" element={<AllSweets />} />
           <Route path="/all-traditional" element={<AllTraditional />} />
           <Route path="/all-health-mix" element={<AllHealthMix />} />
+          <Route path="/all-items" element={<AllItems />} />
+          
 
           {/* Contact */}
           <Route path="/contact" element={<Contact />} />
