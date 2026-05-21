@@ -152,17 +152,16 @@
   position: relative;
 }
 
-.search-icon-wrapper {
+.middle-bar-spacer {
   flex: 1;
-  display: flex;
-  justify-content: flex-start;
 }
 
 .search-icon-middle {
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 8px;
+  padding: 8px 12px;
+  border-radius: 25px;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -174,24 +173,11 @@
 .search-icon-middle:hover {
   transform: scale(1.05);
   color: #a974ee;
+  background-color: #f5f5f5;
 }
 
 .mobile-left-actions {
   display: none;
-}
-
-.mobile-search-icon {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  padding: 8px;
-  transition: transform 0.3s ease;
-}
-
-.mobile-search-icon:hover {
-  transform: scale(1.05);
 }
 
 .logo-wrapper {
@@ -212,33 +198,11 @@
   transform: scale(1.02);
 }
 
-.account-cart-wrapper {
+.nav-actions-wrapper {
   flex: 1;
   display: flex;
   justify-content: flex-end;
-  gap: 1.5rem;
-}
-
-.account-icon,
-.cart-icon {
-  background: transparent;
-  border: none;
-  display: flex;
   align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
-  padding: 8px 12px;
-  border-radius: 25px;
-  transition: all 0.3s ease;
-  font-size: 0.9rem;
-  color: #333;
-}
-
-.account-icon:hover,
-.cart-icon:hover {
-  background-color: #f5f5f5;
-  transform: translateY(-2px);
-  color: #a974ee;
 }
 
 .nav-bar {
@@ -431,6 +395,100 @@
 .search-close-btn:hover {
   background: rgba(255, 255, 255, 0.4);
   transform: rotate(90deg);
+}
+
+.search-results-dropdown {
+  margin-top: 1rem;
+  background: white;
+  border-radius: 12px;
+  padding: 0.75rem 0;
+  max-height: 360px;
+  overflow-y: auto;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.search-results-count {
+  margin: 0;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 600;
+}
+
+.search-results-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.search-result-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 1rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.2s ease;
+}
+
+.search-result-item:hover {
+  background-color: #f9f5ff;
+}
+
+.search-result-thumb {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.search-result-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.search-result-name {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.search-result-meta {
+  font-size: 0.8rem;
+  color: #777;
+  text-transform: capitalize;
+}
+
+.search-view-all-btn {
+  display: block;
+  width: calc(100% - 2rem);
+  margin: 0.5rem 1rem 0.25rem;
+  padding: 0.75rem;
+  background: #a974ee;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.search-view-all-btn:hover {
+  background-color: #8f5fd4;
+}
+
+.search-no-results {
+  margin: 0;
+  padding: 1rem;
+  color: #555;
+  font-size: 0.95rem;
+  text-align: center;
 }
 
 .mobile-menu-icon {
@@ -655,13 +713,11 @@
     gap: 2rem;
   }
   
-  .account-icon span,
-  .cart-icon span {
+  .nav-actions-wrapper .search-icon-middle span {
     display: none;
   }
   
-  .account-icon,
-  .cart-icon {
+  .nav-actions-wrapper .search-icon-middle {
     padding: 8px;
   }
 }
@@ -686,7 +742,7 @@
     font-size: 0.7rem;
   }
   
-  .search-icon-wrapper {
+  .middle-bar-spacer {
     display: none;
   }
   
@@ -713,18 +769,16 @@
     max-height: 45px;
   }
   
-  .account-cart-wrapper {
+  .nav-actions-wrapper {
     flex: 1;
-    gap: 0.5rem;
+    justify-content: flex-end;
   }
-  
-  .account-icon span,
-  .cart-icon span {
+
+  .nav-actions-wrapper .search-icon-middle span {
     display: none;
   }
-  
-  .account-icon,
-  .cart-icon {
+
+  .nav-actions-wrapper .search-icon-middle {
     padding: 8px;
   }
   
@@ -776,8 +830,8 @@
     display: none;
   }
   
-  .search-icon-wrapper {
-    display: flex;
+  .middle-bar-spacer {
+    display: block;
   }
 }
 
@@ -790,10 +844,7 @@
     font-size: 0.6rem;
   }
   
-  .search-icon-middle svg,
-  .account-icon svg,
-  .cart-icon svg,
-  .mobile-search-icon svg {
+  .search-icon-middle svg {
     width: 18px;
     height: 18px;
   }

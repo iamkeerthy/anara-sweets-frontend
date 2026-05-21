@@ -1,10 +1,11 @@
-import React, { useState, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useMemo, useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import WhatsAppButton from "../components/WhatsAppButton";
 import '../styles/product.css';
 import { products } from "../data/products";
+import { filterProductsBySearch } from "../utils/searchProducts";
 
 const SORT_OPTIONS = [
   'Alphabetically, A-Z',
@@ -75,6 +76,8 @@ const ProductCardImageSlider = ({ imagesList, productName }) => {
 // MAIN PRODUCT COMPONENT
 const Product = () => {
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchFromUrl = searchParams.get('search') || '';
 
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(MAX_PRICE_LIMIT);
@@ -83,6 +86,11 @@ const Product = () => {
   const [isSortOpen, setIsSortOpen] = useState(false);
   const [priceOpen, setPriceOpen] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [searchTerm, setSearchTerm] = useState(searchFromUrl);
+
+  useEffect(() => {
+    setSearchTerm(searchFromUrl);
+  }, [searchFromUrl]);
 
   // Get unique categories from products data
   const categories = useMemo(() => {
@@ -98,6 +106,8 @@ const Product = () => {
       return matchesPrice && matchesCategory;
     });
 
+    filtered = filterProductsBySearch(filtered, searchTerm);
+
     // Sort the filtered products
     return [...filtered].sort((a, b) => {
       if (sortOption === 'Price, low to high') return a.price - b.price;
@@ -106,7 +116,7 @@ const Product = () => {
       if (sortOption === 'Alphabetically, Z-A') return b.name.localeCompare(a.name);
       return 0;
     });
-  }, [minPrice, maxPrice, selectedCategory, sortOption]);
+  }, [minPrice, maxPrice, selectedCategory, sortOption, searchTerm]);
 
   const handleMinSlider = (e) => {
     const val = Math.min(Number(e.target.value), maxPrice - 10);
@@ -128,21 +138,24 @@ const Product = () => {
     setMaxPrice(val);
   };
 
+  const clearSearch = () => {
+    setSearchTerm('');
+    const nextParams = new URLSearchParams(searchParams);
+    nextParams.delete('search');
+    setSearchParams(nextParams);
+  };
+
   const clearAllFilters = () => {
     setMinPrice(0);
     setMaxPrice(MAX_PRICE_LIMIT);
     setShowOutOfStock(true);
     setSelectedCategory('all');
     setSortOption('Alphabetically, A-Z');
+    clearSearch();
   };
 
   const fillLeft = `${(minPrice / MAX_PRICE_LIMIT) * 100}%`;
   const fillRight = `${100 - (maxPrice / MAX_PRICE_LIMIT) * 100}%`;
-
-  // Debug function to verify product mapping
-  console.log("Products data:", products);
-  console.log("Coconut Burfi product:", products.find(p => p.name === "Coconut Burfi"));
-  console.log("Chocolate Brownies product:", products.find(p => p.name === "Chocolate Brownies"));
 
   return (
     <div className="traditional-page-wrapper">
@@ -175,7 +188,13 @@ const Product = () => {
                 <button className="remove-filter" onClick={() => setSelectedCategory('all')}>✕</button>
               </div>
             )}
-            {(minPrice > 0 || maxPrice < MAX_PRICE_LIMIT || selectedCategory !== 'all') && (
+            {searchTerm.trim() && (
+              <div className="price-tag category-tag-text">
+                Search: {searchTerm}
+                <button className="remove-filter" onClick={clearSearch}>✕</button>
+              </div>
+            )}
+            {(minPrice > 0 || maxPrice < MAX_PRICE_LIMIT || selectedCategory !== 'all' || searchTerm.trim()) && (
               <button className="clear-all" onClick={clearAllFilters}>Clear all</button>
             )}
           </div>
@@ -259,7 +278,8 @@ const Product = () => {
 
           <div className="product-top-bar">
             <span className="product-count">
-              Showing {processedProducts.length} {selectedCategory !== 'all' ? selectedCategory : ''} product{processedProducts.length !== 1 ? 's' : ''}
+              Showing {processedProducts.length}
+              {searchTerm.trim() ? ` result${processedProducts.length !== 1 ? 's' : ''} for "${searchTerm}"` : ` ${selectedCategory !== 'all' ? selectedCategory : ''} product${processedProducts.length !== 1 ? 's' : ''}`}
             </span>
 
             <div className="sort-dropdown-container">

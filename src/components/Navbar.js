@@ -1,14 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import '../styles/navbar.css';
 import logo from '../assets/images/logo.png';
+import { Link, useNavigate } from "react-router-dom";
+import { products } from '../data/products';
+import { filterProductsBySearch } from '../utils/searchProducts';
 
-import { Link } from "react-router-dom";
+const SEARCH_PREVIEW_LIMIT = 6;
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [darkMode, setDarkMode] = useState(false);
+
+  const searchResults = useMemo(
+    () => filterProductsBySearch(products, searchQuery),
+    [searchQuery]
+  );
+
+  const previewResults = searchResults.slice(0, SEARCH_PREVIEW_LIMIT);
+  const hasMoreResults = searchResults.length > SEARCH_PREVIEW_LIMIT;
   
   const topBarMessages = ['SriLankan Sweets', 'Made fresh daily | One time use Pure Groundnut Oil'];
   const [topBarIndex, setTopBarIndex] = useState(0);
@@ -21,11 +32,6 @@ const Navbar = () => {
     return () => clearInterval(interval);
   }, [topBarMessages.length]);
 
-  const toggleTheme = () => {
-    setDarkMode(!darkMode);
-    document.body.className = !darkMode ? "dark-mode" : "light-mode";
-  };
-
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -34,13 +40,23 @@ const Navbar = () => {
     setIsSearchOpen(!isSearchOpen);
   };
 
+  const goToSearchResults = (query) => {
+    const trimmed = query.trim();
+    if (!trimmed) return;
+    navigate(`/product?search=${encodeURIComponent(trimmed)}`);
+    setSearchQuery('');
+    setIsSearchOpen(false);
+  };
+
   const handleSearch = (e) => {
     e.preventDefault();
-    if (searchQuery.trim()) {
-      alert(`Searching for: ${searchQuery}`);
-      setSearchQuery('');
-      setIsSearchOpen(false);
-    }
+    goToSearchResults(searchQuery);
+  };
+
+  const handleProductSelect = (productId) => {
+    navigate(`/product/${productId}`);
+    setSearchQuery('');
+    setIsSearchOpen(false);
   };
 
   const handleLogoClick = () => {
@@ -60,7 +76,7 @@ const Navbar = () => {
             <form onSubmit={handleSearch} className="search-form-full">
               <input
                 type="text"
-                placeholder="Search for sweets..."
+                placeholder="Search products (e.g. sweets, laddu, snacks)..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="search-input-full"
@@ -69,6 +85,52 @@ const Navbar = () => {
               <button type="submit" className="search-submit-btn">Search</button>
               <button type="button" onClick={toggleSearch} className="search-close-btn">✕</button>
             </form>
+
+            {searchQuery.trim() && (
+              <div className="search-results-dropdown">
+                {searchResults.length > 0 ? (
+                  <>
+                    <p className="search-results-count">
+                      {searchResults.length} product{searchResults.length !== 1 ? 's' : ''} found
+                    </p>
+                    <ul className="search-results-list">
+                      {previewResults.map((product) => (
+                        <li key={product.id}>
+                          <button
+                            type="button"
+                            className="search-result-item"
+                            onClick={() => handleProductSelect(product.id)}
+                          >
+                            <img
+                              src={product.images[0]}
+                              alt={product.name}
+                              className="search-result-thumb"
+                            />
+                            <span className="search-result-info">
+                              <span className="search-result-name">{product.name}</span>
+                              <span className="search-result-meta">
+                                {product.category.charAt(0).toUpperCase() + product.category.slice(1)} · Rs. {product.price}
+                              </span>
+                            </span>
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                    <button
+                      type="button"
+                      className="search-view-all-btn"
+                      onClick={() => goToSearchResults(searchQuery)}
+                    >
+                      {hasMoreResults
+                        ? `View all ${searchResults.length} results`
+                        : 'View on product page'}
+                    </button>
+                  </>
+                ) : (
+                  <p className="search-no-results">No products found for &quot;{searchQuery.trim()}&quot;</p>
+                )}
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -106,15 +168,7 @@ const Navbar = () => {
 
       <div className="middle-bar">
         <div className="middle-bar-container">
-          <div className="search-icon-wrapper desktop-search">
-            <button className="search-icon-middle" onClick={toggleSearch}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="2">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-              </svg>
-              Search
-            </button>
-          </div>
+          <div className="middle-bar-spacer" />
 
           <div className="mobile-left-actions">
             <button className="mobile-menu-icon" onClick={toggleMenu}>
@@ -124,39 +178,19 @@ const Navbar = () => {
                 <line x1="3" y1="18" x2="21" y2="18"></line>
               </svg>
             </button>
-            <button className="mobile-search-icon" onClick={toggleSearch}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="2">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-              </svg>
-            </button>
           </div>
 
           <div className="logo-wrapper" onClick={handleLogoClick}>
             <img src={logo} alt="Anara Sweets" className="middle-logo" />
           </div>
 
-          <div className="account-cart-wrapper">
-            <button className="account-icon" onClick={toggleTheme}>
-              {darkMode ? (
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
-                </svg>
-              ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <circle cx="12" cy="12" r="5"></circle>
-                  <path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"></path>
-                </svg>
-              )}
-              <span>{darkMode ? "Dark Mode" : "Light Mode"}</span>
-            </button>
-            <button className="cart-icon">
+          <div className="nav-actions-wrapper">
+            <button className="search-icon-middle" onClick={toggleSearch} aria-label="Search">
               <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="2">
-                <circle cx="9" cy="21" r="1"></circle>
-                <circle cx="20" cy="21" r="1"></circle>
-                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
-              <span>Cart</span>
+              <span>Search</span>
             </button>
           </div>
         </div>
