@@ -9,7 +9,6 @@ import Product from './pages/product';
 import AllSweets from "./pages/AllSweets";
 import AllTraditional from './pages/AllTraditional';
 import AllHealthMix from './pages/AllHealthMix';
-import AllCollections from './pages/AllCollections';
 
 import ProductDetails from './pages/ProductDetails';
 import AllItems from './pages/AllItems';
@@ -30,7 +29,6 @@ function App() {
           <Route path="/product/:id" element={<ProductDetails />} />
 
           {/* Collections */}
-          <Route path="/all-collections" element={<AllCollections />} />
           <Route path="/sweets" element={<AllSweets />} />
           <Route path="/all-traditional" element={<AllTraditional />} />
           <Route path="/all-health-mix" element={<AllHealthMix />} />
