@@ -1060,7 +1060,7 @@ height: 330px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items:center;
   background: rgba(0, 0, 0, 0.4);
   color: white;
   text-align: left;
@@ -1086,6 +1086,7 @@ height: 330px;
   cursor: pointer;
   transition: background 0.3s ease, transform 0.2s ease;
   border-radius: 4px;
+    text-decoration: none;
 }
 
 .fullwidth-shop-btn:hover {
