@@ -76,7 +76,7 @@ textarea {
 }
 
 input:focus, textarea:focus {
-  border-color: #b71c1c;
+  border-color: #b572c6e9;
 }
 
 input[type="tel"] {
@@ -85,7 +85,7 @@ input[type="tel"] {
 
 /* ✅ SCOPED BUTTON (ONLY CONTACT PAGE) */
 .contact-submit-btn {
-  background: #b71c1c;
+  background: #b572c6e9;
   color: white;
   padding: 12px;
   border: none;
@@ -96,7 +96,7 @@ input[type="tel"] {
 }
 
 .contact-submit-btn:hover {
-  background: #9c0c0c;
+  background: #8b1185;
 }
 
 /* MOBILE */
