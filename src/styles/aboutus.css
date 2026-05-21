@@ -40,32 +40,40 @@
 
 .about-content-section {
   padding: 60px;
-  background: #f9f9f9;
+  background: #ffffff;
 }
 
 .about-content-section .container {
   max-width: 900px;
   margin: auto;
+  text-align: left;
 }
+
 
 .about-content-section h2 {
   font-size: 30px;
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .about-content-section h3 {
   margin-top: 25px;
   font-size: 22px;
+  text-align: center;
 }
 
 .about-content-section p {
   line-height: 1.8;
   margin-bottom: 15px;
   color: #333;
+  text-align: justify;
 }
 
 .about-content-section ul {
-  padding-left: 20px;
+  padding-left: 0;
+  margin: 20px auto;
+  display: inline-block;
+  text-align: left;
 }
 
 .about-content-section li {

@@ -3,10 +3,8 @@ import { useParams, Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import WhatsAppButton from '../components/WhatsAppButton';
-import sweetsImages from "../assets/images/sweets";
 import '../styles/productDetails.css';
-
-const images = require.context('../assets/images', false, /\.(png|jpe?g|svg)$/);
+import { products } from "../data/products";
 
 // Safe Storage Engine Fallback Strategy for Security Access Exceptions
 const safeStorage = {
@@ -38,180 +36,10 @@ const safeStorage = {
   }
 };
 
-const initialProducts = [
-  // --- SWEETS (8 ITEMS) ---
-  {
-    id: 1,
-    name: "Mysore Pak",
-    desc: "Traditional South Indian sweet made with ghee",
-    price: 150,
-    rating: 5,
-    reviews: 120,
-    isBestSeller: true,
-    category: 'sweets',
-    imagesList: [sweetsImages.mysorePak, sweetsImages.mysorePak],
-  },
-  {
-    id: 2,
-    name: "Rava Laddu",
-    desc: "Soft and sweet coconut rava laddu",
-    price: 140,
-    rating: 4,
-    reviews: 98,
-    isBestSeller: false,
-    category: 'sweets',
-    imagesList: [sweetsImages.ravaladdu, sweetsImages.ravaladdu],
-  },
-  {
-    id: 3,
-    name: "Rava Kesari",
-    desc: "Kesari made with semolina and saffron",
-    price: 120,
-    rating: 4,
-    reviews: 80,
-    isBestSeller: false,
-    category: 'sweets',
-    imagesList: [sweetsImages.ravakesari, sweetsImages.ravakesari],
-  },
-  {
-    id: 4,
-    name: "Payatham Urundai",
-    desc: "Protein rich traditional sweet balls",
-    price: 180,
-    rating: 5,
-    reviews: 150,
-    isBestSeller: true,
-    category: 'sweets',
-    imagesList: [sweetsImages.payiththamurundai, sweetsImages.payiththamurundai],
-  },
-  {
-    id: 5,
-    name: "Rich Laddu",
-    desc: "Premium dry fruit laddu",
-    price: 220,
-    rating: 5,
-    reviews: 200,
-    isBestSeller: true,
-    category: 'sweets',
-    imagesList: [sweetsImages.richladdu, sweetsImages.richladdu],
-  },
-  {
-    id: 6,
-    name: "Turkish Delight",
-    desc: "Soft chewy middle eastern sweet",
-    price: 350,
-    rating: 5,
-    reviews: 300,
-    isBestSeller: true,
-    category: 'sweets',
-    imagesList: [sweetsImages.TURKISHDELIGHT, sweetsImages.TURKISHDELIGHT],
-  },
-  {
-    id: 7,
-    name: "Boondi Laddu",
-    desc: "Classic crunchy boondi laddu",
-    price: 160,
-    rating: 4,
-    reviews: 140,
-    isBestSeller: false,
-    category: 'sweets',
-    imagesList: [sweetsImages.BOONDILADDU, sweetsImages.BOONDILADDU],
-  },
-  {
-    id: 8,
-    name: "Coconut Burfi",
-    desc: "Soft coconut milk sweet squares",
-    price: 180,
-    rating: 4,
-    reviews: 110,
-    isBestSeller: false,
-    category: 'sweets',
-    imagesList: [sweetsImages.COCONUTBURFI, sweetsImages.COCONUTBURFI],
-  },
-  // --- TRADITIONAL ---
-  {
-    id: 9,
-    name: 'Achu Murukku + Thattai',
-    desc: 'Traditional sweet crunchy combinations',
-    price: 138,
-    rating: 4,
-    reviews: 147,
-    isBestSeller: false,
-    category: 'traditional',
-    imagesList: [images('./PAYATHAM URUNDAI.jpg'), images('./PAYATHAM URUNDAI.jpg')],
-  },
-  {
-    id: 10,
-    name: 'Jaffna Spicy Special',
-    desc: 'Fiery Mixture, Chickpeas, Cassava Chips',
-    price: 680,
-    rating: 5,
-    reviews: 184,
-    isBestSeller: false,
-    category: 'traditional',
-    imagesList: [images('./PAYATHAM URUNDAI.jpg'), images('./PAYATHAM URUNDAI.jpg')],
-  },
-  {
-    id: 11,
-    name: 'Traditional Village Treat',
-    desc: 'Kavum, Kokis, Aluwa, Athirasa combo',
-    price: 850,
-    rating: 4,
-    reviews: 95,
-    isBestSeller: false,
-    category: 'traditional',
-    imagesList: [images('./PAYATHAM URUNDAI.jpg'), images('./PAYATHAM URUNDAI.jpg')],
-  },
-  {
-    id: 12,
-    name: 'Snack Attack Crunch',
-    desc: 'Spicy Murukku, Ribbon Pakoda, Garlic Sev',
-    price: 340,
-    rating: 4,
-    reviews: 212,
-    isBestSeller: false,
-    category: 'traditional',
-    imagesList: [images('./PAYATHAM URUNDAI.jpg'), images('./PAYATHAM URUNDAI.jpg')],
-  },
-  // --- HEALTH MIX ---
-  {
-    id: 13,
-    name: 'Nutritious Ragi Health Mix',
-    desc: 'Finger millet, almonds, walnuts, and cardamom formula',
-    price: 450,
-    rating: 5,
-    reviews: 120,
-    isBestSeller: false,
-    category: 'healthmix',
-    imagesList: [images('./PAYATHAM URUNDAI.jpg'), images('./PAYATHAM URUNDAI.jpg')],
-  },
-  {
-    id: 14,
-    name: 'Millet & Nuts Power Mix',
-    desc: 'Multi-grain roasted health mix breakfast drink',
-    price: 580,
-    rating: 5,
-    reviews: 88,
-    isBestSeller: true,
-    category: 'healthmix',
-    imagesList: [images('./PAYATHAM URUNDAI.jpg'), images('./PAYATHAM URUNDAI.jpg')],
-  },
-  {
-    id: 15,
-    name: 'Herbal Immunity Porridge',
-    desc: 'Traditional health mix mix with authentic greens',
-    price: 390,
-    rating: 4,
-    reviews: 64,
-    isBestSeller: false,
-    category: 'healthmix',
-    imagesList: [images('./PAYATHAM URUNDAI.jpg'), images('./PAYATHAM URUNDAI.jpg')],
-  },
-];
-
 function ProductDetails() {
   const { id } = useParams();
-  const product = initialProducts.find((p) => p.id === parseInt(id));
+  // Convert id to number for comparison
+  const product = products.find(p => p.id === parseInt(id));
 
   // State Management
   const [quantity, setQuantity] = useState(1);
@@ -239,8 +67,8 @@ function ProductDetails() {
 
   // Set defaults when product shifts or loads
   useEffect(() => {
-    if (product && product.imagesList && product.imagesList.length > 0) {
-      setSelectedImage(product.imagesList[0]);
+    if (product && product.images && product.images.length > 0) {
+      setSelectedImage(product.images[0]);
     } else if (product) {
       setSelectedImage('');
     }
@@ -264,14 +92,14 @@ function ProductDetails() {
     );
   }
 
-  const relatedProducts = initialProducts
+  const relatedProducts = products
     .filter((p) => p.category === product.category && p.id !== product.id)
     .slice(0, 4);
 
   const activeWeight = weightType === 'custom' ? (Number(customWeight) || 0) : Number(selectedWeight);
   const calculatedPricePerUnit = Math.round((product.price / 150) * activeWeight);
   const totalPrice = calculatedPricePerUnit * quantity;
-  const galleryThumbnails = product.imagesList || [];
+  const galleryThumbnails = product.images || [];
 
   const handlePresetWeightChange = (weight) => {
     setWeightType('preset');
@@ -288,7 +116,10 @@ function ProductDetails() {
 
   // Safe Multi-Product Add To Cart Configuration
   const handleAddToCart = () => {
-    if (activeWeight <= 0) return;
+    if (activeWeight <= 0) {
+      alert("Please select a valid weight");
+      return;
+    }
 
     const existingCart = JSON.parse(safeStorage.getItem('shopCart')) || [];
     
@@ -381,8 +212,10 @@ function ProductDetails() {
   };
 
   const handleClearCart = () => {
-    safeStorage.removeItem('shopCart');
-    updateCartCount();
+    if (window.confirm("Are you sure you want to clear your entire cart?")) {
+      safeStorage.removeItem('shopCart');
+      updateCartCount();
+    }
   };
 
   const modalGrandTotal = modalCartItems.reduce((sum, item) => sum + item.itemTotal, 0);
@@ -410,7 +243,7 @@ function ProductDetails() {
               </button>
             )}
             <div className="next-nav-pointer" style={{ marginLeft: '10px' }}>
-              <Link to={`/product/${product.id === initialProducts.length ? 1 : product.id + 1}`}>Next &gt;</Link>
+              <Link to={`/product/${product.id === products.length ? 1 : product.id + 1}`}>Next &gt;</Link>
             </div>
           </div>
         </div>
@@ -426,7 +259,7 @@ function ProductDetails() {
                 <span className="tag-text">Best Seller</span>
               </div>
             )}
-            <img src={selectedImage || (product.imagesList && product.imagesList[0])} alt={product.name} className="active-display-img" />
+            <img src={selectedImage || (product.images && product.images[0])} alt={product.name} className="active-display-img" />
           </div>
 
           <div className="thumbnail-strip-row">
@@ -545,7 +378,7 @@ function ProductDetails() {
               >
                 <div className="related-image-frame">
                   <img 
-                    src={item.imagesList && item.imagesList[0]} 
+                    src={item.images && item.images[0]} 
                     alt={item.name} 
                   />
                 </div>

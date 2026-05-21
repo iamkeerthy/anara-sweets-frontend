@@ -78,8 +78,6 @@ import thattuVadai1 from "../assets/images/THATTU VADAI1.jpg";
 import thattuVadai2 from "../assets/images/THATTU VADAI1.jpg";
 import thattuVadai3 from "../assets/images/THATTU VADAI1.jpg";
 
-
-
 // Video imports for the new reels section
 import reel1 from "../assets/images/anara.mp4";
 import reel2 from "../assets/images/anara.mp4";
@@ -100,7 +98,6 @@ import sweetsImg from "../assets/images/BOONDI LADDU.jpg";
 import podiImg from "../assets/images/EGG FLOUR.jpg";
 import picklesImg from "../assets/images/MIXTURE.jpg";
 import combosImg from "../assets/images/img2.jpg";
-// New full width image for Flavourful Delights section (placed after the grid)
 import flavourfulFullWidthImg from "../assets/images/img2.jpg";
 
 // What Makes Anara Special Section Images
@@ -153,34 +150,34 @@ const reels = [
   },
 ];
 
-// Data for Best Sellers section with multiple images per product
+// Data for Best Sellers section with multiple images per product - CORRECTED IDs
 const bestSellers = [
+  {
+    id: 4,  // Corrected: Coconut Burfi should have ID 4
+    name: "Coconut Burfi",
+    rating: 5,
+    reviews: 483,
+    price: 67.00,
+    images: [coconutBurfi1, coconutBurfi2, coconutBurfi3],
+  },
+  {
+    id: 3,  // Corrected: Chocolate Brownies should have ID 3
+    name: "Chocolate Brownies",
+    rating: 5,
+    reviews: 111,
+    price: 96.00,
+    images: [chocolateBrownies1, chocolateBrownies2, chocolateBrownies3],
+  },
   {
     id: 1,
     name: "Turkish Delight",
     rating: 5,
     reviews: 130,
-    price: 71.00,
+    price: 86.00,
     images: [turkishDelight1, turkishDelight2, turkishDelight3],
   },
   {
     id: 2,
-    name: "Coconut Burfi",
-    rating: 5,
-    reviews: 483,
-    price: 96.00,
-    images: [coconutBurfi1, coconutBurfi2, coconutBurfi3],
-  },
-  {
-    id: 3,
-    name: "Chocolate Brownies",
-    rating: 5,
-    reviews: 111,
-    price: 67.00,
-    images: [chocolateBrownies1, chocolateBrownies2, chocolateBrownies3],
-  },
-  {
-    id: 4,
     name: "Rava Kesari",
     rating: 5,
     reviews: 196,
@@ -260,7 +257,7 @@ const reviewsData = [
     id: 5,
     name: "Vijayakumar C.",
     rating: 5,
-    text: "Best sweets shop I’ve tried so far. Highly recommended!",
+    text: "Best sweets shop I've tried so far. Highly recommended!",
     product: "Boondi Laddu",
   },
   {
@@ -301,18 +298,18 @@ const reviewsData = [
 ];
 
 // Component for image gallery inside each combo card
-const ImageGallery = ({ images, productName }) => {
+const ImageGallery = ({ images, productName, onImageClick }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [previewIndex, setPreviewIndex] = useState(null);
 
   const nextImage = (e) => {
-    if (e) e.stopPropagation();
+    e.stopPropagation();
     setCurrentIndex((prev) => (prev + 1) % images.length);
     setPreviewIndex(null);
   };
 
   const prevImage = (e) => {
-    if (e) e.stopPropagation();
+    e.stopPropagation();
     setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
     setPreviewIndex(null);
   };
@@ -332,11 +329,22 @@ const ImageGallery = ({ images, productName }) => {
 
   const displayedIndex = previewIndex !== null ? previewIndex : currentIndex;
 
+  const handleImageContainerClick = (e) => {
+    if (e.target.closest('.gallery-arrow') || e.target.closest('.image-dots')) {
+      return;
+    }
+    if (onImageClick) {
+      onImageClick();
+    }
+  };
+
   return (
     <div
       className="image-gallery"
       onMouseMove={images.length > 1 ? handleMouseMove : undefined}
       onMouseLeave={images.length > 1 ? handleMouseLeave : undefined}
+      onClick={handleImageContainerClick}
+      style={{ cursor: 'pointer' }}
     >
       <img
         src={images[displayedIndex]}
@@ -382,25 +390,34 @@ const ImageGallery = ({ images, productName }) => {
   );
 };
 
+// CORRECTED combos array with proper IDs matching the products data
 const combos = [
   {
     id: 1,
-    name: "Rava Kesari",
-    price: 71,
-    images: [ravaKesari1, ravaKesari2, ravaKesari3],
-    reviews: 130,
+    name: "Mysore Pak",
+    price: 197,
+    images: [mysorePak1, mysorePak2, mysorePak3],
+    reviews: 207,
     isBestSeller: true
   },
   {
     id: 2,
-    name: "Chocolate Brownies",
-    price: 96,
-    images: [chocolateBrownies1, chocolateBrownies2, chocolateBrownies3],
-    reviews: 483,
+    name: "Rava Kesari",
+    price: 105,
+    images: [ravaKesari1, ravaKesari2, ravaKesari3],
+    reviews: 196,
     isBestSeller: true
   },
   {
-    id: 3,
+    id: 3,  // CORRECTED: Chocolate Brownies has ID 3
+    name: "Chocolate Brownies",
+    price: 96,
+    images: [chocolateBrownies1, chocolateBrownies2, chocolateBrownies3],
+    reviews: 111,
+    isBestSeller: true
+  },
+  {
+    id: 4,  // CORRECTED: Coconut Burfi has ID 4
     name: "Coconut Burfi",
     price: 67,
     images: [coconutBurfi1, coconutBurfi2, coconutBurfi3],
@@ -408,30 +425,19 @@ const combos = [
     isBestSeller: true
   },
   {
-    id: 4,
+    id: 5,
     name: "Boondi Laddu",
-    price: 105,
+    price: 86,
     images: [boondiLaddu1, boondiLaddu2, boondiLaddu3],
-    reviews: 196,
+    reviews: 72,
     isBestSeller: true
   },
   {
-    id: 5,
+    id: 6,
     name: "Turkish Delight",
     price: 86,
     images: [turkishDelight1, turkishDelight2, turkishDelight3],
     reviews: 72,
-    isBestSeller: true
-  },
-
-
-
-  {
-    id: 6,
-    name: "Mysore Pak",
-    price: 197,
-    images: [mysorePak1, mysorePak2, mysorePak3],
-    reviews: 207,
     isBestSeller: true
   },
   {
@@ -607,16 +613,13 @@ const ReelsSection = () => {
   );
 };
 
-// Best Sellers section component - SAME PATTERN AS COMBOS (horizontal scroll) - NO ARROW ON RIGHT SIDE IN HEADER
+// Best Sellers section component - Make entire card clickable - CORRECTED
 const BestSellersSection = () => {
   const bestSellersScrollRef = useRef(null);
-  const [bestSellersCartItems, setBestSellersCartItems] = useState([]);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
 
-  const handleAddToCartBestSellers = (id) => {
-    setBestSellersCartItems((prev) =>
-      prev.includes(id) ? prev : [...prev, id]
-    );
+  const handleNavigate = (id) => {
+    window.location.href = `/product/${id}`;
   };
 
   const checkScrollPosition = () => {
@@ -662,37 +665,41 @@ const BestSellersSection = () => {
             VIEW ALL
           </a>
         </div>
-
-        {/* No right arrow in header - consistent with request */}
       </div>
 
       <div className="bestsellers-scroll-container" ref={bestSellersScrollRef}>
-        {bestSellers.map((item) => {
-          const isAdded = bestSellersCartItems.includes(item.id);
-          return (
-            <div key={item.id} className="bestseller-card">
-              <div className="image-wrapper">
-                <ImageGallery
-                  images={item.images}
-                  productName={item.name}
-                />
-              </div>
-              <div className="bestseller-card-body">
-                <p className="bestseller-product-name">{item.name}</p>
-                <p className="bestseller-reviews">
-                  {'⭐'.repeat(item.rating)} <span>{item.reviews} reviews</span>
-                </p>
-                <p className="bestseller-price">Rs. {item.price.toFixed(2)}</p>
-              </div>
-              <button
-                className={`bestseller-add-btn ${isAdded ? "added" : ""}`}
-                onClick={() => handleAddToCartBestSellers(item.id)}
-              >
-                {isAdded ? "ADDED TO CART" : "ADD TO CART"}
-              </button>
+        {bestSellers.map((item) => (
+          <div 
+            key={item.id} 
+            className="bestseller-card"
+            onClick={() => handleNavigate(item.id)}
+            style={{ cursor: 'pointer' }}
+          >
+            <div className="image-wrapper">
+              <ImageGallery
+                images={item.images}
+                productName={item.name}
+                onImageClick={() => handleNavigate(item.id)}
+              />
             </div>
-          );
-        })}
+            <div className="bestseller-card-body">
+              <p className="bestseller-product-name">{item.name}</p>
+              <p className="bestseller-reviews">
+                {'⭐'.repeat(item.rating)} <span>{item.reviews} reviews</span>
+              </p>
+              <p className="bestseller-price">Rs. {item.price.toFixed(2)}</p>
+            </div>
+            <button
+              className="bestseller-add-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleNavigate(item.id);
+              }}
+            >
+              VIEW DETAILS
+            </button>
+          </div>
+        ))}
       </div>
     </section>
   );
@@ -728,12 +735,11 @@ const FlavourfulDelightsSection = () => {
   );
 };
 
-// ==================== ABOUT US SECTION ====================
+// About Us Section
 const AboutUsSection = () => {
   return (
     <section className="about-section">
       <div className="about-container">
-
         <div className="about-images">
           <img
             src={boondiLaddu1}
@@ -756,14 +762,12 @@ const AboutUsSection = () => {
           </h5>
           <Link to="/about" className="about-btn">KNOW MORE</Link>
         </div>
-
       </div>
     </section>
   );
 };
 
-// ==================== WHAT MAKES ASWINS SPECIAL ====================
-
+// What Makes Anara Special Section
 const SpecialSection = () => {
   const specialItems = [
     {
@@ -795,14 +799,11 @@ const SpecialSection = () => {
 
   return (
     <section className="special-section">
-
       <div className="special-border"></div>
-
       <div className="special-container">
         <h2 className="special-heading">
           What makes Anara special?
         </h2>
-
         <div className="special-grid">
           {specialItems.map((item) => (
             <div
@@ -823,7 +824,6 @@ const SpecialSection = () => {
                   </p>
                 </>
               )}
-
               {!item.imageTop && (
                 <>
                   <p className="special-text">
@@ -842,21 +842,18 @@ const SpecialSection = () => {
           ))}
         </div>
       </div>
-
       <div className="special-border"></div>
-
     </section>
   );
 };
 
-// ==================== TASTED & TRUSTED SECTION ====================
+// Tasted & Trusted Section
 const TrustedReviewsSection = () => {
   const scrollRef = useRef(null);
 
   const scroll = (direction) => {
     const container = scrollRef.current;
     if (!container) return;
-
     container.scrollBy({
       left: direction === "left" ? -260 : 260,
       behavior: "smooth",
@@ -865,19 +862,13 @@ const TrustedReviewsSection = () => {
 
   return (
     <section className="trusted-section">
-
       <h2 className="trusted-title">
         Tasted & Trusted by Millions
       </h2>
-
       <div className="trusted-wrapper">
-
-        {/* LEFT ARROW */}
         <button className="review-arrow left" onClick={() => scroll("left")}>
           ‹
         </button>
-
-        {/* SCROLL AREA */}
         <div className="trusted-scroll" ref={scrollRef}>
           {reviewsData.map((review) => (
             <div className="review-card" key={review.id}>
@@ -885,11 +876,9 @@ const TrustedReviewsSection = () => {
                 <span className="review-product">{review.product}</span>
                 <span className="review-stars">★★★★★</span>
               </div>
-
               <p className="review-text">
                 “{review.text || "Amazing taste and quality!"}”
               </p>
-
               <div className="review-user">
                 <div className="avatar">
                   {review.name.charAt(0)}
@@ -902,27 +891,25 @@ const TrustedReviewsSection = () => {
             </div>
           ))}
         </div>
-
-        {/* RIGHT ARROW */}
         <button className="review-arrow right" onClick={() => scroll("right")}>
           ›
         </button>
-
       </div>
     </section>
   );
 };
+
 const Home = () => {
   const scrollRef = useRef(null);
-  const [cartItems, setCartItems] = useState([]);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
 
-  const handleAddToCart = (id) => {
-    setCartItems((prev) =>
-      prev.includes(id) ? prev : [...prev, id]
-    );
+  const handleNavigate = (id) => {
+    window.location.href = `/product/${id}`;
   };
+
+  // Triple the combos list for seamless infinite scroll
+  const extendedCombos = [...combos, ...combos, ...combos];
 
   const checkScrollPosition = () => {
     if (scrollRef.current) {
@@ -942,12 +929,41 @@ const Home = () => {
     setTimeout(checkScrollPosition, 300);
   };
 
+  const handleInfiniteScroll = () => {
+    const container = scrollRef.current;
+    if (!container) return;
+    const { scrollLeft, scrollWidth, clientWidth } = container;
+    const oneThirdWidth = scrollWidth / 3;
+
+    if (scrollLeft < 200) {
+      container.style.scrollBehavior = "auto";
+      container.scrollLeft = scrollLeft + oneThirdWidth;
+      container.style.scrollBehavior = "smooth";
+    } else if (scrollLeft > scrollWidth - clientWidth - 200) {
+      container.style.scrollBehavior = "auto";
+      container.scrollLeft = scrollLeft - oneThirdWidth;
+      container.style.scrollBehavior = "smooth";
+    }
+  };
+
   useEffect(() => {
     const container = scrollRef.current;
     if (container) {
+      const initializeScroll = () => {
+        const oneThirdWidth = container.scrollWidth / 3;
+        container.scrollLeft = oneThirdWidth;
+      };
+
+      const timer = setTimeout(initializeScroll, 100);
+      container.addEventListener("scroll", handleInfiniteScroll);
       container.addEventListener('scroll', checkScrollPosition);
       checkScrollPosition();
-      return () => container.removeEventListener('scroll', checkScrollPosition);
+      
+      return () => {
+        clearTimeout(timer);
+        container.removeEventListener("scroll", handleInfiniteScroll);
+        container.removeEventListener('scroll', checkScrollPosition);
+      };
     }
   }, []);
 
@@ -956,7 +972,7 @@ const Home = () => {
       <Navbar />
       <Hero />
 
-      {/* Combos Section */}
+      {/* Combos Section with Infinite Scroll */}
       <section className="combos-section">
         <div className="combos-header">
           <button
@@ -986,48 +1002,53 @@ const Home = () => {
         </div>
 
         <div className="scroll-container" ref={scrollRef}>
-          {combos.map((item) => {
-            const isAdded = cartItems.includes(item.id);
-            return (
-              <div key={item.id} className="card">
-                <div className="image-wrapper">
-                  <ImageGallery
-                    images={item.images}
-                    productName={item.name}
-                  />
-                </div>
-
-                <div className="card-body">
-                  <p className="product-name">{item.name}</p>
-                  <p className="reviews">
-                    ⭐⭐⭐⭐⭐ <span>{item.reviews} reviews</span>
-                  </p>
-                  <p className="price">Rs. {item.price}.00</p>
-                </div>
-
-                <button
-                  className={`add-btn ${isAdded ? "added" : ""}`}
-                  onClick={() => handleAddToCart(item.id)}
-                >
-                  {isAdded ? "ADDED TO CART" : "ADD TO CART"}
-                </button>
+          {extendedCombos.map((item, idx) => (
+            <div 
+              key={`${item.id}-${idx}`} 
+              className="card"
+              onClick={() => handleNavigate(item.id)}
+              style={{ cursor: 'pointer' }}
+            >
+              <div className="image-wrapper">
+                <ImageGallery
+                  images={item.images}
+                  productName={item.name}
+                  onImageClick={() => handleNavigate(item.id)}
+                />
               </div>
-            );
-          })}
+
+              <div className="card-body">
+                <p className="product-name">{item.name}</p>
+                <p className="reviews">
+                  ⭐⭐⭐⭐⭐ <span>{item.reviews} reviews</span>
+                </p>
+                <p className="price">Rs. {item.price}.00</p>
+              </div>
+
+              <button
+                className="add-btn"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleNavigate(item.id);
+                }}
+              >
+                VIEW DETAILS
+              </button>
+            </div>
+          ))}
         </div>
       </section>
 
       {/* Video Reels Section */}
       <ReelsSection />
 
-      {/* Best Sellers Section - Now with same pattern as Combos, but no right arrow in header */}
+      {/* Best Sellers Section */}
       <BestSellersSection />
 
       {/* Flavourful Delights Section */}
       <FlavourfulDelightsSection />
 
       {/* About Us Section */}
-       {/* About Us Section */}
       <AboutUsSection />
 
       {/* What Makes Anara Special */}
@@ -1035,9 +1056,6 @@ const Home = () => {
 
       {/* Tasted & Trusted by Millions Section */}
       <TrustedReviewsSection />
-
-
-
 
       <Footer />
       <WhatsAppButton />

@@ -4,46 +4,45 @@
   width: 100%;
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-image 0.6s ease-in-out;
 }
 
-/* Dark overlay like your reference */
+/* Dark Overlay */
 .overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
 }
 
 .hero-container {
   position: relative;
   z-index: 2;
-  max-width: 1200px;
   width: 100%;
+  max-width: 1200px;
   padding: 20px;
 }
 
 .hero-content {
-  color: white;
   max-width: 600px;
+  color: white;
 }
 
 .hero-subtitle {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   letter-spacing: 3px;
   text-transform: uppercase;
   color: #f39c12;
+  margin-bottom: 10px;
 }
 
 .hero-title {
-  font-size: 3.5rem;
-  margin: 20px 0;
-  font-weight: bold;
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 20px;
 }
 
 .hero-description {
@@ -57,69 +56,52 @@
 }
 
 .hero-tagline {
-  font-size: 1.4rem;
-  margin: 15px 0;
-  font-weight: bold;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 30px;
 }
 
 .hero-btn {
-  background-color: #e74c3c;
-  border: none;
+  display: inline-block;
+  background: #b572c6e9;
+  color: white;
   padding: 12px 30px;
   border-radius: 30px;
-  color: white;
+  text-decoration: none;
   font-size: 1rem;
-  cursor: pointer;
-  transition: 0.3s;
+  font-weight: 600;
+  transition: 0.3s ease;
 }
 
 .hero-btn:hover {
-  background-color: #c0392b;
+  background: #8b1185;
 }
 
-/* Arrows */
-.arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.4);
-  border: none;
-  color: white;
-  font-size: 30px;
-  padding: 10px 15px;
-  cursor: pointer;
-  z-index: 3;
-  border-radius: 50%;
-}
-
-.arrow.left {
-  left: 20px;
-}
-
-.arrow.right {
-  right: 20px;
-}
-
-.arrow:hover {
-  background: rgba(0, 0, 0, 0.7);
-}
-
-/* Mobile */
+/* Mobile Responsive */
 @media (max-width: 768px) {
   .hero {
     height: 70vh;
   }
 
-  .hero-title {
-    font-size: 2rem;
-  }
-
   .hero-content {
     text-align: center;
+    margin: auto;
   }
 
-  .arrow {
-    font-size: 20px;
-    padding: 8px;
+  .hero-title {
+    font-size: 2.3rem;
+  }
+
+  .hero-description {
+    font-size: 1rem;
+  }
+
+  .hero-tagline {
+    font-size: 1rem;
+  }
+
+  .hero-btn {
+    padding: 10px 24px;
+    font-size: 0.95rem;
   }
 }

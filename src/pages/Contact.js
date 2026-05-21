@@ -1,9 +1,16 @@
 import React, { useState } from "react";
+import emailjs from "@emailjs/browser";
 import "../styles/contact.css";
 
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import WhatsAppButton from "../components/WhatsAppButton";
+
+// Configuration for EmailJS
+// Please replace these with your actual Service ID, Template ID, and Public Key from your EmailJS account.
+const EMAILJS_SERVICE_ID = "service_jol66nc";
+const EMAILJS_TEMPLATE_ID = "template_clfwlyn";
+const EMAILJS_PUBLIC_KEY = "k7Ol6BAsZIgfOe9BU";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -14,6 +21,8 @@ const ContactPage = () => {
   });
 
   const [successMsg, setSuccessMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+  const [isSending, setIsSending] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -21,19 +30,45 @@ const ContactPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsSending(true);
+    setSuccessMsg("");
+    setErrorMsg("");
 
-    setSuccessMsg("✅ Your message has been sent successfully!");
+    const templateParams = {
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      message: formData.message,
+    };
 
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      message: "",
-    });
+    emailjs
+      .send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      )
+      .then(
+        (response) => {
+          setSuccessMsg("✅ Your message has been sent successfully!");
+          setFormData({
+            name: "",
+            email: "",
+            phone: "",
+            message: "",
+          });
+          setIsSending(false);
 
-    setTimeout(() => {
-      setSuccessMsg("");
-    }, 3000);
+          setTimeout(() => {
+            setSuccessMsg("");
+          }, 5000);
+        },
+        (error) => {
+          console.error("FAILED to send message via EmailJS:", error);
+          setErrorMsg("❌ Failed to send your message. Please check your credentials or try again later.");
+          setIsSending(false);
+        }
+      );
   };
 
   return (
@@ -57,6 +92,23 @@ const ContactPage = () => {
           <h2>Contact Us</h2>
 
           {successMsg && <div className="success-msg">{successMsg}</div>}
+          {errorMsg && (
+            <div
+              className="error-msg"
+              style={{
+                background: "#ffebee",
+                color: "#c62828",
+                padding: "12px",
+                borderRadius: "8px",
+                marginBottom: "15px",
+                textAlign: "center",
+                fontWeight: "500",
+                border: "1px solid #ef9a9a"
+              }}
+            >
+              {errorMsg}
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="contact-form">
             <div className="row">
@@ -97,8 +149,8 @@ const ContactPage = () => {
             />
 
             {/* ✅ SCOPED BUTTON */}
-            <button type="submit" className="contact-submit-btn">
-              Send Message
+            <button type="submit" className="contact-submit-btn" disabled={isSending}>
+              {isSending ? "Sending..." : "Send Message"}
             </button>
           </form>
         </div>
