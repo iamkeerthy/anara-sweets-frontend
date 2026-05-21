@@ -1090,7 +1090,7 @@ height: 330px;
 }
 
 .fullwidth-shop-btn:hover {
-  background: #066c09;
+  background: #8b1185;
   transform: scale(1.02);
 }
 
@@ -1278,7 +1278,7 @@ height: 330px;
 }
 
 .about-btn:hover {
-  background: #066c09;
+  background: #8b1185;
 }
 
 @media (max-width: 1200px) {

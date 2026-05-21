@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import "../styles/home.css";
 
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import WhatsAppButton from "../components/WhatsAppButton";
 
@@ -707,6 +707,14 @@ const BestSellersSection = () => {
 
 // Flavourful Delights Section
 const FlavourfulDelightsSection = () => {
+  const navigate = useNavigate();
+
+  const handleShopNow = (e) => {
+    e.preventDefault();
+    navigate('/product');
+    setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 50);
+  };
+
   return (
     <section className="flavourful-section">
       <div className="flavourful-container">
@@ -727,7 +735,7 @@ const FlavourfulDelightsSection = () => {
           <img src={flavourfulFullWidthImg} alt="Traditional Savouries" />
           <div className="fullwidth-overlay">
             <p className="fullwidth-text">Traditional Savouries, <br />made the native way</p>
-            <Link to="/all-collections" className="fullwidth-shop-btn">Shop now</Link>
+            <a href="/product" className="fullwidth-shop-btn" onClick={handleShopNow}>Shop now</a>
           </div>
         </div>
       </div>
@@ -737,6 +745,15 @@ const FlavourfulDelightsSection = () => {
 
 // About Us Section
 const AboutUsSection = () => {
+  const navigate = useNavigate();
+
+  const handleKnowMore = (e) => {
+    e.preventDefault();
+    navigate('/about');
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 50);
+  };
   return (
     <section className="about-section">
       <div className="about-container">
@@ -760,7 +777,7 @@ const AboutUsSection = () => {
             Old Traditional Recipes.<br /><br />
             Every bite is a Celebration of Our Ethnic Indian flavours and Rich Heritage.
           </h5>
-          <Link to="/about" className="about-btn">KNOW MORE</Link>
+          <a href="/about" className="about-btn" onClick={handleKnowMore}>KNOW MORE</a>
         </div>
       </div>
     </section>

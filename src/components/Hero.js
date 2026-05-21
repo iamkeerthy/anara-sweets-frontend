@@ -30,7 +30,7 @@ const Hero = () => {
             HANDCRAFTED SWEETS & SAVOURIES
           </p>
 
-          <Link to="/all-collections" className="hero-btn">
+          <Link to="/product" className="hero-btn">
             Shop now
           </Link>
         </div>
