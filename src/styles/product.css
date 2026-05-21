@@ -525,9 +525,9 @@
 }
 
 .add-to-cart-btn {
-  background-color: transparent;
-  border: 1px solid #7952b3; /* Light purple layout outline */
-  color: #7952b3; /* Light purple text */
+  background-color: #7952b3;
+  border: 1px solid #7952b3;
+  color: #ffffff;
   padding: 10px 0;
   border-radius: 4px;
   font-size: 13px;
@@ -537,11 +537,12 @@
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
+
 /* Primary Brand light purple action fill on card hover */
 .product-card:hover .add-to-cart-btn {
-  background-color: #7952b3;
+  background-color: #8b1185;
+  border-color: #8b1185;
   color: #ffffff;
-  border-color: #7952b3;
 }
 
 .no-products-fallback {
