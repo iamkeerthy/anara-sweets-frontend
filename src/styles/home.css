@@ -1076,7 +1076,7 @@ height: 330px;
 }
 
 .fullwidth-shop-btn {
-  background: #ff2d6f;
+  background: #b572c6e9;
   color: white;
   border: none;
   padding: 12px 30px;
@@ -1090,7 +1090,7 @@ height: 330px;
 }
 
 .fullwidth-shop-btn:hover {
-  background: #e62560;
+  background: #066c09;
   transform: scale(1.02);
 }
 
@@ -1265,7 +1265,7 @@ height: 330px;
 }
 
 .about-btn {
-  background: #ff2d73;
+  background: #b572c6e9;
   color: white;
   border: none;
   padding: 14px 38px;
@@ -1278,7 +1278,7 @@ height: 330px;
 }
 
 .about-btn:hover {
-  background: #e61f61;
+  background: #066c09;
 }
 
 @media (max-width: 1200px) {
