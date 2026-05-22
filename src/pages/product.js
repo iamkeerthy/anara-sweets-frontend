@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import WhatsAppButton from "../components/WhatsAppButton";
+import PriceFilter from "../components/PriceFilter";
 import '../styles/product.css';
 import { products } from "../data/products";
 import { filterProductsBySearch } from "../utils/searchProducts";
@@ -84,7 +85,6 @@ const Product = () => {
   const [showOutOfStock, setShowOutOfStock] = useState(true);
   const [sortOption, setSortOption] = useState('Alphabetically, A-Z');
   const [isSortOpen, setIsSortOpen] = useState(false);
-  const [priceOpen, setPriceOpen] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState(searchFromUrl);
 
@@ -118,26 +118,6 @@ const Product = () => {
     });
   }, [minPrice, maxPrice, selectedCategory, sortOption, searchTerm]);
 
-  const handleMinSlider = (e) => {
-    const val = Math.min(Number(e.target.value), maxPrice - 10);
-    setMinPrice(val);
-  };
-
-  const handleMaxSlider = (e) => {
-    const val = Math.max(Number(e.target.value), minPrice + 10);
-    setMaxPrice(val);
-  };
-
-  const handleMinInput = (e) => {
-    const val = Math.max(0, Math.min(Number(e.target.value), maxPrice - 10));
-    setMinPrice(val);
-  };
-
-  const handleMaxInput = (e) => {
-    const val = Math.min(MAX_PRICE_LIMIT, Math.max(Number(e.target.value), minPrice + 10));
-    setMaxPrice(val);
-  };
-
   const clearSearch = () => {
     setSearchTerm('');
     const nextParams = new URLSearchParams(searchParams);
@@ -154,6 +134,16 @@ const Product = () => {
     clearSearch();
   };
 
+<<<<<<< HEAD
+  const extraFilters = [
+    ...(selectedCategory !== 'all'
+      ? [{ label: `Category: ${selectedCategory}`, onRemove: () => setSelectedCategory('all') }]
+      : []),
+    ...(searchTerm.trim()
+      ? [{ label: `Search: ${searchTerm}`, onRemove: clearSearch }]
+      : []),
+  ];
+=======
   const removePriceFilter = () => {
     setMinPrice(0);
     setMaxPrice(MAX_PRICE_LIMIT);
@@ -161,6 +151,7 @@ const Product = () => {
 
   const fillLeft = `${(minPrice / MAX_PRICE_LIMIT) * 100}%`;
   const fillRight = `${100 - (maxPrice / MAX_PRICE_LIMIT) * 100}%`;
+>>>>>>> 4f16cd480506c698e024ebee6b774aa66863629f
 
   const hasActiveFilters = minPrice > 0 || maxPrice < MAX_PRICE_LIMIT || selectedCategory !== 'all' || searchTerm.trim();
 
@@ -169,6 +160,20 @@ const Product = () => {
       <Navbar />
 
       <div className="product-container">
+<<<<<<< HEAD
+        <PriceFilter
+          minPrice={minPrice}
+          maxPrice={maxPrice}
+          onMinChange={setMinPrice}
+          onMaxChange={setMaxPrice}
+          showOutOfStock={showOutOfStock}
+          onOutOfStockChange={setShowOutOfStock}
+          onClearAll={clearAllFilters}
+          extraFilters={extraFilters}
+          max={MAX_PRICE_LIMIT}
+          step={10}
+        />
+=======
         {/* SIDEBAR FILTER PANEL */}
         <aside className="filter-sidebar">
           <div className="filter-header">
@@ -292,6 +297,7 @@ const Product = () => {
           </div>
         </aside>
 
+>>>>>>> 4f16cd480506c698e024ebee6b774aa66863629f
         {/* MAIN DISPLAY REGION */}
         <main className="product-content">
           {/* CATEGORY TABS BANNER */}
