@@ -21,7 +21,7 @@ const Navbar = () => {
   const previewResults = searchResults.slice(0, SEARCH_PREVIEW_LIMIT);
   const hasMoreResults = searchResults.length > SEARCH_PREVIEW_LIMIT;
   
-  const topBarMessages = ['SriLankan Sweets', 'Made fresh daily | One time use Pure Groundnut Oil'];
+  const topBarMessages = ['SriLankan Sweets', 'Fresh • Hygienic • Authentic | One time use Pure Groundnut Oil ✨'];
   const [topBarIndex, setTopBarIndex] = useState(0);
 
   useEffect(() => {
