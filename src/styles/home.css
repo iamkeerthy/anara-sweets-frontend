@@ -78,7 +78,7 @@ p {
 .header-top h2 {
   font-size: 28px;
   font-weight: 500;
-  color: #222;
+  color: #070707;
   margin: 0;
   margin-top: -6px; /* adjust value as needed */
 }
@@ -101,13 +101,13 @@ p {
   background: transparent;
   border: none;
   font-size: 20px;
-  color: rgba(58, 36, 22, 0.25);
+  color: rgba(10, 10, 10, 0.25);
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .nav-arrow:hover {
-  color: rgba(58, 36, 22, 0.75);
+  color: rgba(10, 10, 10, 0.75);
   transform: scale(1.08);
 }
 
@@ -127,8 +127,8 @@ p {
 
 /* CARD */
 .card {
-  min-width: 260px;
-  max-width: 260px;
+  min-width: 325px;
+  max-width: 325px;
   display: flex;
   flex-direction: column;
   background: transparent;
@@ -204,7 +204,7 @@ p {
 /* 🔥 CENTER CONTAINER (IMPORTANT) */
 .trusted-wrapper {
   position: relative;
-  max-width: 900px;
+  max-width: 1300px;
   margin: 0 auto;   /* THIS CENTERS THE WHOLE BLOCK */
   display: flex;
   align-items: center;
@@ -226,8 +226,8 @@ p {
 
 /* SMALL CARD */
 .review-card {
-  min-width: 200px;
-  max-width: 200px;
+  min-width: 325px;
+  max-width: 325px;
   background: white;
   border-radius: 12px;
   padding: 12px;
@@ -801,7 +801,7 @@ p {
   border: none;
   font-size: 30px;
   cursor: pointer;
-  color: #333;
+  color: #000000;
   padding: 0 12px;
   transition: opacity 0.2s ease;
 }
@@ -825,8 +825,8 @@ p {
 }
 
 .bestseller-card {
-  min-width: 260px;
-  max-width: 260px;
+  min-width: 325px;
+  max-width: 325px;
   display: flex;
   flex-direction: column;
   background: transparent;

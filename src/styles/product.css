@@ -16,6 +16,13 @@
   gap: 30px;
 }
 
+
+/* font-family: "HolenVintage", serif; */
+.h2,h3,h4 {
+  font-family: "HolenVintage", serif;
+}
+
+
 /* ==========================================================================
    2. FILTER SIDEBAR STYLING
    ========================================================================== */
@@ -82,7 +89,7 @@
 .remove-filter {
   background: none;
   border: none;
-  color: #a496c0;
+  color: #b572c6e9;;
   cursor: pointer;
   padding: 0 0 0 6px;
 }
@@ -118,7 +125,7 @@
 .section-header h4,
 .price-heading {
   margin: 0;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   color: #111111 !important;
 }
@@ -475,6 +482,7 @@
    7. CARD CONTENT META DETAILS & BUTTONS
    ========================================================================== */
 .product-info {
+  font-family: "Outfit", sans-serif;
   padding: 16px;
   display: flex;
   flex-direction: column;
@@ -525,8 +533,8 @@
 }
 
 .add-to-cart-btn {
-  background-color: #7952b3;
-  border: 1px solid #7952b3;
+  background-color: #b572c6e9;;
+  border: 1px solid #b572c6e9;;
   color: #ffffff;
   padding: 10px 0;
   border-radius: 4px;
@@ -540,8 +548,8 @@
 
 /* Primary Brand light purple action fill on card hover */
 .product-card:hover .add-to-cart-btn {
-  background-color: #8b1185;
-  border-color: #8b1185;
+  background-color: #b13cb1;
+  border-color: #b13cb1;
   color: #ffffff;
 }
 

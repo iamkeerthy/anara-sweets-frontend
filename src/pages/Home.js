@@ -79,18 +79,18 @@ import thattuVadai2 from "../assets/images/THATTU VADAI1.jpg";
 import thattuVadai3 from "../assets/images/THATTU VADAI1.jpg";
 
 // Video imports for the new reels section
-import reel1 from "../assets/images/anara.mp4";
-import reel2 from "../assets/images/anara.mp4";
-import reel3 from "../assets/images/anara.mp4";
-import reel4 from "../assets/images/anara.mp4";
-import reel5 from "../assets/images/anara.mp4";
+// import reel1 from "../assets/images/anara.mp4";
+// import reel2 from "../assets/images/anara.mp4";
+// import reel3 from "../assets/images/anara.mp4";
+// import reel4 from "../assets/images/anara.mp4";
+// import reel5 from "../assets/images/anara.mp4";
 
 // Small images for video reels (thumbnails)
-import thumbnail1 from "../assets/images/img1.jpg";
-import thumbnail2 from "../assets/images/img1.jpg";
-import thumbnail3 from "../assets/images/img1.jpg";
-import thumbnail4 from "../assets/images/img1.jpg";
-import thumbnail5 from "../assets/images/img1.jpg";
+// import thumbnail1 from "../assets/images/img1.jpg";
+// import thumbnail2 from "../assets/images/img1.jpg";
+// import thumbnail3 from "../assets/images/img1.jpg";
+// import thumbnail4 from "../assets/images/img1.jpg";
+// import thumbnail5 from "../assets/images/img1.jpg";
 
 // Flavourful Delights Section Images
 import savouriesImg from "../assets/images/img1.jpg";
@@ -107,48 +107,48 @@ import specialOil from "../assets/images/img1.jpg";
 import specialWomen from "../assets/images/img1.jpg";
 
 // Data for the video reels section
-const reels = [
-  {
-    id: 1,
-    video: reel1,
-    title: "Glimpse of Anara Top Seller Achu Murukku",
-    product: "Achu Murukku - Kaaram",
-    price: 67,
-    thumbnail: thumbnail1,
-  },
-  {
-    id: 2,
-    video: reel2,
-    title: "A glimpse on how we make our Famous Thattai",
-    product: "Thattai",
-    price: 71,
-    thumbnail: thumbnail2,
-  },
-  {
-    id: 3,
-    video: reel3,
-    title: "Sneakpeek of Juicy Jamoon",
-    product: "BIG JAMUN JARS",
-    price: 145,
-    thumbnail: thumbnail3,
-  },
-  {
-    id: 4,
-    video: reel4,
-    title: "We have something Special for Christmas",
-    product: "Pocket Plum Cake",
-    price: 50,
-    thumbnail: thumbnail4,
-  },
-  {
-    id: 5,
-    video: reel5,
-    title: "It's Yummy",
-    product: "Thengai Paal Murukku",
-    price: 130,
-    thumbnail: thumbnail5,
-  },
-];
+// const reels = [
+//   {
+//     id: 1,
+//     video: reel1,
+//     title: "Glimpse of Anara Top Seller Achu Murukku",
+//     product: "Achu Murukku - Kaaram",
+//     price: 67,
+//     thumbnail: thumbnail1,
+//   },
+//   {
+//     id: 2,
+//     video: reel2,
+//     title: "A glimpse on how we make our Famous Thattai",
+//     product: "Thattai",
+//     price: 71,
+//     thumbnail: thumbnail2,
+//   },
+//   {
+//     id: 3,
+//     video: reel3,
+//     title: "Sneakpeek of Juicy Jamoon",
+//     product: "BIG JAMUN JARS",
+//     price: 145,
+//     thumbnail: thumbnail3,
+//   },
+//   {
+//     id: 4,
+//     video: reel4,
+//     title: "We have something Special for Christmas",
+//     product: "Pocket Plum Cake",
+//     price: 50,
+//     thumbnail: thumbnail4,
+//   },
+//   {
+//     id: 5,
+//     video: reel5,
+//     title: "It's Yummy",
+//     product: "Thengai Paal Murukku",
+//     price: 130,
+//     thumbnail: thumbnail5,
+//   },
+// ];
 
 // Data for Best Sellers section with multiple images per product - CORRECTED IDs
 const bestSellers = [
@@ -184,14 +184,7 @@ const bestSellers = [
     price: 105.00,
     images: [ravaKesari1, ravaKesari2, ravaKesari3],
   },
-  {
-    id: 5,
-    name: "Boondi Laddu",
-    rating: 5,
-    reviews: 72,
-    price: 86.00,
-    images: [boondiLaddu1, boondiLaddu2, boondiLaddu3],
-  },
+
 ];
 
 // Flavourful Delights Section Data
@@ -530,88 +523,88 @@ const combos = [
   }
 ];
 
-// Video reels section component
-const ReelsSection = () => {
-  const reelRef = useRef(null);
-  const [hoveredReelId, setHoveredReelId] = useState(null);
-  const [canScrollRight, setCanScrollRight] = useState(true);
+// // Video reels section component
+// const ReelsSection = () => {
+//   const reelRef = useRef(null);
+//   const [hoveredReelId, setHoveredReelId] = useState(null);
+//   const [canScrollRight, setCanScrollRight] = useState(true);
 
-  const checkScroll = () => {
-    if (reelRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = reelRef.current;
-      setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 10);
-    }
-  };
+//   const checkScroll = () => {
+//     if (reelRef.current) {
+//       const { scrollLeft, scrollWidth, clientWidth } = reelRef.current;
+//       setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 10);
+//     }
+//   };
 
-  const scrollReel = (dir) => {
-    if (!reelRef.current) return;
-    const scrollAmount = 340;
-    reelRef.current.scrollBy({
-      left: dir === "left" ? -scrollAmount : scrollAmount,
-      behavior: "smooth",
-    });
-    setTimeout(checkScroll, 300);
-  };
+//   const scrollReel = (dir) => {
+//     if (!reelRef.current) return;
+//     const scrollAmount = 340;
+//     reelRef.current.scrollBy({
+//       left: dir === "left" ? -scrollAmount : scrollAmount,
+//       behavior: "smooth",
+//     });
+//     setTimeout(checkScroll, 300);
+//   };
 
-  useEffect(() => {
-    const container = reelRef.current;
-    if (container) {
-      container.addEventListener('scroll', checkScroll);
-      checkScroll();
-      return () => container.removeEventListener('scroll', checkScroll);
-    }
-  }, []);
+//   useEffect(() => {
+//     const container = reelRef.current;
+//     if (container) {
+//       container.addEventListener('scroll', checkScroll);
+//       checkScroll();
+//       return () => container.removeEventListener('scroll', checkScroll);
+//     }
+//   }, []);
 
-  return (
-    <section className="reels-section">
-      <div className="reels-container" ref={reelRef}>
-        {reels.map((reel) => (
-          <div key={reel.id} className="reel-card">
-            <div
-              className="video-wrapper"
-              onMouseEnter={() => setHoveredReelId(reel.id)}
-              onMouseLeave={() => setHoveredReelId(null)}
-            >
-              <video
-                src={reel.video}
-                autoPlay
-                loop
-                muted
-                playsInline
-                disablePictureInPicture
-                controlsList="nodownload noplaybackrate nofullscreen"
-                className="reel-video"
-              />
-              {hoveredReelId === reel.id && (
-                <div className="video-overlay">
-                  <p>{reel.title}</p>
-                </div>
-              )}
-            </div>
-            <div className="reel-info">
-              <div className="reel-thumbnail">
-                <img src={reel.thumbnail} alt={reel.product} />
-              </div>
-              <div className="reel-details">
-                <p className="reel-product-name">{reel.product}</p>
-                <p className="reel-price">Rs. {reel.price}.00</p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+//   return (
+//     <section className="reels-section">
+//       <div className="reels-container" ref={reelRef}>
+//         {reels.map((reel) => (
+//           <div key={reel.id} className="reel-card">
+//             <div
+//               className="video-wrapper"
+//               onMouseEnter={() => setHoveredReelId(reel.id)}
+//               onMouseLeave={() => setHoveredReelId(null)}
+//             >
+//               <video
+//                 src={reel.video}
+//                 autoPlay
+//                 loop
+//                 muted
+//                 playsInline
+//                 disablePictureInPicture
+//                 controlsList="nodownload noplaybackrate nofullscreen"
+//                 className="reel-video"
+//               />
+//               {hoveredReelId === reel.id && (
+//                 <div className="video-overlay">
+//                   <p>{reel.title}</p>
+//                 </div>
+//               )}
+//             </div>
+//             <div className="reel-info">
+//               <div className="reel-thumbnail">
+//                 <img src={reel.thumbnail} alt={reel.product} />
+//               </div>
+//               <div className="reel-details">
+//                 <p className="reel-product-name">{reel.product}</p>
+//                 <p className="reel-price">Rs. {reel.price}.00</p>
+//               </div>
+//             </div>
+//           </div>
+//         ))}
+//       </div>
 
-      {canScrollRight && (
-        <button
-          className="fixed-scroll-arrow right-end-arrow"
-          onClick={() => scrollReel("right")}
-        >
-          &#8250;
-        </button>
-      )}
-    </section>
-  );
-};
+//       {canScrollRight && (
+//         <button
+//           className="fixed-scroll-arrow right-end-arrow"
+//           onClick={() => scrollReel("right")}
+//         >
+//           &#8250;
+//         </button>
+//       )}
+//     </section>
+//   );
+// };
 
 // Best Sellers section component - Make entire card clickable - CORRECTED
 const BestSellersSection = () => {
@@ -1063,7 +1056,7 @@ const Home = () => {
       </section>
 
       {/* Video Reels Section */}
-      <ReelsSection />
+      {/* <ReelsSection /> */}
 
       {/* Best Sellers Section */}
       <BestSellersSection />

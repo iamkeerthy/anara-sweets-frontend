@@ -37,7 +37,7 @@ const ProductCardImageSlider = ({ imagesList, productName }) => {
 
   return (
     <div className="card-slider-wrapper">
-      <button type="button" aria-label="Previous image" className="slider-arrow left-arrow" onClick={handlePrev}>&#10094;</button>
+      <button type="button" aria-label="Previous image" className="slider-arrow left-arrow" onClick={handlePrev}>❮</button>
       <div className="slider-content-window">
         <div 
           className="slider-image-track" 
@@ -57,7 +57,7 @@ const ProductCardImageSlider = ({ imagesList, productName }) => {
           ))}
         </div>
       </div>
-      <button type="button" aria-label="Next image" className="slider-arrow right-arrow" onClick={handleNext}>&#10095;</button>
+      <button type="button" aria-label="Next image" className="slider-arrow right-arrow" onClick={handleNext}>❯</button>
       <div className="slider-dots">
         {imagesList.map((_, idx) => (
           <span 
@@ -134,6 +134,7 @@ const Product = () => {
     clearSearch();
   };
 
+<<<<<<< HEAD
   const extraFilters = [
     ...(selectedCategory !== 'all'
       ? [{ label: `Category: ${selectedCategory}`, onRemove: () => setSelectedCategory('all') }]
@@ -142,12 +143,24 @@ const Product = () => {
       ? [{ label: `Search: ${searchTerm}`, onRemove: clearSearch }]
       : []),
   ];
+=======
+  const removePriceFilter = () => {
+    setMinPrice(0);
+    setMaxPrice(MAX_PRICE_LIMIT);
+  };
+
+  const fillLeft = `${(minPrice / MAX_PRICE_LIMIT) * 100}%`;
+  const fillRight = `${100 - (maxPrice / MAX_PRICE_LIMIT) * 100}%`;
+>>>>>>> 4f16cd480506c698e024ebee6b774aa66863629f
+
+  const hasActiveFilters = minPrice > 0 || maxPrice < MAX_PRICE_LIMIT || selectedCategory !== 'all' || searchTerm.trim();
 
   return (
     <div className="traditional-page-wrapper">
       <Navbar />
 
       <div className="product-container">
+<<<<<<< HEAD
         <PriceFilter
           minPrice={minPrice}
           maxPrice={maxPrice}
@@ -160,6 +173,131 @@ const Product = () => {
           max={MAX_PRICE_LIMIT}
           step={10}
         />
+=======
+        {/* SIDEBAR FILTER PANEL */}
+        <aside className="filter-sidebar">
+          <div className="filter-header">
+            <div className="filter-title-section">
+              <svg className="filter-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="4" y1="8" x2="20" y2="8" />
+                <circle cx="10" cy="8" r="2.5" fill="black" />
+                <line x1="4" y1="16" x2="20" y2="16" />
+                <circle cx="16" cy="16" r="2.5" fill="black" />
+              </svg>
+              <h3 className="filter-title">Filter</h3>
+            </div>
+          </div>
+
+          <div className="applied-filters">
+            <div className="applied-title">Applied filters</div>
+            <div className="price-tag">
+              Rs. {minPrice} - Rs. {maxPrice}
+              <button className="remove-filter" onClick={removePriceFilter}>✕</button>
+            </div>
+            {hasActiveFilters && (
+              <button className="clear-all" onClick={clearAllFilters}>Clear all</button>
+            )}
+          </div>
+
+          {/* OUT OF STOCK SECTION */}
+          <div className="filter-section">
+            <div className="section-header">
+              <h4>Out of stock</h4>
+              <div className="toggle-buttons">
+                <button
+                  className={showOutOfStock ? 'active' : ''}
+                  onClick={() => setShowOutOfStock(true)}
+                >
+                  Show
+                </button>
+                <button
+                  className={!showOutOfStock ? 'active' : ''}
+                  onClick={() => setShowOutOfStock(false)}
+                >
+                  Hide
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* PRICE RANGE FILTER */}
+          <div className="filter-section price-section-wrapper">
+            <div
+              className="section-header price-header-toggle"
+              onClick={() => setPriceOpen(!priceOpen)}
+            >
+              <h4 className="price-heading">Price Range</h4>
+              <span
+                className="accordion-indicator"
+                style={{
+                  transform: priceOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                  transition: '0.2s',
+                }}
+              >
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M18 15l-6-6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
+            </div>
+
+            {priceOpen && (
+              <div className="price-controls-body">
+                <div className="range-track-wrapper">
+                  <div className="range-track-bg" />
+                  <div
+                    className="range-track-fill"
+                    style={{ left: fillLeft, right: fillRight }}
+                  />
+                  <input
+                    type="range"
+                    className="dual-range"
+                    min={0}
+                    max={MAX_PRICE_LIMIT}
+                    step={10}
+                    value={minPrice}
+                    onChange={handleMinSlider}
+                  />
+                  <input
+                    type="range"
+                    className="dual-range"
+                    min={0}
+                    max={MAX_PRICE_LIMIT}
+                    step={10}
+                    value={maxPrice}
+                    onChange={handleMaxSlider}
+                  />
+                </div>
+
+                <div className="price-inputs-container">
+                  <div className="input-box-field">
+                    <span className="currency-symbol">Rs.</span>
+                    <input
+                      type="number"
+                      value={minPrice}
+                      onChange={handleMinInput}
+                      min={0}
+                      max={MAX_PRICE_LIMIT}
+                      step={10}
+                    />
+                  </div>
+                  <div className="input-box-field">
+                    <span className="currency-symbol">Rs.</span>
+                    <input
+                      type="number"
+                      value={maxPrice}
+                      onChange={handleMaxInput}
+                      min={0}
+                      max={MAX_PRICE_LIMIT}
+                      step={10}
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </aside>
+
+>>>>>>> 4f16cd480506c698e024ebee6b774aa66863629f
         {/* MAIN DISPLAY REGION */}
         <main className="product-content">
           {/* CATEGORY TABS BANNER */}
@@ -228,9 +366,6 @@ const Product = () => {
 
                 <div className="product-info">
                   <h3 className="product-name">{product.name}</h3>
-                  
-                  
-
                   <div className="product-price">Rs. {product.price}.00</div>
                   <button 
                     className="add-to-cart-btn"
