@@ -888,23 +888,28 @@ const TrustedReviewsSection = () => {
         <div className="trusted-scroll" ref={scrollRef}>
           {reviewsData.map((review) => (
             <div className="review-card" key={review.id}>
-              <div className="review-top">
-                <span className="review-product">{review.product}</span>
-                <span className="review-stars">★★★★★</span>
-              </div>
-              <p className="review-text">
-                “{review.text || "Amazing taste and quality!"}”
-              </p>
-              <div className="review-user">
-                <div className="avatar">
-                  {review.name.charAt(0)}
-                </div>
-                <div>
-                  <p className="name">{review.name}</p>
-                  <p className="verified">Verified Buyer</p>
-                </div>
-              </div>
-            </div>
+
+  <p className="review-text">
+    “{review.text || "Amazing taste and quality!"}”
+  </p>
+
+  <div className="review-user">
+    <div className="avatar">
+      {review.name.charAt(0)}
+    </div>
+
+    <div>
+      <p className="name">{review.name}</p>
+      <p className="verified">Verified Buyer</p>
+    </div>
+  </div>
+
+  {/* ⭐ STAR RATING AT BOTTOM */}
+  <div className="review-stars-bottom">
+    ★★★★★
+  </div>
+
+</div>
           ))}
         </div>
         <button className="review-arrow right" onClick={() => scroll("right")}>
