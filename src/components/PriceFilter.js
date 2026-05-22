@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import '../styles/filter.css';
 
-const FilterSidebar = ({
+const PriceFilter = ({
   minPrice,
   maxPrice,
   onMinChange,
@@ -8,13 +9,19 @@ const FilterSidebar = ({
   showOutOfStock,
   onOutOfStockChange,
   onClearAll,
+  extraFilters = [],
   max = 3000,
   step = 100,
 }) => {
   const [priceOpen, setPriceOpen] = useState(true);
 
-  const fillLeft = `${(minPrice / max) * 100}%`;
-  const fillRight = `${100 - (maxPrice / max) * 100}%`;
+  const trackInset = 18;
+  const minPercent = minPrice / max;
+  const maxPercent = maxPrice / max;
+  const fillLeft = `calc(${trackInset}px + ${minPercent * 100}% - ${minPercent * trackInset * 2}px)`;
+  const fillRight = `calc(${trackInset}px + ${(1 - maxPercent) * 100}% - ${(1 - maxPercent) * trackInset * 2}px)`;
+  const hasPriceFilter = minPrice > 0 || maxPrice < max;
+  const hasAppliedFilters = hasPriceFilter || extraFilters.length > 0;
 
   const handleMinSlider = (e) => {
     const val = Math.min(Number(e.target.value), maxPrice - step);
@@ -42,9 +49,7 @@ const FilterSidebar = ({
   };
 
   return (
-    <aside className="filter-sidebar">
-
-      {/* FILTER HEADER */}
+    <aside className="filter-sidebar price-filter">
       <div className="filter-header">
         <div className="filter-title-section">
           <svg
@@ -61,42 +66,51 @@ const FilterSidebar = ({
             <line x1="4" y1="21" x2="28" y2="21" />
             <circle cx="22" cy="21" r="2.5" fill="black" />
           </svg>
-          <span className="filter-title">Filter</span>
+          <span className="filter-title">Filters</span>
         </div>
       </div>
 
-      {/* APPLIED FILTERS */}
       <div className="applied-filters">
         <div className="applied-title">Applied filters</div>
         <div className="price-tag">
-          Rs. {minPrice}.00 - Rs. {maxPrice}.00
-          <button className="remove-filter" onClick={removePriceFilter}>✕</button>
+          Rs. {minPrice} - Rs. {maxPrice}
+          <button className="remove-filter" onClick={removePriceFilter} aria-label="Remove price filter">
+            &times;
+          </button>
         </div>
-        <button className="clear-all" onClick={onClearAll}>Clear all</button>
+        {extraFilters.map((filter) => (
+          <div className="price-tag category-tag-text" key={filter.label}>
+            {filter.label}
+            <button className="remove-filter" onClick={filter.onRemove} aria-label={`Remove ${filter.label}`}>
+              &times;
+            </button>
+          </div>
+        ))}
+        {hasAppliedFilters && (
+          <button className="clear-all" onClick={onClearAll}>Clear all</button>
+        )}
       </div>
 
-      {/* OUT OF STOCK */}
-      <div className="filter-section">
+      <div className="filter-section availability-section">
         <div className="section-header">
-          <h4>Out of stock</h4>
+          <h4>Availability</h4>
           <div className="toggle-buttons">
             <button
               className={showOutOfStock ? 'active' : ''}
               onClick={() => onOutOfStockChange(true)}
             >
-              Show
+              Show All
             </button>
             <button
               className={!showOutOfStock ? 'active' : ''}
               onClick={() => onOutOfStockChange(false)}
             >
-              Hide
+              In Stock Only
             </button>
           </div>
         </div>
       </div>
 
-      {/* PRICE RANGE FILTER */}
       <div className="filter-section price-section-wrapper">
         <div
           className="section-header price-header-toggle"
@@ -139,6 +153,7 @@ const FilterSidebar = ({
                 step={step}
                 value={minPrice}
                 onChange={handleMinSlider}
+                aria-label="Minimum price range"
               />
               <input
                 type="range"
@@ -148,6 +163,7 @@ const FilterSidebar = ({
                 step={step}
                 value={maxPrice}
                 onChange={handleMaxSlider}
+                aria-label="Maximum price range"
               />
             </div>
 
@@ -178,9 +194,8 @@ const FilterSidebar = ({
           </>
         )}
       </div>
-
     </aside>
   );
 };
 
-export default FilterSidebar;
+export default PriceFilter;

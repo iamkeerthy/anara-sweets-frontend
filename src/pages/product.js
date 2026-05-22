@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import WhatsAppButton from "../components/WhatsAppButton";
+import PriceFilter from "../components/PriceFilter";
 import '../styles/product.css';
 import { products } from "../data/products";
 import { filterProductsBySearch } from "../utils/searchProducts";
@@ -84,7 +85,6 @@ const Product = () => {
   const [showOutOfStock, setShowOutOfStock] = useState(true);
   const [sortOption, setSortOption] = useState('Alphabetically, A-Z');
   const [isSortOpen, setIsSortOpen] = useState(false);
-  const [priceOpen, setPriceOpen] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState(searchFromUrl);
 
@@ -118,26 +118,6 @@ const Product = () => {
     });
   }, [minPrice, maxPrice, selectedCategory, sortOption, searchTerm]);
 
-  const handleMinSlider = (e) => {
-    const val = Math.min(Number(e.target.value), maxPrice - 10);
-    setMinPrice(val);
-  };
-
-  const handleMaxSlider = (e) => {
-    const val = Math.max(Number(e.target.value), minPrice + 10);
-    setMaxPrice(val);
-  };
-
-  const handleMinInput = (e) => {
-    const val = Math.max(0, Math.min(Number(e.target.value), maxPrice - 10));
-    setMinPrice(val);
-  };
-
-  const handleMaxInput = (e) => {
-    const val = Math.min(MAX_PRICE_LIMIT, Math.max(Number(e.target.value), minPrice + 10));
-    setMaxPrice(val);
-  };
-
   const clearSearch = () => {
     setSearchTerm('');
     const nextParams = new URLSearchParams(searchParams);
@@ -154,113 +134,32 @@ const Product = () => {
     clearSearch();
   };
 
-  const fillLeft = `${(minPrice / MAX_PRICE_LIMIT) * 100}%`;
-  const fillRight = `${100 - (maxPrice / MAX_PRICE_LIMIT) * 100}%`;
+  const extraFilters = [
+    ...(selectedCategory !== 'all'
+      ? [{ label: `Category: ${selectedCategory}`, onRemove: () => setSelectedCategory('all') }]
+      : []),
+    ...(searchTerm.trim()
+      ? [{ label: `Search: ${searchTerm}`, onRemove: clearSearch }]
+      : []),
+  ];
 
   return (
     <div className="traditional-page-wrapper">
       <Navbar />
 
       <div className="product-container">
-        {/* SIDEBAR FILTER PANEL */}
-        <aside className="filter-sidebar">
-          <div className="filter-header">
-            <div className="filter-title-section">
-              <svg className="filter-icon-svg" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="2">
-                <line x1="4" y1="11" x2="28" y2="11" />
-                <circle cx="10" cy="11" r="2.5" fill="black" />
-                <line x1="4" y1="21" x2="28" y2="21" />
-                <circle cx="22" cy="21" r="2.5" fill="black" />
-              </svg>
-              <h2 className="filter-title">Filters</h2>
-            </div>
-          </div>
-
-          <div className="applied-filters">
-            <div className="applied-title">Applied filters</div>
-            <div className="price-tag">
-              Rs. {minPrice} - Rs. {maxPrice}
-              <button className="remove-filter" onClick={() => { setMinPrice(0); setMaxPrice(MAX_PRICE_LIMIT); }}>✕</button>
-            </div>
-            {selectedCategory !== 'all' && (
-              <div className="price-tag category-tag-text">
-                Category: {selectedCategory}
-                <button className="remove-filter" onClick={() => setSelectedCategory('all')}>✕</button>
-              </div>
-            )}
-            {searchTerm.trim() && (
-              <div className="price-tag category-tag-text">
-                Search: {searchTerm}
-                <button className="remove-filter" onClick={clearSearch}>✕</button>
-              </div>
-            )}
-            {(minPrice > 0 || maxPrice < MAX_PRICE_LIMIT || selectedCategory !== 'all' || searchTerm.trim()) && (
-              <button className="clear-all" onClick={clearAllFilters}>Clear all</button>
-            )}
-          </div>
-
-          <div className="filter-section">
-            <div className="section-header">
-              <h4>Availability</h4>
-              <div className="toggle-buttons">
-                <button className={showOutOfStock ? 'active' : ''} onClick={() => setShowOutOfStock(true)}>Show All</button>
-                <button className={!showOutOfStock ? 'active' : ''} onClick={() => setShowOutOfStock(false)}>In Stock Only</button>
-              </div>
-            </div>
-          </div>
-
-          <div className="filter-section price-section-wrapper">
-            <div className="section-header price-header-toggle" onClick={() => setPriceOpen(!priceOpen)}>
-              <h4 className="price-heading">Price Range</h4>
-              <span className="accordion-indicator" style={{ transform: priceOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}>
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <path d="M18 15l-6-6-6 6" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </span>
-            </div>
-
-            {priceOpen && (
-              <div className="price-controls-body">
-                <div className="range-track-wrapper">
-                  <div className="range-track-bg" />
-                  <div className="range-track-fill" style={{ left: fillLeft, right: fillRight }} />
-                  <input 
-                    type="range" 
-                    className="dual-range" 
-                    min={0} 
-                    max={MAX_PRICE_LIMIT} 
-                    step={10} 
-                    value={minPrice} 
-                    onChange={handleMinSlider} 
-                    aria-label="Minimum price range" 
-                  />
-                  <input 
-                    type="range" 
-                    className="dual-range" 
-                    min={0} 
-                    max={MAX_PRICE_LIMIT} 
-                    step={10} 
-                    value={maxPrice} 
-                    onChange={handleMaxSlider} 
-                    aria-label="Maximum price range" 
-                  />
-                </div>
-
-                <div className="price-inputs-container">
-                  <div className="input-box-field">
-                    <span className="currency-symbol">Rs.</span>
-                    <input type="number" value={minPrice} onChange={handleMinInput} min={0} max={MAX_PRICE_LIMIT} step={10} />
-                  </div>
-                  <div className="input-box-field">
-                    <span className="currency-symbol">Rs.</span>
-                    <input type="number" value={maxPrice} onChange={handleMaxInput} min={0} max={MAX_PRICE_LIMIT} step={10} />
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        </aside>
-
+        <PriceFilter
+          minPrice={minPrice}
+          maxPrice={maxPrice}
+          onMinChange={setMinPrice}
+          onMaxChange={setMaxPrice}
+          showOutOfStock={showOutOfStock}
+          onOutOfStockChange={setShowOutOfStock}
+          onClearAll={clearAllFilters}
+          extraFilters={extraFilters}
+          max={MAX_PRICE_LIMIT}
+          step={10}
+        />
         {/* MAIN DISPLAY REGION */}
         <main className="product-content">
           {/* CATEGORY TABS BANNER */}
