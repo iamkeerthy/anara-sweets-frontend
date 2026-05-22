@@ -413,119 +413,66 @@ const handleClearCart = () => {
         </div>
       </div>
 
-      {/* --- RELATED PRODUCTS SECTION --- */}
-      {relatedProducts.length > 0 && (
-        <div className="related-products-section">
-          <h2 className="related-title">More Products</h2>
-          <div className="related-grid-row">
-            {relatedProducts.map((item) => (
-              <Link 
-                to={`/product/${item.id}`} 
-                key={item.id} 
-                className="related-card-item"
-              >
-                <div className="related-image-frame">
-                  <img 
-                    src={item.images && item.images[0]} 
-                    alt={item.name} 
-                  />
-                </div>
-                <h3 className="related-item-name">{item.name}</h3>
-                <p className="related-item-price">Rs. {item.price}.00</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
-
       {/* Interactive Confirmation Step Overlay Modal Dashboard */}
-      {showConfirmModal && (
-        <div className="order-modal-backdrop" style={{
-          position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',
-          backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', justifyContent: 'center',
-          alignItems: 'center', zIndex: 1000
-        }}>
-          <div className="order-modal-content" style={{
-            backgroundColor: '#fff', padding: '30px', borderRadius: '8px',
-            maxWidth: '500px', width: '92%', boxSizing: 'border-box', boxShadow: '0 4px 20px rgba(0,0,0,0.2)'
-          }}>
-            <h3 className="modal-title" style={{ marginTop: 0, borderBottom: '1px solid #eee', paddingBottom: '12px' }}>
+     {showConfirmModal && (
+        <div className="order-modal-backdrop">
+          <div className="order-modal-content">
+            <h3 className="modal-title">
               Review Your Cart Items
             </h3>
-            
-            <div className="modal-body-details" style={{ margin: '20px 0', maxHeight: '280px', overflowY: 'auto', paddingRight: '5px' }}>
+
+            <div className="modal-body-details">
               {modalCartItems.map((item, idx) => (
-                <div 
-                  key={idx} 
-                  style={{ 
-                    display: 'flex', 
-                    justifyContent: 'space-between', 
-                    alignItems: 'center',
-                    marginBottom: '14px', 
-                    fontSize: '14px', 
-                    borderBottom: '1px dashed #eee', 
-                    paddingBottom: '10px' 
-                  }}
-                >
-                  <div style={{ paddingRight: '10px' }}>
-                    <p style={{ margin: '0 0 4px 0' }}>
-                      <strong>{idx + 1}. {item.name}</strong> ({item.weight >= 1000 ? `${item.weight/1000}kg` : `${item.weight}g`})
+                <div key={idx} className="modal-item-row">
+                  
+                  <div className="modal-item-info">
+                    <p className="modal-item-title">
+                      <strong>
+                        {idx + 1}. {item.name}
+                      </strong>{" "}
+                      ({item.weight >= 1000
+                        ? `${item.weight / 1000}kg`
+                        : `${item.weight}g`})
                     </p>
-                    <p style={{ margin: 0, color: '#666', fontSize: '13px' }}>
+
+                    <p className="modal-item-sub">
                       Quantity: {item.quantity} — Subtotal: Rs. {item.itemTotal}.00
                     </p>
                   </div>
-                  
-                  {/* Delete Item Action Hook Button */}
+
                   <button
                     type="button"
                     onClick={() => handleRemoveItemFromModal(idx)}
                     title="Remove item"
-                    style={{
-                      background: '#ffebee',
-                      border: 'none',
-                      color: '#c62828',
-                      borderRadius: '50%',
-                      width: '28px',
-                      height: '28px',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '12px',
-                      transition: 'background 0.2s',
-                      flexShrink: 0
-                    }}
-                    onMouseEnter={(e) => { e.currentTarget.style.background = '#ffcdd2'; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.background = '#ffebee'; }}
+                    className="modal-remove-btn"
                   >
                     ✕
                   </button>
+
                 </div>
               ))}
-              
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '20px' }}>
-                <span style={{ fontSize: '15px', fontWeight: 'bold', color: '#333' }}>Total Amount:</span>
-                <span className="total-billing-highlight" style={{ fontSize: '20px', color: '#d11b5d', fontWeight: 'bold' }}>
+
+              <div className="modal-total-row">
+                <span className="modal-total-label">Total Amount:</span>
+                <span className="modal-total-value">
                   Rs. {modalGrandTotal}.00
                 </span>
               </div>
             </div>
 
-            <div className="modal-action-row" style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end', marginTop: '25px' }}>
-              <button 
+            <div className="modal-action-row">
+              <button
                 type="button"
                 onClick={() => setShowConfirmModal(false)}
                 className="modal-cancel-btn"
-                style={{ padding: '10px 16px', borderRadius: '4px', border: '1px solid #ccc', background: '#fff', cursor: 'pointer' }}
               >
                 Close
               </button>
-              <button 
+
+              <button
                 type="button"
                 onClick={sendWhatsAppMessage}
-                className="modal-confirm-whatsapp-btn"
-                style={{ padding: '10px 20px', borderRadius: '4px', border: 'none', background: '#25D366', color: '#fff', fontWeight: 'bold', cursor: 'pointer' }}
+                className="modal-whatsapp-btn"
               >
                 Send Order to WhatsApp
               </button>
@@ -533,7 +480,6 @@ const handleClearCart = () => {
           </div>
         </div>
       )}
-
       <Footer />
       <WhatsAppButton />
       <ToastContainer />

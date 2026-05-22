@@ -84,6 +84,7 @@ const Product = () => {
   const [showOutOfStock, setShowOutOfStock] = useState(true);
   const [sortOption, setSortOption] = useState('Alphabetically, A-Z');
   const [isSortOpen, setIsSortOpen] = useState(false);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [priceOpen, setPriceOpen] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState(searchFromUrl);
@@ -91,6 +92,14 @@ const Product = () => {
   useEffect(() => {
     setSearchTerm(searchFromUrl);
   }, [searchFromUrl]);
+
+  useEffect(() => {
+    document.body.classList.toggle('filter-drawer-open', isFilterOpen);
+
+    return () => {
+      document.body.classList.remove('filter-drawer-open');
+    };
+  }, [isFilterOpen]);
 
   // Get unique categories from products data
   const categories = useMemo(() => {
@@ -172,8 +181,29 @@ const Product = () => {
       <Navbar />
 
       <div className="product-container">
+        <button
+          type="button"
+          className="mobile-filter-btn"
+          onClick={() => setIsFilterOpen(true)}
+          aria-label="Open filters"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <line x1="4" y1="7" x2="20" y2="7" />
+            <circle cx="9" cy="7" r="2" fill="currentColor" />
+            <line x1="4" y1="17" x2="20" y2="17" />
+            <circle cx="15" cy="17" r="2" fill="currentColor" />
+          </svg>
+        </button>
+
+        <button
+          type="button"
+          className={`filter-drawer-backdrop ${isFilterOpen ? 'show' : ''}`}
+          onClick={() => setIsFilterOpen(false)}
+          aria-label="Close filters"
+        />
+
         {/* SIDEBAR FILTER PANEL */}
-        <aside className="filter-sidebar">
+        <aside className={`filter-sidebar ${isFilterOpen ? 'open' : ''}`}>
           <div className="filter-header">
             <div className="filter-title-section">
               <svg className="filter-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -184,6 +214,14 @@ const Product = () => {
               </svg>
               <h3 className="filter-title">Filter</h3>
             </div>
+            <button
+              type="button"
+              className="filter-drawer-close"
+              onClick={() => setIsFilterOpen(false)}
+              aria-label="Close filters"
+            >
+              x
+            </button>
           </div>
 
           <div className="applied-filters">

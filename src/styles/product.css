@@ -14,6 +14,13 @@
   padding: 40px 20px;
   display: flex;
   gap: 30px;
+  position: relative;
+}
+
+.mobile-filter-btn,
+.filter-drawer-backdrop,
+.filter-drawer-close {
+  display: none;
 }
 
 
@@ -242,6 +249,9 @@
   margin-bottom: 20px;
   padding-bottom: 0;
   border-bottom: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .filter-title-section {
@@ -499,9 +509,17 @@
   margin-bottom: 24px;
   border-bottom: 1px solid #eef0f2;
   padding-bottom: 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.category-tabs-container::-webkit-scrollbar {
+  display: none;
 }
 
 .category-tab-btn {
+  flex: 0 0 auto;
   background: none;
   border: none;
   font-size: 15px;
@@ -832,11 +850,528 @@
 }
 
 @media (max-width: 768px) {
-  .product-container { flex-direction: column; }
-  .filter-sidebar { width: 100%; }
+  body.filter-drawer-open {
+    overflow: hidden;
+  }
+
+  .product-container {
+    flex-direction: column;
+    gap: 18px;
+    padding: 24px 14px 36px;
+  }
+
+  .mobile-filter-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    color: #7952b3;
+    background: #ffffff;
+    border: 1px solid #e8dff0;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(30, 20, 35, 0.08);
+  }
+
+  .mobile-filter-btn svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  .filter-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.36);
+    border: none;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+  }
+
+  .filter-drawer-backdrop.show {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .filter-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: min(86vw, 330px);
+    max-width: 330px;
+    height: 100vh;
+    padding: 22px 18px;
+    overflow-y: auto;
+    border-radius: 0;
+    border-top: none;
+    border-bottom: none;
+    border-left: none;
+    transform: translateX(-105%);
+    transition: transform 0.25s ease;
+  }
+
+  .filter-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .filter-drawer-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    color: #555555;
+    background: #f7f3fb;
+    border: 1px solid #e8dff0;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  .section-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .toggle-buttons {
+    width: 100%;
+  }
+
+  .toggle-buttons button {
+    flex: 1;
+  }
+
+  .category-tabs-container {
+    gap: 8px;
+    margin: -4px -14px 16px;
+    padding: 0 14px 12px;
+    border-bottom: 1px solid #eeeeee;
+  }
+
+  .category-tab-btn {
+    padding: 8px 12px;
+    background: #ffffff;
+    border: 1px solid #e8dff0;
+    border-radius: 999px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .category-tab-btn.active-tab {
+    color: #ffffff;
+    background: #7952b3;
+    border-color: #7952b3;
+  }
+
+  .category-tab-btn.active-tab::after {
+    display: none;
+  }
+
+  .product-top-bar {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .sort-dropdown-container,
+  .sort-dropdown-btn {
+    width: 100%;
+  }
+
+  .sort-dropdown-btn {
+    justify-content: space-between;
+  }
+
+  .sort-dropdown-menu {
+    right: auto;
+    left: 0;
+    width: 100%;
+  }
+
   .product-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 480px) {
   .product-grid { grid-template-columns: 1fr; }
+}
+
+
+/* ==========================================================================
+   9. MOBILE RESPONSIVENESS FIXES (CONTINUED)
+   ========================================================================== */
+
+/* Fix for category tabs on mobile - improved scrolling and tap targets */
+@media (max-width: 768px) {
+  .category-tabs-container {
+    display: flex;
+    gap: 10px;
+    margin: 0 -14px 20px -14px;
+    padding: 0 14px 14px 14px;
+    border-bottom: 1px solid #eeeeee;
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #7952b3 #e8dff0;
+    position: relative;
+    white-space: nowrap;
+    background: linear-gradient(to right, #fcfcfc 0%, #fcfcfc 92%, transparent 100%);
+  }
+
+  .category-tabs-container::-webkit-scrollbar {
+    display: block;
+    height: 3px;
+  }
+
+  .category-tabs-container::-webkit-scrollbar-track {
+    background: #e8dff0;
+    border-radius: 10px;
+  }
+
+  .category-tabs-container::-webkit-scrollbar-thumb {
+    background: #7952b3;
+    border-radius: 10px;
+  }
+
+  .category-tab-btn {
+    flex: 0 0 auto;
+    padding: 8px 18px;
+    background: #ffffff;
+    border: 1px solid #e8dff0;
+    border-radius: 40px;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  }
+
+  .category-tab-btn:active {
+    transform: scale(0.96);
+  }
+
+  .category-tab-btn.active-tab {
+    color: #ffffff;
+    background: #7952b3;
+    border-color: #7952b3;
+    box-shadow: 0 2px 8px rgba(121, 82, 179, 0.3);
+  }
+
+  .category-tab-btn.active-tab::after {
+    display: none;
+  }
+
+  /* Ensure first and last tabs have proper spacing */
+  .category-tab-btn:first-child {
+    margin-left: 0;
+  }
+
+  .category-tab-btn:last-child {
+    margin-right: 0;
+  }
+}
+
+/* Extra small devices - better touch targets */
+@media (max-width: 480px) {
+  .category-tabs-container {
+    gap: 8px;
+    margin: 0 -12px 18px -12px;
+    padding: 0 12px 12px 12px;
+  }
+
+  .category-tab-btn {
+    padding: 7px 14px;
+    font-size: 13px;
+  }
+
+  /* Make product cards more touch-friendly on small screens */
+  .product-card {
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(121, 82, 179, 0.1);
+  }
+
+  .product-card:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+
+  /* Improve slider arrows for touch */
+  .slider-arrow {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+    opacity: 0.7;
+    background: rgba(255, 255, 255, 0.95);
+  }
+
+  .card-slider-wrapper:hover .slider-arrow {
+    opacity: 0.7;
+  }
+
+  .slider-arrow:active {
+    opacity: 1;
+    background: #ffffff;
+  }
+
+  /* Better dots for touch */
+  .slider-dot {
+    width: 8px;
+    height: 8px;
+    margin: 0 2px;
+  }
+
+  .slider-dot.active {
+    width: 16px;
+  }
+
+  /* Improve filter drawer close button */
+  .filter-drawer-close {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  /* Better price input fields for mobile */
+  .input-box-field {
+    min-height: 44px;
+  }
+
+  .input-box-field input {
+    font-size: 14px;
+    padding: 4px 0;
+  }
+
+  /* Improve sort dropdown for touch */
+  .sort-dropdown-btn {
+    min-height: 44px;
+    padding: 10px 16px;
+  }
+
+  .sort-dropdown-menu li {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+
+  /* Better toggle buttons for touch */
+  .toggle-buttons button {
+    min-height: 38px;
+    padding: 8px 12px;
+  }
+
+  /* Improve clear all button touch area */
+  .clear-all {
+    padding: 6px 0;
+    min-width: 70px;
+  }
+
+  /* Better remove filter button touch area */
+  .remove-filter {
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+  }
+}
+
+/* Landscape mode fixes for mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .filter-sidebar {
+    width: min(70vw, 320px);
+    padding: 16px;
+  }
+
+  .category-tabs-container {
+    margin-bottom: 16px;
+  }
+
+  .product-container {
+    padding: 16px 14px 24px;
+  }
+
+  .product-grid {
+    gap: 16px;
+  }
+}
+
+/* Tablet specific improvements */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .category-tabs-container {
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .category-tab-btn {
+    padding: 8px 20px;
+    font-size: 14px;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .filter-sidebar {
+    width: 260px;
+    padding: 20px;
+  }
+}
+
+/* Large desktop optimization */
+@media (min-width: 1280px) {
+  .product-container {
+    padding: 48px 20px;
+  }
+
+  .product-grid {
+    gap: 28px;
+  }
+
+  .category-tabs-container {
+    gap: 16px;
+  }
+}
+
+/* Fix for iOS Safari sticky issues */
+@supports (-webkit-touch-callout: none) {
+  .filter-sidebar {
+    height: -webkit-fill-available;
+  }
+
+  .filter-drawer-backdrop {
+    height: -webkit-fill-available;
+  }
+}
+
+/* Smooth scroll behavior for the whole page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Prevent body scroll when filter drawer is open on all mobile devices */
+@media (max-width: 768px) {
+  body.filter-drawer-open {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  /* Ensure the backdrop covers everything properly */
+  .filter-drawer-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 90;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+  }
+}
+
+/* Animation for filter drawer */
+.filter-sidebar {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.filter-sidebar.open {
+  transform: translateX(0);
+}
+
+/* Improved focus states for accessibility */
+.category-tab-btn:focus-visible,
+.sort-dropdown-btn:focus-visible,
+.toggle-buttons button:focus-visible,
+.remove-filter:focus-visible,
+.clear-all:focus-visible,
+.filter-drawer-close:focus-visible,
+.mobile-filter-btn:focus-visible,
+.slider-arrow:focus-visible,
+.add-to-cart-btn:focus-visible {
+  outline: 2px solid #7952b3;
+  outline-offset: 2px;
+}
+
+/* Loading state for images */
+.product-img {
+  background-color: #f5f5f5;
+  transition: opacity 0.2s ease;
+}
+
+.product-img[src=""] {
+  opacity: 0;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .product-card:hover {
+    transform: none;
+  }
+
+  .category-tab-btn:active {
+    transform: none;
+  }
+}
+
+/* Fix for overlapping elements on very small screens */
+@media (max-width: 360px) {
+  .product-info {
+    padding: 12px;
+  }
+
+  .product-name {
+    font-size: 14px;
+  }
+
+  .product-price {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  .add-to-cart-btn {
+    padding: 8px 0;
+    font-size: 12px;
+  }
+
+  .price-tag {
+    font-size: 11px;
+    padding: 5px 8px;
+  }
+}
+
+/* Ensure filter sidebar doesn't overflow on short screens */
+@media (max-height: 600px) and (max-width: 768px) {
+  .filter-sidebar {
+    padding: 16px;
+  }
+
+  .filter-section {
+    padding: 12px 0;
+  }
+
+  .price-controls-body {
+    margin-top: 0;
+  }
+
+  .price-summary-row {
+    margin: 10px 0 12px;
+  }
 }
