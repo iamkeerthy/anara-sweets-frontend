@@ -113,10 +113,12 @@ const FilterSidebar = ({
             <svg
               viewBox="0 0 24 24"
               width="18"
-              height="18"
+              height="30  "
               fill="none"
               stroke="currentColor"
-              strokeWidth="2.5"
+              strokeWidth="4.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
               <path d="M18 15l-6-6-6 6" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
