@@ -159,8 +159,11 @@ const Product = () => {
     setMaxPrice(MAX_PRICE_LIMIT);
   };
 
-  const fillLeft = `${(minPrice / MAX_PRICE_LIMIT) * 100}%`;
-  const fillRight = `${100 - (maxPrice / MAX_PRICE_LIMIT) * 100}%`;
+  const trackInset = 8;
+  const minPercent = minPrice / MAX_PRICE_LIMIT;
+  const maxPercent = maxPrice / MAX_PRICE_LIMIT;
+  const fillLeft = `calc(${trackInset}px + ${minPercent * 100}% - ${minPercent * trackInset * 2}px)`;
+  const fillRight = `calc(${trackInset}px + ${(1 - maxPercent) * 100}% - ${(1 - maxPercent) * trackInset * 2}px)`;
 
   const hasActiveFilters = minPrice > 0 || maxPrice < MAX_PRICE_LIMIT || selectedCategory !== 'all' || searchTerm.trim();
 
@@ -184,32 +187,39 @@ const Product = () => {
           </div>
 
           <div className="applied-filters">
-            <div className="applied-title">Applied filters</div>
-            <div className="price-tag">
-              Rs. {minPrice} - Rs. {maxPrice}
-              <button className="remove-filter" onClick={removePriceFilter}>✕</button>
+            <div className="applied-filters-head">
+              <span className="applied-title">Applied filters</span>
+              {hasActiveFilters && (
+                <button className="clear-all" onClick={clearAllFilters}>Clear all</button>
+              )}
             </div>
+            {(minPrice > 0 || maxPrice < MAX_PRICE_LIMIT) && (
+              <div className="price-tag">
+                Rs. {minPrice} - Rs. {maxPrice}
+                <button className="remove-filter" onClick={removePriceFilter} aria-label="Remove price filter">x</button>
+              </div>
+            )}
             {selectedCategory !== 'all' && (
               <div className="price-tag">
                 {selectedCategory}
-                <button className="remove-filter" onClick={() => setSelectedCategory('all')}>✕</button>
+                <button className="remove-filter" onClick={() => setSelectedCategory('all')} aria-label="Remove category filter">x</button>
               </div>
             )}
             {searchTerm.trim() && (
               <div className="price-tag">
                 {searchTerm}
-                <button className="remove-filter" onClick={clearSearch}>✕</button>
+                <button className="remove-filter" onClick={clearSearch} aria-label="Remove search filter">x</button>
               </div>
             )}
-            {hasActiveFilters && (
-              <button className="clear-all" onClick={clearAllFilters}>Clear all</button>
+            {!hasActiveFilters && (
+              <div className="empty-filter-note">No filters selected</div>
             )}
           </div>
 
           {/* OUT OF STOCK SECTION */}
           <div className="filter-section">
             <div className="section-header">
-              <h4>Out of stock</h4>
+              <h4>Availability</h4>
               <div className="toggle-buttons">
                 <button
                   className={showOutOfStock ? 'active' : ''}
@@ -249,6 +259,16 @@ const Product = () => {
 
             {priceOpen && (
               <div className="price-controls-body">
+                <div className="price-summary-row">
+                  <div className="price-value-pill">
+                    <span>Min</span>
+                    <strong>Rs. {minPrice}</strong>
+                  </div>
+                  <div className="price-value-pill">
+                    <span>Max</span>
+                    <strong>Rs. {maxPrice}</strong>
+                  </div>
+                </div>
                 <div className="range-track-wrapper">
                   <div className="range-track-bg" />
                   <div
@@ -273,6 +293,11 @@ const Product = () => {
                     value={maxPrice}
                     onChange={handleMaxSlider}
                   />
+                </div>
+
+                <div className="range-endpoints">
+                  <span>Rs. 0</span>
+                  <span>Rs. {MAX_PRICE_LIMIT}</span>
                 </div>
 
                 <div className="price-inputs-container">
