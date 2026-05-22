@@ -38,31 +38,6 @@ const safeStorage = {
   }
 };
 
-const ClearCartToast = ({ closeToast, handleConfirm }) => {
-  return (
-    <div>
-      <p>Are you sure you want to clear your entire cart?</p>
-
-      <div>
-        <button
-          onClick={() => {
-            handleConfirm();
-            closeToast();
-          }}
-        >
-          Yes
-        </button>
-
-        <button onClick={closeToast}>
-          No
-        </button>
-      </div>
-    </div>
-  );
-};
-
-
-
 function ProductDetails() {
   const { id } = useParams();
   // Convert id to number for comparison
@@ -127,6 +102,7 @@ function ProductDetails() {
   const calculatedPricePerUnit = Math.round((product.price / 150) * activeWeight);
   const totalPrice = calculatedPricePerUnit * quantity;
   const galleryThumbnails = product.images || [];
+  const productIngredients = Array.isArray(product.ingredients) ? product.ingredients : [];
 
   const handlePresetWeightChange = (weight) => {
     setWeightType('preset');
@@ -414,13 +390,21 @@ const handleClearCart = () => {
           </div>
 
           <div className="product-features-bullet-list">
-            <ul>
-              <li>Crispy, golden & deeply satisfying - a must-try traditional delicacy blend.</li>
-              <li>Made with high-quality ingredients, fine recipe metrics & mild aromatic additions for a balanced profile.</li>
-              <li>Handcrafted and systematically packed in strictly monitored hygienic batch configurations.</li>
-              <li>Perfect choice to enjoy as a snack accompaniment or festive family treat.</li>
-              <li>Store in a cool dry container to maintain long-lasting freshness.</li>
-            </ul>
+            <div className="product-detail-copy-block">
+              <h2>Product Details</h2>
+              <p>{product.description || "Freshly prepared by Anara Sweets with carefully selected ingredients."}</p>
+            </div>
+
+            {productIngredients.length > 0 && (
+              <div className="product-ingredients-block">
+                <h2>Ingredients</h2>
+                <ul className="product-ingredients-list">
+                  {productIngredients.map((ingredient) => (
+                    <li key={ingredient}>{ingredient}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </div>
       </div>

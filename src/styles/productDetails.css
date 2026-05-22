@@ -383,16 +383,43 @@
   padding-top: 28px;
 }
 
-.product-features-bullet-list ul {
-  margin: 0;
-  padding-left: 18px;
-  color: #222222;
-  font-size: 13px;
-  line-height: 1.8;
+.product-detail-copy-block {
+  margin-bottom: 24px;
 }
 
-.product-features-bullet-list li {
-  margin-bottom: 8px;
+.product-features-bullet-list h2 {
+  margin: 0 0 10px 0;
+  color: #1a1a1a;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.product-detail-copy-block p {
+  margin: 0;
+  color: #333333;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.product-ingredients-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: #222222;
+  font-size: 13px;
+  line-height: 1.4;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.product-ingredients-list li {
+  border: 1px solid #ead3dc;
+  background-color: #fff7fa;
+  color: #4a2433;
+  border-radius: 4px;
+  padding: 7px 10px;
+  font-weight: 600;
 }
 
 /* Interactive WhatsApp Order Confirmation Screen Overlay */
@@ -412,7 +439,7 @@
 .order-modal-content {
   background-color: #fff;
   padding: 30px;
-  borderRadius: 8px;
+  
   max-width: 450px;
   width: 90%;
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
@@ -573,8 +600,7 @@ button.modal-cancel-btn:hover {
   width: 100%; 
   aspect-ratio: 1; 
   overflow: hidden; 
-  borderRadius: 6px; 
-  backgroundColor: #f9f9f9;
+ 
   border: '1px solid #eee';
   display: flex;
   justify-content: center;
