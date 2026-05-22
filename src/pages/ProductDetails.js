@@ -277,18 +277,18 @@ const handleClearCart = () => {
           </nav>
           
           <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
-            <div style={{ fontSize: '13px', color: '#1a1a1a', fontWeight: '600' }}>
-              🛒 Cart Items: <span style={{ color: '#d11b5d', fontSize: '14px' }}>{cartCount}</span>
+            <div style={{ fontSize: '16px', color: '#1a1a1a', fontWeight: '600' }}>
+              🛒 Cart Items: <span style={{ color: '#d031d0', fontSize: '14px' }}>{cartCount}</span>
             </div>
             {cartCount > 0 && (
               <button 
                 onClick={handleClearCart}
-                style={{ fontSize: '11px', background: 'none', border: 'none', color: '#888', cursor: 'pointer', textDecoration: 'underline', padding: 0 }}
+                style={{ fontSize: '14px', background: 'none', border: 'none', color: '#5d0e5a', cursor: 'pointer', textDecoration: 'underline', padding: 0 }}
               >
                 Clear Cart
               </button>
             )}
-            <div className="next-nav-pointer" style={{ marginLeft: '10px' }}>
+            <div className="next-nav-pointer" style={{ marginLeft: '10px' ,fontSize: '14px'}}>
               <Link to={`/product/${product.id === products.length ? 1 : product.id + 1}`}>Next &gt;</Link>
             </div>
           </div>
