@@ -296,6 +296,13 @@ const reviewsData = [
   },
 ];
 
+const partners = [
+  { id: 1, name: "Fresh Farms", logo: srilankaIcon },
+  { id: 2, name: "Sri Lanka Foods", logo: handmadeIcon },
+  { id: 3, name: "Organic Market", logo: noPreservativesIcon },
+  { id: 4, name: "Island Suppliers", logo: shippingIcon },
+];
+
 // Component for image gallery inside each combo card
 const ImageGallery = ({ images, productName, onImageClick }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -783,6 +790,25 @@ const AboutUsSection = () => {
   );
 };
 
+const TrustPartners = () => {
+  return (
+    <section className="partner-section">
+      <h2 className="partner-title">Trusted By Our Partners</h2>
+
+      <div className="partner-grid">
+        {partners.map((p) => (
+          <div key={p.id} className="partner-card">
+            <img src={p.logo} alt={p.name} className="partner-logo" />
+            <p className="partner-name">{p.name}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+
+
 // What Makes Anara Special Section
 const SpecialSection = () => {
   const specialItems = [
@@ -1080,6 +1106,9 @@ const Home = () => {
 
       {/* About Us Section */}
       <AboutUsSection />
+      
+      {/* Trust Partners Section */}
+      <TrustPartners />
 
  {/* four logos */}
       <section className="trust-section">

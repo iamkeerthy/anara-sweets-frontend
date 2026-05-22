@@ -2031,3 +2031,92 @@ margin-top: 80px;
     max-width: 100%;
   }
 }
+.partner-section {
+  padding: 50px 20px;
+  text-align: center;
+  background: #fff;
+}
+
+/* HEADING */
+.partner-title {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #333;
+  text-align: center;
+  position: relative;
+}
+
+.partner-title::after {
+  content: "";
+  width: 70px;
+  height: 3px;
+  background: linear-gradient(135deg, #a974ee, #a1ab4b);
+  display: block;
+  margin: 10px auto 0;
+  border-radius: 10px;
+}
+
+/* GRID FIX */
+.partner-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;              /* 🔥 IMPORTANT FIX */
+  max-width: 800px;
+  margin: 0 auto;
+  justify-items: center;
+  align-items: center;
+}
+
+/* CARD (REDUCED PADDING) */
+.partner-card {
+  background: #f9f9f9;
+  padding: 12px;         /* 🔥 reduced from 20px */
+  border-radius: 14px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  transition: 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* HOVER */
+.partner-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(169, 116, 238, 0.12);
+}
+
+/* LOGO */
+.partner-logo {
+  width: 65px;
+  height: 65px;
+  object-fit: contain;
+  margin-bottom: 6px;   /* 🔥 tighter spacing */
+}
+
+/* NAME */
+.partner-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+  margin: 0;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .partner-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .partner-logo {
+    width: 55px;
+    height: 55px;
+  }
+
+  .partner-title {
+    font-size: 20px;
+  }
+}
