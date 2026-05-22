@@ -332,7 +332,7 @@ p {
 }
 
 .add-btn:hover {
-  background: #8b1185;
+  background: #b13cb1;
 }
 
 .add-btn.added {
@@ -890,7 +890,7 @@ height: 330px;
 }
 
 .bestseller-add-btn:hover {
-  background: #8b1185;
+  background: #b13cb1;
 }
 
 .bestseller-add-btn.added {
@@ -1103,7 +1103,7 @@ height: 330px;
 }
 
 .fullwidth-shop-btn:hover {
-  background: #8b1185;
+  background: #b13cb1;
   transform: scale(1.02);
 }
 
@@ -1291,7 +1291,7 @@ height: 330px;
 }
 
 .about-btn:hover {
-  background: #8b1185;
+  background: #b13cb1;
 }
 
 @media (max-width: 1200px) {
