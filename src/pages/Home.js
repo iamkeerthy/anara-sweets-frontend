@@ -771,12 +771,12 @@ const AboutUsSection = () => {
         </div>
 
         <div className="about-content">
-          <p className="about-subtitle">ABOUT US</p>
-          <h5 className="about-heading">
+          <h2 className="about-subtitle">ABOUT US</h2>
+          <p className="about-heading">
             Anara Sweets is a delicious tribute to our Ethnic Indian flavours and Age-
             Old Traditional Recipes.<br /><br />
             Every bite is a Celebration of Our Ethnic Indian flavours and Rich Heritage.
-          </h5>
+          </p>
           <a href="/about" className="about-btn" onClick={handleKnowMore}>KNOW MORE</a>
         </div>
       </div>

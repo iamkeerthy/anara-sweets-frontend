@@ -41,6 +41,14 @@
   opacity: 1;
 }
 
+h2 {
+  font-family: "HolenVintage", sans-serif;
+}
+
+p {
+  font-family: "Outfit", sans-serif;
+}
+
 
 /* ================= COMBOS SECTION ================= */
 
@@ -316,6 +324,7 @@
   transition: 0.3s ease;
   text-transform: uppercase;
   border-radius: 4px;
+  font-family: "HolenVintage", sans-serif;
 }
 
 .add-btn:hover {
@@ -1776,3 +1785,5 @@ height: 330px;
     right: -8px;
   }
 }
+
+

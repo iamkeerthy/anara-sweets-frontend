@@ -36,6 +36,15 @@
   color: #666;
 }
 
+/* ================= FONTS ================= */
+h1, h2, h3, h4, h5 {
+  font-family: "HolenVintage", sans-serif;
+}
+p{
+  font-family: "Outfit", sans-serif;
+}
+
+
 /* ================= CONTENT SECTION ================= */
 
 .about-content-section {
