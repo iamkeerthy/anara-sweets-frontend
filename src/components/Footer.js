@@ -60,7 +60,7 @@ const Footer = () => {
       </div>
 
       <div className="footer-bottom">
-        <p>© 2026 Anara Sweets. Powered by Shopify</p>
+        <p>© 2026 Anara Sweets.All rights reserved. </p>
       </div>
     </footer>
   );

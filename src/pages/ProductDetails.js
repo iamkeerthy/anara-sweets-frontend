@@ -5,6 +5,8 @@ import Footer from '../components/Footer';
 import WhatsAppButton from '../components/WhatsAppButton';
 import '../styles/productDetails.css';
 import { products } from "../data/products";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Safe Storage Engine Fallback Strategy for Security Access Exceptions
 const safeStorage = {
@@ -35,6 +37,31 @@ const safeStorage = {
     }
   }
 };
+
+const ClearCartToast = ({ closeToast, handleConfirm }) => {
+  return (
+    <div>
+      <p>Are you sure you want to clear your entire cart?</p>
+
+      <div>
+        <button
+          onClick={() => {
+            handleConfirm();
+            closeToast();
+          }}
+        >
+          Yes
+        </button>
+
+        <button onClick={closeToast}>
+          No
+        </button>
+      </div>
+    </div>
+  );
+};
+
+
 
 function ProductDetails() {
   const { id } = useParams();
@@ -143,7 +170,14 @@ function ProductDetails() {
 
     safeStorage.setItem('shopCart', JSON.stringify(existingCart));
     updateCartCount();
-    alert(`${product.name} (${activeWeight}g) successfully added to cart!`);
+   toast.success(
+   `${product.name} (${activeWeight}g) added to cart`,
+   {
+      position: "top-right",
+      autoClose: 2500,
+      hideProgressBar: false,
+   }
+);
   };
 
   // Open confirmation view and calculate data snapshot cleanly without tricky dependency chains
@@ -211,13 +245,45 @@ function ProductDetails() {
     setShowConfirmModal(false);
   };
 
-  const handleClearCart = () => {
-    if (window.confirm("Are you sure you want to clear your entire cart?")) {
-      safeStorage.removeItem('shopCart');
-      updateCartCount();
-    }
-  };
+const handleClearCart = () => {
+  toast(
+    ({ closeToast }) => (
+      <div className="clear-cart-toast">
+        <p>Are you sure you want to clear your entire cart?</p>
 
+        <div className="clear-cart-actions">
+          <button
+            className="clear-cart-yes"
+            onClick={() => {
+              safeStorage.removeItem('shopCart');
+              updateCartCount();
+              toast.success("Cart cleared!");
+              closeToast();
+            }}
+          >
+            Yes
+          </button>
+
+          <button
+            className="clear-cart-no"
+            onClick={closeToast}
+          >
+            No
+          </button>
+        </div>
+      </div>
+    ),
+    {
+      position: "top-center",
+      autoClose: false,
+      closeOnClick: false,
+      draggable: false,
+      closeButton: false
+    }
+  );
+};
+
+  
   const modalGrandTotal = modalCartItems.reduce((sum, item) => sum + item.itemTotal, 0);
 
   return (
@@ -482,6 +548,8 @@ function ProductDetails() {
 
       <Footer />
       <WhatsAppButton />
+      <ToastContainer />
+      
     </div>
   );
 }

@@ -634,5 +634,122 @@ button.modal-cancel-btn:hover {
   .related-item-name {
     font-size: 16px;
     margin-top: 10px;
-  }
 }
+}
+
+
+/* Tostify Custom Styles for Product Details Page Notifications */
+
+.Toastify__toast-container {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+.Toastify__toast--success {
+  background: #1f8f4a;
+  color: white;
+  border-radius: 8px;
+}
+
+
+.Toastify__toast--error {
+  background: #d11b5d;
+  color: white;
+  border-radius: 8px;
+}
+
+.Toastify__toast--warning {
+  background: #f39c12;
+  color: white;
+  border-radius: 8px;
+}
+
+.Toastify__toast--info {
+  background: #2d98da;
+  color: white;
+  border-radius: 8px;
+}
+
+
+.Toastify__progress-bar {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+
+.Toastify__toast {
+  border-radius: 10px;
+  padding: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+
+/* ===== Modern Clear Cart Toast ===== */
+
+.clear-cart-toast {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 2px;
+}
+
+/* Warning row */
+.clear-cart-toast p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Button container */
+.clear-cart-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* YES button (modern red) */
+.clear-cart-yes {
+  background: linear-gradient(135deg, #ff4d6d, #d11b5d);
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  box-shadow: 0 3px 10px rgba(209, 27, 93, 0.25);
+}
+
+/* NO button (soft gray) */
+.clear-cart-no {
+  background: #f2f2f2;
+  color: #333;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+/* Hover effects */
+.clear-cart-yes:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(209, 27, 93, 0.35);
+}
+
+.clear-cart-no:hover {
+  background: #e6e6e6;
+  transform: translateY(-1px);
+}
+
+/* Optional: make toast look like card */
+.Toastify__toast {
+  border-radius: 10px;
+}
+
