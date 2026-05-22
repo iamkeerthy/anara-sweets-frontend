@@ -1,5 +1,5 @@
 .contact-page {
-  font-family: "Poppins", sans-serif;
+  font-family: "Outfit", sans-serif;
   background: #ffffff;
   padding: 60px 20px;
   color: #222;
@@ -147,9 +147,9 @@ input[type="tel"] {
 
 /* SUCCESS */
 .success-popup {
-  background: #e8f5e9;
-  color: #2e7d32;
-  border: 1px solid #81c784;
+  background: #cdb3f0;
+  color: #4a2c72 ;
+  border: 1px solid #a974ee ;
 }
 
 /* ERROR */
