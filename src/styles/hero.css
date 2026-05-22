@@ -31,6 +31,7 @@
 }
 
 .hero-subtitle {
+  font-family: 'Outfit' sans-serif;
   font-size: 1.1rem;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -39,6 +40,7 @@
 }
 
 .hero-title {
+  font-family: 'Holen Vintage';
   font-size: 4rem;
   font-weight: 700;
   line-height: 1.2;
@@ -46,6 +48,7 @@
 }
 
 .hero-description {
+  font-family: 'Outfit' sans-serif;
   font-size: 1.2rem;
   margin-bottom: 10px;
 }
@@ -62,6 +65,7 @@
 }
 
 .hero-btn {
+  font-family: 'Outfit' sans-serif;
   display: inline-block;
   background: #b572c6e9;
   color: white;
@@ -89,10 +93,12 @@
   }
 
   .hero-title {
+    font-family: 'Holen Vintage';
     font-size: 2.3rem;
   }
 
   .hero-description {
+    font-family: 'Outfit' sans-serif;
     font-size: 1rem;
   }
 
@@ -101,6 +107,7 @@
   }
 
   .hero-btn {
+    font-family: 'Outfit';
     padding: 10px 24px;
     font-size: 0.95rem;
   }

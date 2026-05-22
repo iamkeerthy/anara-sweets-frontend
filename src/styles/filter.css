@@ -11,6 +11,7 @@
 }
 
 .filter-title-section {
+  font-family: 'Holen Vintage';
   display: flex;
   align-items: center;
 }
@@ -27,6 +28,7 @@
 }
 
 .applied-title {
+  font-family: 'outfit', sans-serif;
   font-size: 15px;
   margin-bottom: 12px;
   font-weight: 500;
@@ -101,6 +103,7 @@
 }
 
 .price-heading {
+  font-family: 'Holen Vintage';
   font-size: 14px;
   font-weight: 500;
   color: #1a1a1a;

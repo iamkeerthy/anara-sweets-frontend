@@ -24,6 +24,7 @@
 
 
 .section-title {
+  font-family: 'Holen Vintage';
   font-size: 16px;
   font-weight: 700;
   text-transform: uppercase;
@@ -34,6 +35,7 @@
 }
 
 .standard-paragraph {
+  font-family: 'outfit', sans-serif;
   font-size: 14px;
   color: #555555;
   line-height: 1.6;
@@ -86,6 +88,7 @@
 }
 
 .links-list a {
+  font-family: 'outfit', sans-serif;
   font-size: 14px;
   color: #555555;
   text-decoration: none;
@@ -119,6 +122,7 @@
 
 
 .footer-bottom {
+  font-family: 'outfit', sans-serif;
   text-align: center;
   padding: 25px 20px;
   font-size: 13px;
@@ -151,6 +155,7 @@
 
 
 .phone-numbers {
+  font-family: 'outfit', sans-serif;
   font-size: 18px;
   color: #a974ee;
   font-weight: 700;
