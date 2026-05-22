@@ -174,7 +174,7 @@ const bestSellers = [
     price: 96.00,
     images: [chocolateBrownies1, chocolateBrownies2, chocolateBrownies3],
   },
-    {
+  {
     id: 1,  // CHANGED: Mysore Pak instead of Turkish Delight
     name: "Mysore Pak",
     rating: 5,
@@ -668,8 +668,8 @@ const BestSellersSection = () => {
 
       <div className="bestsellers-scroll-container" ref={bestSellersScrollRef}>
         {bestSellers.map((item) => (
-          <div 
-            key={item.id} 
+          <div
+            key={item.id}
             className="bestseller-card"
             onClick={() => handleNavigate(item.id)}
             style={{ cursor: 'pointer' }}
@@ -979,7 +979,7 @@ const Home = () => {
       container.addEventListener("scroll", handleInfiniteScroll);
       container.addEventListener('scroll', checkScrollPosition);
       checkScrollPosition();
-      
+
       return () => {
         clearTimeout(timer);
         container.removeEventListener("scroll", handleInfiniteScroll);
@@ -997,41 +997,41 @@ const Home = () => {
       <section className="combos-section">
         <div className="combos-header">
 
-  {/* TOP ROW: Arrow + Title + Arrow */}
-  <div className="header-top">
-    <button
-      className="nav-arrow"
-      onClick={() => scroll("left")}
-      style={{ visibility: showLeftArrow ? 'visible' : 'hidden' }}
-      aria-label="Scroll left"
-    >
-      <FaChevronLeft />
-    </button>
+          {/* TOP ROW: Arrow + Title + Arrow */}
+          <div className="header-top">
+            <button
+              className="nav-arrow"
+              onClick={() => scroll("left")}
+              style={{ visibility: showLeftArrow ? 'visible' : 'hidden' }}
+              aria-label="Scroll left"
+            >
+              <FaChevronLeft />
+            </button>
 
-    <h2>Anara Products</h2>
+            <h2>Anara Products</h2>
 
-    <button
-      className="nav-arrow"
-      onClick={() => scroll("right")}
-      style={{ visibility: showRightArrow ? 'visible' : 'hidden' }}
-      aria-label="Scroll right"
-    >
-      <FaChevronRight />
-    </button>
-  </div>
+            <button
+              className="nav-arrow"
+              onClick={() => scroll("right")}
+              style={{ visibility: showRightArrow ? 'visible' : 'hidden' }}
+              aria-label="Scroll right"
+            >
+              <FaChevronRight />
+            </button>
+          </div>
 
-  {/* SECOND ROW */}
-  <a href="/product" className="view-all-link">
-    VIEW ALL
-  </a>
+          {/* SECOND ROW */}
+          <a href="/product" className="view-all-link">
+            VIEW ALL
+          </a>
 
-</div>
+        </div>
 
 
         <div className="scroll-container" ref={scrollRef}>
           {extendedCombos.map((item, idx) => (
-            <div 
-              key={`${item.id}-${idx}`} 
+            <div
+              key={`${item.id}-${idx}`}
               className="card"
               onClick={() => handleNavigate(item.id)}
               style={{ cursor: 'pointer' }}
@@ -1067,56 +1067,7 @@ const Home = () => {
       </section>
 
 
-{/* four logos */}
-<section className="trust-section">
-  <div className="trust-container">
-
-    {/* Loved by Sri Lanka */}
-    <div className="trust-item">
-      <img
-        src={srilankaIcon}
-        alt="Loved by Sri Lanka"
-        className="trust-icon"
-      />
-      <h4>Loved By Sri Lanka</h4>
-      <p>Loved by 5 lakh+ customers</p>
-    </div>
-
-    {/* Handmade */}
-    <div className="trust-item">
-      <img
-        src={handmadeIcon}
-        alt="Handmade"
-        className="trust-icon"
-      />
-      <h4>Handmade</h4>
-      <p>Every piece is made with love</p>
-    </div>
-
-    {/* Shipping */}
-    <div className="trust-item">
-      <img
-        src={shippingIcon}
-        alt="Shipping"
-        className="trust-icon"
-      />
-      <h4>Ships In 5–7 Days</h4>
-      <p>Write to us to expedite your order</p>
-    </div>
-
-    {/* No Preservatives */}
-    <div className="trust-item">
-      <img
-        src={noPreservativesIcon}
-        alt="No Preservatives"
-        className="trust-icon"
-      />
-      <h4>No Preservatives</h4>
-      <p>Pure taste, naturally fresh</p>
-    </div>
-
-  </div>
-</section>
+     
 
       {/* Video Reels Section */}
       {/* <ReelsSection /> */}
@@ -1130,6 +1081,37 @@ const Home = () => {
       {/* About Us Section */}
       <AboutUsSection />
 
+ {/* four logos */}
+      <section className="trust-section">
+        <div className="trust-container">
+
+          <div className="trust-item">
+            <img src={srilankaIcon} alt="Loved by Sri Lanka" className="trust-icon" />
+            <h4>Loved By Sri Lanka</h4>
+            <p>Loved by 5 lakh+ customers</p>
+          </div>
+
+          <div className="trust-item">
+            <img src={handmadeIcon} alt="Handmade" className="trust-icon" />
+            <h4>Handmade</h4>
+            <p>Every piece is made with love</p>
+          </div>
+
+          <div className="trust-item">
+            <img src={shippingIcon} alt="Shipping" className="trust-icon" />
+            <h4>Ships In 5–7 Days</h4>
+            <p>Write to us to expedite your order</p>
+          </div>
+
+          <div className="trust-item">
+            <img src={noPreservativesIcon} alt="No Preservatives" className="trust-icon" />
+            <h4>No Preservatives</h4>
+            <p>Pure taste, naturally fresh</p>
+          </div>
+
+        </div>
+      </section>
+      
       {/* What Makes Anara Special */}
       <SpecialSection />
 

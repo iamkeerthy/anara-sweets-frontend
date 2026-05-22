@@ -1761,7 +1761,7 @@ height: 330px;
   border: none;
   font-size: 24px;
   font-weight: bold;
-  color: white;
+  color: #f0f0f0 ;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -1893,47 +1893,51 @@ height: 330px;
 
 
 /* TRUST SECTION */
+/* TRUST SECTION */
+/* TRUST SECTION */
 .trust-section {
-  width: 100%;
+  width: 80%;
+  background: #a1ab4b;
+  margin: 0 auto 80px auto;  /* ✅ centers + bottom space */
+margin-top: 80px;
   display: flex;
-  justify-content: center; /* CENTER HORIZONTALLY */
-  align-items: center;     /* CENTER VERTICALLY */
-  padding: 60px 20px;
-  background: linear-gradient(135deg, #a974ee 0%, #a1ab4b 100%);
-}
+  justify-content: center;
 
-.trust-container {
-  width: 100%;
-  max-width: 1300px;
-  margin: 0 auto; /* IMPORTANT */
-  
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-
-  gap: 40px;
-  text-align: center;
-
-  padding-left: 40px;
-  padding-right: 40px;
-
+  padding: 60px 10px; /* small inner spacing */
   box-sizing: border-box;
 }
 
+/* INNER CONTAINER (controls width) */
+.trust-container {
+  width: 100%;
+  max-width: 1200px;
+
+  /* ✅ ADD THIS */
+  padding: 0 10px;
+  box-sizing: border-box;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+
+  text-align: center;
+}
+
+/* ITEM */
 .trust-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  color: white;
+  color: #f7f7f7;
 }
 
+/* ICON */
 .trust-icon {
   width: 140px;
   height: auto;
   margin-bottom: 18px;
   object-fit: contain;
-
   transition: transform 0.3s ease;
 }
 
@@ -1941,11 +1945,11 @@ height: 330px;
   transform: scale(1.05);
 }
 
+/* TEXT */
 .trust-item h4 {
   font-size: 22px;
   font-weight: 700;
   margin-bottom: 10px;
-  letter-spacing: 0.3px;
 }
 
 .trust-item p {
@@ -1955,35 +1959,39 @@ height: 330px;
   max-width: 220px;
 }
 
-/* TABLET */
+/* =========================
+   TABLET (2 columns)
+========================= */
 @media (max-width: 992px) {
   .trust-container {
     grid-template-columns: repeat(2, 1fr);
-    gap: 50px 30px;
-  }
-}
-
-/* MOBILE */
-@media (max-width: 576px) {
-  .trust-section {
-    padding: 50px 15px;
-  }
-
-  .trust-container {
-    grid-template-columns: 1fr;
-    gap: 45px;
-    padding: 0 10px;
+    gap: 35px;
   }
 
   .trust-icon {
-    width: 110px;
+    width: 120px;
+  }
+}
+
+/* =========================
+   MOBILE (2 columns as requested)
+========================= */
+@media (max-width: 576px) {
+  .trust-container {
+    grid-template-columns: repeat(2, 1fr); /* ✅ 2 per row */
+    gap: 20px;
+  }
+
+  .trust-icon {
+    width: 90px;
   }
 
   .trust-item h4 {
-    font-size: 20px;
+    font-size: 16px;
   }
 
   .trust-item p {
-    font-size: 14px;
+    font-size: 13px;
+    max-width: 100%;
   }
 }

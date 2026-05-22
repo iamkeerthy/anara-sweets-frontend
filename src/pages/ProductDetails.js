@@ -38,10 +38,6 @@ const safeStorage = {
   }
 };
 
-
-
-
-
 function ProductDetails() {
   const { id } = useParams();
   // Convert id to number for comparison
@@ -97,10 +93,6 @@ function ProductDetails() {
       </div>
     );
   }
-
-  const relatedProducts = products
-    .filter((p) => p.category === product.category && p.id !== product.id)
-    .slice(0, 4);
 
   const activeWeight = weightType === 'custom' ? (Number(customWeight) || 0) : Number(selectedWeight);
   const calculatedPricePerUnit = Math.round((product.price / 150) * activeWeight);
@@ -225,44 +217,43 @@ function ProductDetails() {
     setShowConfirmModal(false);
   };
 
-const handleClearCart = () => {
-  toast(
-    ({ closeToast }) => (
-      <div className="clear-cart-toast">
-        <p>Are you sure you want to clear your entire cart?</p>
+  const handleClearCart = () => {
+    toast(
+      ({ closeToast }) => (
+        <div className="clear-cart-toast">
+          <p>Are you sure you want to clear your entire cart?</p>
 
-        <div className="clear-cart-actions">
-          <button
-            className="clear-cart-yes"
-            onClick={() => {
-              safeStorage.removeItem('shopCart');
-              updateCartCount();
-              toast.success("Cart cleared!");
-              closeToast();
-            }}
-          >
-            Yes
-          </button>
+          <div className="clear-cart-actions">
+            <button
+              className="clear-cart-yes"
+              onClick={() => {
+                safeStorage.removeItem('shopCart');
+                updateCartCount();
+                toast.success("Cart cleared!");
+                closeToast();
+              }}
+            >
+              Yes
+            </button>
 
-          <button
-            className="clear-cart-no"
-            onClick={closeToast}
-          >
-            No
-          </button>
+            <button
+              className="clear-cart-no"
+              onClick={closeToast}
+            >
+              No
+            </button>
+          </div>
         </div>
-      </div>
-    ),
-    {
-      position: "top-center",
-      autoClose: false,
-      closeOnClick: false,
-      draggable: false,
-      closeButton: false
-    }
-  );
-};
-
+      ),
+      {
+        position: "top-center",
+        autoClose: false,
+        closeOnClick: false,
+        draggable: false,
+        closeButton: false
+      }
+    );
+  };
   
   const modalGrandTotal = modalCartItems.reduce((sum, item) => sum + item.itemTotal, 0);
 
@@ -328,8 +319,6 @@ const handleClearCart = () => {
         <div className="details-info-panel">
           <h1 className="product-main-heading">{product.name}</h1>
           
-          
-
           <div className="product-price-display">
             Rs. {totalPrice > 0 ? totalPrice : 0}.00 
             {quantity > 1 && <span className="price-each-label"> (Rs. {calculatedPricePerUnit}.00 each)</span>}
