@@ -890,3 +890,9 @@ body.dark-mode {
 .light-mode .navbar {
   background-color: #ffffff;
 }
+
+.links-list a,
+.footer-social-icons a,
+.vital-link {
+  -webkit-tap-highlight-color: rgba(151, 94, 225, 0.3);
+}
