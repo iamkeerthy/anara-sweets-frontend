@@ -1,130 +1,126 @@
 .footer {
   background: #ffffff;
   border-top: 1px solid #e5e5e5;
-  padding-top: 60px;
+  padding: 60px 20px 30px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   color: #333333;
+  text-align: center;
 }
 
 .footer-container {
-  max-width: 1300px;
+  max-width: 850px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 50px;
-  align-items: flex-start; 
-  padding: 0 20px 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  padding-bottom: 35px;
   border-bottom: 1px solid #e5e5e5;
 }
 
 .footer-section {
+  width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
-
-.section-title {
-  font-family: 'Holen Vintage';
-  font-size: 16px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-top: 0;
-  margin-bottom: 20px;
-  color: #111111;
-}
-
-.standard-paragraph {
-  font-family: 'outfit', sans-serif;
-  font-size: 14px;
-  color: #555555;
-  line-height: 1.6;
-  margin: 0;
-  text-align: justify;
-  text-justify: inter-word;
-}
-
-.logo-column {
-  align-items: flex-start;
-  gap: 20px;
-}
-
+/* LOGO */
 .footer-logo {
-  max-width: 160px;
+  max-width: 180px;
   width: 100%;
   height: auto;
   object-fit: contain;
 }
 
-.footer-social-icons {
-  display: flex;
-  gap: 14px;
-  align-items: center;
-}
-
-.footer-social-icons a {
+/* ABOUT TEXT */
+.standard-paragraph {
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
   color: #555555;
-  font-size: 20px;
-  transition: color 0.2s ease, transform 0.2s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  line-height: 1.8;
+  margin: 0;
+  max-width: 650px;
+  text-align: center;
 }
 
-.footer-social-icons a:hover {
-  color: #a974ee;
-  transform: scale(1.15);
+/* HIDE UNUSED TITLES & PHONE */
+.section-title,
+.support-text,
+.phone-numbers {
+  display: none;
 }
 
-
+/* POLICY BUTTONS */
 .links-list {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
 }
 
 .links-list li {
-  margin-bottom: 12px;
+  margin: 0;
 }
 
 .links-list a {
-  font-family: 'outfit', sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 14px;
   color: #555555;
   text-decoration: none;
-  cursor: pointer;
-  transition: color 0.2s ease, transform 0.2s ease;
+  padding: 10px 22px;
+  border: 1px solid #d9d9d9;
+  border-radius: 50px;
+  background: #fafafa;
+  transition: all 0.3s ease;
   display: inline-block;
 }
 
 .links-list a:hover {
-  color: #a974ee;
-  transform: translateX(2px);
+  background: #a974ee;
+  color: #ffffff;
+  border-color: #a974ee;
+  transform: translateY(-2px);
 }
 
-.contact-column {
-  gap: 15px;
+/* SOCIAL ICONS */
+.footer-social-icons {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
 }
 
-.support-contact-row {
+.footer-social-icons a {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #f3f3f3;
+  color: #555555;
+  font-size: 18px;
   display: flex;
   align-items: center;
-  gap: 18px;
-  flex-wrap: wrap;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 1px solid #e2e2e2;
 }
 
-.phone-numbers {
-  font-size: 18px;
-  color: #a974ee;
-  font-weight: 700;
-  margin: 0;
+.footer-social-icons a:hover {
+  background: #a974ee;
+  color: #ffffff;
+  transform: translateY(-3px) scale(1.05);
+  border-color: #a974ee;
 }
 
-
+/* FOOTER BOTTOM */
 .footer-bottom {
-  font-family: 'outfit', sans-serif;
+  font-family: 'Outfit', sans-serif;
   text-align: center;
-  padding: 25px 20px;
+  padding-top: 22px;
   font-size: 13px;
   color: #777777;
 }
@@ -133,40 +129,39 @@
   margin: 0;
 }
 
-@media (max-width: 1024px) {
-  .footer-container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
-  }
-}
-
+/* MOBILE */
 @media (max-width: 600px) {
-  .footer-container {
-    grid-template-columns: 1fr;
-    gap: 35px;
-    padding-bottom: 40px;
+  .footer {
+    padding: 50px 15px 25px;
   }
-  
-  
+
+  .footer-logo {
+    max-width: 150px;
+  }
+
   .standard-paragraph {
-    text-align: left;
+    font-size: 14px;
+  }
+
+  .links-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .links-list a {
+    width: 250px;
+    text-align: center;
   }
 }
 
-
-.phone-numbers {
-  font-family: 'outfit', sans-serif;
-  font-size: 18px;
+.vital-link {
   color: #a974ee;
-  font-weight: 700;
-  margin: 0;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px; 
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
 }
 
-.phone-icon {
-  font-size: 15px; 
-  color: #a974ee;
-  flex-shrink: 0;
+.vital-link:hover {
+  color: #6b3fd4;
+  text-decoration: underline;
 }
