@@ -684,9 +684,9 @@ const BestSellersSection = () => {
             </div>
             <div className="bestseller-card-body">
               <p className="bestseller-product-name">{item.name}</p>
-              <p className="bestseller-reviews">
+              {/* <p className="bestseller-reviews">
                 {'⭐'.repeat(item.rating)} <span>{item.reviews} reviews</span>
-              </p>
+              </p> */}
               <p className="bestseller-price">Rs. {item.price.toFixed(2)}</p>
             </div>
             <button
@@ -992,31 +992,37 @@ const Home = () => {
       {/* Combos Section with Infinite Scroll */}
       <section className="combos-section">
         <div className="combos-header">
-          <button
-            className="nav-arrow"
-            onClick={() => scroll("left")}
-            style={{ visibility: showLeftArrow ? 'visible' : 'hidden' }}
-            aria-label="Scroll combos left"
-          >
-            <FaChevronLeft />
-          </button>
 
-          <div className="title-box">
-            <h2>Combos</h2>
-            <a href="/product" className="view-all-link">
-              VIEW ALL
-            </a>
-          </div>
+  {/* TOP ROW: Arrow + Title + Arrow */}
+  <div className="header-top">
+    <button
+      className="nav-arrow"
+      onClick={() => scroll("left")}
+      style={{ visibility: showLeftArrow ? 'visible' : 'hidden' }}
+      aria-label="Scroll left"
+    >
+      <FaChevronLeft />
+    </button>
 
-          <button
-            className="nav-arrow"
-            onClick={() => scroll("right")}
-            style={{ visibility: showRightArrow ? 'visible' : 'hidden' }}
-            aria-label="Scroll combos right"
-          >
-            <FaChevronRight />
-          </button>
-        </div>
+    <h2>Anara Products</h2>
+
+    <button
+      className="nav-arrow"
+      onClick={() => scroll("right")}
+      style={{ visibility: showRightArrow ? 'visible' : 'hidden' }}
+      aria-label="Scroll right"
+    >
+      <FaChevronRight />
+    </button>
+  </div>
+
+  {/* SECOND ROW */}
+  <a href="/product" className="view-all-link">
+    VIEW ALL
+  </a>
+
+</div>
+
 
         <div className="scroll-container" ref={scrollRef}>
           {extendedCombos.map((item, idx) => (
@@ -1036,9 +1042,9 @@ const Home = () => {
 
               <div className="card-body">
                 <p className="product-name">{item.name}</p>
-                <p className="reviews">
+                {/* <p className="reviews">
                   ⭐⭐⭐⭐⭐ <span>{item.reviews} reviews</span>
-                </p>
+                </p> */}
                 <p className="price">Rs. {item.price}.00</p>
               </div>
 
