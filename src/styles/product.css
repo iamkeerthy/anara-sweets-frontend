@@ -231,6 +231,265 @@
   background-color: transparent;
 }
 
+/* Simple price filter refresh */
+.filter-sidebar {
+  background: #ffffff;
+  border: 1px solid #e8dff0;
+  box-shadow: none;
+}
+
+.filter-header {
+  margin-bottom: 20px;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.filter-title-section {
+  margin-bottom: 0;
+}
+
+.filter-icon-svg {
+  color: #7952b3;
+}
+
+.applied-filters {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin-bottom: 22px;
+}
+
+.applied-filters-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.applied-title {
+  color: #7952b3 !important;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.empty-filter-note,
+.range-endpoints {
+  color: #777777;
+  font-size: 12px;
+}
+
+.price-tag {
+  width: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  gap: 8px;
+  margin: 0 6px 8px 0;
+  padding: 7px 10px;
+  color: #4c326f;
+  background: #f7f3fb;
+  border: 1px solid #e8dff0;
+  border-radius: 4px;
+  box-shadow: none;
+}
+
+.remove-filter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border-radius: 50%;
+  color: #666666;
+  background: transparent;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.remove-filter:hover {
+  color: #ffffff;
+  background: #7952b3;
+}
+
+.clear-all {
+  flex-shrink: 0;
+  color: #7952b3;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.clear-all:hover {
+  color: #000000;
+}
+
+.filter-section {
+  border-top: 1px solid #eeeeee;
+  padding: 18px 0;
+}
+
+.section-header {
+  gap: 12px;
+}
+
+.toggle-buttons {
+  display: flex;
+  gap: 2px;
+  padding: 2px;
+  background: #f5f2f8;
+  border: none;
+  border-radius: 6px;
+}
+
+.toggle-buttons button {
+  min-height: 30px;
+  padding: 6px 10px;
+  background: transparent;
+  border-radius: 4px;
+  color: #444444;
+  font-weight: 500;
+}
+
+.toggle-buttons button.active {
+  background: #7952b3;
+  color: #ffffff;
+  box-shadow: none;
+}
+
+.price-header-toggle {
+  min-height: auto;
+}
+
+.accordion-indicator {
+  color: #7952b3;
+}
+
+.price-controls-body {
+  margin-top: 0;
+}
+
+.price-summary-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 16px 0 18px;
+}
+
+.price-value-pill {
+  min-width: 0;
+  padding: 9px 10px;
+  background: #faf8fc;
+  border: 1px solid #e8dff0;
+  border-radius: 6px;
+}
+
+.price-value-pill span {
+  display: block;
+  margin-bottom: 3px;
+  color: #777777;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.price-value-pill strong {
+  display: block;
+  color: #222222;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.range-track-wrapper {
+  height: 22px;
+  margin: 18px 8px 6px;
+}
+
+.range-track-bg {
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  width: auto;
+  height: 6px;
+  background-color: #e7e1ee;
+  border-radius: 999px;
+}
+
+.range-track-fill {
+  top: 8px;
+  height: 6px;
+  background: #7952b3;
+  border-radius: 999px;
+}
+
+.dual-range {
+  top: 0;
+  height: 22px;
+  transform: none;
+}
+
+.dual-range::-webkit-slider-runnable-track {
+  height: 6px;
+  background: transparent;
+  border: 0;
+  -webkit-appearance: none;
+}
+
+.dual-range::-webkit-slider-thumb {
+  width: 16px;
+  height: 16px;
+  margin-top: -5px;
+  border: 2px solid #7952b3;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.dual-range::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border: 2px solid #7952b3;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.dual-range::-moz-range-track {
+  height: 6px;
+  background: transparent;
+  border: 0;
+}
+
+.dual-range::-moz-range-progress {
+  height: 6px;
+  background: transparent;
+  border: 0;
+}
+
+.range-endpoints {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.price-inputs-container {
+  gap: 10px;
+}
+
+.input-box-field {
+  min-height: 38px;
+  border-color: #dddddd;
+  border-radius: 4px;
+  background-color: #ffffff;
+}
+
+.input-box-field:focus-within {
+  border-color: #7952b3;
+  box-shadow: none;
+}
+
 /* ==========================================================================
    4. CATEGORY TABS BANNER & TOP CONTROLS (HOVER EFFECT REWORKED)
    ========================================================================== */
