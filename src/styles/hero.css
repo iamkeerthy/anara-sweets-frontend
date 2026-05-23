@@ -1,76 +1,70 @@
 .hero {
   position: relative;
-  height: 90vh;
   width: 100%;
+  height: 100vh;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
 }
 
-/* Dark Overlay */
+/* Overlay */
 .overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.45);
+  background: rgba(255, 255, 255, 0.1);
 }
 
+/* Main Layout */
 .hero-container {
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 1200px;
-  padding: 20px;
+  max-width: 1300px;
+  height: 100%;
+  margin: auto;
+  padding: 0 60px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
+/* LEFT SIDE */
 .hero-content {
-  max-width: 600px;
-  color: white;
+  max-width: 550px;
 }
 
 .hero-subtitle {
-  font-family: 'Outfit' sans-serif;
-  font-size: 1.1rem;
+  font-family: "Outfit", sans-serif;
+  font-size: 18px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: #f39c12;
-  margin-bottom: 10px;
+  color: #8b1185;
+  margin-bottom: 15px;
 }
 
 .hero-title {
-  font-family: 'Holen Vintage';
+  font-family: "Holen Vintage";
   font-size: 4rem;
-  font-weight: 700;
   line-height: 1.2;
   margin-bottom: 20px;
-}
-
-.hero-description {
-  font-family: 'Outfit' sans-serif;
-  font-size: 1.2rem;
-  margin-bottom: 10px;
-}
-
-.highlight {
-  color: #ffcc70;
-  font-weight: bold;
+  color: #111;
 }
 
 .hero-tagline {
-  font-size: 1.3rem;
-  font-weight: 600;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #333;
   margin-bottom: 30px;
 }
 
 .hero-btn {
-  font-family: 'Outfit' sans-serif;
   display: inline-block;
   background: #b572c6e9;
   color: white;
-  padding: 12px 30px;
-  border-radius: 30px;
+  padding: 14px 34px;
+  border-radius: 40px;
   text-decoration: none;
   font-size: 1rem;
   font-weight: 600;
@@ -81,34 +75,133 @@
   background: #8b1185;
 }
 
-/* Mobile Responsive */
-@media (max-width: 768px) {
-  .hero {
-    height: 70vh;
+/* RIGHT SIDE CIRCLE */
+.circle-slider-wrapper {
+  position: relative;
+  width: 500px;
+  height: 500px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Decorative design behind */
+.circle-design {
+  position: absolute;
+  width: 850px;
+  height: 850px;
+  border-radius: 50%;
+  /* background: radial-gradient(
+    circle,
+    rgba(181, 114, 198, 0.25) 0%,
+    rgba(139, 17, 133, 0.15) 40%,
+    transparent 70%
+  ); */
+  z-index: 1;
+}
+
+/* Circle image */
+.circle-slider {
+  position: relative;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 2;
+
+  /* box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  border: 10px solid #111;
+  background: #111; */
+}
+
+.circle-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  animation: fadeZoom 1s ease;
+}
+
+/* Smooth animation */
+@keyframes fadeZoom {
+  from {
+    opacity: 0.5;
+    transform: scale(1.1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ========================= */
+/* MOBILE RESPONSIVE */
+/* ========================= */
+
+@media (max-width: 992px) {
+  .hero-container {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 40px;
+    padding-top: 80px;
   }
 
   .hero-content {
-    text-align: center;
-    margin: auto;
+    max-width: 100%;
   }
 
   .hero-title {
-    font-family: 'Holen Vintage';
-    font-size: 2.3rem;
+    font-size: 2.8rem;
   }
 
-  .hero-description {
-    font-family: 'Outfit' sans-serif;
-    font-size: 1rem;
+  .circle-slider-wrapper {
+    width: 350px;
+    height: 350px;
+  }
+
+  .circle-design {
+    width: 360px;
+    height: 360px;
+  }
+
+  .circle-slider {
+    width: 260px;
+    height: 260px;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero {
+    height: auto;
+    padding: 60px 0;
+  }
+
+  .hero-container {
+    padding: 20px;
+  }
+
+  .hero-title {
+    font-size: 2rem;
   }
 
   .hero-tagline {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 
-  .hero-btn {
-    font-family: 'Outfit';
-    padding: 10px 24px;
-    font-size: 0.95rem;
+  .circle-slider-wrapper {
+    width: 280px;
+    height: 280px;
+  }
+
+  .circle-design {
+    width: 300px;
+    height: 300px;
+  }
+
+  .circle-slider {
+    width: 220px;
+    height: 220px;
   }
 }
