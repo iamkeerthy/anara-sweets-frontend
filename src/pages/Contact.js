@@ -7,10 +7,9 @@ import Footer from "../components/Footer";
 import WhatsAppButton from "../components/WhatsAppButton";
 
 // Configuration for EmailJS
-// Please replace these with your actual Service ID, Template ID, and Public Key from your EmailJS account.
-const EMAILJS_SERVICE_ID = "service_76s89yl";
-const EMAILJS_TEMPLATE_ID = "template_r2wl90c";
-const EMAILJS_PUBLIC_KEY = "-ST1tkTtBkBvbRDwf";
+const EMAILJS_SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
+const EMAILJS_PUBLIC_KEY = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -74,8 +73,8 @@ const ContactPage = () => {
   return (
     <>
       <Navbar />
-   
-    
+
+
 
       <div className="contact-page">
         <div className="contact-header">
@@ -94,17 +93,17 @@ const ContactPage = () => {
           <h2>Contact Us</h2>
 
           {/* Popup Messages */}
-{successMsg && (
-  <div className="popup-message success-popup">
-    {successMsg}
-  </div>
-)}
+          {successMsg && (
+            <div className="popup-message success-popup">
+              {successMsg}
+            </div>
+          )}
 
-{errorMsg && (
-  <div className="popup-message error-popup">
-    {errorMsg}
-  </div>
-)}
+          {errorMsg && (
+            <div className="popup-message error-popup">
+              {errorMsg}
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="contact-form">
             <div className="row">

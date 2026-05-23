@@ -2180,8 +2180,8 @@ p {
   position: absolute;
   top: 8px;
   left: 8px;
-  width: 26px;
-  height: 26px;
+  width: 60px;
+  height: 60px;
   z-index: 5;
   pointer-events: none;
   /* IMPORTANT so clicks go through */

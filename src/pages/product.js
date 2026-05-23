@@ -82,7 +82,7 @@ const Product = () => {
 
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(MAX_PRICE_LIMIT);
-  const [showOutOfStock, setShowOutOfStock] = useState(true);
+  // const [showOutOfStock, setShowOutOfStock] = useState(true);
   const [sortOption, setSortOption] = useState('Alphabetically, A-Z');
   const [isSortOpen, setIsSortOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -158,7 +158,7 @@ const Product = () => {
   const clearAllFilters = () => {
     setMinPrice(0);
     setMaxPrice(MAX_PRICE_LIMIT);
-    setShowOutOfStock(true);
+    // setShowOutOfStock(true);
     setSelectedCategory('all');
     setSortOption('Alphabetically, A-Z');
     clearSearch();

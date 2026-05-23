@@ -336,7 +336,7 @@ function ProductDetails() {
           <div className="variant-options-group">
             <label className="variant-field-label">Select Weight Unit</label>
             <div className="weight-selection-container">
-              {[100, 500, 1000].map((wt) => {
+              {[500, 1000, 2000].map((wt) => {
                 const isSelected = weightType === 'preset' && selectedWeight === wt;
                 return (
                   <button
