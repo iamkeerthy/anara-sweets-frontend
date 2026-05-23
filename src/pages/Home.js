@@ -106,6 +106,12 @@ import specialFlour from "../assets/images/img1.jpg";
 import specialOil from "../assets/images/img1.jpg";
 import specialWomen from "../assets/images/img1.jpg";
 
+import srilankaIcon from "../assets/images/icon/Srilanka.png";
+import handmadeIcon from "../assets/images/icon/handmade-icon.png";
+import noPreservativesIcon from "../assets/images/icon/no-preservatives-icon.png";
+import shippingIcon from "../assets/images/icon/shipping-icon.png";
+
+
 // Data for the video reels section
 // const reels = [
 //   {
@@ -1054,6 +1060,58 @@ const Home = () => {
           ))}
         </div>
       </section>
+
+
+{/* four logos */}
+<section className="trust-section">
+  <div className="trust-container">
+
+    {/* Loved by Sri Lanka */}
+    <div className="trust-item">
+      <img
+        src={srilankaIcon}
+        alt="Loved by Sri Lanka"
+        className="trust-icon"
+      />
+      <h4>Loved By Sri Lanka</h4>
+      <p>Loved by 5 lakh+ customers</p>
+    </div>
+
+    {/* Handmade */}
+    <div className="trust-item">
+      <img
+        src={handmadeIcon}
+        alt="Handmade"
+        className="trust-icon"
+      />
+      <h4>Handmade</h4>
+      <p>Every piece is made with love</p>
+    </div>
+
+    {/* Shipping */}
+    <div className="trust-item">
+      <img
+        src={shippingIcon}
+        alt="Shipping"
+        className="trust-icon"
+      />
+      <h4>Ships In 5–7 Days</h4>
+      <p>Write to us to expedite your order</p>
+    </div>
+
+    {/* No Preservatives */}
+    <div className="trust-item">
+      <img
+        src={noPreservativesIcon}
+        alt="No Preservatives"
+        className="trust-icon"
+      />
+      <h4>No Preservatives</h4>
+      <p>Pure taste, naturally fresh</p>
+    </div>
+
+  </div>
+</section>
 
       {/* Video Reels Section */}
       {/* <ReelsSection /> */}

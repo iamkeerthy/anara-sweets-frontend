@@ -148,6 +148,7 @@
 }
 
 .product-main-heading {
+  font-family: "HolenVintage", serif;
   font-size: 32px;
   font-weight: 500;
   margin: 0 0 12px 0;
@@ -175,6 +176,7 @@
 
 .product-price-display {
   font-size: 22px;
+  font-family: "Outfit", sans-serif;
   font-weight: 600;
   color: #1a1a1a;
   margin-bottom: 24px;
@@ -187,7 +189,8 @@
 }
 
 .facility-shipping-banner {
-  font-size: 13px;
+  font-size: 14px;
+  font-family: "Outfit", sans-serif;
   color: #1a1a1a;
   border-top: 1px solid #e5e5e5;
   border-bottom: 1px solid #e5e5e5;
@@ -209,10 +212,11 @@
 
 .variant-field-label {
   display: block;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: bold;
   color: #1a1a1a;
   margin-bottom: 8px;
+  font-family: "Outfit", sans-serif;
 }
 
 .weight-selection-container {
@@ -225,7 +229,7 @@
 /* Enforce dark text color over any buttons or fields inside the selector container */
 .weight-selection-container button {
   color: #1a1a1a !important;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: normal;
   padding: 8px 16px;
   border: 1px solid #ccc;
@@ -271,7 +275,7 @@
 }
 
 .weight-selection-container .grams-text-label {
-  font-size: 14px;
+  font-size: 15px;
   color: #555;
   font-weight: 600;
 }
@@ -318,7 +322,7 @@
 .counter-number-box {
   min-width: 40px;
   text-align: center;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
   color: #1a1a1a !important;
   user-select: none;
@@ -339,7 +343,8 @@
   border: none;
   width: 100%;
   height: 48px;
-  font-size: 12px;
+  font-size: 16px;
+  font-family: "Outfit", sans-serif;
   font-weight: 600;
   letter-spacing: 1px;
   cursor: pointer;
@@ -350,7 +355,8 @@
   border: none;
   width: 100%;
   height: 48px;
-  font-size: 12px;
+  font-size: 16px;
+  font-family: "Outfit", sans-serif;
   font-weight: 600;
   letter-spacing: 1px;
   cursor: pointer;
@@ -578,6 +584,7 @@ button.modal-cancel-btn:hover {
   margin-bottom: 20px;
   border-bottom: 2px solid #f0f0f0;
   padding-bottom: 10px;
+  font-family: "HolenVintage", serif;
 }
 
 .related-grid-row {
@@ -593,6 +600,9 @@ button.modal-cancel-btn:hover {
   color: inherit;
   display: flex;
   flex-direction: column;
+  font-family: "Outfit", sans-serif;
+  font-size: 16px;
+  
 }
 
 /* Image Wrapper with matching fallback styles */
@@ -621,19 +631,20 @@ button.modal-cancel-btn:hover {
 
 /* Text elements styled to match details typography hierarchy */
 .related-item-name {
-  font-size: 16px; 
+  font-size: 18px; 
+  font-family: "outfit", sans-serif;
   margin: 12px 0 4px 0; 
   font-weight: bold;
   transition: color 0.15s ease;
 }
 
 .related-card-item:hover .related-item-name {
-  color: #d11b5d; /* Changes color to your primary accent on card hover */
+  color: #a974ee; /* Changes color to your primary accent on card hover */
 }
 
 .related-item-price {
-  font-size: 15px; 
-  color: #ff9900; 
+  font-size: 16px; 
+  color: #7a379b; 
   margin: 0; 
   font-weight: bold;
 }

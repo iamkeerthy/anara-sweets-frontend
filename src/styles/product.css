@@ -57,7 +57,7 @@
 }
 
 .filter-title {
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 600;
   margin: 0;
   color: #111111;
@@ -69,7 +69,7 @@
 }
 
 .applied-title {
-  font-size: 13px;
+  font-size: 18px;
   font-weight: 600;
   color: #111111 !important;
   margin-bottom: 10px;
@@ -83,7 +83,7 @@
   color: #5c3e91; /* Dark purple text */
   padding: 6px 12px;
   border-radius: 20px;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   margin-bottom: 8px;
   width: 100%;
@@ -109,7 +109,7 @@
   background: none;
   border: none;
   color: #7952b3;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   padding: 4px 0;
@@ -132,7 +132,7 @@
 .section-header h4,
 .price-heading {
   margin: 0;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   color: #111111 !important;
 }
@@ -142,7 +142,7 @@
   border: none;
   color: #222222;
   padding: 6px 12px;
-  font-size: 12px;
+  font-size: 14px;
   cursor: pointer;
 }
 
@@ -560,12 +560,14 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 24px;
+  font-size: 16px;
 }
 
 .product-count {
-  font-size: 14px;
+  font-size: 16px;
   color: #111111 !important;
   font-weight: 500;
+  font-family: "Outfit", sans-serif;
 }
 
 /* Dropdown Menu Filters */
@@ -574,6 +576,7 @@
 }
 
 .sort-dropdown-btn {
+  font-family: "Outfit", sans-serif;
   background-color: #ffffff;
   border: 1px solid #ced4da;
   color: #222222;
@@ -587,7 +590,7 @@
 }
 
 .arrow-icon {
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .sort-dropdown-menu {
@@ -607,7 +610,7 @@
 
 .sort-dropdown-menu li {
   padding: 10px 16px;
-  font-size: 13px;
+  font-size: 14px;
   color: #333333;
   cursor: pointer;
 }
@@ -659,7 +662,7 @@
   left: 12px;
   padding: 4px 8px;
   border-radius: 4px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: bold;
   z-index: 2;
   text-transform: uppercase;
@@ -767,6 +770,7 @@
 }
 
 .product-name {
+  font-family: "Outfit", sans-serif;
   font-size: 16px;
   font-weight: 600;
   margin: 0 0 6px 0;
@@ -774,7 +778,7 @@
 }
 
 .product-desc {
-  font-size: 13px;
+  font-size: 16px;
   color: #555555;
   margin: 0 0 12px 0;
   line-height: 1.4;
@@ -791,17 +795,18 @@
   margin-bottom: 12px;
 }
 
-.stars {
+/* .stars {
   color: #fabc05;
   font-size: 13px;
-}
+} */
 
-.review-count {
+/* .review-count {
   font-size: 12px;
   color: #777777;
-}
+} */
 
 .product-price {
+  font-family: "Outfit", sans-serif;
   font-size: 16px;
   font-weight: 700;
   color: #111111;
@@ -815,7 +820,8 @@
   color: #ffffff;
   padding: 10px 0;
   border-radius: 4px;
-  font-size: 13px;
+  font-size: 16px;
+  font-family: "Outfit", sans-serif;
   font-weight: 600;
   cursor: pointer;
   width: 100%;

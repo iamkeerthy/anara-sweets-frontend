@@ -43,10 +43,12 @@
 
 h2 {
   font-family: "HolenVintage", sans-serif;
+  font-size: 28px;
 }
 
 p {
   font-family: "Outfit", sans-serif;
+  font-size: 16px;
 }
 
 
@@ -887,6 +889,7 @@ height: 330px;
   font-weight: 700;
   letter-spacing: 3px;
   border-radius: 4px;
+  font-family: "HolenVintage", sans-serif;
 }
 
 .bestseller-add-btn:hover {
@@ -982,6 +985,7 @@ height: 330px;
 .flavourful-section {
   padding: 80px 60px;
   background: #f3f3f3;
+  font-family: "Outfit", sans-serif;
 }
 
 .flavourful-container {
@@ -1266,7 +1270,7 @@ height: 330px;
   letter-spacing: 4px;
   color: #666;
   margin-bottom: 20px;
-  font-weight: 500;
+  font-weight: 200;
 }
 
 .about-heading {
@@ -1791,3 +1795,98 @@ height: 330px;
 }
 
 
+/* TRUST SECTION */
+.trust-section {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* CENTER HORIZONTALLY */
+  align-items: center;     /* CENTER VERTICALLY */
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #a974ee 0%, #a1ab4b 100%);
+}
+
+.trust-container {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto; /* IMPORTANT */
+  
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 40px;
+  text-align: center;
+
+  padding-left: 40px;
+  padding-right: 40px;
+
+  box-sizing: border-box;
+}
+
+.trust-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+}
+
+.trust-icon {
+  width: 140px;
+  height: auto;
+  margin-bottom: 18px;
+  object-fit: contain;
+
+  transition: transform 0.3s ease;
+}
+
+.trust-item:hover .trust-icon {
+  transform: scale(1.05);
+}
+
+.trust-item h4 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: 0.3px;
+}
+
+.trust-item p {
+  font-size: 15px;
+  line-height: 1.6;
+  opacity: 0.95;
+  max-width: 220px;
+}
+
+/* TABLET */
+@media (max-width: 992px) {
+  .trust-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px 30px;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 576px) {
+  .trust-section {
+    padding: 50px 15px;
+  }
+
+  .trust-container {
+    grid-template-columns: 1fr;
+    gap: 45px;
+    padding: 0 10px;
+  }
+
+  .trust-icon {
+    width: 110px;
+  }
+
+  .trust-item h4 {
+    font-size: 20px;
+  }
+
+  .trust-item p {
+    font-size: 14px;
+  }
+}
