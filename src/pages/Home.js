@@ -261,6 +261,7 @@ const ImageGallery = ({ images, productName, onImageClick }) => {
 
 // Best Sellers section component - Make entire card clickable - CORRECTED
 const BestSellersSection = () => {
+  const navigate = useNavigate(); // Added useNavigate hook
   const bestSellersScrollRef = useRef(null);
   const bestSellers = bestSellerIds
     .map((id) => products.find((item) => item.id === id))
@@ -268,7 +269,7 @@ const BestSellersSection = () => {
   const [showLeftArrow, setShowLeftArrow] = useState(false);
 
   const handleNavigate = (id) => {
-    window.location.href = `/product/${id}`;
+    navigate(`/product/${id}`); // Changed to use navigate
   };
 
   const checkScrollPosition = () => {
@@ -310,7 +311,15 @@ const BestSellersSection = () => {
 
         <div className="title-box">
           <h2>Best Sellers</h2>
-          <a href="/product" className="view-all-link">
+          <a 
+            href="/product" 
+            className="view-all-link"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate('/product');
+              setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 50);
+            }}
+          >
             VIEW ALL
           </a>
         </div>
@@ -583,12 +592,13 @@ const TrustedReviewsSection = () => {
 };
 
 const Home = () => {
+  const navigate = useNavigate(); // Added useNavigate hook
   const scrollRef = useRef(null);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
 
   const handleNavigate = (id) => {
-    window.location.href = `/product/${id}`;
+    navigate(`/product/${id}`); // Changed to use navigate
   };
 
   // Triple the combos list for seamless infinite scroll
@@ -683,7 +693,15 @@ const Home = () => {
           </div>
 
           {/* SECOND ROW */}
-          <a href="/product" className="view-all-link">
+          <a 
+            href="/product" 
+            className="view-all-link"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate('/product');
+              setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 50);
+            }}
+          >
             VIEW ALL
           </a>
 
