@@ -7,77 +7,8 @@ import "../styles/home.css";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import badgeIcon from "../assets/images/icon.png";
-
+import { products } from "../data/products";
 import WhatsAppButton from "../components/WhatsAppButton";
-
-// Import all images (multiple angles/variants per product)
-import mysorePak1 from "../assets/images/MYSORE PAK1.jpg";
-import mysorePak2 from "../assets/images/MYSORE PAK.jpg";
-import mysorePak3 from "../assets/images/MYSORE PAK1.jpg";
-
-import ravaKesari1 from "../assets/images/RAVA KESARI.jpg";
-import ravaKesari2 from "../assets/images/RAVA KESARI.jpg";
-import ravaKesari3 from "../assets/images/RAVA KESARI.jpg";
-
-import chocolateBrownies1 from "../assets/images/CHOCOLATE BROWNIES.jpg";
-import chocolateBrownies2 from "../assets/images/CHOCOLATE BROWNIES.jpg";
-import chocolateBrownies3 from "../assets/images/CHOCOLATE BROWNIES.jpg";
-
-import coconutBurfi1 from "../assets/images/COCONUT BURFI.jpg";
-import coconutBurfi2 from "../assets/images/COCONUT BURFI.jpg";
-import coconutBurfi3 from "../assets/images/COCONUT BURFI.jpg";
-
-import boondiLaddu1 from "../assets/images/BOONDI LADDU.jpg";
-import boondiLaddu2 from "../assets/images/BOONDI LADDU.jpg";
-import boondiLaddu3 from "../assets/images/BOONDI LADDU.jpg";
-
-import turkishDelight1 from "../assets/images/TURKISH DELIGHT.jpg";
-import turkishDelight2 from "../assets/images/TURKISH DELIGHT.jpg";
-import turkishDelight3 from "../assets/images/TURKISH DELIGHT.jpg";
-
-import eggFlour1 from "../assets/images/EGG FLOUR1.jpg";
-import eggFlour2 from "../assets/images/EGG FLOUR.jpg";
-import eggFlour3 from "../assets/images/EGG FLOUR.jpg";
-
-import healthMix1 from "../assets/images/HEALTH MIX.jpg";
-import healthMix2 from "../assets/images/HEALTH MIX.jpg";
-import healthMix3 from "../assets/images/HEALTH MIX.jpg";
-
-import karaBoondi1 from "../assets/images/KARA BOONDI2.jpg";
-import karaBoondi2 from "../assets/images/KARA BOONDI1.jpg";
-import karaBoondi3 from "../assets/images/KARA BOONDI2.jpg";
-
-import karaSippi1 from "../assets/images/KARA SIPPI1.jpg";
-import karaSippi2 from "../assets/images/KARA SIPPI2.jpg";
-import karaSippi3 from "../assets/images/KARA SIPPI1.jpg";
-
-import kuchchiMurukku1 from "../assets/images/KUCHCHIMURUKKU1.jpg";
-import kuchchiMurukku2 from "../assets/images/KUCHCHIMURUKKU1.jpg";
-import kuchchiMurukku3 from "../assets/images/KUCHCHIMURUKKU1.jpg";
-
-import mixture1 from "../assets/images/MIXTURE1.jpg";
-import mixture2 from "../assets/images/MIXTURE.jpg";
-import mixture3 from "../assets/images/MIXTURE1.jpg";
-
-import mulluMurukku1 from "../assets/images/MULLU MURUKKU1.jpg";
-import mulluMurukku2 from "../assets/images/MULLU MURUKKU2.jpg";
-import mulluMurukku3 from "../assets/images/MULLU MURUKKU3.jpg";
-
-import payathamUrundai1 from "../assets/images/PAYATHAMURUNDAI1.jpg";
-import payathamUrundai2 from "../assets/images/PAYATHAM URUNDAI.jpg";
-import payathamUrundai3 from "../assets/images/PAYATHAMURUNDAI1.jpg";
-
-import ravaLaddu1 from "../assets/images/RAVALADDU2.jpg";
-import ravaLaddu2 from "../assets/images/RAVALADDU3.jpg";
-import ravaLaddu3 from "../assets/images/RAVALADDU4.jpg";
-
-import richLaddu1 from "../assets/images/RICH LADDU2.jpg";
-import richLaddu2 from "../assets/images/RICH LADDU1.jpg";
-import richLaddu3 from "../assets/images/RICH LADDU2.jpg";
-
-import thattuVadai1 from "../assets/images/THATTU VADAI1.jpg";
-import thattuVadai2 from "../assets/images/THATTU VADAI1.jpg";
-import thattuVadai3 from "../assets/images/THATTU VADAI1.jpg";
 
 // Press Features Images
 import behindwoodsLogo from "../assets/images/img1.jpg";
@@ -98,48 +29,41 @@ import specialFlour from "../assets/images/img1.jpg";
 import specialOil from "../assets/images/img1.jpg";
 import specialWomen from "../assets/images/img1.jpg";
 
+// About Us Section Images
+import boondiLaddu1 from "../assets/images/BOONDI LADDU.jpg";
+import richLaddu1 from "../assets/images/RICH LADDU.jpg";
+
 import srilankaIcon from "../assets/images/icon/Srilanka.png";
 import handmadeIcon from "../assets/images/icon/handmade-icon.png";
 import noPreservativesIcon from "../assets/images/icon/no-preservatives-icon.png";
 import shippingIcon from "../assets/images/icon/shipping-icon.png";
 
-// Data for Best Sellers section with multiple images per product - CORRECTED IDs
-const bestSellers = [
-  {
-    id: 4,
-    name: "Coconut Burfi",
-    rating: 5,
-    reviews: 483,
-    price: 67.00,
-    images: [coconutBurfi1, coconutBurfi2, coconutBurfi3],
-  },
-  {
-    id: 3,
-    name: "Chocolate Brownies",
-    rating: 5,
-    reviews: 111,
-    price: 96.00,
-    images: [chocolateBrownies1, chocolateBrownies2, chocolateBrownies3],
-  },
+const bestSellerIds = [12, 10, 14, 9];
+const combos = products; // or filter category if needed
+
+// Press Features Data
+const pressFeatures = [
   {
     id: 1,
-    name: "Mysore Pak",
-    rating: 5,
-    reviews: 207,
-    price: 197.00,
-    images: [mysorePak1, mysorePak2, mysorePak3],
+    name: "Behindwoods",
+    logo: behindwoodsLogo,
+    alt: "Behindwoods",
   },
   {
     id: 2,
-    name: "Rava Kesari",
-    rating: 5,
-    reviews: 196,
-    price: 105.00,
-    images: [ravaKesari1, ravaKesari2, ravaKesari3],
+    name: "Vikatan",
+    logo: vikatanLogo,
+    alt: "Vikatan",
+  },
+  {
+    id: 3,
+    name: "The Hindu",
+    logo: theHinduLogo,
+    alt: "The Hindu",
   },
 ];
 
-// Flavourful Delights Section Data
+// Flavourful Delights Data
 const flavourfulDelights = [
   {
     id: 1,
@@ -165,28 +89,6 @@ const flavourfulDelights = [
     id: 5,
     name: "Combos",
     image: combosImg,
-  },
-];
-
-// Press Features Data
-const pressFeatures = [
-  {
-    id: 1,
-    name: "Behindwoods",
-    logo: behindwoodsLogo,
-    alt: "Behindwoods",
-  },
-  {
-    id: 2,
-    name: "Vikatan",
-    logo: vikatanLogo,
-    alt: "Vikatan",
-  },
-  {
-    id: 3,
-    name: "The Hindu",
-    logo: theHinduLogo,
-    alt: "The Hindu",
   },
 ];
 
@@ -357,149 +259,12 @@ const ImageGallery = ({ images, productName, onImageClick }) => {
   );
 };
 
-// CORRECTED combos array with proper IDs matching the products data
-const combos = [
-  {
-    id: 1,
-    name: "Mysore Pak",
-    price: 197,
-    images: [mysorePak1, mysorePak2, mysorePak3],
-    reviews: 207,
-    isBestSeller: true
-  },
-  {
-    id: 2,
-    name: "Rava Kesari",
-    price: 105,
-    images: [ravaKesari1, ravaKesari2, ravaKesari3],
-    reviews: 196,
-    isBestSeller: true
-  },
-  {
-    id: 3,
-    name: "Chocolate Brownies",
-    price: 96,
-    images: [chocolateBrownies1, chocolateBrownies2, chocolateBrownies3],
-    reviews: 111,
-    isBestSeller: true
-  },
-  {
-    id: 4,
-    name: "Coconut Burfi",
-    price: 67,
-    images: [coconutBurfi1, coconutBurfi2, coconutBurfi3],
-    reviews: 111,
-    isBestSeller: true
-  },
-  {
-    id: 5,
-    name: "Boondi Laddu",
-    price: 86,
-    images: [boondiLaddu1, boondiLaddu2, boondiLaddu3],
-    reviews: 72,
-    isBestSeller: true
-  },
-  {
-    id: 6,
-    name: "Turkish Delight",
-    price: 86,
-    images: [turkishDelight1, turkishDelight2, turkishDelight3],
-    reviews: 72,
-    isBestSeller: true
-  },
-  {
-    id: 7,
-    name: "Egg Flour",
-    price: 149,
-    images: [eggFlour1, eggFlour2, eggFlour3],
-    reviews: 12,
-    isBestSeller: false
-  },
-  {
-    id: 8,
-    name: "Health Mix",
-    price: 175,
-    images: [healthMix1, healthMix2, healthMix3],
-    reviews: 32,
-    isBestSeller: true
-  },
-  {
-    id: 9,
-    name: "Kara Boondi",
-    price: 155,
-    images: [karaBoondi1, karaBoondi2, karaBoondi3],
-    reviews: 27,
-    isBestSeller: false
-  },
-  {
-    id: 10,
-    name: "Kara Sippi",
-    price: 168,
-    images: [karaSippi1, karaSippi2, karaSippi3],
-    reviews: 19,
-    isBestSeller: false
-  },
-  {
-    id: 11,
-    name: "Kuchchi Murukku",
-    price: 172,
-    images: [kuchchiMurukku1, kuchchiMurukku2, kuchchiMurukku3],
-    reviews: 56,
-    isBestSeller: true
-  },
-  {
-    id: 12,
-    name: "Mixture",
-    price: 158,
-    images: [mixture1, mixture2, mixture3],
-    reviews: 94,
-    isBestSeller: false
-  },
-  {
-    id: 13,
-    name: "Mullu Murukku",
-    price: 164,
-    images: [mulluMurukku1, mulluMurukku2, mulluMurukku3],
-    reviews: 41,
-    isBestSeller: false
-  },
-  {
-    id: 14,
-    name: "Payatham Urundai",
-    price: 185,
-    images: [payathamUrundai1, payathamUrundai2, payathamUrundai3],
-    reviews: 23,
-    isBestSeller: false
-  },
-  {
-    id: 15,
-    name: "Rava Laddu",
-    price: 179,
-    images: [ravaLaddu1, ravaLaddu2, ravaLaddu3],
-    reviews: 68,
-    isBestSeller: true
-  },
-  {
-    id: 16,
-    name: "Rich Laddu",
-    price: 199,
-    images: [richLaddu1, richLaddu2, richLaddu3],
-    reviews: 88,
-    isBestSeller: true
-  },
-  {
-    id: 17,
-    name: "Thattu Vadai",
-    price: 143,
-    images: [thattuVadai1, thattuVadai2, thattuVadai3],
-    reviews: 37,
-    isBestSeller: false
-  }
-];
-
 // Best Sellers section component - Make entire card clickable - CORRECTED
 const BestSellersSection = () => {
   const bestSellersScrollRef = useRef(null);
+  const bestSellers = bestSellerIds
+    .map((id) => products.find((item) => item.id === id))
+    .filter(Boolean);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
 
   const handleNavigate = (id) => {
@@ -560,16 +325,14 @@ const BestSellersSection = () => {
             style={{ cursor: 'pointer' }}
           >
             <div className="image-wrapper product-image-wrapper">
-  
-  {/* Badge Icon */}
-  <img src={badgeIcon} alt="badge" className="product-badge-icon" />
-
-  <ImageGallery
-    images={item.images}
-    productName={item.name}
-    onImageClick={() => handleNavigate(item.id)}
-  />
-</div>
+              {/* Badge Icon */}
+              <img src={badgeIcon} alt="badge" className="product-badge-icon" />
+              <ImageGallery
+                images={item.images}
+                productName={item.name}
+                onImageClick={() => handleNavigate(item.id)}
+              />
+            </div>
             <div className="bestseller-card-body">
               <p className="bestseller-product-name">{item.name}</p>
               <p className="bestseller-price">Rs. {item.price.toFixed(2)}</p>
@@ -934,17 +697,15 @@ const Home = () => {
               onClick={() => handleNavigate(item.id)}
               style={{ cursor: 'pointer' }}
             >
-             <div className="image-wrapper product-image-wrapper">
-
-  {/* Badge Icon */}
-  <img src={badgeIcon} alt="badge" className="product-badge-icon" />
-
-  <ImageGallery
-    images={item.images}
-    productName={item.name}
-    onImageClick={() => handleNavigate(item.id)}
-  />
-</div>
+              <div className="image-wrapper product-image-wrapper">
+                {/* Badge Icon */}
+                <img src={badgeIcon} alt="badge" className="product-badge-icon" />
+                <ImageGallery
+                  images={item.images}
+                  productName={item.name}
+                  onImageClick={() => handleNavigate(item.id)}
+                />
+              </div>
 
               <div className="card-body">
                 <p className="product-name">{item.name}</p>
@@ -1011,6 +772,24 @@ const Home = () => {
 
       {/* Tasted & Trusted by Millions Section */}
       <TrustedReviewsSection />
+
+      {/* Video Reels Section - Commented out as requested */}
+      {/*
+      <section className="video-reels-section">
+        <h2>Watch Our Reels</h2>
+        <div className="video-reels-container">
+          <div className="video-reel">
+            <video src="/path/to/video1.mp4" controls />
+          </div>
+          <div className="video-reel">
+            <video src="/path/to/video2.mp4" controls />
+          </div>
+          <div className="video-reel">
+            <video src="/path/to/video3.mp4" controls />
+          </div>
+        </div>
+      </section>
+      */}
 
       <Footer />
       <WhatsAppButton />
