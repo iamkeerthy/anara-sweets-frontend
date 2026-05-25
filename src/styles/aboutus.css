@@ -9,15 +9,20 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 40px;
+  gap: 20px;
   padding: 60px;
 }
 
 .about-hero-image img {
   width: 100%;
-  max-width: 600px;
+  max-width: 850px;
+  height: 550px;
   border-radius: 10px;
   object-fit: cover;
+}
+
+.about-hero-image {
+  flex: 1;
 }
 
 .about-hero-content {
