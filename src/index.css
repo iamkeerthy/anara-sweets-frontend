@@ -19,6 +19,10 @@
   font-style: normal;
 }
 
+p {
+  font-family: "Outfit", sans-serif !important;
+}
+
 /* @font-face {
   font-family: "NC Geetha";
   src: url("../assets/fonts/NCGeetha.ttf") format("truetype");
