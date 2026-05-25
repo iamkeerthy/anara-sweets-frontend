@@ -1,114 +1,474 @@
+/* ========================= */
+/* HERO SECTION */
+/* ========================= */
+
 .hero {
   position: relative;
-  height: 90vh;
   width: 100%;
+  min-height: 100vh;
+
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+
+  overflow: hidden;
+}
+
+/* ========================= */
+/* OVERLAY */
+/* ========================= */
+
+.overlay {
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(to right,
+      rgba(255, 255, 255, 0.88),
+      rgba(255, 255, 255, 0.45));
+
+  z-index: 1;
+}
+
+/* ========================= */
+/* HERO CONTAINER */
+/* ========================= */
+
+.hero-container {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 1450px;
+
+  min-height: 100vh;
+
+  margin: auto;
+
+  padding: 0 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 40px;
+}
+
+/* ========================= */
+/* LEFT CONTENT */
+/* ========================= */
+
+.hero-content {
+  flex: 1;
+  max-width: 580px;
+}
+
+/* SUBTITLE */
+
+.hero-subtitle {
+  font-family: "Outfit", sans-serif;
+
+  font-size: 18px;
+  font-weight: 600;
+
+  letter-spacing: 4px;
+  text-transform: uppercase;
+
+  color: #8b1185;
+
+  margin-bottom: 18px;
+}
+
+/* TITLE */
+
+.hero-title {
+  font-family: "Outfit", sans-serif;
+
+  font-size: 4.8rem;
+  line-height: 1.1;
+
+  color: #111;
+
+  margin-bottom: 24px;
+}
+
+/* TAGLINE */
+
+.hero-tagline {
+  font-family: "Outfit", sans-serif;
+
+  font-size: 1.08rem;
+  line-height: 1.9;
+
+  color: #333;
+
+  margin-bottom: 35px;
+
+  max-width: 520px;
+}
+
+/* BUTTON */
+
+.hero-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 15px 38px;
+
+  border-radius: 50px;
+
+  text-decoration: none;
+
+  font-size: 1rem;
+  font-weight: 600;
+
+  color: white;
+
+  background: linear-gradient(135deg, #b572c6, #8b1185);
+
+  box-shadow: 0 12px 28px rgba(139, 17, 133, 0.25);
+
+  transition: 0.35s ease;
+}
+
+.hero-btn:hover {
+  transform: translateY(-3px);
+
+  background: linear-gradient(135deg, #8b1185, #650b61);
+
+  box-shadow: 0 18px 35px rgba(139, 17, 133, 0.35);
+}
+
+/* ========================= */
+/* CUSTOMER REVIEW SECTION */
+/* ========================= */
+
+.customer-review-section {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+
+  margin-top: 38px;
+
+  flex-wrap: nowrap;
+}
+
+/* BADGES */
+
+.review-badges {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.review-badge-img {
+  width: 82px;
+  height: 82px;
+
+  border-radius: 50%;
+
+  overflow: hidden;
+
+  background: white;
+
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Dark Overlay */
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.45);
-}
-
-.hero-container {
-  position: relative;
-  z-index: 2;
+.review-badge-img img {
   width: 100%;
-  max-width: 1200px;
-  padding: 20px;
+  height: 100%;
+
+  object-fit: cover;
+
+  border-radius: 50%;
 }
 
-.hero-content {
-  max-width: 600px;
-  color: white;
+/* CUSTOMER REVIEW */
+
+.customer-review {
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
-.hero-subtitle {
-  font-family: 'Outfit' sans-serif;
-  font-size: 1.1rem;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: #f39c12;
-  margin-bottom: 10px;
+.customer-images {
+  display: flex;
+  align-items: center;
 }
 
-.hero-title {
-  font-family: 'Holen Vintage';
-  font-size: 4rem;
-  font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: 20px;
+.customer-images img {
+  width: 48px;
+  height: 48px;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+
+  border: 3px solid white;
+
+  margin-left: -12px;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.hero-description {
-  font-family: 'Outfit' sans-serif;
-  font-size: 1.2rem;
-  margin-bottom: 10px;
+.customer-images img:first-child {
+  margin-left: 0;
 }
 
-.highlight {
-  color: #ffcc70;
-  font-weight: bold;
-}
-
-.hero-tagline {
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin-bottom: 30px;
-}
-
-.hero-btn {
-  font-family: 'Outfit' sans-serif;
-  display: inline-block;
-  background: #b572c6e9;
-  color: white;
-  padding: 12px 30px;
-  border-radius: 30px;
-  text-decoration: none;
+.review-text h2 {
   font-size: 1rem;
-  font-weight: 600;
-  transition: 0.3s ease;
+  font-weight: 700;
+
+  color: #111;
+  margin-top: 15px;
+  margin-bottom: -1px;
 }
 
-.hero-btn:hover {
-  background: #8b1185;
+.review-text p {
+  font-size: 0.92rem;
+  color: #555;
+  margin-bottom: -1px;
 }
 
-/* Mobile Responsive */
-@media (max-width: 768px) {
-  .hero {
-    height: 70vh;
+/* ========================= */
+/* RIGHT IMAGE SIDE */
+/* ========================= */
+
+.circle-slider-wrapper {
+  position: relative;
+
+  width: 760px;
+  height: 760px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* GLOW EFFECT */
+
+.circle-design {
+  position: absolute;
+
+  width: 50px;
+  height: 50px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(circle,
+      rgba(0, 0, 0, 0.35) 0%,
+      rgba(0, 0, 0, 0.12) 45%,
+      rgba(255, 255, 255, 0) 75%);
+
+  animation: pulse 5s infinite ease-in-out;
+}
+
+/* MAIN CIRCLE */
+
+.circle-slider {
+  position: relative;
+
+  width: 620px;
+  height: 620px;
+
+  border-radius: 50%;
+
+  overflow: visible;
+
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* IMAGE */
+
+.circle-image {
+  width: 145%;
+  height: 145%;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  display: block;
+
+  animation: fadeZoom 1s ease;
+
+  filter: drop-shadow(0 25px 40px rgba(0, 0, 0, 0.28));
+
+  transition: 0.4s ease;
+}
+
+/* HOVER */
+
+.circle-slider:hover .circle-image {
+  transform: scale(1.03);
+}
+
+/* ========================= */
+/* IMAGE ANIMATION */
+/* ========================= */
+
+@keyframes fadeZoom {
+  from {
+    opacity: 0;
+    transform: scale(1.08);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ========================= */
+/* GLOW ANIMATION */
+/* ========================= */
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+}
+
+/* ========================= */
+/* TABLET */
+/* ========================= */
+
+@media (max-width: 992px) {
+  .hero-container {
+    flex-direction: column;
+
+    justify-content: center;
+    text-align: center;
+
+    padding-top: 120px;
+    padding-bottom: 80px;
+
+    gap: 60px;
   }
 
   .hero-content {
-    text-align: center;
-    margin: auto;
+    max-width: 100%;
   }
 
   .hero-title {
-    font-family: 'Holen Vintage';
-    font-size: 2.3rem;
-  }
-
-  .hero-description {
-    font-family: 'Outfit' sans-serif;
-    font-size: 1rem;
+    font-size: 3.5rem;
   }
 
   .hero-tagline {
-    font-size: 1rem;
+    margin: auto auto 35px;
+  }
+
+  .customer-review-section {
+    justify-content: center;
+  }
+
+  .circle-slider-wrapper {
+    width: 520px;
+    height: 520px;
+  }
+
+  .circle-design {
+    width: 480px;
+    height: 480px;
+  }
+
+  .circle-slider {
+    width: 420px;
+    height: 420px;
+  }
+
+  .circle-image {
+    width: 140%;
+    height: 140%;
+  }
+}
+
+/* ========================= */
+/* MOBILE */
+/* ========================= */
+
+@media (max-width: 576px) {
+  .hero {
+    min-height: auto;
+    padding: 90px 0 60px;
+  }
+
+  .hero-container {
+    padding: 20px;
+    gap: 50px;
+  }
+
+  .hero-subtitle {
+    font-size: 14px;
+    letter-spacing: 2px;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-tagline {
+    font-size: 0.95rem;
+    line-height: 1.7;
   }
 
   .hero-btn {
-    font-family: 'Outfit';
-    padding: 10px 24px;
+    padding: 13px 28px;
     font-size: 0.95rem;
+  }
+
+  .customer-review-section {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .review-badge-img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .customer-images img {
+    width: 42px;
+    height: 42px;
+  }
+
+  .circle-slider-wrapper {
+    width: 360px;
+    height: 360px;
+  }
+
+  .circle-design {
+    width: 330px;
+    height: 330px;
+  }
+
+  .circle-slider {
+    width: 290px;
+    height: 290px;
+  }
+
+  .circle-image {
+    width: 135%;
+    height: 135%;
   }
 }

@@ -1,3 +1,31 @@
+/* ========================= */
+/* GOOGLE FONT */
+/* ========================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+/* ========================= */
+/* CUSTOM FONTS */
+/* ========================= */
+
+@font-face {
+  font-family: "Holen Vintage";
+  src: url("../assets/fonts/HolenVintage.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* @font-face {
+  font-family: "NC Geetha";
+  src: url("../assets/fonts/NCGeetha.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+} */
+
+/* ========================= */
+/* CONTACT PAGE */
+/* ========================= */
+
 .contact-page {
   font-family: "Outfit", sans-serif;
   background: #ffffff;
@@ -5,48 +33,88 @@
   color: #222;
 }
 
+/* ========================= */
 /* HEADER */
+/* ========================= */
+
 .contact-header {
   text-align: center;
   max-width: 800px;
   margin: auto;
 }
 
+/* PRIMARY FONT */
 .contact-header h1 {
+  font-family: "Holen Vintage", cursive;
+
   font-size: 42px;
   font-weight: 700;
+
   margin-bottom: 10px;
+
+  color: #222;
+  letter-spacing: 1px;
 }
 
+/* SECONDARY FONT */
 .contact-header p {
+  font-family: "Outfit", sans-serif;
+
   font-size: 16px;
   color: #666;
+
   margin-bottom: 20px;
 }
 
+/* CONTACT INFO */
 .contact-info {
+  font-family: "Outfit", sans-serif;
+
   margin-top: 20px;
   line-height: 1.8;
   font-size: 15px;
 }
 
+/* TAMIL SUPPORT */
+.tamil-font {
+  font-family: "NC Geetha", sans-serif;
+}
+
+/* ========================= */
 /* FORM BOX */
+/* ========================= */
+
 .contact-box {
   max-width: 700px;
+
   margin: 60px auto 0;
+
   padding: 30px;
+
   background: #fff;
+
   border-radius: 12px;
+
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
+/* PRIMARY FONT */
 .contact-box h2 {
+  font-family: "Holen Vintage", cursive;
+
   text-align: center;
+
   margin-bottom: 25px;
+
   font-size: 26px;
+
+  color: #222;
 }
 
+/* ========================= */
 /* FORM */
+/* ========================= */
+
 .contact-form {
   display: flex;
   flex-direction: column;
@@ -62,12 +130,21 @@
   flex: 1;
 }
 
-input, textarea {
+/* INPUTS */
+input,
+textarea {
+  font-family: "Outfit", sans-serif;
+
   padding: 12px;
+
   border: 1px solid #ddd;
   border-radius: 8px;
+
   font-size: 15px;
+
   outline: none;
+
+  transition: border-color 0.3s ease;
 }
 
 textarea {
@@ -75,7 +152,8 @@ textarea {
   resize: none;
 }
 
-input:focus, textarea:focus {
+input:focus,
+textarea:focus {
   border-color: #b572c6e9;
 }
 
@@ -83,15 +161,26 @@ input[type="tel"] {
   width: 100%;
 }
 
-/* ✅ SCOPED BUTTON (ONLY CONTACT PAGE) */
+/* ========================= */
+/* BUTTON */
+/* ========================= */
+
 .contact-submit-btn {
+  font-family: "Outfit", sans-serif;
+
   background: #b572c6e9;
   color: white;
+
   padding: 12px;
+
   border: none;
   border-radius: 8px;
+
   font-size: 16px;
+  font-weight: 600;
+
   cursor: pointer;
+
   transition: 0.3s;
 }
 
@@ -99,44 +188,31 @@ input[type="tel"] {
   background: #b13cb1;
 }
 
-/* MOBILE */
-@media (max-width: 768px) {
-  .row {
-    flex-direction: column;
-  }
-
-  .contact-header h1 {
-    font-size: 30px;
-  }
-}
-
-/* SUCCESS MESSAGE 
-.success-msg {
-  background: #e8f5e9;
-  color: #2e7d32;
-  padding: 12px;
-  border-radius: 8px;
-  margin-bottom: 15px;
-  text-align: center;
-  font-weight: 500;
-  border: 1px solid #a5d6a7;
-}
-*/
+/* ========================= */
 /* POPUP MESSAGE */
+/* ========================= */
+
 .popup-message {
+  font-family: "Outfit", sans-serif;
+
   position: fixed;
+
   top: 20px;
   left: 50%;
+
   transform: translateX(-50%);
+
   z-index: 9999;
 
   min-width: 320px;
   max-width: 90%;
 
   padding: 14px 22px;
+
   border-radius: 12px;
 
   text-align: center;
+
   font-weight: 600;
   font-size: 15px;
 
@@ -146,20 +222,27 @@ input[type="tel"] {
 }
 
 /* SUCCESS */
+
 .success-popup {
   background: #cdb3f0;
-  color: #4a2c72 ;
-  border: 1px solid #a974ee ;
+  color: #4a2c72;
+
+  border: 1px solid #a974ee;
 }
 
 /* ERROR */
+
 .error-popup {
   background: #ffebee;
   color: #c62828;
+
   border: 1px solid #ef9a9a;
 }
 
-/* Animation */
+/* ========================= */
+/* ANIMATION */
+/* ========================= */
+
 @keyframes slideDown {
   from {
     opacity: 0;
@@ -169,5 +252,28 @@ input[type="tel"] {
   to {
     opacity: 1;
     transform: translate(-50%, 0);
+  }
+}
+
+/* ========================= */
+/* MOBILE */
+/* ========================= */
+
+@media (max-width: 768px) {
+
+  .row {
+    flex-direction: column;
+  }
+
+  .contact-header h1 {
+    font-size: 30px;
+  }
+
+  .contact-box {
+    padding: 22px;
+  }
+
+  .contact-box h2 {
+    font-size: 22px;
   }
 }

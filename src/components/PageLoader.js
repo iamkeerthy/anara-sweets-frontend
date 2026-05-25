@@ -1,18 +1,21 @@
 import React from "react";
 import "../styles/loader.css";
-
-
+import logo from "../assets/images/logo.png";
 
 const PageLoader = () => {
   return (
     <div className="page-loader">
-      <div className="loader-dots">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+      <div className="loader-content">
 
-      <p>🇱🇰 SriLankan Sweets Loading...</p>
+        <img
+          src={logo}
+          alt="Brand Logo"
+          className="loader-logo"
+        />
+
+        <div className="loader-line"></div>
+
+      </div>
     </div>
   );
 };

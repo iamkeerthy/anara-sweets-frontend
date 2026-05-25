@@ -6,94 +6,20 @@ import "../styles/home.css";
 
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-
+import badgeIcon from "../assets/images/icon.png";
+import { products } from "../data/Products";
 import WhatsAppButton from "../components/WhatsAppButton";
 
-// Import all images (multiple angles/variants per product)
-import mysorePak1 from "../assets/images/MYSORE PAK1.jpg";
-import mysorePak2 from "../assets/images/MYSORE PAK.jpg";
-import mysorePak3 from "../assets/images/MYSORE PAK1.jpg";
+// Press Features Images
+import astaLogo from "../assets/images/asta.png";
+import feastoLogo from "../assets/images/LogoFeasto.png";
+import logos1 from "../assets/images/Logos1.png";
+import logosCloud from "../assets/images/LogosCloud.png";
+import logosVM from "../assets/images/LogosVM.png";
 
-import ravaKesari1 from "../assets/images/RAVA KESARI.jpg";
-import ravaKesari2 from "../assets/images/RAVA KESARI.jpg";
-import ravaKesari3 from "../assets/images/RAVA KESARI.jpg";
-
-import chocolateBrownies1 from "../assets/images/CHOCOLATE BROWNIES.jpg";
-import chocolateBrownies2 from "../assets/images/CHOCOLATE BROWNIES.jpg";
-import chocolateBrownies3 from "../assets/images/CHOCOLATE BROWNIES.jpg";
-
-import coconutBurfi1 from "../assets/images/COCONUT BURFI.jpg";
-import coconutBurfi2 from "../assets/images/COCONUT BURFI.jpg";
-import coconutBurfi3 from "../assets/images/COCONUT BURFI.jpg";
-
-import boondiLaddu1 from "../assets/images/BOONDI LADDU.jpg";
-import boondiLaddu2 from "../assets/images/BOONDI LADDU.jpg";
-import boondiLaddu3 from "../assets/images/BOONDI LADDU.jpg";
-
-import turkishDelight1 from "../assets/images/TURKISH DELIGHT.jpg";
-import turkishDelight2 from "../assets/images/TURKISH DELIGHT.jpg";
-import turkishDelight3 from "../assets/images/TURKISH DELIGHT.jpg";
-
-import eggFlour1 from "../assets/images/EGG FLOUR1.jpg";
-import eggFlour2 from "../assets/images/EGG FLOUR.jpg";
-import eggFlour3 from "../assets/images/EGG FLOUR.jpg";
-
-import healthMix1 from "../assets/images/HEALTH MIX.jpg";
-import healthMix2 from "../assets/images/HEALTH MIX.jpg";
-import healthMix3 from "../assets/images/HEALTH MIX.jpg";
-
-import karaBoondi1 from "../assets/images/KARA BOONDI2.jpg";
-import karaBoondi2 from "../assets/images/KARA BOONDI1.jpg";
-import karaBoondi3 from "../assets/images/KARA BOONDI2.jpg";
-
-import karaSippi1 from "../assets/images/KARA SIPPI1.jpg";
-import karaSippi2 from "../assets/images/KARA SIPPI2.jpg";
-import karaSippi3 from "../assets/images/KARA SIPPI1.jpg";
-
-import kuchchiMurukku1 from "../assets/images/KUCHCHIMURUKKU1.jpg";
-import kuchchiMurukku2 from "../assets/images/KUCHCHIMURUKKU1.jpg";
-import kuchchiMurukku3 from "../assets/images/KUCHCHIMURUKKU1.jpg";
-
-import mixture1 from "../assets/images/MIXTURE1.jpg";
-import mixture2 from "../assets/images/MIXTURE.jpg";
-import mixture3 from "../assets/images/MIXTURE1.jpg";
-
-import mulluMurukku1 from "../assets/images/MULLU MURUKKU1.jpg";
-import mulluMurukku2 from "../assets/images/MULLU MURUKKU2.jpg";
-import mulluMurukku3 from "../assets/images/MULLU MURUKKU3.jpg";
-
-import payathamUrundai1 from "../assets/images/PAYATHAMURUNDAI1.jpg";
-import payathamUrundai2 from "../assets/images/PAYATHAM URUNDAI.jpg";
-import payathamUrundai3 from "../assets/images/PAYATHAMURUNDAI1.jpg";
-
-import ravaLaddu1 from "../assets/images/RAVALADDU2.jpg";
-import ravaLaddu2 from "../assets/images/RAVALADDU3.jpg";
-import ravaLaddu3 from "../assets/images/RAVALADDU4.jpg";
-
-import richLaddu1 from "../assets/images/RICH LADDU2.jpg";
-import richLaddu2 from "../assets/images/RICH LADDU1.jpg";
-import richLaddu3 from "../assets/images/RICH LADDU2.jpg";
-
-import thattuVadai1 from "../assets/images/THATTU VADAI1.jpg";
-import thattuVadai2 from "../assets/images/THATTU VADAI1.jpg";
-import thattuVadai3 from "../assets/images/THATTU VADAI1.jpg";
-
-// Video imports for the new reels section
-// import reel1 from "../assets/images/anara.mp4";
-// import reel2 from "../assets/images/anara.mp4";
-// import reel3 from "../assets/images/anara.mp4";
-// import reel4 from "../assets/images/anara.mp4";
-// import reel5 from "../assets/images/anara.mp4";
-
-// Small images for video reels (thumbnails)
-// import thumbnail1 from "../assets/images/img1.jpg";
-// import thumbnail2 from "../assets/images/img1.jpg";
-// import thumbnail3 from "../assets/images/img1.jpg";
-// import thumbnail4 from "../assets/images/img1.jpg";
-// import thumbnail5 from "../assets/images/img1.jpg";
 
 // Flavourful Delights Section Images
-import savouriesImg from "../assets/images/img1.jpg";
+import savouriesImg from "../assets/images/FreshOil.png";
 import sweetsImg from "../assets/images/BOONDI LADDU.jpg";
 import podiImg from "../assets/images/EGG FLOUR.jpg";
 import picklesImg from "../assets/images/MIXTURE.jpg";
@@ -101,93 +27,59 @@ import combosImg from "../assets/images/img2.jpg";
 import flavourfulFullWidthImg from "../assets/images/img2.jpg";
 
 // What Makes Anara Special Section Images
-import special25Years from "../assets/images/img1.jpg";
-import specialFlour from "../assets/images/img1.jpg";
-import specialOil from "../assets/images/img1.jpg";
-import specialWomen from "../assets/images/img1.jpg";
+import special25Years from "../assets/images/FreshOil.png";
+import specialFlour from "../assets/images/HandCrafted.png";
+import specialOil from "../assets/images/Homemade.png";
+import specialWomen from "../assets/images/Organic.png";
 
-// Data for the video reels section
-// const reels = [
-//   {
-//     id: 1,
-//     video: reel1,
-//     title: "Glimpse of Anara Top Seller Achu Murukku",
-//     product: "Achu Murukku - Kaaram",
-//     price: 67,
-//     thumbnail: thumbnail1,
-//   },
-//   {
-//     id: 2,
-//     video: reel2,
-//     title: "A glimpse on how we make our Famous Thattai",
-//     product: "Thattai",
-//     price: 71,
-//     thumbnail: thumbnail2,
-//   },
-//   {
-//     id: 3,
-//     video: reel3,
-//     title: "Sneakpeek of Juicy Jamoon",
-//     product: "BIG JAMUN JARS",
-//     price: 145,
-//     thumbnail: thumbnail3,
-//   },
-//   {
-//     id: 4,
-//     video: reel4,
-//     title: "We have something Special for Christmas",
-//     product: "Pocket Plum Cake",
-//     price: 50,
-//     thumbnail: thumbnail4,
-//   },
-//   {
-//     id: 5,
-//     video: reel5,
-//     title: "It's Yummy",
-//     product: "Thengai Paal Murukku",
-//     price: 130,
-//     thumbnail: thumbnail5,
-//   },
-// ];
+// About Us Section Images
+import boondiLaddu1 from "../assets/images/BOONDI LADDU.jpg";
+import richLaddu1 from "../assets/images/RICH LADDU.jpg";
 
-// Data for Best Sellers section with multiple images per product - CORRECTED IDs
-const bestSellers = [
+import srilankaIcon from "../assets/images/icon/Srilanka.png";
+import handmadeIcon from "../assets/images/icon/handmade-icon.png";
+import noPreservativesIcon from "../assets/images/icon/no-preservatives-icon.png";
+import shippingIcon from "../assets/images/icon/shipping-icon.png";
+
+const bestSellerIds = [12, 10, 14, 9];
+const combos = products; // or filter category if needed
+
+// Press Features Data
+const pressFeatures = [
   {
-    id: 4,  // Corrected: Coconut Burfi should have ID 4
-    name: "Coconut Burfi",
-    rating: 5,
-    reviews: 483,
-    price: 67.00,
-    images: [coconutBurfi1, coconutBurfi2, coconutBurfi3],
-  },
-  {
-    id: 3,  // Corrected: Chocolate Brownies should have ID 3
-    name: "Chocolate Brownies",
-    rating: 5,
-    reviews: 111,
-    price: 96.00,
-    images: [chocolateBrownies1, chocolateBrownies2, chocolateBrownies3],
-  },
-    {
-    id: 1,  // CHANGED: Mysore Pak instead of Turkish Delight
-    name: "Mysore Pak",
-    rating: 5,
-    reviews: 207,
-    price: 197.00,
-    images: [mysorePak1, mysorePak2, mysorePak3],
+    id: 1,
+    name: "Behindwoods",
+    logo: astaLogo,
+    alt: "Behindwoods",
   },
   {
     id: 2,
-    name: "Rava Kesari",
-    rating: 5,
-    reviews: 196,
-    price: 105.00,
-    images: [ravaKesari1, ravaKesari2, ravaKesari3],
+    name: "Vikatan",
+    logo: feastoLogo,
+    alt: "Vikatan",
+  },
+  {
+    id: 3,
+    name: "The Hindu",
+    logo: logos1,
+    alt: "The Hindu",
+  },
+   {
+    id: 4,
+    name: "The Hindu",
+    logo: logosCloud,
+    alt: "The Hindu",
+  },
+   {
+    id: 5,
+    name: "The Hindu",
+    logo: logosVM,
+    alt: "The Hindu",
   },
 
 ];
 
-// Flavourful Delights Section Data
+// Flavourful Delights Data
 const flavourfulDelights = [
   {
     id: 1,
@@ -383,305 +275,115 @@ const ImageGallery = ({ images, productName, onImageClick }) => {
   );
 };
 
-// CORRECTED combos array with proper IDs matching the products data
-const combos = [
-  {
-    id: 1,
-    name: "Mysore Pak",
-    price: 197,
-    images: [mysorePak1, mysorePak2, mysorePak3],
-    reviews: 207,
-    isBestSeller: true
-  },
-  {
-    id: 2,
-    name: "Rava Kesari",
-    price: 105,
-    images: [ravaKesari1, ravaKesari2, ravaKesari3],
-    reviews: 196,
-    isBestSeller: true
-  },
-  {
-    id: 3,  // CORRECTED: Chocolate Brownies has ID 3
-    name: "Chocolate Brownies",
-    price: 96,
-    images: [chocolateBrownies1, chocolateBrownies2, chocolateBrownies3],
-    reviews: 111,
-    isBestSeller: true
-  },
-  {
-    id: 4,  // CORRECTED: Coconut Burfi has ID 4
-    name: "Coconut Burfi",
-    price: 67,
-    images: [coconutBurfi1, coconutBurfi2, coconutBurfi3],
-    reviews: 111,
-    isBestSeller: true
-  },
-  {
-    id: 5,
-    name: "Boondi Laddu",
-    price: 86,
-    images: [boondiLaddu1, boondiLaddu2, boondiLaddu3],
-    reviews: 72,
-    isBestSeller: true
-  },
-  {
-    id: 6,
-    name: "Turkish Delight",
-    price: 86,
-    images: [turkishDelight1, turkishDelight2, turkishDelight3],
-    reviews: 72,
-    isBestSeller: true
-  },
-  {
-    id: 7,
-    name: "Egg Flour",
-    price: 149,
-    images: [eggFlour1, eggFlour2, eggFlour3],
-    reviews: 12,
-    isBestSeller: false
-  },
-  {
-    id: 8,
-    name: "Health Mix",
-    price: 175,
-    images: [healthMix1, healthMix2, healthMix3],
-    reviews: 32,
-    isBestSeller: true
-  },
-  {
-    id: 9,
-    name: "Kara Boondi",
-    price: 155,
-    images: [karaBoondi1, karaBoondi2, karaBoondi3],
-    reviews: 27,
-    isBestSeller: false
-  },
-  {
-    id: 10,
-    name: "Kara Sippi",
-    price: 168,
-    images: [karaSippi1, karaSippi2, karaSippi3],
-    reviews: 19,
-    isBestSeller: false
-  },
-  {
-    id: 11,
-    name: "Kuchchi Murukku",
-    price: 172,
-    images: [kuchchiMurukku1, kuchchiMurukku2, kuchchiMurukku3],
-    reviews: 56,
-    isBestSeller: true
-  },
-  {
-    id: 12,
-    name: "Mixture",
-    price: 158,
-    images: [mixture1, mixture2, mixture3],
-    reviews: 94,
-    isBestSeller: false
-  },
-  {
-    id: 13,
-    name: "Mullu Murukku",
-    price: 164,
-    images: [mulluMurukku1, mulluMurukku2, mulluMurukku3],
-    reviews: 41,
-    isBestSeller: false
-  },
-  {
-    id: 14,
-    name: "Payatham Urundai",
-    price: 185,
-    images: [payathamUrundai1, payathamUrundai2, payathamUrundai3],
-    reviews: 23,
-    isBestSeller: false
-  },
-  {
-    id: 15,
-    name: "Rava Laddu",
-    price: 179,
-    images: [ravaLaddu1, ravaLaddu2, ravaLaddu3],
-    reviews: 68,
-    isBestSeller: true
-  },
-  {
-    id: 16,
-    name: "Rich Laddu",
-    price: 199,
-    images: [richLaddu1, richLaddu2, richLaddu3],
-    reviews: 88,
-    isBestSeller: true
-  },
-  {
-    id: 17,
-    name: "Thattu Vadai",
-    price: 143,
-    images: [thattuVadai1, thattuVadai2, thattuVadai3],
-    reviews: 37,
-    isBestSeller: false
-  }
-];
-
-// // Video reels section component
-// const ReelsSection = () => {
-//   const reelRef = useRef(null);
-//   const [hoveredReelId, setHoveredReelId] = useState(null);
-//   const [canScrollRight, setCanScrollRight] = useState(true);
-
-//   const checkScroll = () => {
-//     if (reelRef.current) {
-//       const { scrollLeft, scrollWidth, clientWidth } = reelRef.current;
-//       setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 10);
-//     }
-//   };
-
-//   const scrollReel = (dir) => {
-//     if (!reelRef.current) return;
-//     const scrollAmount = 340;
-//     reelRef.current.scrollBy({
-//       left: dir === "left" ? -scrollAmount : scrollAmount,
-//       behavior: "smooth",
-//     });
-//     setTimeout(checkScroll, 300);
-//   };
-
-//   useEffect(() => {
-//     const container = reelRef.current;
-//     if (container) {
-//       container.addEventListener('scroll', checkScroll);
-//       checkScroll();
-//       return () => container.removeEventListener('scroll', checkScroll);
-//     }
-//   }, []);
-
-//   return (
-//     <section className="reels-section">
-//       <div className="reels-container" ref={reelRef}>
-//         {reels.map((reel) => (
-//           <div key={reel.id} className="reel-card">
-//             <div
-//               className="video-wrapper"
-//               onMouseEnter={() => setHoveredReelId(reel.id)}
-//               onMouseLeave={() => setHoveredReelId(null)}
-//             >
-//               <video
-//                 src={reel.video}
-//                 autoPlay
-//                 loop
-//                 muted
-//                 playsInline
-//                 disablePictureInPicture
-//                 controlsList="nodownload noplaybackrate nofullscreen"
-//                 className="reel-video"
-//               />
-//               {hoveredReelId === reel.id && (
-//                 <div className="video-overlay">
-//                   <p>{reel.title}</p>
-//                 </div>
-//               )}
-//             </div>
-//             <div className="reel-info">
-//               <div className="reel-thumbnail">
-//                 <img src={reel.thumbnail} alt={reel.product} />
-//               </div>
-//               <div className="reel-details">
-//                 <p className="reel-product-name">{reel.product}</p>
-//                 <p className="reel-price">Rs. {reel.price}.00</p>
-//               </div>
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-
-//       {canScrollRight && (
-//         <button
-//           className="fixed-scroll-arrow right-end-arrow"
-//           onClick={() => scrollReel("right")}
-//         >
-//           &#8250;
-//         </button>
-//       )}
-//     </section>
-//   );
-// };
-
 // Best Sellers section component - Make entire card clickable - CORRECTED
 const BestSellersSection = () => {
+  const navigate = useNavigate();
   const bestSellersScrollRef = useRef(null);
+
+  const bestSellers = bestSellerIds
+    .map((id) => products.find((item) => item.id === id))
+    .filter(Boolean);
+
   const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(true);
 
   const handleNavigate = (id) => {
-    window.location.href = `/product/${id}`;
+    navigate(`/product/${id}`);
   };
 
   const checkScrollPosition = () => {
-    if (bestSellersScrollRef.current) {
-      const { scrollLeft } = bestSellersScrollRef.current;
-      setShowLeftArrow(scrollLeft > 10);
-    }
+    const el = bestSellersScrollRef.current;
+    if (!el) return;
+
+    const { scrollLeft, scrollWidth, clientWidth } = el;
+
+    setShowLeftArrow(scrollLeft > 10);
+    setShowRightArrow(scrollLeft + clientWidth < scrollWidth - 10);
   };
 
   const scrollBestSellers = (dir) => {
-    if (!bestSellersScrollRef.current) return;
-    const amount = 340;
-    bestSellersScrollRef.current.scrollBy({
+    const el = bestSellersScrollRef.current;
+    if (!el) return;
+
+    const amount = 320;
+
+    el.scrollBy({
       left: dir === "left" ? -amount : amount,
-      behavior: "smooth"
+      behavior: "smooth",
     });
-    setTimeout(checkScrollPosition, 300);
   };
 
   useEffect(() => {
-    const container = bestSellersScrollRef.current;
-    if (container) {
-      container.addEventListener('scroll', checkScrollPosition);
-      checkScrollPosition();
-      return () => container.removeEventListener('scroll', checkScrollPosition);
-    }
+    const el = bestSellersScrollRef.current;
+    if (!el) return;
+
+    el.addEventListener("scroll", checkScrollPosition);
+    checkScrollPosition();
+
+    return () => el.removeEventListener("scroll", checkScrollPosition);
   }, []);
 
   return (
     <section className="bestsellers-section">
+
+      {/* HEADER */}
       <div className="bestsellers-header">
+
         <button
-          className="nav-arrow bestsellers-nav-arrow"
+          className="bestsellers-nav-arrow left"
           onClick={() => scrollBestSellers("left")}
-          style={{ visibility: showLeftArrow ? 'visible' : 'hidden' }}
+          style={{ visibility: showLeftArrow ? "visible" : "hidden" }}
         >
           &#8249;
         </button>
 
         <div className="title-box">
           <h2>Best Sellers</h2>
-          <a href="/product" className="view-all-link">
+          <a
+            href="/product"
+            className="view-all-link"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/product");
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+          >
             VIEW ALL
           </a>
         </div>
+
+        <button
+          className="bestsellers-nav-arrow right"
+          onClick={() => scrollBestSellers("right")}
+          style={{ visibility: showRightArrow ? "visible" : "hidden" }}
+        >
+          &#8250;
+        </button>
+
       </div>
 
+      {/* SCROLL AREA */}
       <div className="bestsellers-scroll-container" ref={bestSellersScrollRef}>
         {bestSellers.map((item) => (
-          <div 
-            key={item.id} 
+          <div
+            key={item.id}
             className="bestseller-card"
             onClick={() => handleNavigate(item.id)}
-            style={{ cursor: 'pointer' }}
           >
-            <div className="image-wrapper">
+            <div className="image-wrapper product-image-wrapper">
+              <img src={badgeIcon} alt="badge" className="product-badge-icon" />
               <ImageGallery
                 images={item.images}
                 productName={item.name}
                 onImageClick={() => handleNavigate(item.id)}
               />
             </div>
+
             <div className="bestseller-card-body">
               <p className="bestseller-product-name">{item.name}</p>
-              {/* <p className="bestseller-reviews">
-                {'⭐'.repeat(item.rating)} <span>{item.reviews} reviews</span>
-              </p> */}
               <p className="bestseller-price">Rs. {item.price.toFixed(2)}</p>
             </div>
+
             <button
               className="bestseller-add-btn"
               onClick={(e) => {
@@ -694,10 +396,10 @@ const BestSellersSection = () => {
           </div>
         ))}
       </div>
+
     </section>
   );
 };
-
 // Flavourful Delights Section
 const FlavourfulDelightsSection = () => {
   const navigate = useNavigate();
@@ -777,6 +479,29 @@ const AboutUsSection = () => {
   );
 };
 
+// Press Features Section
+const PressFeaturesSection = () => {
+  return (
+    <section className="press-section">
+      <div className="press-container">
+        <h2 className="press-title">Press Features</h2>
+
+        <div className="press-grid">
+          {pressFeatures.map((item) => (
+            <div key={item.id} className="press-card">
+              <img
+                src={item.logo}
+                alt={item.alt}
+                className="press-logo"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 // What Makes Anara Special Section
 const SpecialSection = () => {
   const specialItems = [
@@ -784,7 +509,7 @@ const SpecialSection = () => {
       id: 1,
       image: special25Years,
       title: "40+ Outlets",
-      large: true,
+      // large: true,
       imageTop: false,
     },
     {
@@ -910,12 +635,13 @@ const TrustedReviewsSection = () => {
 };
 
 const Home = () => {
+  const navigate = useNavigate(); // Added useNavigate hook
   const scrollRef = useRef(null);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
 
   const handleNavigate = (id) => {
-    window.location.href = `/product/${id}`;
+    navigate(`/product/${id}`); // Changed to use navigate
   };
 
   // Triple the combos list for seamless infinite scroll
@@ -968,7 +694,7 @@ const Home = () => {
       container.addEventListener("scroll", handleInfiniteScroll);
       container.addEventListener('scroll', checkScrollPosition);
       checkScrollPosition();
-      
+
       return () => {
         clearTimeout(timer);
         container.removeEventListener("scroll", handleInfiniteScroll);
@@ -986,46 +712,55 @@ const Home = () => {
       <section className="combos-section">
         <div className="combos-header">
 
-  {/* TOP ROW: Arrow + Title + Arrow */}
-  <div className="header-top">
-    <button
-      className="nav-arrow"
-      onClick={() => scroll("left")}
-      style={{ visibility: showLeftArrow ? 'visible' : 'hidden' }}
-      aria-label="Scroll left"
-    >
-      <FaChevronLeft />
-    </button>
+          {/* TOP ROW: Arrow + Title + Arrow */}
+          <div className="header-top">
+            <button
+              className="nav-arrow"
+              onClick={() => scroll("left")}
+              style={{ visibility: showLeftArrow ? 'visible' : 'hidden' }}
+              aria-label="Scroll left"
+            >
+              <FaChevronLeft />
+            </button>
 
-    <h2>Anara Products</h2>
+            <h2>Anara Products</h2>
 
-    <button
-      className="nav-arrow"
-      onClick={() => scroll("right")}
-      style={{ visibility: showRightArrow ? 'visible' : 'hidden' }}
-      aria-label="Scroll right"
-    >
-      <FaChevronRight />
-    </button>
-  </div>
+            <button
+              className="nav-arrow"
+              onClick={() => scroll("right")}
+              style={{ visibility: showRightArrow ? 'visible' : 'hidden' }}
+              aria-label="Scroll right"
+            >
+              <FaChevronRight />
+            </button>
+          </div>
 
-  {/* SECOND ROW */}
-  <a href="/product" className="view-all-link">
-    VIEW ALL
-  </a>
+          {/* SECOND ROW */}
+          <a 
+            href="/product" 
+            className="view-all-link"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate('/product');
+              setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 50);
+            }}
+          >
+            VIEW ALL
+          </a>
 
-</div>
-
+        </div>
 
         <div className="scroll-container" ref={scrollRef}>
           {extendedCombos.map((item, idx) => (
-            <div 
-              key={`${item.id}-${idx}`} 
+            <div
+              key={`${item.id}-${idx}`}
               className="card"
               onClick={() => handleNavigate(item.id)}
               style={{ cursor: 'pointer' }}
             >
-              <div className="image-wrapper">
+              <div className="image-wrapper product-image-wrapper">
+                {/* Badge Icon */}
+                <img src={badgeIcon} alt="badge" className="product-badge-icon" />
                 <ImageGallery
                   images={item.images}
                   productName={item.name}
@@ -1035,9 +770,6 @@ const Home = () => {
 
               <div className="card-body">
                 <p className="product-name">{item.name}</p>
-                {/* <p className="reviews">
-                  ⭐⭐⭐⭐⭐ <span>{item.reviews} reviews</span>
-                </p> */}
                 <p className="price">Rs. {item.price}.00</p>
               </div>
 
@@ -1055,9 +787,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Video Reels Section */}
-      {/* <ReelsSection /> */}
-
       {/* Best Sellers Section */}
       <BestSellersSection />
 
@@ -1067,11 +796,61 @@ const Home = () => {
       {/* About Us Section */}
       <AboutUsSection />
 
+      {/* four logos */}
+      <section className="trust-section">
+        <div className="trust-container">
+          <div className="trust-item">
+            <img src={srilankaIcon} alt="Loved by Sri Lanka" className="trust-icon" />
+            <h4>Loved By Sri Lanka</h4>
+            <p>Loved by 5 lakh+ customers</p>
+          </div>
+
+          <div className="trust-item">
+            <img src={handmadeIcon} alt="Handmade" className="trust-icon" />
+            <h4>Handmade</h4>
+            <p>Every piece is made with love</p>
+          </div>
+
+          <div className="trust-item">
+            <img src={shippingIcon} alt="Shipping" className="trust-icon" />
+            <h4>Ships In 5–7 Days</h4>
+            <p>Write to us to expedite your order</p>
+          </div>
+
+          <div className="trust-item">
+            <img src={noPreservativesIcon} alt="No Preservatives" className="trust-icon" />
+            <h4>No Preservatives</h4>
+            <p>Pure taste, naturally fresh</p>
+          </div>
+        </div>
+      </section>
+
       {/* What Makes Anara Special */}
       <SpecialSection />
 
+      {/* Press Features Section - Added after Special Section */}
+      <PressFeaturesSection />
+
       {/* Tasted & Trusted by Millions Section */}
       <TrustedReviewsSection />
+
+      {/* Video Reels Section - Commented out as requested */}
+      {/*
+      <section className="video-reels-section">
+        <h2>Watch Our Reels</h2>
+        <div className="video-reels-container">
+          <div className="video-reel">
+            <video src="/path/to/video1.mp4" controls />
+          </div>
+          <div className="video-reel">
+            <video src="/path/to/video2.mp4" controls />
+          </div>
+          <div className="video-reel">
+            <video src="/path/to/video3.mp4" controls />
+          </div>
+        </div>
+      </section>
+      */}
 
       <Footer />
       <WhatsAppButton />

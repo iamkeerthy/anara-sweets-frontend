@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import Home from './pages/Home';
 import AboutUs from './pages/AboutUs';
 import Contact from './pages/Contact';
-import Product from './pages/product';
+import Product from './pages/Product';
 import ProductDetails from './pages/ProductDetails';
 
 import PrivacyPolicy from './pages/Policy/PrivacyPolicy';

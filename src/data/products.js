@@ -107,7 +107,7 @@ export const products = [
     price: 149,
     rating: 4,
     isBestSeller: false,
-    category: "healthmix",
+    category: "Healthmix",
     images: [eggFlour1, eggFlour2, eggFlour1],
     ingredients: ["Whole Eggs", "Milk Solids", "Natural Protein Isolate", "Stabilizers", "Permitted Preservatives"],
     description: "Anara Sweets' Egg Flour is a versatile and protein-rich alternative to traditional flours, specially crafted for baking enthusiasts and health-conscious individuals."
@@ -118,7 +118,7 @@ export const products = [
     price: 175,
     rating: 4,
     isBestSeller: true,
-    category: "healthmix",
+    category: "Healthmix",
     images: [healthMix1, healthMix2, healthMix1],
     ingredients: ["Ragi (Finger Millet)", "Wheat", "Barley", "Green Gram", "Soybean", "Almonds", "Cardamom", "Jaggery", "Dry Ginger"],
     description: "Anara Sweets' Health Mix is a nutrient-dense traditional Indian porridge mix, carefully crafted to provide complete nourishment for the entire family."

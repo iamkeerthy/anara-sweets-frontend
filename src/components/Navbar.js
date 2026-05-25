@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import '../styles/navbar.css';
 import logo from '../assets/images/logo.png';
 import { Link, useNavigate } from "react-router-dom";
-import { products } from '../data/products';
+import { products } from '../data/Products';
 import { filterProductsBySearch } from '../utils/searchProducts';
 
 const SEARCH_PREVIEW_LIMIT = 6;
@@ -21,7 +21,7 @@ const Navbar = () => {
   const previewResults = searchResults.slice(0, SEARCH_PREVIEW_LIMIT);
   const hasMoreResults = searchResults.length > SEARCH_PREVIEW_LIMIT;
   
-  const topBarMessages = ['SriLankan Sweets', 'Fresh • Hygienic • Authentic | One time use Pure Groundnut Oil ✨'];
+  const topBarMessages = ['SriLankan Sweets', 'Made fresh daily | One time use Pure Groundnut Oil'];
   const [topBarIndex, setTopBarIndex] = useState(0);
 
   useEffect(() => {

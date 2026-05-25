@@ -4,9 +4,10 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import WhatsAppButton from '../components/WhatsAppButton';
 import '../styles/productDetails.css';
-import { products } from "../data/products";
+import { products } from "../data/Products";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import badgeIcon from "../assets/images/icon.png";
 
 // Safe Storage Engine Fallback Strategy for Security Access Exceptions
 const safeStorage = {
@@ -38,10 +39,6 @@ const safeStorage = {
   }
 };
 
-
-
-
-
 function ProductDetails() {
   const { id } = useParams();
   // Convert id to number for comparison
@@ -50,12 +47,12 @@ function ProductDetails() {
   // State Management
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState('');
-  const [weightType, setWeightType] = useState('preset'); 
-  const [selectedWeight, setSelectedWeight] = useState(150); 
+  const [weightType, setWeightType] = useState('preset');
+  const [selectedWeight, setSelectedWeight] = useState(150);
   const [customWeight, setCustomWeight] = useState('');
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [cartCount, setCartCount] = useState(0);
-  
+
   // Modal Interactive State to monitor modifications in real-time
   const [modalCartItems, setModalCartItems] = useState([]);
 
@@ -98,10 +95,6 @@ function ProductDetails() {
     );
   }
 
-  const relatedProducts = products
-    .filter((p) => p.category === product.category && p.id !== product.id)
-    .slice(0, 4);
-
   const activeWeight = weightType === 'custom' ? (Number(customWeight) || 0) : Number(selectedWeight);
   const calculatedPricePerUnit = Math.round((product.price / 150) * activeWeight);
   const totalPrice = calculatedPricePerUnit * quantity;
@@ -129,7 +122,7 @@ function ProductDetails() {
     }
 
     const existingCart = JSON.parse(safeStorage.getItem('shopCart')) || [];
-    
+
     const existingItemIndex = existingCart.findIndex(
       (item) => item.id === product.id && item.weight === activeWeight
     );
@@ -150,14 +143,14 @@ function ProductDetails() {
 
     safeStorage.setItem('shopCart', JSON.stringify(existingCart));
     updateCartCount();
-   toast.success(
-   `${product.name} (${activeWeight}g) added to cart`,
-   {
-      position: "top-right",
-      autoClose: 2500,
-      hideProgressBar: false,
-   }
-);
+    toast.success(
+      `${product.name} (${activeWeight}g) added to cart`,
+      {
+        position: "top-right",
+        autoClose: 2500,
+        hideProgressBar: false,
+      }
+    );
   };
 
   // Open confirmation view and calculate data snapshot cleanly without tricky dependency chains
@@ -197,11 +190,11 @@ function ProductDetails() {
   const sendWhatsAppMessage = () => {
     if (modalCartItems.length === 0) return;
 
-    const phoneNumber = "+94752753522"; 
-    
+    const phoneNumber = "+94752753522";
+
     let message = `*NEW ORDER SUBMISSION*\n`;
     message += `=========================\n\n`;
-    
+
     let grandTotal = 0;
 
     modalCartItems.forEach((item, index) => {
@@ -215,55 +208,54 @@ function ProductDetails() {
 
     message += `\n*GRAND TOTAL PRICE: Rs. ${grandTotal}.00*\n\n`;
     message += `Please process my items. Thank you!`;
-    
+
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
-    
+
     // Cleanup storage configurations after dispatching user
     safeStorage.removeItem('shopCart');
     updateCartCount();
     setShowConfirmModal(false);
   };
 
-const handleClearCart = () => {
-  toast(
-    ({ closeToast }) => (
-      <div className="clear-cart-toast">
-        <p>Are you sure you want to clear your entire cart?</p>
+  const handleClearCart = () => {
+    toast(
+      ({ closeToast }) => (
+        <div className="clear-cart-toast">
+          <p>Are you sure you want to clear your entire cart?</p>
 
-        <div className="clear-cart-actions">
-          <button
-            className="clear-cart-yes"
-            onClick={() => {
-              safeStorage.removeItem('shopCart');
-              updateCartCount();
-              toast.success("Cart cleared!");
-              closeToast();
-            }}
-          >
-            Yes
-          </button>
+          <div className="clear-cart-actions">
+            <button
+              className="clear-cart-yes"
+              onClick={() => {
+                safeStorage.removeItem('shopCart');
+                updateCartCount();
+                toast.success("Cart cleared!");
+                closeToast();
+              }}
+            >
+              Yes
+            </button>
 
-          <button
-            className="clear-cart-no"
-            onClick={closeToast}
-          >
-            No
-          </button>
+            <button
+              className="clear-cart-no"
+              onClick={closeToast}
+            >
+              No
+            </button>
+          </div>
         </div>
-      </div>
-    ),
-    {
-      position: "top-center",
-      autoClose: false,
-      closeOnClick: false,
-      draggable: false,
-      closeButton: false
-    }
-  );
-};
+      ),
+      {
+        position: "top-center",
+        autoClose: false,
+        closeOnClick: false,
+        draggable: false,
+        closeButton: false
+      }
+    );
+  };
 
-  
   const modalGrandTotal = modalCartItems.reduce((sum, item) => sum + item.itemTotal, 0);
 
   return (
@@ -275,20 +267,20 @@ const handleClearCart = () => {
           <nav className="breadcrumb-path">
             <Link to="/">Home</Link> &gt; <Link to="/product">Products</Link> &gt; <span className="current-node">{product.name}</span>
           </nav>
-          
+
           <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
-            <div style={{ fontSize: '13px', color: '#1a1a1a', fontWeight: '600' }}>
-              🛒 Cart Items: <span style={{ color: '#d11b5d', fontSize: '14px' }}>{cartCount}</span>
+            <div style={{ fontSize: '16px', color: '#1a1a1a', fontWeight: '600' }}>
+              🛒 Cart Items: <span style={{ color: '#d031d0', fontSize: '14px' }}>{cartCount}</span>
             </div>
             {cartCount > 0 && (
-              <button 
+              <button
                 onClick={handleClearCart}
-                style={{ fontSize: '11px', background: 'none', border: 'none', color: '#888', cursor: 'pointer', textDecoration: 'underline', padding: 0 }}
+                style={{ fontSize: '14px', background: 'none', border: 'none', color: '#5d0e5a', cursor: 'pointer', textDecoration: 'underline', padding: 0 }}
               >
                 Clear Cart
               </button>
             )}
-            <div className="next-nav-pointer" style={{ marginLeft: '10px' }}>
+            <div className="next-nav-pointer" style={{ marginLeft: '10px', fontSize: '14px' }}>
               <Link to={`/product/${product.id === products.length ? 1 : product.id + 1}`}>Next &gt;</Link>
             </div>
           </div>
@@ -299,21 +291,25 @@ const handleClearCart = () => {
         {/* Left: Media Block Section */}
         <div className="details-media-gallery">
           <div className="main-preview-frame">
-            {product.isBestSeller && (
-              <div className="details-ribbon-tag">
-                <span className="stars-line">★★★</span>
-                <span className="tag-text">Best Seller</span>
-              </div>
-            )}
-            <img src={selectedImage || (product.images && product.images[0])} alt={product.name} className="active-display-img" />
+            <div className="product-detail-image-wrapper">
+
+              {/* ICON BADGE */}
+              <img src={badgeIcon} alt="badge" className="product-detail-badge-icon" />
+
+              <img
+                src={selectedImage || (product.images && product.images[0])}
+                alt={product.name}
+                className="active-display-img"
+              />
+            </div>
           </div>
 
           <div className="thumbnail-strip-row">
             {galleryThumbnails.map((thumbSrc, index) => {
               const isActive = selectedImage === thumbSrc;
               return (
-                <div 
-                  key={index} 
+                <div
+                  key={index}
                   className={`thumb-box-item ${isActive ? 'active-border' : ''}`}
                   onClick={() => setSelectedImage(thumbSrc)}
                 >
@@ -327,14 +323,12 @@ const handleClearCart = () => {
         {/* Right Info Section */}
         <div className="details-info-panel">
           <h1 className="product-main-heading">{product.name}</h1>
-          
-          
 
           <div className="product-price-display">
-            Rs. {totalPrice > 0 ? totalPrice : 0}.00 
+            Rs. {totalPrice > 0 ? totalPrice : 0}.00
             {quantity > 1 && <span className="price-each-label"> (Rs. {calculatedPricePerUnit}.00 each)</span>}
           </div>
-          
+
           <div className="facility-shipping-banner">
             <span className="truck-icon">🚚</span> Ships Directly from Our Production Facility
           </div>
@@ -342,7 +336,7 @@ const handleClearCart = () => {
           <div className="variant-options-group">
             <label className="variant-field-label">Select Weight Unit</label>
             <div className="weight-selection-container">
-              {[100, 500, 1000].map((wt) => {
+              {[500, 1000, 2000].map((wt) => {
                 const isSelected = weightType === 'preset' && selectedWeight === wt;
                 return (
                   <button
@@ -351,11 +345,11 @@ const handleClearCart = () => {
                     onClick={() => handlePresetWeightChange(wt)}
                     className={isSelected ? 'active-weight-btn' : ''}
                   >
-                    {wt >= 1000 ? `${wt/1000}kg` : `${wt}g`}
+                    {wt >= 1000 ? `${wt / 1000}kg` : `${wt}g`}
                   </button>
                 );
               })}
-              
+
               <div className="custom-weight-wrapper">
                 <input
                   type="number"
@@ -383,9 +377,9 @@ const handleClearCart = () => {
             <button type="button" className="primary-cart-action-btn" onClick={handleAddToCart}>
               ADD TO CART
             </button>
-            <button 
-              type="button" 
-              className="secondary-buy-action-btn whatsapp-order-btn" 
+            <button
+              type="button"
+              className="secondary-buy-action-btn whatsapp-order-btn"
               onClick={handleOpenConfirmationModal}
               disabled={activeWeight <= 0 && cartCount === 0}
             >
@@ -413,119 +407,66 @@ const handleClearCart = () => {
         </div>
       </div>
 
-      {/* --- RELATED PRODUCTS SECTION --- */}
-      {relatedProducts.length > 0 && (
-        <div className="related-products-section">
-          <h2 className="related-title">More Products</h2>
-          <div className="related-grid-row">
-            {relatedProducts.map((item) => (
-              <Link 
-                to={`/product/${item.id}`} 
-                key={item.id} 
-                className="related-card-item"
-              >
-                <div className="related-image-frame">
-                  <img 
-                    src={item.images && item.images[0]} 
-                    alt={item.name} 
-                  />
-                </div>
-                <h3 className="related-item-name">{item.name}</h3>
-                <p className="related-item-price">Rs. {item.price}.00</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
-
       {/* Interactive Confirmation Step Overlay Modal Dashboard */}
       {showConfirmModal && (
-        <div className="order-modal-backdrop" style={{
-          position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',
-          backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', justifyContent: 'center',
-          alignItems: 'center', zIndex: 1000
-        }}>
-          <div className="order-modal-content" style={{
-            backgroundColor: '#fff', padding: '30px', borderRadius: '8px',
-            maxWidth: '500px', width: '92%', boxSizing: 'border-box', boxShadow: '0 4px 20px rgba(0,0,0,0.2)'
-          }}>
-            <h3 className="modal-title" style={{ marginTop: 0, borderBottom: '1px solid #eee', paddingBottom: '12px' }}>
+        <div className="order-modal-backdrop">
+          <div className="order-modal-content">
+            <h3 className="modal-title">
               Review Your Cart Items
             </h3>
-            
-            <div className="modal-body-details" style={{ margin: '20px 0', maxHeight: '280px', overflowY: 'auto', paddingRight: '5px' }}>
+
+            <div className="modal-body-details">
               {modalCartItems.map((item, idx) => (
-                <div 
-                  key={idx} 
-                  style={{ 
-                    display: 'flex', 
-                    justifyContent: 'space-between', 
-                    alignItems: 'center',
-                    marginBottom: '14px', 
-                    fontSize: '14px', 
-                    borderBottom: '1px dashed #eee', 
-                    paddingBottom: '10px' 
-                  }}
-                >
-                  <div style={{ paddingRight: '10px' }}>
-                    <p style={{ margin: '0 0 4px 0' }}>
-                      <strong>{idx + 1}. {item.name}</strong> ({item.weight >= 1000 ? `${item.weight/1000}kg` : `${item.weight}g`})
+                <div key={idx} className="modal-item-row">
+
+                  <div className="modal-item-info">
+                    <p className="modal-item-title">
+                      <strong>
+                        {idx + 1}. {item.name}
+                      </strong>{" "}
+                      ({item.weight >= 1000
+                        ? `${item.weight / 1000}kg`
+                        : `${item.weight}g`})
                     </p>
-                    <p style={{ margin: 0, color: '#666', fontSize: '13px' }}>
+
+                    <p className="modal-item-sub">
                       Quantity: {item.quantity} — Subtotal: Rs. {item.itemTotal}.00
                     </p>
                   </div>
-                  
-                  {/* Delete Item Action Hook Button */}
+
                   <button
                     type="button"
                     onClick={() => handleRemoveItemFromModal(idx)}
                     title="Remove item"
-                    style={{
-                      background: '#ffebee',
-                      border: 'none',
-                      color: '#c62828',
-                      borderRadius: '50%',
-                      width: '28px',
-                      height: '28px',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '12px',
-                      transition: 'background 0.2s',
-                      flexShrink: 0
-                    }}
-                    onMouseEnter={(e) => { e.currentTarget.style.background = '#ffcdd2'; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.background = '#ffebee'; }}
+                    className="modal-remove-btn"
                   >
                     ✕
                   </button>
+
                 </div>
               ))}
-              
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '20px' }}>
-                <span style={{ fontSize: '15px', fontWeight: 'bold', color: '#333' }}>Total Amount:</span>
-                <span className="total-billing-highlight" style={{ fontSize: '20px', color: '#d11b5d', fontWeight: 'bold' }}>
+
+              <div className="modal-total-row">
+                <span className="modal-total-label">Total Amount:</span>
+                <span className="modal-total-value">
                   Rs. {modalGrandTotal}.00
                 </span>
               </div>
             </div>
 
-            <div className="modal-action-row" style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end', marginTop: '25px' }}>
-              <button 
+            <div className="modal-action-row">
+              <button
                 type="button"
                 onClick={() => setShowConfirmModal(false)}
                 className="modal-cancel-btn"
-                style={{ padding: '10px 16px', borderRadius: '4px', border: '1px solid #ccc', background: '#fff', cursor: 'pointer' }}
               >
                 Close
               </button>
-              <button 
+
+              <button
                 type="button"
                 onClick={sendWhatsAppMessage}
-                className="modal-confirm-whatsapp-btn"
-                style={{ padding: '10px 20px', borderRadius: '4px', border: 'none', background: '#25D366', color: '#fff', fontWeight: 'bold', cursor: 'pointer' }}
+                className="modal-whatsapp-btn"
               >
                 Send Order to WhatsApp
               </button>
@@ -533,11 +474,10 @@ const handleClearCart = () => {
           </div>
         </div>
       )}
-
       <Footer />
       <WhatsAppButton />
       <ToastContainer />
-      
+
     </div>
   );
 }

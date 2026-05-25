@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import WhatsAppButton from "../components/WhatsAppButton";
 import '../styles/product.css';
-import { products } from "../data/products";
+import { products } from "../data/Products";
 import { filterProductsBySearch } from "../utils/searchProducts";
 
 const SORT_OPTIONS = [
@@ -70,6 +70,7 @@ const ProductCardImageSlider = ({ imagesList, productName }) => {
         ))}
       </div>
     </div>
+
   );
 };
 
@@ -81,9 +82,10 @@ const Product = () => {
 
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(MAX_PRICE_LIMIT);
-  const [showOutOfStock, setShowOutOfStock] = useState(true);
+  // const [showOutOfStock, setShowOutOfStock] = useState(true);
   const [sortOption, setSortOption] = useState('Alphabetically, A-Z');
   const [isSortOpen, setIsSortOpen] = useState(false);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [priceOpen, setPriceOpen] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState(searchFromUrl);
@@ -91,6 +93,14 @@ const Product = () => {
   useEffect(() => {
     setSearchTerm(searchFromUrl);
   }, [searchFromUrl]);
+
+  useEffect(() => {
+    document.body.classList.toggle('filter-drawer-open', isFilterOpen);
+
+    return () => {
+      document.body.classList.remove('filter-drawer-open');
+    };
+  }, [isFilterOpen]);
 
   // Get unique categories from products data
   const categories = useMemo(() => {
@@ -148,7 +158,7 @@ const Product = () => {
   const clearAllFilters = () => {
     setMinPrice(0);
     setMaxPrice(MAX_PRICE_LIMIT);
-    setShowOutOfStock(true);
+    // setShowOutOfStock(true);
     setSelectedCategory('all');
     setSortOption('Alphabetically, A-Z');
     clearSearch();
@@ -159,8 +169,11 @@ const Product = () => {
     setMaxPrice(MAX_PRICE_LIMIT);
   };
 
-  const fillLeft = `${(minPrice / MAX_PRICE_LIMIT) * 100}%`;
-  const fillRight = `${100 - (maxPrice / MAX_PRICE_LIMIT) * 100}%`;
+  const trackInset = 8;
+  const minPercent = minPrice / MAX_PRICE_LIMIT;
+  const maxPercent = maxPrice / MAX_PRICE_LIMIT;
+  const fillLeft = `calc(${trackInset}px + ${minPercent * 100}% - ${minPercent * trackInset * 2}px)`;
+  const fillRight = `calc(${trackInset}px + ${(1 - maxPercent) * 100}% - ${(1 - maxPercent) * trackInset * 2}px)`;
 
   const hasActiveFilters = minPrice > 0 || maxPrice < MAX_PRICE_LIMIT || selectedCategory !== 'all' || searchTerm.trim();
 
@@ -169,8 +182,29 @@ const Product = () => {
       <Navbar />
 
       <div className="product-container">
+        <button
+          type="button"
+          className="mobile-filter-btn"
+          onClick={() => setIsFilterOpen(true)}
+          aria-label="Open filters"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <line x1="4" y1="7" x2="20" y2="7" />
+            <circle cx="9" cy="7" r="2" fill="currentColor" />
+            <line x1="4" y1="17" x2="20" y2="17" />
+            <circle cx="15" cy="17" r="2" fill="currentColor" />
+          </svg>
+        </button>
+
+        <button
+          type="button"
+          className={`filter-drawer-backdrop ${isFilterOpen ? 'show' : ''}`}
+          onClick={() => setIsFilterOpen(false)}
+          aria-label="Close filters"
+        />
+
         {/* SIDEBAR FILTER PANEL */}
-        <aside className="filter-sidebar">
+        <aside className={`filter-sidebar ${isFilterOpen ? 'open' : ''}`}>
           <div className="filter-header">
             <div className="filter-title-section">
               <svg className="filter-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -181,35 +215,50 @@ const Product = () => {
               </svg>
               <h3 className="filter-title">Filter</h3>
             </div>
+            <button
+              type="button"
+              className="filter-drawer-close"
+              onClick={() => setIsFilterOpen(false)}
+              aria-label="Close filters"
+            >
+              x
+            </button>
           </div>
 
           <div className="applied-filters">
-            <div className="applied-title">Applied filters</div>
-            <div className="price-tag">
-              Rs. {minPrice} - Rs. {maxPrice}
-              <button className="remove-filter" onClick={removePriceFilter}>✕</button>
+            <div className="applied-filters-head">
+              <span className="applied-title">Applied filters</span>
+              {hasActiveFilters && (
+                <button className="clear-all" onClick={clearAllFilters}>Clear all</button>
+              )}
             </div>
+            {(minPrice > 0 || maxPrice < MAX_PRICE_LIMIT) && (
+              <div className="price-tag">
+                Rs. {minPrice} - Rs. {maxPrice}
+                <button className="remove-filter" onClick={removePriceFilter} aria-label="Remove price filter">x</button>
+              </div>
+            )}
             {selectedCategory !== 'all' && (
               <div className="price-tag">
                 {selectedCategory}
-                <button className="remove-filter" onClick={() => setSelectedCategory('all')}>✕</button>
+                <button className="remove-filter" onClick={() => setSelectedCategory('all')} aria-label="Remove category filter">x</button>
               </div>
             )}
             {searchTerm.trim() && (
               <div className="price-tag">
                 {searchTerm}
-                <button className="remove-filter" onClick={clearSearch}>✕</button>
+                <button className="remove-filter" onClick={clearSearch} aria-label="Remove search filter">x</button>
               </div>
             )}
-            {hasActiveFilters && (
-              <button className="clear-all" onClick={clearAllFilters}>Clear all</button>
+            {!hasActiveFilters && (
+              <div className="empty-filter-note">No filters selected</div>
             )}
           </div>
 
           {/* OUT OF STOCK SECTION */}
-          <div className="filter-section">
+          {/* <div className="filter-section">
             <div className="section-header">
-              <h4>Out of stock</h4>
+              <h4>Availability</h4>
               <div className="toggle-buttons">
                 <button
                   className={showOutOfStock ? 'active' : ''}
@@ -225,7 +274,7 @@ const Product = () => {
                 </button>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* PRICE RANGE FILTER */}
           <div className="filter-section price-section-wrapper">
@@ -249,6 +298,16 @@ const Product = () => {
 
             {priceOpen && (
               <div className="price-controls-body">
+                <div className="price-summary-row">
+                  <div className="price-value-pill">
+                    <span>Min</span>
+                    <strong>Rs. {minPrice}</strong>
+                  </div>
+                  <div className="price-value-pill">
+                    <span>Max</span>
+                    <strong>Rs. {maxPrice}</strong>
+                  </div>
+                </div>
                 <div className="range-track-wrapper">
                   <div className="range-track-bg" />
                   <div
@@ -273,6 +332,11 @@ const Product = () => {
                     value={maxPrice}
                     onChange={handleMaxSlider}
                   />
+                </div>
+
+                <div className="range-endpoints">
+                  <span>Rs. 0</span>
+                  <span>Rs. {MAX_PRICE_LIMIT}</span>
                 </div>
 
                 <div className="price-inputs-container">

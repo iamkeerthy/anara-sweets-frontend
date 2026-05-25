@@ -15,7 +15,7 @@ const PriceFilter = ({
 }) => {
   const [priceOpen, setPriceOpen] = useState(true);
 
-  const trackInset = 18;
+  const trackInset = 8;
   const minPercent = minPrice / max;
   const maxPercent = maxPrice / max;
   const fillLeft = `calc(${trackInset}px + ${minPercent * 100}% - ${minPercent * trackInset * 2}px)`;
@@ -71,23 +71,30 @@ const PriceFilter = ({
       </div>
 
       <div className="applied-filters">
-        <div className="applied-title">Applied filters</div>
-        <div className="price-tag">
-          Rs. {minPrice} - Rs. {maxPrice}
-          <button className="remove-filter" onClick={removePriceFilter} aria-label="Remove price filter">
-            &times;
-          </button>
+        <div className="applied-filters-head">
+          <span className="applied-title">Applied filters</span>
+          {hasAppliedFilters && (
+            <button className="clear-all" onClick={onClearAll}>Clear all</button>
+          )}
         </div>
+        {hasPriceFilter && (
+          <div className="price-tag">
+            Rs. {minPrice} - Rs. {maxPrice}
+            <button className="remove-filter" onClick={removePriceFilter} aria-label="Remove price filter">
+              x
+            </button>
+          </div>
+        )}
         {extraFilters.map((filter) => (
           <div className="price-tag category-tag-text" key={filter.label}>
             {filter.label}
             <button className="remove-filter" onClick={filter.onRemove} aria-label={`Remove ${filter.label}`}>
-              &times;
+              x
             </button>
           </div>
         ))}
-        {hasAppliedFilters && (
-          <button className="clear-all" onClick={onClearAll}>Clear all</button>
+        {!hasAppliedFilters && (
+          <div className="empty-filter-note">No filters selected</div>
         )}
       </div>
 
@@ -127,7 +134,7 @@ const PriceFilter = ({
             <svg
               viewBox="0 0 24 24"
               width="18"
-              height="30  "
+              height="18"
               fill="none"
               stroke="currentColor"
               strokeWidth="4.5"
@@ -141,6 +148,16 @@ const PriceFilter = ({
 
         {priceOpen && (
           <>
+            <div className="price-summary-row">
+              <div className="price-value-pill">
+                <span>Min</span>
+                <strong>Rs. {minPrice}</strong>
+              </div>
+              <div className="price-value-pill">
+                <span>Max</span>
+                <strong>Rs. {maxPrice}</strong>
+              </div>
+            </div>
             <div className="range-track-wrapper">
               <div className="range-track-bg" />
               <div
@@ -167,6 +184,11 @@ const PriceFilter = ({
                 onChange={handleMaxSlider}
                 aria-label="Maximum price range"
               />
+            </div>
+
+            <div className="range-endpoints">
+              <span>Rs. 0</span>
+              <span>Rs. {max}</span>
             </div>
 
             <div className="price-inputs-container">
