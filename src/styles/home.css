@@ -855,71 +855,83 @@ p {
   background: #fafafa;
 }
 
-/* HEADER */
+/* HEADER - FIXED CENTER ALIGNMENT */
 .bestsellers-header {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 50px;
-  margin-bottom: 40px;
-  max-width: 1600px;
-  margin-left: auto;
-  margin-right: auto;
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto 40px;
   padding: 0 20px;
 }
 
-.bestsellers-header .title-box {
+/* CENTER TITLE ALWAYS */
+.title-box {
   text-align: center;
 }
 
-.bestsellers-header .title-box h2 {
+.title-box h2 {
   font-size: 28px;
   font-weight: 600;
   margin: 0;
 }
 
-.bestsellers-header .view-all-link {
+.view-all-link {
   font-size: 12px;
   color: #888;
   letter-spacing: 1.5px;
   text-decoration: none;
+  display: inline-block;
+  margin-top: 6px;
 }
 
-.bestsellers-header .view-all-link:hover {
+.view-all-link:hover {
   color: #333;
   text-decoration: underline;
 }
 
-/* NAV ARROWS */
+/* NAV ARROWS - FIX POSITIONING */
 .bestsellers-nav-arrow {
   background: transparent;
   border: none;
-  font-size: 30px;
+  font-size: 32px;
   cursor: pointer;
   color: #000;
   padding: 0 12px;
-  transition: opacity 0.2s ease;
+  transition: 0.2s ease;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
 }
 
 .bestsellers-nav-arrow:hover {
   opacity: 0.6;
 }
 
-/* ✅ MAIN FIX: CENTER 4 CARDS CLEANLY */
+.bestsellers-nav-arrow.left {
+  left: 10px;
+}
+
+.bestsellers-nav-arrow.right {
+  right: 10px;
+}
+
+/* ================= SCROLL CONTAINER ================= */
+
 .bestsellers-scroll-container {
   display: flex;
-  justify-content: center;
-  /* KEY FIX */
   gap: 24px;
-
   overflow-x: auto;
   scroll-behavior: smooth;
-
-  padding: 0 0 20px;
-  scrollbar-width: none;
+  padding: 10px 20px 20px;
 
   max-width: 1400px;
   margin: 0 auto;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .bestsellers-scroll-container::-webkit-scrollbar {
@@ -929,9 +941,7 @@ p {
 /* CARD */
 .bestseller-card {
   flex: 0 0 auto;
-
   width: 300px;
-  /* FIXED WIDTH FOR 4-CARD LAYOUT */
   display: flex;
   flex-direction: column;
 }
@@ -942,7 +952,6 @@ p {
   height: 300px;
   border-radius: 12px;
   overflow: hidden;
-  position: relative;
 }
 
 .bestseller-card .image-gallery img {
@@ -960,14 +969,12 @@ p {
 .bestseller-product-name {
   font-size: 15px;
   font-weight: 500;
-  color: #2a2a2a;
-  margin: 0 0 4px 0;
+  margin: 0 0 4px;
 }
 
 .bestseller-price {
   font-size: 16px;
   font-weight: 600;
-  color: #2a2a2a;
   margin: 4px 0 14px;
 }
 
@@ -981,13 +988,23 @@ p {
   color: #fff;
   font-size: 13px;
   font-weight: 700;
-  letter-spacing: 1.5px;
   cursor: pointer;
   transition: 0.3s ease;
 }
 
 .bestseller-add-btn:hover {
   background: #b13cb1;
+}
+
+/* RESPONSIVE FIX */
+@media (max-width: 768px) {
+  .bestseller-card {
+    width: 260px;
+  }
+
+  .bestsellers-nav-arrow {
+    display: none;
+  }
 }
 
 /* ================= RESPONSIVE ================= */
@@ -1169,78 +1186,45 @@ p {
   }
 
   .flavourful-title {
-    font-size: 34px;
+    font-size: 28px;
     margin-bottom: 40px;
   }
 
   .flavourful-grid {
-    gap: 30px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    justify-items: center;
+    align-items: start;
   }
 
   .flavourful-image {
-    width: 140px;
-    height: 140px;
+    width: 120px;
+    height: 120px;
   }
 
   .flavourful-name {
-    font-size: 18px;
+    font-size: 15px;
   }
 
   .flavourful-fullwidth-image {
-    height: 400px;
-  }
-
-  .fullwidth-text {
-    font-size: 36px;
-  }
-
-  .fullwidth-overlay {
-    padding: 20px 40px;
+    height: 380px;
   }
 }
 
+
 @media (max-width: 768px) {
-  .flavourful-section {
-    padding: 50px 20px;
-  }
-
-  .flavourful-title {
-    font-size: 28px;
-    margin-bottom: 35px;
-  }
-
   .flavourful-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    justify-items: center;
+    gap: 15px;
   }
 
   .flavourful-image {
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
   }
 
   .flavourful-name {
-    font-size: 14px;
-    margin-top: 10px;
-  }
-
-  .flavourful-fullwidth-image {
-    height: 300px;
-  }
-
-  .fullwidth-text {
-    font-size: 28px;
-  }
-
-  .fullwidth-shop-btn {
-    padding: 10px 24px;
-    font-size: 14px;
-  }
-
-  .fullwidth-overlay {
-    padding: 20px 30px;
+    font-size: 13px;
   }
 }
 
@@ -1566,6 +1550,7 @@ p {
   background: #f5efe4;
   width: 100%;
   overflow: hidden;
+  margin-bottom: 50px;
 }
 
 .special-border {
@@ -1598,7 +1583,7 @@ p {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   /* ALWAYS 4 COLUMNS */
-  gap: 40px;
+  gap: 15px;
   align-items: center;
 }
 
@@ -1620,13 +1605,13 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 3px dotted #d7b895;
-  padding: 8px;
+  /* border: 3px dotted #d7b895; */
+  padding: 0px;
 }
 
 .special-image {
-  width: 100%;
-  height: 100%;
+  width: 120%;
+  height: 120%;
   object-fit: cover;
   border-radius: 50%;
 }
@@ -1642,19 +1627,19 @@ p {
   font-weight: 500;
 }
 
-.large-card .special-image-wrapper {
+/* .large-card .special-image-wrapper {
   width: 260px;
   height: 260px;
   background: transparent;
   border: none;
-}
+} */
 
-.large-card .special-text {
+/* .large-card .special-text {
   margin-top: 18px;
   font-size: 22px;
   color: #8b1d1d;
   font-weight: 600;
-}
+} */
 
 /* ================= RESPONSIVE ================= */
 
@@ -1680,10 +1665,10 @@ p {
     height: 150px;
   }
 
-  .large-card .special-image-wrapper {
+  /* .large-card .special-image-wrapper {
     width: 170px;
     height: 170px;
-  }
+  } */
 
   .special-text {
     font-size: 15px;
@@ -1713,10 +1698,10 @@ p {
     padding: 4px;
   }
 
-  .large-card .special-image-wrapper {
+  /* .large-card .special-image-wrapper {
     width: 85px;
     height: 85px;
-  }
+  } */
 
   .special-text {
     font-size: 10px;
@@ -2112,7 +2097,7 @@ p {
 }
 /* SECTION */
 .press-section {
-  padding: 50px 20px;
+  padding: 10px;
   background: #fff;
 }
 
@@ -2126,49 +2111,49 @@ p {
 .press-title {
   font-size: 26px;
   font-weight: 700;
-  margin-bottom: 30px;
+  margin: 0 0 10px 0;
   text-align: center;
 }
 
-/* GRID - 3 PER ROW WITH 10PX GAP */
+/* GRID - 5 PER ROW */
 .press-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px; /* ✅ your required spacing */
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
   width: 100%;
+  margin-top: 0;
 }
 
-/* CARD (NO EXTRA BOX LOOK) */
+/* CARD */
 .press-card {
   width: 100%;
-  height: 180px;
+  aspect-ratio: 1 / 1;   /* keeps square layout */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-  border-radius: 8px; /* optional smooth edges */
+  background: #fff;
 }
 
-/* IMAGE FULL COVER */
+/* IMAGE */
 .press-logo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: 85%;
+  height: 85%;
+  object-fit: contain;   /* IMPORTANT for tall logos */
   display: block;
 }
 
 /* TABLET */
 @media (max-width: 992px) {
   .press-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(5, 1fr);
   }
 }
 
 /* MOBILE */
 @media (max-width: 600px) {
   .press-grid {
-    grid-template-columns: repeat(1, 1fr);
-  }
-
-  .press-card {
-    height: 160px;
+    grid-template-columns: repeat(5, 1fr);
   }
 }
 

@@ -11,12 +11,15 @@ import { products } from "../data/Products";
 import WhatsAppButton from "../components/WhatsAppButton";
 
 // Press Features Images
-import behindwoodsLogo from "../assets/images/img1.jpg";
-import vikatanLogo from "../assets/images/img2.jpg";
-import theHinduLogo from "../assets/images/img3.jpg";
+import astaLogo from "../assets/images/asta.png";
+import feastoLogo from "../assets/images/LogoFeasto.png";
+import logos1 from "../assets/images/Logos1.png";
+import logosCloud from "../assets/images/LogosCloud.png";
+import logosVM from "../assets/images/LogosVM.png";
+
 
 // Flavourful Delights Section Images
-import savouriesImg from "../assets/images/img1.jpg";
+import savouriesImg from "../assets/images/FreshOil.png";
 import sweetsImg from "../assets/images/BOONDI LADDU.jpg";
 import podiImg from "../assets/images/EGG FLOUR.jpg";
 import picklesImg from "../assets/images/MIXTURE.jpg";
@@ -24,10 +27,10 @@ import combosImg from "../assets/images/img2.jpg";
 import flavourfulFullWidthImg from "../assets/images/img2.jpg";
 
 // What Makes Anara Special Section Images
-import special25Years from "../assets/images/img1.jpg";
-import specialFlour from "../assets/images/img1.jpg";
-import specialOil from "../assets/images/img1.jpg";
-import specialWomen from "../assets/images/img1.jpg";
+import special25Years from "../assets/images/FreshOil.png";
+import specialFlour from "../assets/images/HandCrafted.png";
+import specialOil from "../assets/images/Homemade.png";
+import specialWomen from "../assets/images/Organic.png";
 
 // About Us Section Images
 import boondiLaddu1 from "../assets/images/BOONDI LADDU.jpg";
@@ -46,21 +49,34 @@ const pressFeatures = [
   {
     id: 1,
     name: "Behindwoods",
-    logo: behindwoodsLogo,
+    logo: astaLogo,
     alt: "Behindwoods",
   },
   {
     id: 2,
     name: "Vikatan",
-    logo: vikatanLogo,
+    logo: feastoLogo,
     alt: "Vikatan",
   },
   {
     id: 3,
     name: "The Hindu",
-    logo: theHinduLogo,
+    logo: logos1,
     alt: "The Hindu",
   },
+   {
+    id: 4,
+    name: "The Hindu",
+    logo: logosCloud,
+    alt: "The Hindu",
+  },
+   {
+    id: 5,
+    name: "The Hindu",
+    logo: logosVM,
+    alt: "The Hindu",
+  },
+
 ];
 
 // Flavourful Delights Data
@@ -261,80 +277,100 @@ const ImageGallery = ({ images, productName, onImageClick }) => {
 
 // Best Sellers section component - Make entire card clickable - CORRECTED
 const BestSellersSection = () => {
-  const navigate = useNavigate(); // Added useNavigate hook
+  const navigate = useNavigate();
   const bestSellersScrollRef = useRef(null);
+
   const bestSellers = bestSellerIds
     .map((id) => products.find((item) => item.id === id))
     .filter(Boolean);
+
   const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(true);
 
   const handleNavigate = (id) => {
-    navigate(`/product/${id}`); // Changed to use navigate
+    navigate(`/product/${id}`);
   };
 
   const checkScrollPosition = () => {
-    if (bestSellersScrollRef.current) {
-      const { scrollLeft } = bestSellersScrollRef.current;
-      setShowLeftArrow(scrollLeft > 10);
-    }
+    const el = bestSellersScrollRef.current;
+    if (!el) return;
+
+    const { scrollLeft, scrollWidth, clientWidth } = el;
+
+    setShowLeftArrow(scrollLeft > 10);
+    setShowRightArrow(scrollLeft + clientWidth < scrollWidth - 10);
   };
 
   const scrollBestSellers = (dir) => {
-    if (!bestSellersScrollRef.current) return;
-    const amount = 340;
-    bestSellersScrollRef.current.scrollBy({
+    const el = bestSellersScrollRef.current;
+    if (!el) return;
+
+    const amount = 320;
+
+    el.scrollBy({
       left: dir === "left" ? -amount : amount,
-      behavior: "smooth"
+      behavior: "smooth",
     });
-    setTimeout(checkScrollPosition, 300);
   };
 
   useEffect(() => {
-    const container = bestSellersScrollRef.current;
-    if (container) {
-      container.addEventListener('scroll', checkScrollPosition);
-      checkScrollPosition();
-      return () => container.removeEventListener('scroll', checkScrollPosition);
-    }
+    const el = bestSellersScrollRef.current;
+    if (!el) return;
+
+    el.addEventListener("scroll", checkScrollPosition);
+    checkScrollPosition();
+
+    return () => el.removeEventListener("scroll", checkScrollPosition);
   }, []);
 
   return (
     <section className="bestsellers-section">
+
+      {/* HEADER */}
       <div className="bestsellers-header">
+
         <button
-          className="nav-arrow bestsellers-nav-arrow"
+          className="bestsellers-nav-arrow left"
           onClick={() => scrollBestSellers("left")}
-          style={{ visibility: showLeftArrow ? 'visible' : 'hidden' }}
+          style={{ visibility: showLeftArrow ? "visible" : "hidden" }}
         >
           &#8249;
         </button>
 
         <div className="title-box">
           <h2>Best Sellers</h2>
-          <a 
-            href="/product" 
+          <a
+            href="/product"
             className="view-all-link"
             onClick={(e) => {
               e.preventDefault();
-              navigate('/product');
-              setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 50);
+              navigate("/product");
+              window.scrollTo({ top: 0, behavior: "smooth" });
             }}
           >
             VIEW ALL
           </a>
         </div>
+
+        <button
+          className="bestsellers-nav-arrow right"
+          onClick={() => scrollBestSellers("right")}
+          style={{ visibility: showRightArrow ? "visible" : "hidden" }}
+        >
+          &#8250;
+        </button>
+
       </div>
 
+      {/* SCROLL AREA */}
       <div className="bestsellers-scroll-container" ref={bestSellersScrollRef}>
         {bestSellers.map((item) => (
           <div
             key={item.id}
             className="bestseller-card"
             onClick={() => handleNavigate(item.id)}
-            style={{ cursor: 'pointer' }}
           >
             <div className="image-wrapper product-image-wrapper">
-              {/* Badge Icon */}
               <img src={badgeIcon} alt="badge" className="product-badge-icon" />
               <ImageGallery
                 images={item.images}
@@ -342,10 +378,12 @@ const BestSellersSection = () => {
                 onImageClick={() => handleNavigate(item.id)}
               />
             </div>
+
             <div className="bestseller-card-body">
               <p className="bestseller-product-name">{item.name}</p>
               <p className="bestseller-price">Rs. {item.price.toFixed(2)}</p>
             </div>
+
             <button
               className="bestseller-add-btn"
               onClick={(e) => {
@@ -358,10 +396,10 @@ const BestSellersSection = () => {
           </div>
         ))}
       </div>
+
     </section>
   );
 };
-
 // Flavourful Delights Section
 const FlavourfulDelightsSection = () => {
   const navigate = useNavigate();
@@ -447,10 +485,15 @@ const PressFeaturesSection = () => {
     <section className="press-section">
       <div className="press-container">
         <h2 className="press-title">Press Features</h2>
+
         <div className="press-grid">
           {pressFeatures.map((item) => (
             <div key={item.id} className="press-card">
-              <img src={item.logo} alt={item.alt} className="press-logo" />
+              <img
+                src={item.logo}
+                alt={item.alt}
+                className="press-logo"
+              />
             </div>
           ))}
         </div>
@@ -466,7 +509,7 @@ const SpecialSection = () => {
       id: 1,
       image: special25Years,
       title: "40+ Outlets",
-      large: true,
+      // large: true,
       imageTop: false,
     },
     {

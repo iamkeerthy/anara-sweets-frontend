@@ -1,8 +1,38 @@
+/* ========================= */
+/* GOOGLE FONT */
+/* ========================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+/* ========================= */
+/* CUSTOM FONTS */
+/* ========================= */
+
+@font-face {
+  font-family: "Holen Vintage";
+  src: url("../assets/fonts/HolenVintage.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* @font-face {
+  font-family: "NC Geetha";
+  src: url("./assets/fonts/NCGeetha.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+} */
+
+/* ========================= */
+/* FOOTER */
+/* ========================= */
+
 .footer {
   background: #ffffff;
   border-top: 1px solid #e5e5e5;
   padding: 60px 20px 30px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  font-family: "Outfit", sans-serif;
+
   color: #333333;
   text-align: center;
 }
@@ -10,22 +40,30 @@
 .footer-container {
   max-width: 850px;
   margin: 0 auto;
+
   display: flex;
   flex-direction: column;
   align-items: center;
+
   gap: 28px;
+
   padding-bottom: 35px;
+
   border-bottom: 1px solid #e5e5e5;
 }
 
 .footer-section {
   width: 100%;
+
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+/* ========================= */
 /* LOGO */
+/* ========================= */
+
 .footer-logo {
   max-width: 180px;
   width: 100%;
@@ -33,9 +71,24 @@
   object-fit: contain;
 }
 
+/* ========================= */
+/* FOOTER TITLES */
+/* ========================= */
+
+.section-title {
+  font-family: "Holen Vintage", cursive;
+  font-size: 26px;
+  color: #222;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+/* ========================= */
 /* ABOUT TEXT */
+/* ========================= */
+
 .standard-paragraph {
-  font-family: 'Outfit', sans-serif;
+  font-family: "Outfit", sans-serif;
   font-size: 15px;
   color: #555555;
   line-height: 1.8;
@@ -44,21 +97,28 @@
   text-align: center;
 }
 
-/* HIDE UNUSED TITLES & PHONE */
-.section-title,
-.support-text,
-.phone-numbers {
-  display: none;
+/* ========================= */
+/* TAMIL TEXT */
+/* ========================= */
+
+.tamil-font {
+  font-family: "NC Geetha", sans-serif;
 }
 
+/* ========================= */
 /* POLICY BUTTONS */
+/* ========================= */
+
 .links-list {
   list-style: none;
+
   padding: 0;
   margin: 0;
+
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+
   gap: 14px;
 }
 
@@ -67,15 +127,22 @@
 }
 
 .links-list a {
-  font-family: 'Outfit', sans-serif;
+  font-family: "Outfit", sans-serif;
+
   font-size: 14px;
   color: #555555;
+
   text-decoration: none;
+
   padding: 10px 22px;
+
   border: 1px solid #d9d9d9;
   border-radius: 50px;
+
   background: #fafafa;
+
   transition: all 0.3s ease;
+
   display: inline-block;
 }
 
@@ -83,13 +150,44 @@
   background: #a974ee;
   color: #ffffff;
   border-color: #a974ee;
+
   transform: translateY(-2px);
 }
 
+/* ========================= */
+/* SUPPORT CONTACT */
+/* ========================= */
+
+.support-contact-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.phone-numbers {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-family: "Outfit", sans-serif;
+
+  font-size: 15px;
+  color: #444;
+}
+
+.phone-icon {
+  color: #a974ee;
+}
+
+/* ========================= */
 /* SOCIAL ICONS */
+/* ========================= */
+
 .footer-social-icons {
   display: flex;
   gap: 16px;
+
   align-items: center;
   justify-content: center;
 }
@@ -97,30 +195,45 @@
 .footer-social-icons a {
   width: 48px;
   height: 48px;
+
   border-radius: 50%;
+
   background: #f3f3f3;
   color: #555555;
+
   font-size: 18px;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   text-decoration: none;
+
   transition: all 0.3s ease;
+
   border: 1px solid #e2e2e2;
 }
 
 .footer-social-icons a:hover {
   background: #a974ee;
   color: #ffffff;
+
   transform: translateY(-3px) scale(1.05);
+
   border-color: #a974ee;
 }
 
+/* ========================= */
 /* FOOTER BOTTOM */
+/* ========================= */
+
 .footer-bottom {
-  font-family: 'Outfit', sans-serif;
+  font-family: "Outfit", sans-serif;
+
   text-align: center;
+
   padding-top: 22px;
+
   font-size: 13px;
   color: #777777;
 }
@@ -129,7 +242,40 @@
   margin: 0;
 }
 
+/* ========================= */
+/* LINKS */
+/* ========================= */
+
+.vital-link {
+  font-family: "Outfit", sans-serif;
+
+  color: #a974ee;
+
+  text-decoration: none;
+  font-weight: 600;
+
+  transition: color 0.3s ease;
+}
+
+.vital-link:hover {
+  color: #6b3fd4;
+  text-decoration: underline;
+}
+
+/* ========================= */
+/* TAP HIGHLIGHT */
+/* ========================= */
+
+.links-list a,
+.footer-social-icons a,
+.vital-link {
+  -webkit-tap-highlight-color: rgba(151, 94, 225, 0.3);
+}
+
+/* ========================= */
 /* MOBILE */
+/* ========================= */
+
 @media (max-width: 600px) {
   .footer {
     padding: 50px 15px 25px;
@@ -152,22 +298,8 @@
     width: 250px;
     text-align: center;
   }
-}
 
-.vital-link {
-  color: #a974ee;
-  text-decoration: none;
-  font-weight: 600;
-  transition: color 0.3s ease;
-}
-
-.vital-link:hover {
-  color: #6b3fd4;
-  text-decoration: underline;
-}
-
-.links-list a,
-.footer-social-icons a,
-.vital-link {
-  -webkit-tap-highlight-color: rgba(151, 94, 225, 0.3);
+  .section-title {
+    font-size: 22px;
+  }
 }

@@ -6,13 +6,15 @@ import "../styles/hero.css";
 import bgImage from "../assets/images/cover-image.jpeg";
 
 // Circle slider images
-import sweet1 from "../assets/images/img1.jpeg";
-import sweet2 from "../assets/images/img1.jpg";
-import sweet3 from "../assets/images/img3.jpg";
-import sweet4 from "../assets/images/img4.jpg";
+import sweet1 from "../assets/images/Karaboondi.png";
+import sweet2 from "../assets/images/Murukku.png";
+import sweet3 from "../assets/images/Rava-Laddu.png";
+import sweet4 from "../assets/images/Rich-Laddu.png";
+import sweet5 from "../assets/images/sippi.png";
+import sweet6 from "../assets/images/kuchci.png";
 
 // Move outside component
-const images = [sweet1, sweet2, sweet3, sweet4];
+const images = [sweet1, sweet2, sweet3, sweet4, sweet5,sweet6];
 
 const Hero = () => {
   const [currentImage, setCurrentImage] = useState(0);

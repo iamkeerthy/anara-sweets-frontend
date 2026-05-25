@@ -16,7 +16,7 @@ const Footer = () => {
 
 
         <div className="footer-section">
-          <h3 className="section-title">About Us</h3>
+          <h6 className="section-title">About Us</h6>
           <p className="story-text standard-paragraph">
             A story that began in 2004 is now a beloved and trusted name in homes
             across Tamil Nadu with more than 40+ outlets and counting.
@@ -24,7 +24,7 @@ const Footer = () => {
         </div>
 
         <div className="footer-section">
-          <h3 className="section-title">Quick Links</h3>
+          <h6 className="section-title">Quick Links</h6>
           <ul className="links-list">
             <li><Link to="/privacy-policy">Privacy Policy</Link></li>
             <li><Link to="/shipping-policy">Shipping Policy</Link></li>
@@ -34,7 +34,7 @@ const Footer = () => {
         </div>
 
         <div className="footer-section contact-column">
-          <h3 className="section-title">Customer Support</h3>
+          <h6 className="section-title">Customer Support</h6>
           <p className="support-text standard-paragraph">
             If you haven't received information about your order after placing it,
             please get in touch with us at:
